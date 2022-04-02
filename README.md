@@ -10,6 +10,7 @@ Rede social para fãs de astronomia, onde pode se encontrar e discutir sobre nov
 - ASP.NET MVC
 - Entity Framework Core 6.0
 - HTML, CSS, JS
+- ASP.NET Identity
 
 ## Uso
 
