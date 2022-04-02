@@ -17,7 +17,7 @@ Use o comando abaixo para baixar o repositório em seu computador
 
 `git clone https://github.com/Caioferrari04/CalculadoraIMC.git`
 
-E então utilizar o comando abaixo para executar a calculadora:
+E então utilizar o comando abaixo para executar o programa
 
 `dotnet run`
 
