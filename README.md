@@ -14,11 +14,15 @@ Rede social para fãs de astronomia, onde pode se encontrar e discutir sobre nov
 
 ## Uso
 
-Use o comando abaixo para baixar o repositório em seu computador
+Use o comando abaixo para baixar o repositório em seu computador:
 
-`git clone https://github.com/Caioferrari04/CalculadoraIMC.git`
+`git clone https://github.com/Caioferrari04/Astromedia.git`
 
-E então utilizar o comando abaixo para executar o programa
+Baixe as dependências do projeto com:
+
+`dotnet restore`
+
+E então utilizar o comando abaixo para executar o programa:
 
 `dotnet run`
 
