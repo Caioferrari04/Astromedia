@@ -6,8 +6,9 @@
     <title>@ViewData["Title"] - Astromedia</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Astromedia.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("stylesheet", required: false)
 </head>
-<body>
+<body> <!-- HEADER E FOOTER AQUI -->
     <header>
         <nav class="nav">
             <div class="nav-left">
@@ -27,6 +28,6 @@
         <p>sheeeeeeeeeeeeeesh</p>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("scripts", required: false)
 </body>
 </html>
