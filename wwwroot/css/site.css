@@ -1,4 +1,4 @@
-@import url(chota.css);
+@import url(../lib/node_modules/chota/dist/chota.css);
 
 :root {
   --bg-color: #471C5C;

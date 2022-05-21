@@ -1,0 +1,14 @@
+@model UsuarioDTO
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+
+<form asp-action="Index" method="post">
+    <input asp-for="Nome" />
+    <input asp-for="Email"/>
+    <input asp-for="DataNascimento"/>
+    <input asp-for="Senha"/>
+    <input asp-for="ConfirmarSenha"/>
+    <button type="submit">Enviar</button>
+</form>
