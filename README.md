@@ -11,6 +11,7 @@ Rede social para fãs de astronomia, onde pode se encontrar e discutir sobre nov
 - Entity Framework Core 6.0
 - HTML, CSS, JS
 - ASP.NET Identity
+- chota 0.8
 
 ## Uso
 
