@@ -1,16 +1,36 @@
+@import url(chota.css);
+
+:root {
+  --bg-color: #471C5C;
+  --bg-secondary-color: #3F005C;
+  --color-primary: #7300A8;
+  --color-secondary: #9600DB; /*Novo*/
+  --color-highlight: #AF43E0; /*Novo*/
+  --color-lightGrey: #d2d6dd;
+  --color-grey: #747681;
+  --color-darkGrey: #3f4144;
+  --color-error: #d43939;
+  --color-success: #28bd14;
+  --grid-maxWidth: 120rem;
+  --grid-gutter: 2rem;
+  --font-size: 1.6rem;
+  --font-color: #333333;
+  --font-family-sans: -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
+}
+
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
 }
 
 body {
