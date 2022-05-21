@@ -3,16 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("InitialString");
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<AstroContext>(options =>
-    options.UseNpgsql(connectionString));
-
+    options.UseNpgsql($"User ID=postgres;Password={args[0]};Host=containers-us-west-56.railway.app;Port=5499;Database=railway;"));
+                        /*Inserir senha do banco por args. Em produção, todos campos serão enviados por args.*/
 builder.Services.AddDefaultIdentity<Usuario>()
         .AddEntityFrameworkStores<AstroContext>();
 
