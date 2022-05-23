@@ -10,8 +10,6 @@ public class Postagem
 
     public Usuario Usuario { get; set; }
 
-    public int UsuarioId { get; set; }
-
     public Postagem()
     {
         Texto = "";

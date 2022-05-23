@@ -6,4 +6,6 @@ public class AstroContext : IdentityDbContext<Usuario>
 {
     public AstroContext(DbContextOptions<AstroContext> options) : base(options)
     { }
+
+    public DbSet<Postagem> Postagens { get; set; }
 }
