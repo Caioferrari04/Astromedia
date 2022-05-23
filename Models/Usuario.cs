@@ -15,4 +15,6 @@ public class Usuario : IdentityUser
     }
 
     public string FotoPerfil { get; set; }
+
+    public List<Postagem> Postagens { get; set; }
 }

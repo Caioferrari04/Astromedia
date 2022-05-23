@@ -8,6 +8,10 @@ public class Postagem
 
     public DateTime DataPostagem { get; set; }
 
+    public Usuario Usuario { get; set; }
+
+    public int UsuarioId { get; set; }
+
     public Postagem()
     {
         Texto = "";
