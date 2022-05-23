@@ -21,6 +21,31 @@ namespace Astromedia.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Astromedia.Models.Postagem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataPostagem")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Postagens");
+                });
+
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
                 {
                     b.Property<string>("Id")
@@ -225,6 +250,15 @@ namespace Astromedia.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Postagem", b =>
+                {
+                    b.HasOne("Astromedia.Models.Usuario", "Usuario")
+                        .WithMany("Postagens")
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -274,6 +308,11 @@ namespace Astromedia.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Astromedia.Models.Usuario", b =>
+                {
+                    b.Navigation("Postagens");
                 });
 #pragma warning restore 612, 618
         }
