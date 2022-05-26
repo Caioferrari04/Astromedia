@@ -9,8 +9,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<AstroContext>(options =>
-    options.UseNpgsql($"User ID=postgres;Password={args[0]};Host=containers-us-west-56.railway.app;Port=5499;Database=railway;"));
-                        /*Inserir senha do banco por args. Em produção, todos campos serão enviados por args.*/
+    options.UseNpgsql(builder.Configuration.GetConnectionString("LOCALHOST")));
+    
 builder.Services.AddDefaultIdentity<Usuario>()
         .AddEntityFrameworkStores<AstroContext>();
 
