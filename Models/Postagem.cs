@@ -14,11 +14,13 @@ public class Postagem
     {
         Texto = "";
         DataPostagem = DateTime.Now;
+        Usuario = new Usuario();
     }
 
-    public Postagem(string texto, DateTime dataPostagem)
+    public Postagem(string texto, DateTime dataPostagem, Usuario usuario)
     {
         Texto = texto;
         DataPostagem = dataPostagem;
+        Usuario = usuario;
     }
 }
