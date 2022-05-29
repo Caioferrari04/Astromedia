@@ -3,9 +3,37 @@
     ViewData["Title"] = "Log In";
 }
 
-<form asp-action="Index" method="post">
-    <input asp-for="Nome" />
-    <input asp-for="Senha"/>
-    <input asp-for="LembrarMe"/>
-    <button type="submit">Enviar</button>
-</form>
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/loginmodal.css">
+}
+
+@section scripts {
+    <script src="~/js/loginmodal.js"></script>
+}
+
+<button id="modalbtn" class="button button-primary">LogIn</button>
+<div id="modalblock" class="modal hidden container">
+    <form class="modal-content animatein" action="Index" method="post">
+        <div class="container logo-box">
+            <img class="img-logo" src="../img/logo-small-bgless.png" alt="minorlogo" class="minlogo">
+            <h2 class="modal-title">Entrar</h2>
+        </div>
+
+        <div class="container">
+            <label class="name-label" asp-for="Nome">Nome de Usuário
+                <input class="inputbox" type="text" name="Nome" autocomplete="off" required>
+            </label>
+
+            <div class="password-label">
+                <label class="checklabel" asp-for="Senha">Senha</label>
+                <a class="fpassword" asp-action="" asp-controller="">Esqueci minha senha</a>
+            </div>
+            <input class="inputbox" type="password" name="Senha" autocomplete="off" required>
+
+            <label asp-for="LembrarMe">
+                <input class="checkbox" type="checkbox" name="lembrar">Lembrar minha senha
+            </label>
+            <button type="submit" class="submit-btn button outline">Entrar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,97 @@
+.modal {
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100vw; 
+    height: 100vh;
+    overflow: auto;  
+    background-color: rgba(0,0,0,0.5); 
+    padding-top: 40px;
+}
+
+.inputbox {
+    border: 1px solid #AF43E0 !important;
+    border-radius: 20px !important;
+    height: 50px !important;
+    margin-bottom: 30px;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    border-radius: 20px;
+    transition: .4s;
+    width: 170px !important;
+}
+
+.modal-title {
+    margin: 0 20px;
+}
+
+.logo-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.submit-btn:hover {
+    opacity: 0.6;
+}
+
+.fpassword {
+    color: white;
+    font-size: large;
+    transition: .4s ease;
+}
+
+.fpassword:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+.name-label {
+    margin-left: 20px;
+}
+
+.img-logo {
+    width: 146px;
+}
+
+.password-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 20px;
+}
+
+.checkbox {
+    margin-left: 20px;
+}
+
+.modal-content {
+    background-color: #3F005C;
+    margin: 5px auto; 
+    border-radius: 25px;
+    width: 35%; 
+    color: white;
+    font-weight: lighter;
+    font-size: x-large;
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.animatein {
+    animation: zoomin 0.6s
+}
+
+@keyframes zoomin {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
