@@ -73,4 +73,9 @@ public class SignInController : Controller
 
         return View(); /*oopsie, alguma coisa tava errado :)*/
     }
+
+    public IActionResult RenderLoginModal() 
+    {
+        return PartialView("LogIn");
+    }
 }

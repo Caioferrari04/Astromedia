@@ -3,11 +3,10 @@
     z-index: 1; 
     left: 0;
     top: 0;
-    width: 100vw; 
-    height: 100vh;
+    width: 100%; 
+    height: 100%;
     overflow: auto;  
     background-color: rgba(0,0,0,0.5); 
-    padding-top: 40px;
 }
 
 .inputbox {
@@ -18,24 +17,17 @@
 }
 
 .submit-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 40px auto;
     border-radius: 20px;
     transition: .4s;
     width: 170px !important;
 }
 
-.modal-title {
-    margin: 0 20px;
-}
-
 .logo-box {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 20px auto;
+    margin: 18px auto;
 }
 
 .submit-btn:hover {
@@ -52,16 +44,8 @@
     text-decoration: underline;
 }
 
-.hidden {
-    display: none;
-}
-
-.name-label {
-    margin-left: 20px;
-}
-
 .img-logo {
-    width: 146px;
+    max-width: 146px;
 }
 
 .password-label {
@@ -71,20 +55,14 @@
     margin: 0 20px;
 }
 
-.checkbox {
-    margin-left: 20px;
-}
-
 .modal-content {
     background-color: #3F005C;
-    margin: 5px auto; 
     border-radius: 25px;
-    width: 35%; 
-    color: white;
-    font-weight: lighter;
     font-size: x-large;
-    padding-top: 20px;
-    padding-bottom: 5px;
+    font-weight: lighter;
+    padding-top: 10px;
+    margin: auto;
+    transform: scale(0.8)
 }
 
 .animatein {
@@ -93,5 +71,17 @@
 
 @keyframes zoomin {
     from {transform: scale(0)}
-    to {transform: scale(1)}
+    to {transform: scale(0.8)}
+}
+
+@media screen and (max-width: 600px) {
+    .logo-box {
+        flex-flow: nowrap;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .logo-box {
+        flex-flow: row wrap;
+    }
 }

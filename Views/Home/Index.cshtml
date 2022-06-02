@@ -3,22 +3,32 @@
 }
 
 @section stylesheet {
-  <link rel="stylesheet" href="../wwwroot/css/paunocu.css" />
+    <link rel="stylesheet" href="~/css/loginmodal.css">
 }
 
 <div class="card">
-  <header>
-    <h4>Bem vindo :)</h4>
-  </header>
-  <p>Não tem nada aqui por enquanto :)</p>
-  <footer class="is-right">
-    <a asp-action="LogIn" asp-controller="SignIn" class="button primary">Login</a>
-    <a asp-action="Index" asp-controller="SignIn" class="button">Cadastro</a>
-  </footer>
+    <header>
+        <h4>Bem vindo :)</h4>
+    </header>
+    <p>Não tem nada aqui por enquanto :)</p>
+    <footer class="is-right">
+        <a id="loginmodalbtn" class="button primary">Login</a>
+        <a asp-action="Index" asp-controller="SignIn" class="button">Cadastro</a>
+    </footer>
 </div>
 
-@section scripts {
-  <script>
-    
-  </script>
+@section modal {
+    <div id="login-modal"></div>
 }
+
+@section scripts {
+    <script>
+        var url = '@Url.Action("RenderLoginModal", "SignIn")';
+        $('#loginmodalbtn').click(function() {
+            $('#login-modal').load(url);
+        })
+    </script>
+    <script src="~/js/loginmodal.js"></script>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
