@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="~/css/loginmodal.css">
 }
 
+@section modal {
+    <div id="login-modal"></div>
+}
+
 <div class="card">
     <header>
         <h4>Bem vindo :)</h4>
@@ -17,18 +21,20 @@
     </footer>
 </div>
 
-@section modal {
-    <div id="login-modal"></div>
-}
-
 @section scripts {
     <script>
-        var url = '@Url.Action("RenderLoginModal", "SignIn")';
+        const loginmodalurl = '@Url.Action("RenderLoginModal", "SignIn")';
         $('#loginmodalbtn').click(function() {
-            $('#login-modal').load(url);
+            $('#login-modal').load(loginmodalurl);
+            $('#login-modal').show();
+        })
+
+        $(window).click(function(event) {
+            if (event.target == modalblock) {
+                $('#login-modal').hide();
+            }
         })
     </script>
-    <script src="~/js/loginmodal.js"></script>
-}
+} 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
