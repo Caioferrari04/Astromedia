@@ -15,4 +15,7 @@ public class UsuarioDTO
     public DateTime DataNascimento { get; set; }
 
     public bool LembrarMe { get; set; }
+
+    public List<PostagemDTO> Postagens { get; set; }
+
 }
