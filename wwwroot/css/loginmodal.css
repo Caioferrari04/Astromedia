@@ -11,7 +11,7 @@
 }
 
 .modal-content {
-    background-color: #3F005C;
+    background-color: var(--bg-secondary-color);
     border-radius: 25px;
     font-size: x-large;
     font-weight: lighter;
@@ -33,7 +33,7 @@
 }
 
 .inputbox {
-    border: 1px solid #AF43E0 !important;
+    border: 1px solid var(--color-highlight) !important;
     border-radius: 20px !important;
     height: 50px !important;
     margin-bottom: 30px;
@@ -58,7 +58,7 @@
 }
 
 .fpassword {
-    color: white;
+    color: var(--color-lightGrey);
     font-size: large;
     transition: .4s ease;
 }

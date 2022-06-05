@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="~/css/loginmodal.css">
 }
 
-@section modal {
-    <div id="login-modal"></div>
+@section loginmodal {
+    <div id="rendermodal" data-url='@Url.Action("RenderLoginModal", "SignIn")'></div>
 }
 
 <div class="card">
@@ -16,25 +16,11 @@
     </header>
     <p>Não tem nada aqui por enquanto :)</p>
     <footer class="is-right">
-        <a id="loginmodalbtn" class="button primary">Login</a>
+        <a id="modalbtn" class="button primary">Login</a>
         <a asp-action="Index" asp-controller="SignIn" class="button">Cadastro</a>
     </footer>
 </div>
 
 @section scripts {
-    <script>
-        const loginmodalurl = '@Url.Action("RenderLoginModal", "SignIn")';
-        $('#loginmodalbtn').click(function() {
-            $('#login-modal').load(loginmodalurl);
-            $('#login-modal').show();
-        })
-
-        $(window).click(function(event) {
-            if (event.target == modalblock) {
-                $('#login-modal').hide();
-            }
-        })
-    </script>
+    <script src="~/js/loadmodal.js"></script>
 } 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
