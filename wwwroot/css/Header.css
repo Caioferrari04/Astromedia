@@ -1,0 +1,66 @@
+.Header{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: linear-gradient(#7300a8ad 10% , transparent 90%);
+    height: 47px;
+
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.login{
+    font-size: 17px;
+    margin-right: 50px;
+}
+
+.signin{
+    font-size: 17px;
+    margin-right: 10px;
+   
+}
+
+.logo{
+    width: 104.5px;
+    padding: 0px;
+    margin-top: -25px;
+    margin-left: -20px;
+}
+
+/*.logo_user{
+    width: 104.5px;
+    padding: 0px;
+    margin-top: -25px;
+    margin-right: 60px;
+}
+
+.HeaderLogado{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: linear-gradient(#7300a8ad 10% , transparent 90%);
+    height: 47px;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+.logo{
+    width: 104.5px;
+    padding: 0px;
+    margin-top: -25px;
+    margin-left: -20px;
+}*/
+
