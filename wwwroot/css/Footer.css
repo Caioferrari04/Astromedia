@@ -1,42 +1,35 @@
-.Footer{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #7300a81f;
-    height: 47px;
+.footer{
+    background-color: var(--color-dark-purple);
+    height: 4rem;
     bottom: 0;
     position: fixed;
-    width: 100%;
+    padding: 10px;
 }
 
-.logoFooter{
-    width: 86px;
-    padding: 0px;
-    margin-top: -20px;
-    margin-left: 10px;
+.footer > a {
+    margin-right: 0.6rem;
+    display: flex;
+    align-items: center;
 }
 
-.copyright{
-    font-size: 10px;
-    margin-right: 5px;
-    margin-left: -35px;
-    margin-top: 3px;
+.footer--logo {
+    width: 55px;
 }
 
-.termos{
-    font-size: 10px;
-    margin-right: -5px;
-    margin-top: 3px;
-   
+.footer--texto {
+    font-size: 8px;
 }
 
-.privacidade{
-    font-size: 10px;
-    margin-right: 10px;
-    margin-top: 3px;
+.footer--texto:nth-of-type(2) {
+    font-size: 12px;
 }
 
-body{
-    margin: 0px;
-}
+@media (min-width: 768px) {
+    .footer--texto {
+        font-size: 12px;
+    }
+    
+    .footer--texto:nth-of-type(2) {
+        font-size: 16px;
+    }
+  }
