@@ -1,34 +1,41 @@
 @model UsuarioDTO
 
 <div id="modalblock" class="modal container is-vertical-align is-horizontal-align">
-    <form class="modal-content animatein text-light col-5" action="Index" method="post">
+    <form class="modal-content animatein text-light col-5" asp-action="Login" asp-controller="SignIn">
         <div class="container logo-box row is-vertical-align is-horizontal-align">
-            <img class="img-logo col" src="../img/logo-small-bgless.png" alt="minorlogo" class="minlogo">
+            <img class="img-logo col" src="../img/logo-small.png" alt="minorlogo" class="minlogo">
             <h2 class="col">Entrar</h2>
         </div>
 
         <div class="container">
+            <div asp-validation-summary="ModelOnly" class="text-error"></div>
+            
+            <small><span asp-validation-for="Nome" class="text-error"></span></small>
             <div class="row">
-                <label class="col" asp-for="Nome">Nome de Usuário
-                    <input class="inputbox" type="text" name="Nome" autocomplete="off" required>
+                <label class="col" asp-for="Nome">
+                    @Html.DisplayNameFor(m => m.Nome)
+                    <input class="inputbox" asp-for="Nome" required>
                 </label>
             </div>
 
+            <small><span asp-validation-for="Senha" class="text-error"></span></small>
             <div class="row">
-                <label class="checklabel col" asp-for="Senha">Senha
+                <label class="checklabel col" asp-for="Senha">
+                    @Html.DisplayNameFor(m => m.Senha)
                     <a class="fpassword pull-right" asp-action="" asp-controller="">Esqueci minha senha</a>
-                    <input class="inputbox" type="password" name="Senha" autocomplete="off" required>
+                    <input class="inputbox" asp-for="Senha" required>
                 </label>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label asp-for="LembrarMe">
-                        <input type="checkbox" name="lembrar">Lembrar minha senha
+                        <input asp-for="LembrarMe">Lembrar minha senha
                     </label>
-                    <button asp-action="" asp-controller="" type="submit" class="col submit-btn button outline is-vertical-align is-horizontal-align">Entrar</button>
+                    <button type="submit" class="col submit-btn button outline is-vertical-align is-horizontal-align">Entrar</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+

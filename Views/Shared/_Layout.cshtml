@@ -9,20 +9,21 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Footer.css">
     <link rel="stylesheet" href="~/css/Header.css">
+    <link rel="stylesheet" href="~/css/loginmodal.css">
     @await RenderSectionAsync("stylesheet", required: false)
 </head>
 <style>
 </style>
 
 <body>
-    @await RenderSectionAsync("loginmodal", required: false)
+    <div id="rendermodal" data-url='@Url.Action("Login", "SignIn")'></div>
+    @await RenderSectionAsync("modal", required: false)
     <!-- HEADER AQUI -->
 
     <header class="header nav">
         <a asp-action="Index" asp-controller="Home"><img class="logo" src="~/img/logo-small.png" alt=""></a>
         <div class="nav-right header--btn-group">
-            <a class="text-light" id="modalbtn" href="#contact">Login</a>
-            <a class="text-light" href="#about">Sign-in</a>
+            <partial name="_LoginPartial" />
         </div>
     </header>
 
@@ -44,6 +45,8 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/loadmodal.js"></script>
+
     @await RenderSectionAsync("scripts", required: false)
 </body>
 

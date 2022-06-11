@@ -1,9 +1,11 @@
 using Astromedia.DTO;
 using Astromedia.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+[AllowAnonymous]
 public class SignInController : Controller
 {
     private readonly SignInManager<Usuario> _signInManager;
@@ -24,7 +26,7 @@ public class SignInController : Controller
     {
         if (ModelState.IsValid)
         {                                                              /*Adicionar foto padrão*/
-            var novoUsuario = new Usuario { UserName = usuario.Nome, FotoPerfil = "", Email = usuario.Email };
+            var novoUsuario = new Usuario { UserName = usuario.Nome, FotoPerfil = "~/img/default-img.jpg", Email = usuario.Email };
             var resultado = await _userManager.CreateAsync(novoUsuario, usuario.Senha);
 
             if (resultado.Succeeded)
@@ -47,7 +49,7 @@ public class SignInController : Controller
                                                                             forçado a acessar a tela de login
                                                                             novamente*/
 
-        return View();
+        return PartialView("LogIn");
     }
 
     [HttpPost]
@@ -74,8 +76,9 @@ public class SignInController : Controller
         return View(); /*oopsie, alguma coisa tava errado :)*/
     }
 
-    public IActionResult RenderLoginModal() 
+    public async Task<IActionResult> Logout()
     {
-        return PartialView("LogIn");
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }
