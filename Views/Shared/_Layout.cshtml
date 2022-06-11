@@ -1,62 +1,48 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
+
 <head>
 
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="~/css/Header.css">
-    <link rel="stylesheet" href="~/css/Footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Astromedia</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Astromedia.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Footer.css">
+    <link rel="stylesheet" href="~/css/Header.css">
     @await RenderSectionAsync("stylesheet", required: false)
 </head>
 <style>
 </style>
-<body> 
+
+<body>
+    @await RenderSectionAsync("loginmodal", required: false)
     <!-- HEADER AQUI -->
 
     <ul class="Header">
-        <li style=" float: left;"><a class="logo" href=""><img src="~/img/logo-small.png" alt=""></a></li>
+        <li style="float:left;"><a class="logo" href=""><img src="~/img/logo-small.png" alt=""></a></li>
         <li style="float:right"><a class="login" href="#contact">Login</a></li>
-        <li style="float:right"><a class="signin" href="#about">Sign-in</a></li>    
+        <li style="float:right"><a class="signin" href="#about">Sign-in</a></li>
     </ul>
 
-      <!--<ul class="HeaderLogado">
+    <!--<ul class="HeaderLogado">
         <li style=" float: left;"><a class="logo" href=""><img src="~/img/logo-small.png" alt=""></a></li>
         <li style="float:right"><a class="logo_user" href=""><img src="xxxxx" alt=""></a></li>   
     </ul>-->
 
+    @RenderBody()
+
     <!-- FOOTER AQUI -->
-    <ul class="Footer">
-        <li style=" float: left;"><a class="logoFooter" href=""><img src="~/img/logo-small.png" alt=""></a></li>
-        <li style="float:left"><a class="copyright" href="#copyright">©2022 Astromedia</a></li>
-        <li style="float:left"><a class="termos" href="#termos">Termos</a></li>
-	    <li style="float:left"><a class="privacidade" href="#privacidade">Privacidade</a></li>       
-    </ul>
+    <footer class="footer is-full-width is-vertical-align">
+        <a href=""><img class="footer--logo" src="~/img/logo-small.png" alt=""></a>
+        <a class="footer--texto text-light" href="#copyright">©2022 Astromedia</a>
+        <a class="footer--texto text-light" href="#termos">Termos</a>
+        <a class="footer--texto text-light" href="#privacidade">Privacidade</a>
+    </footer>
 
     </div>
-    @await RenderSectionAsync("loginmodal", required: false)
-    <header>
-        <nav class="nav">
-            <div class="nav-left">
-                <a class="brand" href="#">Brand</a>
-                <div class="tabs">
-                    <a>Link 1</a>
-                    <a>Link 2</a>
-                </div>
-            </div>
-            <div class="nav-right">
-                <a class="button outline">Button</a>
-            </div>
-        </nav>
-    </header>
-    @RenderBody()
-    <footer>
-        <p>sheeeeeeeeeeeeeesh</p>
-    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("scripts", required: false)
 </body>
+
 </html>
