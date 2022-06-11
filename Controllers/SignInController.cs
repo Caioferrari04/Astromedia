@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+namespace Astromedia.Controllers;
+
 [AllowAnonymous]
 public class SignInController : Controller
 {
@@ -24,21 +26,26 @@ public class SignInController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(UsuarioDTO usuario)
     {
-        if (ModelState.IsValid)
-        {                                                              /*Adicionar foto padrão*/
-            var novoUsuario = new Usuario { UserName = usuario.Nome, FotoPerfil = "~/img/default-img.jpg", Email = usuario.Email };
+        var validator = new UsuarioValidator();
+        var novoUsuario = new Usuario { UserName = usuario.Nome, FotoPerfil = "~/img/default-img.jpg", Email = usuario.Email };
+
+        var validationResult = await validator.ValidateAsync(novoUsuario);
+
+        if (validationResult.IsValid)
+        {
             var resultado = await _userManager.CreateAsync(novoUsuario, usuario.Senha);
 
             if (resultado.Succeeded)
             {
                 await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
+
+                return RedirectToAction("Index", "Home");
             }
-            foreach (var error in resultado.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+
+            return Json(new { tipo = "database", erros = resultado.Errors });
         }
-        return RedirectToAction("Index", "Home"); /*Redirecionar para a home*/
+
+        return Json(new { tipo = "model", erros = validationResult.Errors });
     }
 
     public async Task<IActionResult> LogIn()

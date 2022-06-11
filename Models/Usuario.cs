@@ -18,5 +18,7 @@ public class Usuario : IdentityUser
 
     public string FotoPerfil { get; set; }
 
+    public DateTime DataNascimento { get; set; }
+
     public List<Postagem> Postagens { get; set; }
 }
