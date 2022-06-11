@@ -1,38 +1,43 @@
-.Header{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-image: linear-gradient(#7300a8ad 10% , transparent 90%);
-    height: 47px;
-
+.header{
+    background-image: linear-gradient(#7300a8ad 5% , transparent 70%);
+    min-height: 2rem!important;
+    height: 75px;
+    top: 0;
+    position: sticky;
 }
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.login{
-    font-size: 17px;
-    margin-right: 10px;
-}
-
-.signin{
-    font-size: 17px;
-    margin-right: 10px;
-   
+.header > a {
+    font-size: 24px;
 }
 
 .logo{
-    width: 104.5px;
-    padding: 0px;
-    margin-top: -25px;
-    margin-left: -20px;
+    max-width: 70px;
 }
+
+
+@media (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .header a {
+        font-size: 15px;
+        white-space: nowrap;
+    }
+
+    .header--btn-group {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .header--btn-group a {
+        margin-left: 5px
+    }
+}
+
 
 /*.logo_user{
     width: 104.5px;

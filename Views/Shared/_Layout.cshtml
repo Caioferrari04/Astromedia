@@ -18,11 +18,13 @@
     @await RenderSectionAsync("loginmodal", required: false)
     <!-- HEADER AQUI -->
 
-    <ul class="Header">
-        <li style="float:left;"><a class="logo" href=""><img src="~/img/logo-small.png" alt=""></a></li>
-        <li style="float:right"><a class="login" href="#contact">Login</a></li>
-        <li style="float:right"><a class="signin" href="#about">Sign-in</a></li>
-    </ul>
+    <header class="header nav">
+        <a asp-action="Index" asp-controller="Home"><img class="logo" src="~/img/logo-small.png" alt=""></a>
+        <div class="nav-right header--btn-group">
+            <a class="text-light" id="modalbtn" href="#contact">Login</a>
+            <a class="text-light" href="#about">Sign-in</a>
+        </div>
+    </header>
 
     <!--<ul class="HeaderLogado">
         <li style=" float: left;"><a class="logo" href=""><img src="~/img/logo-small.png" alt=""></a></li>
