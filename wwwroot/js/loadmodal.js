@@ -7,11 +7,11 @@ $(modalbtn).click(function() {
     $.get(url, function(data) {
         $(rendermodal).html(data);
         $(rendermodal).show();
+        
+        $(window).click(function(event) {
+            if (event.target == modalblock) {
+                $(rendermodal).hide();
+            }
+        })
     })
-})
-
-$(window).click(function(event) {
-    if (event.target == modalblock) {
-        $(rendermodal).hide();
-    }
 })
