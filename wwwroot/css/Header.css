@@ -10,13 +10,32 @@
     font-size: 24px;
 }
 
-.logo{
+.header a:hover {
+    opacity: 1!important;
+}
+
+.header .text-light {
+    transition: 0.3s;
+}
+
+.header .text-light:hover {
+    opacity: 0.75!important;
+}
+
+.logo {
     max-width: 70px;
 }
 
-.logo_user{
+.logo-user{
     width: 3rem;
     border-radius: 50px;
+    transition: 0.3s;
+    border: 3px solid transparent;
+}
+
+.logo-user:hover {
+    border: 3px solid var(--color-highlight);
+    opacity: 100%!important;
 }
 
 @media (max-width: 768px) {

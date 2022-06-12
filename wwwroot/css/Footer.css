@@ -1,5 +1,5 @@
 .footer{
-    background-color: var(--color-dark-purple);
+    background-color: var(--bg-secondary-color);
     height: 4rem;
     bottom: 0;
     position: fixed;

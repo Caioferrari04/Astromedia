@@ -32,20 +32,19 @@ public class SignInController : Controller
         var validationResult = await validator.ValidateAsync(novoUsuario);
 
         if (validationResult.IsValid)
-        {
+        {                                                              /*Adicionar foto padrão*/
             var resultado = await _userManager.CreateAsync(novoUsuario, usuario.Senha);
 
             if (resultado.Succeeded)
             {
                 await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
-
-                return RedirectToAction("Index", "Home");
             }
-
-            return Json(new { tipo = "database", erros = resultado.Errors });
+            foreach (var error in resultado.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
-
-        return Json(new { tipo = "model", erros = validationResult.Errors });
+        return RedirectToAction("Index", "Home"); /*Redirecionar para a home*/
     }
 
     public async Task<IActionResult> LogIn()
@@ -60,9 +59,10 @@ public class SignInController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> LogIn(UsuarioDTO usuario)
     {
-        if (ModelState.IsValid)
+        try
         {
             var resultado = await _signInManager.PasswordSignInAsync(
                 userName: usuario.Nome,
@@ -73,14 +73,18 @@ public class SignInController : Controller
 
             if (!resultado.Succeeded)
             {
-                ModelState.AddModelError(string.Empty, "Tentativa de login inválida");
+                ModelState.AddModelError(string.Empty, @"Tentativa de login inválida, 
+                verifique se digitou seus dados corretamente");
                 return View();
             }
 
             return RedirectToAction("Index", "Home"); /*Redirecionar para home*/
         }
-
-        return View(); /*oopsie, alguma coisa tava errado :)*/
+        catch
+        {
+            ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
+            return PartialView("LogIn");
+        }
     }
 
     public async Task<IActionResult> Logout()

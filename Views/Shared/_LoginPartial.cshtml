@@ -7,8 +7,8 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <a href=""><img src="@usuario.FotoPerfil" class="logo_user" alt=""></a>
     <a class="text-light" asp-action="Logout" asp-controller="SignIn">Deslogar</a>
+    <a href=""><img src="@usuario.FotoPerfil" class="logo-user" alt=""></a>
 }
 else 
 {
