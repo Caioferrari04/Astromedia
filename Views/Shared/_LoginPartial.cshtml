@@ -3,6 +3,7 @@
 @inject UserManager<Usuario> UserManager
 @{
     var usuario = await UserManager.GetUserAsync(User);
+    var rota = ViewContext.RouteData.Values["action"] as string;
 }
 
 @if (SignInManager.IsSignedIn(User))
@@ -10,8 +11,19 @@
     <a class="text-light" asp-action="Logout" asp-controller="SignIn">Deslogar</a>
     <a href=""><img src="@usuario.FotoPerfil" class="logo-user" alt=""></a>
 }
-else 
+else
 {
-    <a class="text-light" id="modalbtn" href="#contact">Login</a>
-    <a class="text-light" asp-action="Index" asp-controller="SignIn">Sign-in</a>
+    @if (rota == "Index")
+    {
+        <a class="text-light" id="modalbtn" href="#contact">Login</a>
+    }
+    else if (rota == "LogIn")
+    {
+        <a class="text-light" asp-action="Index" asp-controller="SignIn">Sign-in</a>
+    } 
+    else
+    {
+        <a class="text-light" id="modalbtn" href="#contact">Login</a>
+        <a class="text-light" asp-action="Index" asp-controller="SignIn">Sign-in</a>
+    }
 }
