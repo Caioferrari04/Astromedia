@@ -1,17 +1,17 @@
-const rendermodal = document.getElementById('rendermodal');
-const modalbtn = document.getElementById('modalbtn');
+const renderModal = document.getElementById('rendermodal');
+const modalBtn = document.getElementById('modalbtn');
 
-$(modalbtn).click(function() {
-    var url = $(rendermodal).data('url');
+$(modalBtn).click(function () {
+    var url = $(renderModal).data('url');
 
-    $.get(url, function(data) {
-        $(rendermodal).html(data);
-        $(rendermodal).show();
-        
-        $(window).click(function(event) {
+    $.get(url, function (data) {
+        $(renderModal).html(data);
+        $(renderModal).show();
+
+        $(window).click(function (event) {
             if (event.target == modalblock) {
-                $(rendermodal).hide();
+                $(renderModal).hide();
             }
-        })
-    })
-})
+        });
+    });
+});
