@@ -18,7 +18,6 @@
 <body>
     <div id="rendermodal" data-url='@Url.Action("Login", "SignIn")'></div>
     @await RenderSectionAsync("modal", required: false)
-    <!-- HEADER AQUI -->
 
     <header class="header nav">
         <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-small.png"  class="logo" alt=""></a>
@@ -27,14 +26,8 @@
         </div>
     </header>
 
-    <!--<ul class="HeaderLogado">
-        <li style=" float: left;"><a class="logo" href=""><img src="~/img/logo-small.png" alt=""></a></li>
-        <li style="float:right"><a class="logo_user" href=""><img src="xxxxx" alt=""></a></li>   
-    </ul>-->
-
     @RenderBody()
 
-    <!-- FOOTER AQUI -->
     <footer class="footer is-full-width is-vertical-align">
         <a href=""><img class="footer--logo" src="~/img/logo-small.png" alt=""></a>
         <a class="footer--texto text-light" href="#copyright">©2022 Astromedia</a>

@@ -75,7 +75,7 @@ public class SignInController : Controller
             {
                 ModelState.AddModelError(string.Empty, @"Tentativa de login inválida, 
                 verifique se digitou seus dados corretamente");
-                return View();
+                return View("LogInView");
             }
 
             return RedirectToAction("Index", "Home"); /*Redirecionar para home*/
@@ -83,7 +83,7 @@ public class SignInController : Controller
         catch
         {
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
-            return PartialView("LogIn");
+            return View("LogInView");
         }
     }
 
