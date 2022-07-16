@@ -12,7 +12,7 @@ public class PostagemService
         _astroContext = astroContext;
     }
 
-    public void CriarPostagem(PostagemDTO postagemDTO)
+    public void Create(PostagemDTO postagemDTO)
     {
         _astroContext.Postagens.Add(ToPostagem(postagemDTO));
         _astroContext.SaveChanges();
