@@ -21,6 +21,25 @@ namespace Astromedia.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Astromedia.Models.Astro", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Curiosidades")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Astros");
+                });
+
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
                 {
                     b.Property<int>("Id")
@@ -38,9 +57,14 @@ namespace Astromedia.Migrations
                     b.Property<string>("UsuarioId")
                         .HasColumnType("text");
 
+                    b.Property<int?>("astroId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UsuarioId");
+
+                    b.HasIndex("astroId");
 
                     b.ToTable("Postagens");
                 });
@@ -113,6 +137,21 @@ namespace Astromedia.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("AstroUsuario", b =>
+                {
+                    b.Property<int>("AstrosId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("usuariosId")
+                        .HasColumnType("text");
+
+                    b.HasKey("AstrosId", "usuariosId");
+
+                    b.HasIndex("usuariosId");
+
+                    b.ToTable("AstroUsuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -257,7 +296,28 @@ namespace Astromedia.Migrations
                         .WithMany("Postagens")
                         .HasForeignKey("UsuarioId");
 
+                    b.HasOne("Astromedia.Models.Astro", "astro")
+                        .WithMany("postagens")
+                        .HasForeignKey("astroId");
+
                     b.Navigation("Usuario");
+
+                    b.Navigation("astro");
+                });
+
+            modelBuilder.Entity("AstroUsuario", b =>
+                {
+                    b.HasOne("Astromedia.Models.Astro", null)
+                        .WithMany()
+                        .HasForeignKey("AstrosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Astromedia.Models.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("usuariosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -309,6 +369,11 @@ namespace Astromedia.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Astromedia.Models.Astro", b =>
+                {
+                    b.Navigation("postagens");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
