@@ -21,4 +21,6 @@ public class Usuario : IdentityUser
     public DateTime DataNascimento { get; set; }
 
     public List<Postagem> Postagens { get; set; }
+
+    public List<Astro> Astros { get; set; }
 }

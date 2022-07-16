@@ -8,4 +8,6 @@ public class AstroContext : IdentityDbContext<Usuario>
     { }
 
     public DbSet<Postagem> Postagens { get; set; }
+
+    public DbSet<Astro> Astros { get; set; }
 }
