@@ -10,7 +10,7 @@ namespace Astromedia.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "astroId",
+                name: "AstroId",
                 table: "Postagens",
                 type: "integer",
                 nullable: true);
@@ -22,7 +22,8 @@ namespace Astromedia.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nome = table.Column<string>(type: "text", nullable: true),
-                    Curiosidades = table.Column<string>(type: "text", nullable: true)
+                    Curiosidades = table.Column<string>(type: "text", nullable: true),
+                    Foto = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,14 +35,14 @@ namespace Astromedia.Migrations
                 columns: table => new
                 {
                     AstrosId = table.Column<int>(type: "integer", nullable: false),
-                    usuariosId = table.Column<string>(type: "text", nullable: false)
+                    UsuariosId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AstroUsuario", x => new { x.AstrosId, x.usuariosId });
+                    table.PrimaryKey("PK_AstroUsuario", x => new { x.AstrosId, x.UsuariosId });
                     table.ForeignKey(
-                        name: "FK_AstroUsuario_AspNetUsers_usuariosId",
-                        column: x => x.usuariosId,
+                        name: "FK_AstroUsuario_AspNetUsers_UsuariosId",
+                        column: x => x.UsuariosId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -54,19 +55,19 @@ namespace Astromedia.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Postagens_astroId",
+                name: "IX_Postagens_AstroId",
                 table: "Postagens",
-                column: "astroId");
+                column: "AstroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AstroUsuario_usuariosId",
+                name: "IX_AstroUsuario_UsuariosId",
                 table: "AstroUsuario",
-                column: "usuariosId");
+                column: "UsuariosId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Postagens_Astros_astroId",
+                name: "FK_Postagens_Astros_AstroId",
                 table: "Postagens",
-                column: "astroId",
+                column: "AstroId",
                 principalTable: "Astros",
                 principalColumn: "Id");
         }
@@ -74,7 +75,7 @@ namespace Astromedia.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Postagens_Astros_astroId",
+                name: "FK_Postagens_Astros_AstroId",
                 table: "Postagens");
 
             migrationBuilder.DropTable(
@@ -84,11 +85,11 @@ namespace Astromedia.Migrations
                 name: "Astros");
 
             migrationBuilder.DropIndex(
-                name: "IX_Postagens_astroId",
+                name: "IX_Postagens_AstroId",
                 table: "Postagens");
 
             migrationBuilder.DropColumn(
-                name: "astroId",
+                name: "AstroId",
                 table: "Postagens");
         }
     }
