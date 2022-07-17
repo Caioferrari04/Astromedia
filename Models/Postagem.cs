@@ -10,7 +10,7 @@ public class Postagem
 
     public Usuario Usuario { get; set; }
 
-    public Astro astro { get; set; }
+    public Astro Astro { get; set; }
 
     public Postagem()
     {

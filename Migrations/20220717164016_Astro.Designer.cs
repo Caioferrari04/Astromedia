@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Astromedia.Migrations
 {
     [DbContext(typeof(AstroContext))]
-    [Migration("20220716171015_Astro")]
+    [Migration("20220717164016_Astro")]
     partial class Astro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace Astromedia.Migrations
                     b.Property<string>("Curiosidades")
                         .HasColumnType("text");
 
+                    b.Property<string>("Foto")
+                        .HasColumnType("text");
+
                     b.Property<string>("Nome")
                         .HasColumnType("text");
 
@@ -50,6 +53,9 @@ namespace Astromedia.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AstroId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DataPostagem")
                         .HasColumnType("timestamp with time zone");
 
@@ -59,14 +65,11 @@ namespace Astromedia.Migrations
                     b.Property<string>("UsuarioId")
                         .HasColumnType("text");
 
-                    b.Property<int?>("astroId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("AstroId");
 
-                    b.HasIndex("astroId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Postagens");
                 });
@@ -146,12 +149,12 @@ namespace Astromedia.Migrations
                     b.Property<int>("AstrosId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("usuariosId")
+                    b.Property<string>("UsuariosId")
                         .HasColumnType("text");
 
-                    b.HasKey("AstrosId", "usuariosId");
+                    b.HasKey("AstrosId", "UsuariosId");
 
-                    b.HasIndex("usuariosId");
+                    b.HasIndex("UsuariosId");
 
                     b.ToTable("AstroUsuario");
                 });
@@ -294,17 +297,17 @@ namespace Astromedia.Migrations
 
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
                 {
+                    b.HasOne("Astromedia.Models.Astro", "Astro")
+                        .WithMany("Postagens")
+                        .HasForeignKey("AstroId");
+
                     b.HasOne("Astromedia.Models.Usuario", "Usuario")
                         .WithMany("Postagens")
                         .HasForeignKey("UsuarioId");
 
-                    b.HasOne("Astromedia.Models.Astro", "astro")
-                        .WithMany("postagens")
-                        .HasForeignKey("astroId");
+                    b.Navigation("Astro");
 
                     b.Navigation("Usuario");
-
-                    b.Navigation("astro");
                 });
 
             modelBuilder.Entity("AstroUsuario", b =>
@@ -317,7 +320,7 @@ namespace Astromedia.Migrations
 
                     b.HasOne("Astromedia.Models.Usuario", null)
                         .WithMany()
-                        .HasForeignKey("usuariosId")
+                        .HasForeignKey("UsuariosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -375,7 +378,7 @@ namespace Astromedia.Migrations
 
             modelBuilder.Entity("Astromedia.Models.Astro", b =>
                 {
-                    b.Navigation("postagens");
+                    b.Navigation("Postagens");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
