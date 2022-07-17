@@ -1,4 +1,5 @@
 using Astromedia.Models;
+using Astromedia.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<AstroContext>(options =>
     
 builder.Services.AddDefaultIdentity<Usuario>()
         .AddEntityFrameworkStores<AstroContext>();
+
+builder.Services.AddScoped<AstroService>();
+builder.Services.AddScoped<PostagemService>();
 
 var app = builder.Build();
 

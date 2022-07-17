@@ -29,7 +29,7 @@ public class AstroService
 
     public void Delete(int id)
     {
-        var astro = GetById(id);
+        Astro astro = GetById(id);
 
         _astroContext.Astros.Remove(astro);
         _astroContext.SaveChanges();
