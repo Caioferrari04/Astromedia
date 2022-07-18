@@ -5,6 +5,7 @@
         <div class="container logo-box row is-vertical-align is-horizontal-align">
             <img class="img-logo col" src="../img/logo-small.png" alt="minorlogo" class="minlogo">
             <h2 class="col">Entrar</h2>
+            <img class="is-vertical-align is-horizontal-align close-btn col" src="../img/close-icon.svg" alt="Close Icon">
         </div>
 
         <div class="container">
@@ -20,8 +21,10 @@
             <small><span asp-validation-for="Senha" class="text-error"></span></small>
             <div class="row">
                 <label class="checklabel col" asp-for="Senha">
-                    @Html.DisplayNameFor(m => m.Senha)
-                    <a class="fpassword pull-right" asp-action="" asp-controller="">Esqueci minha senha</a>
+                    <div class="password-box">
+                        @Html.DisplayNameFor(m => m.Senha)
+                        <a class="fpassword" asp-action="" asp-controller="">Esqueci minha senha</a>
+                    </div>
                     <input class="inputbox" asp-for="Senha" required>
                 </label>
             </div>

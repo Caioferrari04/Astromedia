@@ -17,7 +17,7 @@
     font-weight: lighter;
     padding-top: 10px;
     margin: auto;
-    transform: scale(0.8)
+    transform: scale(0.75)
 }
 
 /* Conteúdo Modal - Form */
@@ -25,7 +25,19 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    justify-content: center;
     margin: 18px auto;
+}
+
+.close-btn {
+    max-width: 50px;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+}
+
+.close-btn:hover {
+    transform: scale(0.95);
+    opacity: 0.9;
 }
 
 .img-logo {
@@ -44,6 +56,12 @@
     justify-content: space-between;
     align-items: flex-end;
     margin: 0 20px;
+}
+
+.password-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .submit-btn {
@@ -73,8 +91,8 @@
 }
 
 @keyframes zoomin {
-    from {transform: scale(0)}
-    to {transform: scale(0.8)}
+    from {transform: scale(0); opacity: 0;}
+    to {transform: scale(0.75); opacity: 1;}
 }
 
 /* Media Queries - Modal */
