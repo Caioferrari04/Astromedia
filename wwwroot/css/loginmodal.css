@@ -29,6 +29,10 @@
     margin: 18px auto;
 }
 
+.logo-text {
+    margin: 0;
+}
+
 .close-btn {
     max-width: 50px;
     cursor: pointer;
@@ -38,6 +42,7 @@
 .close-btn:hover {
     transform: scale(0.95);
     opacity: 0.9;
+    margin: 0;
 }
 
 .img-logo {
@@ -96,14 +101,71 @@
 }
 
 /* Media Queries - Modal */
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 601px) and (max-width: 1154px) {
+    .modal-content {
+        transform: scale(1);
+        font-size: 1.2rem;
+        max-width: 100%;
+    }
+    .inputbox {
+        height: 42px !important;
+    }
     .logo-box {
         flex-flow: nowrap;
+    }
+    .fpassword {
+        font-size: 1rem;
+    }
+    .img-logo {
+        max-width: 12vw;
+    }
+    .close-btn {
+        max-width: 40px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .modal-content {
+        transform: scale(0.85);
+        font-size: 1.4rem;
+    }
+    .inputbox {
+        height: 42px !important;
+    }
+    .logo-box {
+        flex-flow: nowrap;
+    }
+    .fpassword {
+        font-size: 1.2rem;
+    }
+    .img-logo {
+        max-width: 24vw;
+    }
+    .close-btn {
+        max-width: 47px;
     }
 }
 
 @media screen and (max-width: 320px) {
+    .modal-content {
+        transform: scale(0.9);
+        font-size: 1.1rem;
+    }
+    .fpassword {
+        font-size: 1rem;
+    }
     .logo-box {
-        flex-flow: row wrap;
+        flex-flow: nowrap;
+    }
+    .inputbox {
+        height: 35px !important;
+    }
+    .close-btn {
+        max-width: 12vw;
+    }
+    .submit-btn {
+        margin: 25px auto;
+        width: 150px !important;
+        font-size: 1.4rem;
     }
 }
