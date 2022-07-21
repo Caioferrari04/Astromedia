@@ -22,10 +22,6 @@
 
 /* Conteúdo Modal - Form */
 .logo-box {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    justify-content: center;
     margin: 18px auto;
 }
 
@@ -37,12 +33,15 @@
     max-width: 50px;
     cursor: pointer;
     transition: 0.4s ease-in-out;
+    margin-bottom: 0;
 }
 
 .close-btn:hover {
     transform: scale(0.95);
-    opacity: 0.9;
-    margin: 0;
+}
+
+.close-btn:active {
+    transform: scale(0.8);
 }
 
 .img-logo {

@@ -15,3 +15,7 @@ $(modalBtn).click(function () {
         });
     });
 });
+
+function closeModal() {
+    $(renderModal).hide(); 
+};
