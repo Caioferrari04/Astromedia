@@ -1,0 +1,64 @@
+.header{
+    background-image: linear-gradient(var(--bg-secondary-color) 1% , transparent 90%);
+    min-height: 2rem!important;
+    height: 75px;
+    top: 0;
+    position: sticky;
+}
+
+.header > a {
+    font-size: 24px;
+}
+
+.header a:hover {
+    opacity: 1!important;
+}
+
+.header .text-light {
+    transition: 0.3s;
+}
+
+.header .text-light:hover {
+    opacity: 0.75!important;
+}
+
+.logo {
+    max-width: 70px;
+}
+
+.logo-user{
+    width: 3rem;
+    border-radius: 50px;
+    transition: 0.3s;
+    border: 3px solid transparent;
+}
+
+.logo-user:hover {
+    border: 3px solid var(--color-highlight);
+    opacity: 100%!important;
+}
+
+@media (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .header a {
+        font-size: 15px;
+        white-space: nowrap;
+    }
+
+    .header--btn-group {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .header--btn-group a {
+        margin-left: 5px
+    }
+}
+
+

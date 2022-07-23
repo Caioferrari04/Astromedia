@@ -31,3 +31,7 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+node_modules/
+
+.env

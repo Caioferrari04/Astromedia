@@ -1,0 +1,35 @@
+.footer{
+    background-color: #471c5cb3;
+    height: 4rem;
+    bottom: 0;
+    position: fixed;
+    padding: 10px;
+}
+
+.footer > a {
+    margin-right: 0.6rem;
+    display: flex;
+    align-items: center;
+}
+
+.footer--logo {
+    width: 55px;
+}
+
+.footer--texto {
+    font-size: 8px;
+}
+
+.footer--texto:nth-of-type(2) {
+    font-size: 12px;
+}
+
+@media (min-width: 768px) {
+    .footer--texto {
+        font-size: 12px;
+    }
+    
+    .footer--texto:nth-of-type(2) {
+        font-size: 16px;
+    }
+  }
