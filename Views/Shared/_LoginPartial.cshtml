@@ -4,6 +4,7 @@
 @{
     var usuario = await UserManager.GetUserAsync(User);
     var rota = ViewContext.RouteData.Values["action"] as string;
+    var rotaController = ViewContext.RouteData.Values["controller"] as string;
 }
 
 @if (SignInManager.IsSignedIn(User))
@@ -13,7 +14,7 @@
 }
 else
 {
-    @if (rota == "Index")
+    @if (rota is "Index" && rotaController is "SignIn")
     {
         <a class="text-light" id="modalbtn" href="#contact">Login</a>
     }
