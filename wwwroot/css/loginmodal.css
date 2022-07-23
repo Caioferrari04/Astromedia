@@ -55,13 +55,6 @@
     margin-bottom: 30px;
 }
 
-.password-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin: 0 20px;
-}
-
 .password-box {
     display: flex;
     justify-content: space-between;

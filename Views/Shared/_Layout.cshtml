@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/css/Footer.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/Header.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/loginmodal.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true">
     @await RenderSectionAsync("stylesheet", required: false)
 </head>
 <style>
@@ -20,7 +21,7 @@
     @await RenderSectionAsync("modal", required: false)
 
     <header class="header nav">
-        <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-small.png"  class="logo" alt=""></a>
+        <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-small.png" class="logo" alt=""></a>
         <div class="nav-right header--btn-group">
             <partial name="_LoginPartial" />
         </div>
