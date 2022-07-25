@@ -14,7 +14,7 @@
             <div class="row">
                 <label class="col" asp-for="Nome">
                     @Html.DisplayNameFor(m => m.Nome)
-                    <input class="inputbox" asp-for="Nome" required>
+                    <input class="inputbox-name" asp-for="Nome" required>
                 </label>
             </div>
 
@@ -25,7 +25,12 @@
                         @Html.DisplayNameFor(m => m.Senha)
                         <a class="fpassword" asp-action="" asp-controller="">Esqueci minha senha</a>
                     </div>
-                    <input class="inputbox" asp-for="Senha" required>
+                    <div class="row input-password-box">
+                        <input class="col-10 inputbox-password" asp-for="Senha" required>
+                        <div class="col btn-show-password is-vertical-align is-horizontal-align">
+                            <img src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd" id="show-password"></i>
+                        </div>
+                    </div>
                 </label>
             </div>
 
