@@ -26,9 +26,9 @@
                         <a class="fpassword" asp-action="" asp-controller="">Esqueci minha senha</a>
                     </div>
                     <div class="row input-password-box">
-                        <input class="col-10 inputbox-password" asp-for="Senha" required>
+                        <input id="inputbox-password" class="col-10 inputbox-password" asp-for="Senha" required>
                         <div class="col btn-show-password is-vertical-align is-horizontal-align">
-                            <img src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd" id="show-password"></i>
+                            <img onclick="showPass()" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd" id="show-password"></img>
                         </div>
                     </div>
                 </label>
@@ -45,4 +45,3 @@
         </div>
     </form>
 </div>
-

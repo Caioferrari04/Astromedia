@@ -81,13 +81,17 @@
 
 .btn-show-password {
     cursor: pointer;
-    transition: 0.4s ease-in-out;
+    transition: 0.1s ease-in-out;
     display: flex;
     height: 50px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: var(--color-highlight);
     margin-left: 0;
+}
+
+.btn-show-password:active {
+    opacity: 0.5;
 }
 
 .submit-btn {
