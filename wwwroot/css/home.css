@@ -1,5 +1,252 @@
-body {
-    background-image: url(../img/home-background.png);
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 200%;
+    width: 100%;
+    background: url(../img/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
+
+#hero{
+    position: relative;
+    width: 100%;
+    padding-bottom: 35vh;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroElements{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 20vh;
+}
+
+.mainLogo{
+    width: 900px;
+}
+
+.memberButton{
+    background-color: #5c2578;
+    color: #ffff;
+    border: 4px solid  rgb(45, 45, 130);
+    font-family: 'Righteous', cursive;
+    font-size: 2rem;
+}
+
+.memberButton:hover{
+    border: 4px solid  rgba(45, 45, 130, 0.366);
+    border-radius: 4px;
+}
+
+#secondHero{
+    background-color: #3F005C;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 10vh;
+    padding-bottom: 25vh;
+}
+
+.elementsContainer-secondHero-title1{
+    font-size: 2em;
+    margin-bottom: -4%;
+    color: #af43e0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.elementsContainer-secondHero-title2{
+    font-size: 3em;
+    color: #af43e0;
+    font-family: 'Righteous', cursive
+}
+
+.iframeContainer{
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.iframeContainer iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 10px solid #af43e0;
+    border-radius: 5px;
+}
+
+#thirdHero{
+    background-color: #5c257800;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#fourthHero{
+    background-color: #5c2578;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0vh;
+}
+
+#fifthHero{
+    background-color: #5c257800;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#sixthHero{
+    background-color: #3F005C;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 10vh;
+    padding-bottom: 25vh;
+}
+
+.sixthHero-container{
+    padding-top: -6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.elementsContainer-sixthHero-listNames{
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: line;
+}
+
+.elementsContainer-sixthHero h1{
+    font-size: 3em;
+    margin-bottom: 10%;
+    margin-top: 1%;
+    color: #af43e0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.sixthHero-container-listNames-Image-1{
+    border-radius: 4px;
+    width: 40%;
+    border: 5px solid #af43e0;
+}
+
+.sixthHero-container-listNames-Image-2{
+    border-radius: 4px;
+    width: 40%;
+    border: 5px solid #af43e0;
+}
+
+.sixthHero-container-listNames-Image-3{
+    border-radius: 4px;
+    width: 40%;
+    border: 5px solid #af43e0;
+}
+
+.sixthHero-container-listNames-Image-4{
+    border-radius: 4px;
+    width: 40%;
+    border: 5px solid #af43e0;
+}
+
+.sixthHero-container-listNames-Elements-1 h3{
+    font-size: 1em;
+    color: #af43e0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.sixthHero-container-listNames-Elements-2 h3{
+    font-size: 1em;
+    color: #af43e0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.sixthHero-container-listNames-Elements-3 h3{
+    font-size: 1em;
+    color: #af43e0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.sixthHero-container-listNames-Elements-4 h3{
+    font-size: 1em;
+    color: #af43e0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.elementsContainer-sixthHero-Message{
+    font-size: 1.5em;
+    margin-top: 10vh;
+    color: #af43e0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
