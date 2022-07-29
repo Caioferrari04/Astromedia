@@ -1,11 +1,23 @@
+/* Conteúdo Cadastro - Geral */
+
+.cad {
+    margin-top: inherit;
+}
+
 .cad-content {
     padding-top: 10px;
     margin: auto;
 }
 
 /* Conteúdo Cadastro - Form */
+/* -- Header do Cadastro */
+
 .logo-box-cad {
     margin: 18px auto;
+}
+
+.img-logo-cad {
+    max-width: 50vw;
 }
 
 .logo-text-cad {
@@ -13,9 +25,7 @@
     font-size: 30px;
 }
 
-.img-logo-cad {
-    max-width: 50vw;
-}
+/* -- Input do Cadastro */
 
 .inputbox-cad {
     border: 1px solid var(--color-highlight) !important;
@@ -23,6 +33,8 @@
     height: 50px !important;
     margin-bottom: 30px;
 }
+
+/* -- Submit Button do Cadastro */
 
 .submit-btn-cad {
     margin: 40px auto;
@@ -37,8 +49,47 @@
     opacity: 0.9;
 }
 
+/* Media Queries - Cadastro */
+
+@media screen and (min-width: 601px) and (max-width: 1154px) {
+    .img-logo-cad {
+        max-width: 50vw;
+    }
+    .logo-box-cad {
+        flex-flow: wrap;
+    }
+}
+
 @media screen and (max-width: 600px) {
+    .cad-content {
+        transform: scale(0.95);
+    }
     .img-logo-cad {
         max-width: 80vw;
+    }
+    .inputbox-cad {
+        height: 45px !important;
+    }
+    .logo-box-cad {
+        flex-flow: wrap;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .cad {
+        margin-top: -13vh;
+    }
+    .cad-content {
+        transform: scale(0.80);
+        padding-top: 2px;
+    }
+    .img-logo-cad {
+        max-width: 100vw;
+    }
+    .inputbox-cad {
+        height: 40px !important;
+    }
+    .logo-box-cad {
+        flex-flow: wrap;
     }
 }

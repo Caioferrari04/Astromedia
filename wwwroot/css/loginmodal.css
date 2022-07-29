@@ -1,4 +1,5 @@
 /* Conteúdo Modal - Corpo do Login */
+
 .modal {
     position: fixed; 
     z-index: 2; 
@@ -21,8 +22,14 @@
 }
 
 /* Conteúdo Modal - Form */
+/* -- Header do Modal */
+
 .logo-box {
     margin: 18px auto;
+}
+
+.img-logo {
+    max-width: 146px;
 }
 
 .logo-text {
@@ -37,42 +44,36 @@
 }
 
 .close-btn:hover {
-    transform: scale(0.95);
+    transform: scale(0.97);
 }
 
 .close-btn:active {
-    transform: scale(0.8);
+    transform: scale(0.85);
 }
 
-.img-logo {
-    max-width: 146px;
+/* -- Inputs do Modal */
+
+.inputbox {
+    border: 1px solid var(--color-highlight) !important;
+    height: 50px !important;
+    margin-bottom: 30px;
+    margin-right: 0;
 }
 
 .inputbox-name {
-    border: 1px solid var(--color-highlight) !important;
     border-radius: 20px !important;
-    height: 50px !important;
-    margin-bottom: 30px;
-    margin-right: 0;
-}
-
-.inputbox-password {
-    border: 1px solid var(--color-highlight) !important;
-    border-top-left-radius: 20px !important;
-    border-bottom-left-radius: 20px !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-    height: 50px !important;
-    margin-bottom: 30px;
-    margin-right: 0;
-    flex: 0 0 calc((100% / (12/10)) - var(--grid-gutter)) !important;
-    max-width: calc((100% / (12/10)) - var(--grid-gutter)) !important;
 }
 
 .password-box {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+.inputbox-password {
+    border-radius: 20px 0 0 20px !important;
+    flex: 0 0 calc((100% / (12/10)) - var(--grid-gutter)) !important;
+    max-width: calc((100% / (12/10)) - var(--grid-gutter)) !important;
 }
 
 #show-password {
@@ -84,25 +85,13 @@
     transition: 0.1s ease-in-out;
     display: flex;
     height: 50px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-radius: 0 20px 20px 0;
     background-color: var(--color-highlight);
     margin-left: 0;
 }
 
 .btn-show-password:active {
     opacity: 0.5;
-}
-
-.submit-btn {
-    margin: 40px auto;
-    border-radius: 20px;
-    transition: .4s;
-    width: 170px !important;
-}
-
-.submit-btn:hover {
-    opacity: 0.6;
 }
 
 .fpassword {
@@ -115,7 +104,21 @@
     text-decoration: underline;
 }
 
+/* -- Submit Button do Modal */
+
+.submit-btn {
+    margin: 40px auto;
+    border-radius: 20px;
+    transition: .4s;
+    width: 170px !important;
+}
+
+.submit-btn:hover {
+    opacity: 0.6;
+}
+
 /* Animação de entrada - Modal do Login */
+
 .animatein {
     animation: zoomin 0.7s
 }
@@ -126,6 +129,7 @@
 }
 
 /* Media Queries - Modal */
+
 @media screen and (min-width: 601px) and (max-width: 1154px) {
     .modal-content {
         transform: scale(1);
