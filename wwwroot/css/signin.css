@@ -1,12 +1,12 @@
 /* Conteúdo Cadastro - Geral */
 
 .cad {
-    margin-top: inherit;
+    margin-top: -13vh;
 }
 
 .cad-content {
-    padding-top: 10px;
     margin: auto;
+    transform: scale(0.85);
 }
 
 /* Conteúdo Cadastro - Form */
@@ -22,7 +22,7 @@
 
 .logo-text-cad {
     margin: 0;
-    font-size: 30px;
+    font-size: 2rem;
 }
 
 /* -- Input do Cadastro */
@@ -32,6 +32,13 @@
     border-radius: 20px !important;
     height: 50px !important;
     margin-bottom: 30px;
+}
+
+.inputbox-password-cad {
+    border: 1px solid var(--color-highlight) !important;
+    height: 50px !important;
+    margin-bottom: 30px;
+    margin-right: 0;
 }
 
 /* -- Submit Button do Cadastro */
@@ -52,15 +59,27 @@
 /* Media Queries - Cadastro */
 
 @media screen and (min-width: 601px) and (max-width: 1154px) {
+    .cad {
+        margin-top: 0;
+    }
     .img-logo-cad {
         max-width: 50vw;
     }
     .logo-box-cad {
         flex-flow: wrap;
     }
+    .inputbox-password-cad {
+        height: 50px !important;
+    }
+    .btn-show-password {
+        height: 50px;
+    }
 }
 
 @media screen and (max-width: 600px) {
+    .cad {
+        margin-top: -4vh;
+    }
     .cad-content {
         transform: scale(0.95);
     }
@@ -69,6 +88,12 @@
     }
     .inputbox-cad {
         height: 45px !important;
+    }
+    .inputbox-password-cad {
+        height: 45px !important;
+    }
+    .btn-show-password {
+        height: 45px;
     }
     .logo-box-cad {
         flex-flow: wrap;
@@ -89,7 +114,13 @@
     .inputbox-cad {
         height: 40px !important;
     }
+    .inputbox-password-cad {
+        height: 40px !important;
+    }
     .logo-box-cad {
         flex-flow: wrap;
+    }
+    .btn-show-password {
+        height: 40px;
     }
 }

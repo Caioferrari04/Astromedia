@@ -76,7 +76,7 @@
     max-width: calc((100% / (12/10)) - var(--grid-gutter)) !important;
 }
 
-#show-password {
+.show-password {
     height: 43px;
 }
 
@@ -136,7 +136,7 @@
         font-size: 1.2rem;
         max-width: 100%;
     }
-    #show-password {
+    .show-password {
         height: 33px;
     }
     .inputbox-name {
@@ -170,7 +170,7 @@
         transform: scale(0.85);
         font-size: 1.4rem;
     }
-    #show-password {
+    .show-password {
         height: 37px;
     }
     .inputbox-name {
@@ -204,7 +204,7 @@
         transform: scale(0.9);
         font-size: 1.1rem;
     }
-    #show-password {
+    .show-password {
         height: 27px;
     }
     .fpassword {
