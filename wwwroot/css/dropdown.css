@@ -1,0 +1,31 @@
+.dropdown {
+    background-color: var(--bg-color); 
+    margin-top: 10px;
+    animation: inverso-drifto 0.6s;
+    transform: translateX(700px);
+}
+
+.dropdown-active {
+    animation: drifto 0.6s;
+    transform: translateX(0);
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.dropdown ul {
+    list-style-type: none;
+}
+
+@keyframes drifto {
+    from {transform: translateX(700px)}
+    to {transform: translateX(0)}
+}
+
+@keyframes inverso-drifto {
+    from {transform: translateX(0)}
+    to {transform: translateX(700px)}
+}

@@ -9,8 +9,33 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <a class="text-light" asp-action="Logout" asp-controller="SignIn">Deslogar</a>
-    <a href=""><img src="@usuario.FotoPerfil" class="logo-user" alt=""></a>
+    @* <a class="text-light" asp-action="Logout" asp-controller="SignIn">Deslogar</a> *@
+    <div class="profile">
+        @* <a href="" id="profile"></a> *@
+        <img src="@usuario.FotoPerfil" class="logo-user" id="profile" alt="">
+        <div class="dropdown drifto" id="logged-in">
+            <ul>
+                <li>
+                    <a class="text-light" href="#">
+                        <img src="https://icongr.am/material/account.svg?size=30&color=ffffff"/>
+                        Perfil
+                    </a>
+                </li>
+                <li>
+                    <a class="text-light" href="#">
+                        <img src="https://icongr.am/material/account-cog.svg?size=30&color=ffffff"/>
+                        Configurações
+                    </a>
+                </li>
+                <li>
+                    <a class="text-light" asp-action="Logout" asp-controller="SignIn">
+                        <img src="https://icongr.am/entypo/log-out.svg?size=30&color=ffffff"/>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 }
 else
 {
@@ -18,7 +43,7 @@ else
     {
         <a class="text-light" id="modalbtn" href="#contact">Login</a>
     }
-    else if (rota == "LogIn")
+    else if (rota is "LogIn")
     {
         <a class="text-light" asp-action="Index" asp-controller="SignIn">Sign-in</a>
     } 

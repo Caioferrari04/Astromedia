@@ -31,6 +31,8 @@
     border-radius: 50px;
     transition: 0.3s;
     border: 3px solid transparent;
+    cursor: pointer;
+    margin-right: 20px; 
 }
 
 .logo-user:hover {

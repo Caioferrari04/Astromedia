@@ -2,14 +2,15 @@
 <html lang="pt">
 
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Astromedia</title>
+    <partial name="_Favicons"></partial>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Footer.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/Header.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/loginmodal.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/dropdown.css" asp-append-version="true"/>
     @await RenderSectionAsync("stylesheet", required: false)
 </head>
 <style>
@@ -39,6 +40,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/loadmodal.js" asp-append-version="true"></script>
+    <script src="~/js/header.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("scripts", required: false)
 </body>
