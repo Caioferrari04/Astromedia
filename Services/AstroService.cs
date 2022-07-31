@@ -22,10 +22,10 @@ public class AstroService
 
     public List<Astro> GetAll() => _astroContext.Astros.ToList();
 
-    public List<Astro> GetAllByUser(Usuario usuario)
-    {
-        return _astroContext.Astros.Where(astro => astro.Usuarios.Contains(usuario)).ToList();
-    } 
+    // public List<Astro> GetAllByUser(Usuario usuario)
+    // {
+    //     return _astroContext.Astros.Where(astro => astro.Usuarios.Contains(usuario)).ToList();
+    // } 
 
     public void Delete(int id)
     {

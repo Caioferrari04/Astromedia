@@ -1,0 +1,23 @@
+@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/Grid.css" asp-append-version="true">
+
+@await RenderSectionAsync("stylesheet", required: false)
+
+<div class="grid">
+    <div class="sidebar">
+        <div class="item">
+            <img src="@Model.Foto" alt=""  onmouseenter="openTooltip(event)" onmouseout="closeTooltip(event)">
+            <span class="tooltip">@Model.Nome</span>
+        </div>
+
+    </div>
+    @RenderBody()
+</div>
+
+
+<script src="~/js/openTooltip.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("scripts", required: false)
