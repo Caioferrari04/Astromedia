@@ -1,0 +1,222 @@
+/* Estilo para corpo da página de perfil do astro */
+.container-perfil {
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    padding: 0;
+    width: 100%;
+    grid-column: 2;
+    margin-bottom: 10px;
+}
+
+/* Estilos para imagem da página de perfil do astro */
+.banner-container {
+    height: 300px;
+}
+
+.img{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+/* Estilos para os elementos da página*/
+.picture-container {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin-top: -110px;
+    margin-left: 20px;
+    margin-right: 15px;
+    border-width: 3px !important;
+}
+
+.picture-container img{
+    border-radius: 50%;
+}
+
+.join-btn {
+    font-size: 20px;
+    background-color: var(--bg-color);
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-left: 20px;
+}
+
+/*Estilos para as abas*/
+.tabs {
+    margin-left: 20px;
+    margin-bottom: 0 !important;
+}
+.tabs button{
+    font-size: 18px;
+    background-color: var(--color-secondary);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.144);
+    padding: 0;
+    width: 100%;
+    height: 40px;
+}
+
+.tabs button:hover {
+    opacity: 1;
+    background-color: var(--color-primary);
+}
+
+.active {
+    border: 1px solid var(--color-lightGrey) !important;
+    z-index: 1 !important;
+}
+
+#tab2{
+    position: relative;
+    right: 25px;
+}
+
+#tab3 {
+    position: relative;
+    right: 45px;
+    
+}
+
+#tab4 {
+    position: relative;
+    right: 65px;
+}
+
+.tab-content {
+    position: relative;
+    background-color:  var(--color-secondary);
+    display: none;
+    padding: 20px 60px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 19px;
+    margin-top: -5px;
+    z-index: 2;
+}
+
+.tab-content-active {
+    display: block;
+}
+
+
+/* Responsividade */
+
+@media screen and (max-width: 1200px) {
+    .container-perfil {
+        width: 90% !important;
+    }
+    .tabs button{
+        font-size: 15px;
+    }
+    
+    .astro-title {
+        font-size: 35px;
+    }
+
+    .join-btn {
+        font-size: 17px;
+    }
+
+    .tab-content{
+        font-size: 17px !important;
+    }
+
+    .sidebar {display: none !important;}
+}
+
+@media screen and (max-width: 900px) {
+    .tabs{
+        display: flex;
+        justify-content: center;
+    }
+
+    .tabs button{
+        font-size: 12px;
+        height: 30px;
+    }
+
+    .elements-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .responsive {
+        display: flex;
+        justify-content: center;
+    }
+
+    .astro-title {
+        font-size: 30px;
+    }
+
+    .picture-container {
+        height: 110px;
+        width: 140px;
+        margin-top: -110px;
+        margin-left: -110px;
+        margin-right: 9px;
+    }
+
+    .join-btn {
+        font-size: 20px;
+        padding: 10px 40px;
+        margin-bottom: 30px;
+    }
+
+    .container-perfil {
+        width: 90%;
+    }
+
+    .tab-content{
+        font-size: 15px !important;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .picture-container {
+        margin: -70px 0 0 0;
+    }
+
+    .astro-title {
+        font-size: 18px;
+    }
+
+    .join-btn {
+        font-size: 13px;
+        padding: 10px 30px;
+    }
+
+    .responsive {
+        flex-direction: column;
+    }
+
+    .tabs {
+        margin-left: 30px;
+    }
+
+    .tabs button{
+        font-size: 10px;
+        min-width: 75px !important;
+    }
+
+    #tab2{
+        right: 12px;
+    }
+    
+    #tab3 {
+        right: 22px;
+        
+    }
+    
+    #tab4 {
+        right: 32px;
+    }
+
+    .tab-content{
+        font-size: 13px !important;
+    }
+}
+

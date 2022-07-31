@@ -4,6 +4,7 @@
     height: 75px;
     top: 0;
     position: sticky;
+    z-index: 3;
 }
 
 .header > a {
