@@ -27,7 +27,12 @@ public class SignInController : Controller
     public async Task<IActionResult> Index(UsuarioDTO usuario)
     {
         var validator = new UsuarioValidator();
-        var novoUsuario = new Usuario { UserName = usuario.Nome, FotoPerfil = "~/img/default-img.jpg", Email = usuario.Email };
+        var novoUsuario = new Usuario { 
+            UserName = usuario.Nome, 
+            FotoPerfil = "/img/default-img.jpg", 
+            Email = usuario.Email, 
+            DataNascimento = usuario.DataNascimento.ToUniversalTime() 
+        };
 
         var validationResult = await validator.ValidateAsync(novoUsuario);
 
@@ -59,7 +64,6 @@ public class SignInController : Controller
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> LogIn(UsuarioDTO usuario)
     {
         try
