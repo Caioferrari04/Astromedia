@@ -1,7 +1,7 @@
 /* Conteúdo Cadastro - Geral */
 
 .cad {
-    margin-top: -13vh;
+    margin-top: -11vh;
 }
 
 .cad-content {
@@ -41,6 +41,24 @@
     margin-right: 0;
 }
 
+.show-password-cad {
+    height: 36px;
+}
+
+.btn-show-password-cad {
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    display: flex;
+    height: 50px;
+    border-radius: 0 20px 20px 0;
+    background-color: var(--color-highlight);
+    margin-left: 0;
+}
+
+.btn-show-password-cad:active {
+    opacity: 0.5;
+}
+
 /* -- Submit Button do Cadastro */
 
 .submit-btn-cad {
@@ -71,7 +89,7 @@
     .inputbox-password-cad {
         height: 50px !important;
     }
-    .btn-show-password {
+    .btn-show-password-cad {
         height: 50px;
     }
 }
@@ -81,7 +99,7 @@
         margin-top: -4vh;
     }
     .cad-content {
-        transform: scale(0.95);
+        transform: scale(0.9);
     }
     .img-logo-cad {
         max-width: 80vw;
@@ -92,7 +110,7 @@
     .inputbox-password-cad {
         height: 45px !important;
     }
-    .btn-show-password {
+    .btn-show-password-cad {
         height: 45px;
     }
     .logo-box-cad {
@@ -120,7 +138,7 @@
     .logo-box-cad {
         flex-flow: wrap;
     }
-    .btn-show-password {
+    .btn-show-password-cad {
         height: 40px;
     }
 }

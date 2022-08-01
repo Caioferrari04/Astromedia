@@ -9,6 +9,7 @@
         background-image: url(../img/signin-bg.jpg);
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center center;
     }
 </style>
 }
@@ -53,9 +54,9 @@
                         @Html.DisplayNameFor(m => m.Senha)
                     </div>
                     <div class="row input-password-box">
-                        <input id="inputbox-pass1" class="col-10 inputbox-password-cad inputbox-password" asp-for="Senha" required>
-                        <div onclick="showPass1()" class="col btn-show-password is-vertical-align is-horizontal-align">
-                            <img id="show-password1" class="show-password" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                        <input id="inputbox-pass1" class="col-11 inputbox-password-cad inputbox-password" asp-for="Senha" required>
+                        <div onclick="showPassword()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
+                            <img id="show-password1" class="show-password-cad" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
                         </div>
                     </div>
                 </label>
@@ -69,9 +70,9 @@
                         Confirmar Senha
                     </div>
                     <div class="row input-password-box">
-                        <input id="inputbox-pass2" class="col-10 inputbox-password-cad inputbox-password" asp-for="Senha" required>
-                        <div onclick="showPass2()" class="col btn-show-password is-vertical-align is-horizontal-align">
-                            <img id="show-password2" class="show-password" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                        <input id="inputbox-pass2" class="col-11 inputbox-password-cad inputbox-password" asp-for="Senha" required>
+                        <div onclick="showConfirmation()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
+                            <img id="show-password2" class="show-password-cad" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
                         </div>
                     </div>
                 </label>

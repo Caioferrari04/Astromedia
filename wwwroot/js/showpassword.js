@@ -1,8 +1,6 @@
-function showPass1() {
+function showPassword() {
     const toggleImage = document.getElementById('show-password1');
-
     const inputbox = document.getElementById('inputbox-pass1');
-
 
     let type = inputbox.getAttribute("type") === "password" ? "text" : "password";
     inputbox.setAttribute("type", type);
@@ -14,9 +12,8 @@ function showPass1() {
     }
 };
 
-function showPass2() {
+function showConfirmation() {
     const toggleImage = document.getElementById('show-password2');
-
     const inputbox = document.getElementById('inputbox-pass2');
 
     let type = inputbox.getAttribute("type") === "password" ? "text" : "password";

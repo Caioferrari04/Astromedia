@@ -72,12 +72,12 @@
 
 .inputbox-password {
     border-radius: 20px 0 0 20px !important;
-    flex: 0 0 calc((100% / (12/10)) - var(--grid-gutter)) !important;
-    max-width: calc((100% / (12/10)) - var(--grid-gutter)) !important;
+    flex: 0 0 calc((100% / (12/10.5)) - var(--grid-gutter)) !important;
+    max-width: calc((100% / (12/10.5)) - var(--grid-gutter)) !important;
 }
 
 .show-password {
-    height: 43px;
+    height: 36px;
 }
 
 .btn-show-password {
@@ -137,7 +137,7 @@
         max-width: 100%;
     }
     .show-password {
-        height: 33px;
+        height: 30px;
     }
     .inputbox-name {
         height: 42px !important;
@@ -171,7 +171,7 @@
         font-size: 1.4rem;
     }
     .show-password {
-        height: 37px;
+        height: 30px;
     }
     .inputbox-name {
         height: 42px !important;
@@ -205,7 +205,7 @@
         font-size: 1.1rem;
     }
     .show-password {
-        height: 27px;
+        height: 24px;
     }
     .fpassword {
         font-size: 1rem;
