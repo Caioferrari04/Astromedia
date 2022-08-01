@@ -94,6 +94,7 @@
     font-size: 19px;
     margin-top: -5px;
     z-index: 2;
+    text-align: justify;
 }
 
 .tab-content-active {
@@ -216,7 +217,8 @@
     }
 
     .tab-content{
-        font-size: 13px !important;
+        font-size: 10px !important;
+        padding: 20px 15px;
     }
 }
 
