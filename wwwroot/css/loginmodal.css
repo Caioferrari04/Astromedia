@@ -178,6 +178,7 @@
     }
     .inputbox-password {
         height: 42px !important;
+        border-radius: 15px 0 0 15px !important;
     }
     .logo-box {
         flex-flow: nowrap;

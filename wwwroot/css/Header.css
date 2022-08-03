@@ -3,6 +3,7 @@
     min-height: 2rem!important;
     height: 75px;
     top: 0;
+    z-index: 1;
     position: sticky;
 }
 

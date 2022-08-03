@@ -21,13 +21,17 @@
             <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">Cadastrar</h2>
         </div>
 
-        <div class="container">
+        <div class="container container-cad">
             <div asp-validation-summary="ModelOnly" class="text-error"></div>
             
             <div class="row">
                 <label class="col" asp-for="Nome">
                     @Html.DisplayNameFor(m => m.Nome)
                     <input class="inputbox-cad" asp-for="Nome" required>
+                    <div class="input-desc">
+                        <p>Seu nome de usuário deve conter pelo menos 4 caracteres, 
+                        e no máximo 15 caracteres. Sem caracteres especiais.</p>
+                    </div>
                 </label>
             </div>
 
@@ -58,6 +62,9 @@
                         <div onclick="showPassword()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
                             <img id="show-password1" class="show-password-cad" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
                         </div>
+                    </div>
+                    <div class="input-desc">
+                        <p>Sua senha deve conter pelo menos 6 caracteres, uma letra maiuscula e números. Sem caracteres especiais.</p>
                     </div>
                 </label>
             </div>
