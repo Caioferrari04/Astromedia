@@ -3,10 +3,12 @@
     animation: inverso-drifto 0.6s;
     transform: translateX(700px);
     text-align: center;
+    top: 0;
     z-index: 10;
-    position: absolute;
+    position: fixed;
     height: 100vh;
     padding-top: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .dropdown-active {
@@ -37,6 +39,14 @@
     background-color: #2c1238;
     width: 90%;
     margin-left: 5%;
+}
+
+.backdrop {
+    width: 100vw;
+    z-index: 9;
+    height: 100vh;
+    background-color: #0000008f;
+    position: fixed;
 }
 
 @keyframes drifto {

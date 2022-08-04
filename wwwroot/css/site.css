@@ -35,8 +35,10 @@ html {
 
 body {
   margin-bottom: 60px;
-  overflow-x: hidden;
+}
 
+html, body {
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
