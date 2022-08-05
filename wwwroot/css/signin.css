@@ -11,6 +11,7 @@
 
 .container-cad {
     width: 73%;
+    padding: 0;
 }
 
 /* Conteúdo Cadastro - Form */
@@ -70,7 +71,15 @@
     opacity: 0.5;
 }
 
-/* -- Submit Button do Cadastro */
+/* -- Submit do Cadastro */
+
+.checkbox-cad {
+    margin-bottom: 10px;
+}
+
+.checkbox-cad input {
+    margin-right: 10px;
+}
 
 .submit-btn-cad {
     margin: 40px auto;
@@ -116,6 +125,9 @@
     .container-cad {
         width: 100% !important;
     }
+    .checkbox-cad {
+        font-size: 1.2rem;
+    }
     .img-logo-cad {
         width: 100%;
     }
@@ -153,7 +165,8 @@
         width: 100% !important;
     }
     .img-logo-cad {
-        width: 100%;
+        max-width: 100vw !important;
+        width: 88vw !important;
     }
     .inputbox-cad {
         height: 38px !important;
