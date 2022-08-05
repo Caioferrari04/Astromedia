@@ -35,7 +35,10 @@ html {
 
 body {
   margin-bottom: 60px;
+}
 
+html, body {
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -55,4 +58,19 @@ body::-webkit-scrollbar-thumb:hover {
 }
 body::-webkit-scrollbar-thumb:active {
   background: rgba(0,0,0,.9);
+}
+
+.icon-button {
+  transition: 0.3s;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: var(--color-highlight);
+  border-radius: 100%;
+}
+
+article {
+  margin-top: 10vh;
 }

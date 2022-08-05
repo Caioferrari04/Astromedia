@@ -1,0 +1,68 @@
+.dropdown {
+    background-color: var(--bg-secondary-color); 
+    animation: inverso-drifto 0.6s;
+    transform: translateX(400px);
+    top: 0;
+    right: 0;
+    z-index: 10;
+    position: fixed;
+    height: 100vh;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.dropdown-active {
+    animation: drifto 0.6s;
+    transform: translateX(0);
+}
+
+.dropdown-active .logo-user {
+    margin-right: 0;
+    width: 5rem;
+    max-height: 5rem;
+}
+
+.dropdown-active img {
+    margin-right: 1rem;
+}
+
+
+.dropdown ul {
+    list-style-type: none;
+}
+
+.dropdown li a:hover {
+    background-color: var(--color-highlight);
+}
+
+.dropdown p {
+    margin-bottom: 1rem;
+}
+
+.divider {
+    height: 0.5px;
+    background-color: #2c1238;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.backdrop {
+    z-index: 9;
+    background-color: #000000;
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+}
+
+.dropdown-active .icon-button {
+    margin: 0.5rem 1rem 0 1rem;
+}
+
+@keyframes drifto {
+    from {transform: translateX(700px)}
+    to {transform: translateX(0)}
+}
+
+@keyframes inverso-drifto {
+    from {transform: translateX(0)}
+    to {transform: translateX(700px)}
+}
