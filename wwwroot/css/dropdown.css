@@ -1,13 +1,12 @@
 .dropdown {
     background-color: var(--bg-secondary-color); 
     animation: inverso-drifto 0.6s;
-    transform: translateX(700px);
-    text-align: center;
+    transform: translateX(400px);
     top: 0;
+    right: 0;
     z-index: 10;
     position: fixed;
     height: 100vh;
-    padding-top: 1rem;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
@@ -16,18 +15,23 @@
     transform: translateX(0);
 }
 
-.dropdown-active img {
+.dropdown-active .logo-user {
     margin-right: 0;
+    width: 5rem;
+    max-height: 5rem;
 }
 
-.profile {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+.dropdown-active img {
+    margin-right: 1rem;
 }
+
 
 .dropdown ul {
     list-style-type: none;
+}
+
+.dropdown li a:hover {
+    background-color: var(--color-highlight);
 }
 
 .dropdown p {
@@ -42,11 +46,15 @@
 }
 
 .backdrop {
-    width: 100vw;
     z-index: 9;
-    height: 100vh;
-    background-color: #0000008f;
-    position: fixed;
+    background-color: #000000;
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+}
+
+.dropdown-active .icon-button {
+    margin: 0.5rem 1rem 0 1rem;
 }
 
 @keyframes drifto {

@@ -9,17 +9,17 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    @* <a class="text-light" asp-action="Logout" asp-controller="SignIn">Deslogar</a> *@
-    <div class="profile">
-        @* <a href="" id="profile"></a> *@
-        <img src="@usuario.FotoPerfil" class="logo-user" alt="">
-        <div class="dropdown drifto" id="logged-in">
+    <div class="profile is-center">
+        <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="Imagem de usuário" />
+        <div id="backdrop" class="dropdown-toggle"></div>
+        <div class="text-center dropdown drifto" id="logged-in">
+            <img src="https://icongr.am/material/close.svg?size=30&color=ffffff" class="icon-button is-left dropdown-toggle" />
             <ul>
                 <li>
-                    <img src="@usuario.FotoPerfil" class="logo-user" alt="">
+                    <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="">
                 </li>
                 <li>
-                    <p class="text-light">@usuario.UserName</p>
+                    <h5 class="text-light">@usuario.UserName</h5>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -28,14 +28,12 @@
                         Perfil
                     </a>
                 </li>
-                <li class="divider"></li>
                 <li>
                     <a class="text-light" href="#">
                         <img src="https://icongr.am/material/account-cog.svg?size=30&color=ffffff"/>
                         Configurações
                     </a>
                 </li>
-                <li class="divider"></li>
                 <li>
                     <a class="text-light" asp-action="Logout" asp-controller="SignIn">
                         <img src="https://icongr.am/entypo/log-out.svg?size=30&color=ffffff"/>
