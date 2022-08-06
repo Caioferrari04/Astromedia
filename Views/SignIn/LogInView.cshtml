@@ -24,25 +24,30 @@
             <div class="row">
                 <label class="col" asp-for="Nome">
                     @Html.DisplayNameFor(m => m.Nome)
-                    <input class="inputbox" asp-for="Nome" required>
+                    <input class="inputbox inputbox-name" asp-for="Nome" required>
                 </label>
             </div>
 
             <small><span asp-validation-for="Senha" class="text-error"></span></small>
             <div class="row">
-                <label class="checklabel col" asp-for="Senha">
+                <label class="col" asp-for="Senha">
                     <div class="password-box">
                         @Html.DisplayNameFor(m => m.Senha)
-                        <a class="fpassword" asp-action="" asp-controller="">Esqueci minha senha</a>
+                        <a asp-action="" asp-controller="">Esqueci minha senha</a>
                     </div>
-                    <input class="inputbox" asp-for="Senha" required>
+                    <div class="row inputbox-password">
+                        <input id="inputbox-pass1" class="col-10 inputbox" asp-for="Senha" required>
+                        <div onclick="showPassword()" class="col btn-show-password is-vertical-align is-horizontal-align">
+                            <img id="show-password1" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                        </div>
+                    </div>
                 </label>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label asp-for="LembrarMe" class="is-vertical-align">
-                        <input asp-for="LembrarMe">Lembrar minha senha
+                        <input asp-for="LembrarMe" class="dnfpassword">Lembrar minha senha
                     </label>
                     <button type="submit" class="col submit-btn button outline is-vertical-align is-horizontal-align">Entrar</button>
                 </div>

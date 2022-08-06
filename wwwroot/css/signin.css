@@ -53,10 +53,6 @@
     margin-right: 0;
 }
 
-.show-password-cad {
-    height: 36px;
-}
-
 .btn-show-password-cad {
     cursor: pointer;
     transition: 0.1s ease-in-out;
@@ -69,6 +65,10 @@
 
 .btn-show-password-cad:active {
     opacity: 0.5;
+}
+
+.btn-show-password-cad img {
+    height: 36px;
 }
 
 /* -- Submit do Cadastro */
@@ -145,7 +145,7 @@
     .logo-box-cad {
         flex-flow: column;
     }
-    .show-password-cad {
+    .btn-show-password-cad img {
         height: 33px;
     }
     .input-desc {

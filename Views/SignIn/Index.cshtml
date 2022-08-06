@@ -57,10 +57,10 @@
                     <div class="password-box-cad">
                         @Html.DisplayNameFor(m => m.Senha)
                     </div>
-                    <div class="row input-password-box">
-                        <input id="inputbox-pass1" class="col-11 inputbox-password-cad inputbox-password" asp-for="Senha" required>
+                    <div class="row inputbox-password">
+                        <input id="inputbox-pass1" class="col-11 inputbox-password-cad" asp-for="Senha" required>
                         <div onclick="showPassword()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
-                            <img id="show-password1" class="show-password-cad" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                            <img id="show-password1" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
                         </div>
                     </div>
                     <div class="input-desc">
@@ -76,10 +76,10 @@
                         @* @Html.DisplayNameFor(m => m.Senha) *@
                         Confirmar Senha
                     </div>
-                    <div class="row input-password-box">
-                        <input id="inputbox-pass2" class="col-11 inputbox-password-cad inputbox-password" asp-for="Senha" required>
+                    <div class="row inputbox-password">
+                        <input id="inputbox-pass2" class="col-11 inputbox-password-cad" asp-for="Senha" required>
                         <div onclick="showConfirmation()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
-                            <img id="show-password2" class="show-password-cad" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                            <img id="show-password2" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
                         </div>
                     </div>
                 </label>
@@ -87,11 +87,12 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="is-vertical-align checkbox-cad">
-                        <input type="checkbox">Aceito os termos de condição 
+                    <label asp-for="ConditionTerms" class="text-is-vertical-align checkbox-cad">
+                        <input asp-for="ConditionTerms" type="checkbox">Aceito os termos de condição 
                     </label>
-                    <label class="is-vertical-align checkbox-cad">
-                        <input type="checkbox">Aceito os termos de privacidade
+                    <br>
+                    <label asp-for="PrivacyTerms" class="text-is-vertical-align checkbox-cad">
+                        <input asp-for="PrivacyTerms" type="checkbox">Aceito os termos de privacidade
                     </label>
                     <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Juntar-se!</button>
                 </div>

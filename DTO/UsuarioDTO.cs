@@ -20,6 +20,10 @@ public class UsuarioDTO
 
     public bool LembrarMe { get; set; }
 
+    public bool ConditionTerms { get; set; }
+
+    public bool PrivacyTerms { get; set; }
+
     public List<PostagemDTO> Postagens { get; set; }
 
 }

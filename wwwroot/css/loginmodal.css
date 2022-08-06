@@ -64,20 +64,34 @@
     border-radius: 20px !important;
 }
 
+.inputbox-password {
+    display: flex;
+}
+
+.inputbox-password input {
+    border-radius: 20px 0 0 20px !important;
+    flex: 0 0 calc((100% / (12/10.5)) - var(--grid-gutter)) !important;
+    max-width: calc((100% / (12/10.5)) - var(--grid-gutter)) !important;
+}
+
+.dnfpassword {
+    margin-right: 10px;
+}
+
 .password-box {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.inputbox-password {
-    border-radius: 20px 0 0 20px !important;
-    flex: 0 0 calc((100% / (12/10.5)) - var(--grid-gutter)) !important;
-    max-width: calc((100% / (12/10.5)) - var(--grid-gutter)) !important;
+.password-box a {
+    color: var(--color-lightGrey);
+    font-size: large;
+    transition: .4s ease;
 }
 
-.show-password {
-    height: 36px;
+.password-box a:hover {
+    text-decoration: underline;
 }
 
 .btn-show-password {
@@ -90,18 +104,12 @@
     margin-left: 0;
 }
 
+.btn-show-password img {
+    height: 36px;
+}
+
 .btn-show-password:active {
     opacity: 0.5;
-}
-
-.fpassword {
-    color: var(--color-lightGrey);
-    font-size: large;
-    transition: .4s ease;
-}
-
-.fpassword:hover {
-    text-decoration: underline;
 }
 
 /* -- Submit Button do Modal */
@@ -136,22 +144,22 @@
         font-size: 1.2rem;
         max-width: 100%;
     }
-    .show-password {
+    .btn-show-password img {
         height: 30px;
     }
     .inputbox-name {
         height: 42px !important;
     }
-    .inputbox-password {
+    .inputbox-password input{
         height: 42px !important;
     }
     .logo-box {
         flex-flow: nowrap;
     }
-    .input-password-box {
+    .inputbox-password {
         flex-flow: nowrap;
     }
-    .fpassword {
+    .password-box a {
         font-size: 1rem;
     }
     .img-logo {
@@ -170,23 +178,23 @@
         transform: scale(0.85);
         font-size: 1.4rem;
     }
-    .show-password {
+    .btn-show-password img {
         height: 30px;
     }
     .inputbox-name {
         height: 42px !important;
     }
-    .inputbox-password {
+    .inputbox-password input {
         height: 42px !important;
         border-radius: 15px 0 0 15px !important;
     }
     .logo-box {
         flex-flow: nowrap;
     }
-    .input-password-box {
+    .inputbox-password {
         flex-flow: nowrap;
     }
-    .fpassword {
+    .password-box a {
         font-size: 1.2rem;
     }
     .img-logo {
@@ -205,22 +213,22 @@
         transform: scale(0.9);
         font-size: 1.1rem;
     }
-    .show-password {
+    .btn-show-password img {
         height: 24px;
     }
-    .fpassword {
+    .password-box a {
         font-size: 1rem;
     }
     .logo-box {
         flex-flow: nowrap;
     }
-    .input-password-box {
+    .inputbox-password {
         flex-flow: nowrap;
     }
     .inputbox-name {
         height: 35px !important;
     }
-    .inputbox-password {
+    .inputbox-password input {
         height: 35px !important;
     }
     .close-btn {
