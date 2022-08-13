@@ -29,7 +29,6 @@
                 </label>
             </div>
 
-            <small><span asp-validation-for="Email" class="text-error"></span></small>
             <div class="row">
                 <label class="col" asp-for="Email">
                     @Html.DisplayNameFor(m => m.Email)
@@ -37,7 +36,6 @@
                 </label>
             </div>
 
-            <small><span asp-validation-for="DataNascimento" class="text-error"></span></small>
             <div class="row">
                 <label class="col" asp-for="DataNascimento">
                     @Html.DisplayNameFor(m => m.DataNascimento)
@@ -45,7 +43,6 @@
                 </label>
             </div>
 
-            <small><span asp-validation-for="Senha" class="text-error"></span></small>
             <div class="row">
                 <label class="col" asp-for="Senha">
                     <div class="password-box-cad">
@@ -63,15 +60,13 @@
                 </label>
             </div>
 
-            <small><span asp-validation-for="Senha" class="text-error"></span></small>
             <div class="row">
-                <label class="col" asp-for="Senha">
+                <label class="col" asp-for="ConfirmarSenha">
                     <div class="password-box-cad">
-                        @* @Html.DisplayNameFor(m => m.Senha) *@
-                        Confirmar Senha
+                        @Html.DisplayNameFor(m => m.ConfirmarSenha)
                     </div>
                     <div class="row inputbox-password">
-                        <input id="inputbox-pass2" class="col-11 inputbox-password-cad" asp-for="Senha" required>
+                        <input id="inputbox-pass2" class="col-11 inputbox-password-cad" asp-for="ConfirmarSenha" required>
                         <div onclick="showConfirmation()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
                             <img id="show-password2" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
                         </div>
@@ -82,11 +77,11 @@
             <div class="row">
                 <div class="col">
                     <label asp-for="ConditionTerms" class="text-is-vertical-align checkbox-cad">
-                        <input asp-for="ConditionTerms" type="checkbox">Aceito os termos de condição 
+                        <input asp-for="ConditionTerms" type="checkbox" required>Aceito os termos de condição 
                     </label>
                     <br>
                     <label asp-for="PrivacyTerms" class="text-is-vertical-align checkbox-cad">
-                        <input asp-for="PrivacyTerms" type="checkbox">Aceito os termos de privacidade
+                        <input asp-for="PrivacyTerms" type="checkbox" required>Aceito os termos de privacidade
                     </label>
                     <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Juntar-se!</button>
                 </div>

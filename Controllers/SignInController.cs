@@ -26,9 +26,12 @@ public class SignInController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(UsuarioDTO usuario)
     {
-        var validator = new UsuarioValidator();
+        if (usuario.ConfirmarSenha != usuario.Senha)        
+            ModelState.AddModelError(string.Empty, "Senha de confirmação não é igual à senha inserida!");
+
         var novoUsuario = new Usuario { UserName = usuario.Nome, FotoPerfil = "~/img/default-img.jpg", Email = usuario.Email };
 
+        var validator = new UsuarioValidator();
         var validationResult = await validator.ValidateAsync(novoUsuario);
 
         if (validationResult.IsValid)
@@ -44,7 +47,13 @@ public class SignInController : Controller
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-        return RedirectToAction("Index", "Home"); /*Redirecionar para a home*/
+
+        foreach (var error in validationResult.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.ErrorMessage);
+        }
+
+        return View(); /*Atualizar pagina*/
     }
 
     public async Task<IActionResult> LogIn()

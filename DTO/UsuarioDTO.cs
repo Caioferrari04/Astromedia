@@ -12,9 +12,11 @@ public class UsuarioDTO
     [DataType(DataType.Password)]
     public string Senha { get; set; }
 
+    [Display(Name = "Confirmar senha")]
     [DataType(DataType.Password)]
     public string ConfirmarSenha { get; set; }
 
+    [Display(Name = "Data de nascimento")]
     [DataType(DataType.Date)]
     public DateTime DataNascimento { get; set; }
 
