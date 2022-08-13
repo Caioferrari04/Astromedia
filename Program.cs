@@ -1,4 +1,5 @@
 using Astromedia.Models;
+using Astromedia.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,11 +9,32 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddHttpContextAccessor();
 
+string connectionString = "";
+
+if (builder.Environment.IsProduction())
+{
+    var PGUSER = Environment.GetEnvironmentVariable("PGUSER");
+    var PGPASSWORD = Environment.GetEnvironmentVariable("PGPASSWORD");
+    var PGHOST = Environment.GetEnvironmentVariable("PGHOST");
+    var PGPORT = Environment.GetEnvironmentVariable("PGPORT");
+    var PGDATABASE = Environment.GetEnvironmentVariable("PGDATABASE");
+
+    connectionString = $"User ID={PGUSER};Password={PGPASSWORD};Host={PGHOST};Port={PGPORT};Database={PGDATABASE};";
+}
+else 
+{
+    connectionString = builder.Configuration.GetConnectionString("LOCALHOST");
+}
+
+
 builder.Services.AddDbContext<AstroContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("LOCALHOST")));
-    
+    options.UseNpgsql(connectionString));
+
 builder.Services.AddDefaultIdentity<Usuario>()
         .AddEntityFrameworkStores<AstroContext>();
+
+builder.Services.AddScoped<AstroService>();
+builder.Services.AddScoped<PostagemService>();
 
 var app = builder.Build();
 

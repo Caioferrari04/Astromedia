@@ -29,7 +29,12 @@ public class SignInController : Controller
         if (usuario.ConfirmarSenha != usuario.Senha)        
             ModelState.AddModelError(string.Empty, "Senha de confirmação não é igual à senha inserida!");
 
-        var novoUsuario = new Usuario { UserName = usuario.Nome, FotoPerfil = "~/img/default-img.jpg", Email = usuario.Email };
+        var novoUsuario = new Usuario { 
+            UserName = usuario.Nome, 
+            FotoPerfil = "/img/default-img.jpg", 
+            Email = usuario.Email, 
+            DataNascimento = usuario.DataNascimento.ToUniversalTime() 
+        };
 
         var validator = new UsuarioValidator();
         var validationResult = await validator.ValidateAsync(novoUsuario);
@@ -68,7 +73,6 @@ public class SignInController : Controller
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> LogIn(UsuarioDTO usuario)
     {
         try

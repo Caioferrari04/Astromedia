@@ -1,5 +1,151 @@
-body {
-    background-image: url(../img/home-background.png);
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    background: url(../img/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+    box-sizing: border-box;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#hero{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroElements{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin: 30vh 0 40vh 0;
+}
+
+.heroElements img {
+    width: 50vw;
+    margin: 0 1rem 4rem 1rem;
+}
+
+.memberButton{
+    background-color: #5c2578;
+    color: #ffff;
+    border: 4px solid  rgb(45, 45, 130);
+    font-family: 'Righteous', cursive;
+    font-size: 1rem;
+}
+
+.memberButton:hover{
+    border: 4px solid  rgba(45, 45, 130, 0.366);
+    border-radius: 4px;
+}
+
+#secondHero{
+    background-color: #3F005C;
+    padding: 3vw;
+}
+
+.elementsContainer-secondHero-title1{
+    font-size: 1.5rem;
+    color: #af43e0;
+}
+
+.elementsContainer-secondHero-title2{
+    font-size: 2rem;
+    color: #af43e0;
+    font-family: 'Righteous', cursive
+}
+
+.iframeContainer iframe{
+    border: 10px solid #af43e0;
+    border-radius: 5px;
+}
+
+.hero-transparent {
+    background-color: #5c257800;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.hero {
+    background-color: #5c2578;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#sixthHero{
+    background-color: #3F005C;
+    padding: 2vw;
+}
+
+.elements-container h1{
+    font-size: 3rem;    
+    color: #af43e0;
+}
+
+.elements-container--message{
+    font-size: 1.5rem;
+    margin: 2vh;
+    color: #af43e0;
+}
+
+.hero--img {
+    border-radius: 4px;
+    width: 20%;
+    border: 5px solid #af43e0;
+}
+
+.list--name {
+    font-size: 1rem;
+    color: #af43e0;
+}
+
+.text--font {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .elements-container .row {
+        justify-content: space-between;
+    }
+
+    .heroElements img {
+        width: 90vw;
+    }
+
+    .hero--img {
+        width: 30%;
+    }
+
+    .iframeContainer iframe {
+        border: 0;
+        width: 90vw;
+        height: 45vh;
+    }
+
+    body {
+        background-attachment: initial;
+    }
 }

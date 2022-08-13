@@ -1,4 +1,4 @@
-@import url(../lib/node_modules/chota/dist/chota.css);
+@import url(../lib/chota/dist/chota.css);
 
 :root {
   --bg-color: #3F005C;
@@ -35,4 +35,42 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0,0,0,0.1);
+}
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0,0,0,0.2);
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.4);
+}
+body::-webkit-scrollbar-thumb:active {
+  background: rgba(0,0,0,.9);
+}
+
+.icon-button {
+  transition: 0.3s;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: var(--color-highlight);
+  border-radius: 100%;
+}
+
+article {
+  margin-top: 10vh;
 }
