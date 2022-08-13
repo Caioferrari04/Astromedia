@@ -20,7 +20,7 @@ public class UsuarioValidator : AbstractValidator<UsuarioDTO>
         
         RuleFor(m => m.DataNascimento)
             .LessThan(m => DateTime.UtcNow.AddYears(-13))
-            .WithMessage("Você deve ser maior de 13 anos para se cadastrar.");
+            .WithMessage("Você deve ser possuir mais que 13 anos para se cadastrar.");
 
         RuleFor(m => m.DataNascimento)
             .GreaterThan(m => DateTime.UtcNow.AddYears(-120))
