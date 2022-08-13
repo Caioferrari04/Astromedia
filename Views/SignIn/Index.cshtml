@@ -3,11 +3,89 @@
     ViewData["Title"] = "Sign In";
 }
 
-<form asp-action="Index" method="post">
-    <input asp-for="Nome" />
-    <input asp-for="Email"/>
-    <input asp-for="DataNascimento"/>
-    <input asp-for="Senha"/>
-    <input asp-for="ConfirmarSenha"/>
-    <button type="submit">Enviar</button>
-</form>
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true">
+}
+
+<div class="cad container is-vertical-align is-horizontal-align">
+    <form class="cad-content text-light" asp-action="Index" method="post">
+        <div class="container logo-box-cad row is-vertical-align is-horizontal-align">
+            <!-- substituir por img nova -->
+            <img class="img-logo-cad col" src="../img/logo-bgless.png" alt="majorlogo" class="maxlogo"> 
+            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">Cadastrar</h2>
+        </div>
+
+        <div class="container container-cad">
+            <div asp-validation-summary="ModelOnly" class="text-error"></div>
+            
+            <div class="row">
+                <label class="col" asp-for="Nome">
+                    @Html.DisplayNameFor(m => m.Nome)
+                    <input class="inputbox-cad" asp-for="Nome" required>
+                    <div class="input-desc">
+                        <p>Seu nome de usuário deve conter pelo menos 4 caracteres, 
+                        e no máximo 15 caracteres. Sem caracteres especiais.</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="col" asp-for="Email">
+                    @Html.DisplayNameFor(m => m.Email)
+                    <input class="inputbox-cad" asp-for="Email" required>
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="col" asp-for="DataNascimento">
+                    @Html.DisplayNameFor(m => m.DataNascimento)
+                    <input class="inputbox-cad" asp-for="DataNascimento" required>
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="col" asp-for="Senha">
+                    <div class="password-box-cad">
+                        @Html.DisplayNameFor(m => m.Senha)
+                    </div>
+                    <div class="row inputbox-password">
+                        <input id="inputbox-pass1" class="col-11 inputbox-password-cad" asp-for="Senha" required>
+                        <div onclick="showPassword()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
+                            <img id="show-password1" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                        </div>
+                    </div>
+                    <div class="input-desc">
+                        <p>Sua senha deve conter pelo menos 6 caracteres, uma letra maiuscula e números. Sem caracteres especiais.</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="col" asp-for="ConfirmarSenha">
+                    <div class="password-box-cad">
+                        @Html.DisplayNameFor(m => m.ConfirmarSenha)
+                    </div>
+                    <div class="row inputbox-password">
+                        <input id="inputbox-pass2" class="col-11 inputbox-password-cad" asp-for="ConfirmarSenha" required>
+                        <div onclick="showConfirmation()" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
+                            <img id="show-password2" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label asp-for="ConditionTerms" class="text-is-vertical-align checkbox-cad">
+                        <input asp-for="ConditionTerms" type="checkbox" required>Aceito os termos de condição 
+                    </label>
+                    <br>
+                    <label asp-for="PrivacyTerms" class="text-is-vertical-align checkbox-cad">
+                        <input asp-for="PrivacyTerms" type="checkbox" required>Aceito os termos de privacidade
+                    </label>
+                    <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Juntar-se!</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,194 @@
+body {
+    background-image: url(../img/signin-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: center center; */
+    background-attachment: fixed;
+}
+
+/* Conteúdo Cadastro - Geral */
+
+.cad {
+    margin-top: -11vh;
+}
+
+.cad-content {
+    margin: auto;
+    transform: scale(0.85);
+}
+
+.container-cad {
+    width: 73%;
+    padding: 0;
+}
+
+/* Conteúdo Cadastro - Form */
+/* -- Header do Cadastro */
+
+.logo-box-cad {
+    margin: 18px auto;
+    flex-flow: column;
+}
+
+.img-logo-cad {
+    width: 50vw;
+}
+
+.logo-text-cad {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* -- Input do Cadastro */
+
+.inputbox-cad {
+    border: 1px solid var(--color-highlight) !important;
+    border-radius: 20px !important;
+    height: 50px !important;
+    margin-bottom: 15px;
+}
+
+.input-desc {
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    margin-top: -10px;
+}
+
+.inputbox-password-cad {
+    border: 1px solid var(--color-highlight) !important;
+    height: 50px !important;
+    margin-bottom: 15px;
+    margin-right: 0;
+}
+
+.btn-show-password-cad {
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    display: flex;
+    height: 50px;
+    border-radius: 0 20px 20px 0;
+    background-color: var(--color-highlight);
+    margin-left: 0;
+}
+
+.btn-show-password-cad:active {
+    opacity: 0.5;
+}
+
+.btn-show-password-cad img {
+    height: 36px;
+}
+
+/* -- Submit do Cadastro */
+
+.checkbox-cad {
+    margin-bottom: 10px;
+}
+
+.checkbox-cad input {
+    margin-right: 10px;
+}
+
+.submit-btn-cad {
+    margin: 40px auto;
+    transition: .4s;
+    width: auto !important;
+    background: var(--bg-color);
+    border: 1px solid var(--color-highlight);
+    border-radius: 20px;
+}
+
+.submit-btn-cad:hover {
+    opacity: 0.9;
+}
+
+/* Media Queries - Cadastro */
+
+@media screen and (min-width: 601px) and (max-width: 1154px) {
+    .cad {
+        margin-top: 0;
+    }
+    .img-logo-cad {
+        width: 80%;
+    }
+    .logo-box-cad {
+        flex-flow: column;
+    }
+    .inputbox-password-cad {
+        height: 50px !important;
+        margin-bottom: 18px;
+    }
+    .btn-show-password-cad {
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cad {
+        margin-top: -4vh;
+    }
+    .cad-content {
+        transform: scale(0.9);
+    }
+    .container-cad {
+        width: 100% !important;
+    }
+    .checkbox-cad {
+        font-size: 1.2rem;
+    }
+    .img-logo-cad {
+        width: 100%;
+    }
+    .inputbox-cad {
+        height: 43px !important;
+        border-radius: 15px !important;
+    }
+    .inputbox-password-cad {
+        height: 43px !important;
+    }
+    .btn-show-password-cad {
+        height: 43px;
+        border-radius: 0 15px 15px 0;
+    }
+    .logo-box-cad {
+        flex-flow: column;
+    }
+    .btn-show-password-cad img {
+        height: 33px;
+    }
+    .input-desc {
+        font-size: .9rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .cad {
+        margin-top: -13vh;
+    }
+    .cad-content {
+        transform: scale(0.80);
+        padding-top: 2px;
+    }
+    .container-cad {
+        width: 100% !important;
+    }
+    .img-logo-cad {
+        max-width: 100vw !important;
+        width: 88vw !important;
+    }
+    .inputbox-cad {
+        height: 38px !important;
+    }
+    .inputbox-password-cad {
+        height: 38px !important;
+    }
+    .logo-box-cad {
+        flex-flow: wrap;
+    }
+    .btn-show-password-cad {
+        height: 38px;
+    }
+    .input-desc {
+        font-size: .75rem;
+    }
+}

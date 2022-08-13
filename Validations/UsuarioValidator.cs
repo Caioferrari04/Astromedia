@@ -19,7 +19,13 @@ public class UsuarioValidator : AbstractValidator<Usuario>
             .WithMessage("Email inválido");
         
         RuleFor(m => m.DataNascimento)
+            .GreaterThan(m => DateTime.UtcNow.AddYears(-120))
             .LessThan(m => DateTime.UtcNow.AddYears(-18))
-            .GreaterThan(m => DateTime.UtcNow.AddYears(-150));
+            .WithName("Data de Nascimento");
+    
+        RuleFor(m => m.PasswordHash)
+            .Length(6, 20)
+            .Matches("^([a-zA-Z0-9_-])*$")
+            .WithMessage("Senha deve conter apenas letras, números, underline e traço");
     }
 }
