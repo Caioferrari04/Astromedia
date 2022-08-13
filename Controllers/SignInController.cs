@@ -26,37 +26,37 @@ public class SignInController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(UsuarioDTO usuario)
     {
-        if (usuario.ConfirmarSenha != usuario.Senha)        
-            ModelState.AddModelError(string.Empty, "Senha de confirmação não é igual à senha inserida!");
-
-        var novoUsuario = new Usuario { 
-            UserName = usuario.Nome, 
-            FotoPerfil = "/img/default-img.jpg", 
-            Email = usuario.Email, 
-            DataNascimento = usuario.DataNascimento.ToUniversalTime() 
-        };
-
         var validator = new UsuarioValidator();
-        var validationResult = await validator.ValidateAsync(novoUsuario);
+        var validationResult = await validator.ValidateAsync(usuario);
 
         if (validationResult.IsValid)
         {                                                              /*Adicionar foto padrão*/
-            var resultado = await _userManager.CreateAsync(novoUsuario, usuario.Senha);
+            var novoUsuario = new Usuario { 
+                UserName = usuario.Nome, 
+                FotoPerfil = "/img/default-img.jpg", 
+                Email = usuario.Email, 
+                DataNascimento = usuario.DataNascimento.ToUniversalTime() 
+            };
+            try {
+                var resultado = await _userManager.CreateAsync(novoUsuario, usuario.Senha);
 
-            if (resultado.Succeeded)
+                if (resultado.Succeeded) {
+                    await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
+
+                    return RedirectToAction("Index", "Home");
+                }
+            
+                foreach (var error in resultado.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+                } 
+            catch(Exception error)
             {
-                await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
-            }
-            foreach (var error in resultado.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+                Console.WriteLine(error.Message);
+            } 
         }
 
         foreach (var error in validationResult.Errors)
-        {
             ModelState.AddModelError(string.Empty, error.ErrorMessage);
-        }
 
         return View(); /*Atualizar pagina*/
     }
