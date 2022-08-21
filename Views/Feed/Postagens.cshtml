@@ -1,0 +1,29 @@
+@model Postagem
+@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/postagem.css">
+
+<div id="post-holder" class="container is-full-screen">
+    <div id="post-input-box" class="is-vertical-align is-horizontal-align">
+        <div class="post-input-content">
+            <textarea class="is-full-width" name="" id="" cols="100%" rows="auto" placeholder="Escreva Aqui" maxlength="280"></textarea>
+            @* <img src="" alt=""> *@
+            <div class="row">
+                <div onclick="" class="col is-vertical-align is-left">
+                    <img id="" src="" />
+                </div>
+                <button type="submit" class="col submit-post-btn button outline is-vertical-align is-right">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    @* <div class="post-box" class="is-vertical-align is-horizontal-align">
+        <div class="post-content">
+            <h1>Jumping fox</h1>
+        </div>
+    </div> *@
+</div>
+
+<script src="~/js/textarea-post.js"></script>

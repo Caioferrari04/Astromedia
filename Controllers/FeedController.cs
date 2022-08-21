@@ -18,4 +18,6 @@ public class FeedController : Controller {
 
         return View(astro);
     }
+    
+    public IActionResult Postagens() => View();
 }

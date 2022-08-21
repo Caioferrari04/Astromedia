@@ -1,0 +1,33 @@
+textarea {
+    background-color: var(--color-secondary);
+    color: var(--color-lightGrey);
+    border-style: none;
+    border: none;
+    resize: none;
+    overflow: hidden;
+    font-size: x-large;
+    min-width: 94vw;
+}
+
+#post-holder::before {
+    content: "Crie sua postagem";
+    font-size: 1rem;
+    margin-left: 15px;
+    color: var(--color-lightGrey);
+}
+
+#post-holder {
+    display: flex;
+    flex-flow: column;
+    width: auto; 
+    margin-top: 13vh;
+    overflow: hidden;  
+}
+
+#post-input-box {
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: auto;
+    height: auto;
+}
