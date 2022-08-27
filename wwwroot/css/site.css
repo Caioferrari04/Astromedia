@@ -23,22 +23,10 @@
 
 html {
   font-size: 14px;
-  position: relative;
-  min-height: 100%;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-body {
-  margin-bottom: 60px;
-}
-
-html, body {
-  overflow-x: hidden;
+main {
+  min-height: 84vh;
 }
 
 body::-webkit-scrollbar {
@@ -71,6 +59,28 @@ body::-webkit-scrollbar-thumb:active {
   border-radius: 100%;
 }
 
-article {
-  margin-top: 10vh;
+.tippy-box[data-theme~='astromedia'] {
+  background: var(--color-highlight);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: var(--color-lightGrey);
 }
+
+.tippy-box[data-theme~='astromedia'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: var(--color-highlight);
+}
+.tippy-box[data-theme~='astromedia'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: var(--color-highlight);
+}
+.tippy-box[data-theme~='astromedia'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: var(--color-highlight);
+}
+.tippy-box[data-theme~='astromedia'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: var(--color-highlight);
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+

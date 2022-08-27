@@ -1,14 +1,11 @@
 .footer{
     background-color: #471c5cb3;
-    height: 4rem;
-    bottom: 0;
-    position: absolute;
+    height: 8vh;
     padding: 10px;
-    z-index: 3;
 }
 
-.footer > a {
-    margin-right: 0.6rem;
+.footer a {
+    margin-right: 0.8rem;
     display: flex;
     align-items: center;
 }
