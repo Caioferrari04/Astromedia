@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Astromedia.Models;
 using Astromedia.Services;
 using Microsoft.EntityFrameworkCore;
@@ -64,3 +66,14 @@ app.UseEndpoints(endpoints =>
     });
 
 app.Run();
+
+MinimizeFootprint();
+
+
+[DllImport("psapi.dll")]
+static extern int EmptyWorkingSet(IntPtr hwProc);
+
+static void MinimizeFootprint()
+{
+    EmptyWorkingSet(Process.GetCurrentProcess().Handle);
+}
