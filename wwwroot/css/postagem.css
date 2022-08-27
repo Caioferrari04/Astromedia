@@ -4,9 +4,9 @@ textarea {
     border-style: none;
     border: none;
     resize: none;
+    outline: none;
     overflow: hidden;
     font-size: x-large;
-    min-width: 94vw;
 }
 
 #post-holder::before {
@@ -19,8 +19,8 @@ textarea {
 #post-holder {
     display: flex;
     flex-flow: column;
-    width: auto; 
-    margin-top: 13vh;
+    width: 600px; 
+    margin-top: 14vh;
     overflow: hidden;  
 }
 
@@ -30,4 +30,53 @@ textarea {
     margin-bottom: 10px;
     width: auto;
     height: auto;
+    padding: 5px;
+}
+
+#post-img-preview {
+    display: none;  
+    margin-bottom: 20px;
+}
+
+#post-img-preview img {
+    height: auto; 
+    display: flex;      
+    align-items: center;
+    margin: auto;
+    border-radius: 10px; 
+}
+
+.post-input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#post-imgcon {
+    cursor: pointer;
+    transition: all .3s;
+}
+
+#post-imgcon:active, #post-imgcon:focus {
+    transform: scale(.9);
+}
+
+#post-imgcon:hover {
+    opacity: 0.6;
+}
+
+.post-input-imgcon {
+    position: relative;
+    max-width: 1.8vw;
+    left: 12px;
+}
+
+.submit-post-btn {
+    position: relative;
+    border-radius: 7px;
+    font-size: 18px;
+    height: .9vh;
+    padding: 1vw;
+    margin: 10px;
 }

@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Astromedia.Services;
 using Astromedia.Models;
+using Microsoft.AspNetCore.Authorization;
 
+[AllowAnonymous]
 public class FeedController : Controller {
     private readonly AstroService _astroService;
 
@@ -21,3 +23,4 @@ public class FeedController : Controller {
     
     public IActionResult Postagens() => View();
 }
+

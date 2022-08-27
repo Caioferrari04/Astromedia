@@ -1,14 +1,14 @@
 /* Estilos  */
 .grid{
     display: grid;
-    grid-template-columns: 0.75fr 6fr 3fr;
+    grid-template-columns: 0.75fr 6fr 4fr;
 }
 
 /* Side bar */
 .sidebar{
-    position: fixed;
+    position: sticky; /* Tá como sticky por razões de teste */
     left: 0;
-    width: 200px;
+    /* width: 200px; */ /* Tá comentado por razões de teste */
     height: 100%;
     padding: 10px;
     display: flex;

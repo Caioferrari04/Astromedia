@@ -1,6 +1,5 @@
-@model Postagem
 @{
-    Layout = "_Layout";
+    Layout = "_LayoutFeed";
 }
 
 <link rel="stylesheet" href="~/css/postagem.css">
@@ -9,12 +8,15 @@
     <div id="post-input-box" class="is-vertical-align is-horizontal-align">
         <div class="post-input-content">
             <textarea class="is-full-width" name="" id="" cols="100%" rows="auto" placeholder="Escreva Aqui" maxlength="280"></textarea>
-            @* <img src="" alt=""> *@
-            <div class="row">
-                <div onclick="" class="col is-vertical-align is-left">
-                    <img id="" src="" />
+            <div id="post-img-preview"></div>
+            <div class="post-input-footer">
+                <div class="post-input-imgcon is-vertical-align is-left">
+                    <label for="img-up">
+                        <img id="post-imgcon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
+                    </label>
+                    <input id="img-up" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg">
                 </div>
-                <button type="submit" class="col submit-post-btn button outline is-vertical-align is-right">Enviar</button>
+                <button type="submit" class="submit-post-btn button outline is-vertical-align is-right">Enviar</button>
             </div>
         </div>
     </div>
@@ -27,3 +29,4 @@
 </div>
 
 <script src="~/js/textarea-post.js"></script>
+<script src="~/js/post-img-insert.js"></script>
