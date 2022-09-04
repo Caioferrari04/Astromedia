@@ -1,7 +1,9 @@
 .dropdown {
+    visibility: hidden;
+    transition: visibility .1s;
     background-color: var(--bg-secondary-color); 
     animation: inverso-drifto 0.6s;
-    transform: translateX(400px);
+    transform: translateX(700px);
     top: 0;
     right: 0;
     z-index: 10;
@@ -11,6 +13,7 @@
 }
 
 .dropdown-active {
+    visibility: visible;
     animation: drifto 0.6s;
     transform: translateX(0);
 }
