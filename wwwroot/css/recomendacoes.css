@@ -63,3 +63,14 @@
 .botao-recomendacao:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+@media screen and (max-width: 1700px) {
+    .recomendacao-titulo h5 {
+        font-size: 1.5rem;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .recomendacao-titulo h5 {
+        font-size: 1.3rem;
+    }
+}

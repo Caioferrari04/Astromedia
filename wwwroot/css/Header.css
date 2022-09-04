@@ -1,8 +1,9 @@
 .header {
     background-image: linear-gradient(var(--bg-secondary-color) 1% , transparent 90%);
     z-index: 20;
-    top: 0;
     position: sticky;
+    top: 0;
+    height: 8vh;
 }
 
 .header > a {

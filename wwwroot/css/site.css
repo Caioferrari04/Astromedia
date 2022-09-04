@@ -27,6 +27,7 @@ html {
 
 main {
   min-height: 84vh;
+  /* margin-bottom: 4rem; */
 }
 
 body::-webkit-scrollbar {
