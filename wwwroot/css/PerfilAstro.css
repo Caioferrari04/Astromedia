@@ -121,6 +121,9 @@
     }
 
     .sidebar {display: none !important;}
+    .container-perfil {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 900px) {

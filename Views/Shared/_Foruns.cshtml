@@ -8,7 +8,7 @@
     var astros = usuario?.Astros ?? _service.GetAll();
 }
 
-@for (int i = 0; i < 6; i++)
+@for (int i = 0; i < 6; i++) // implementar no servidor
 {
     <div class="item">
         <img src="@astros[i].Foto" alt="@astros[i].Nome" data-tippy-content="@astros[i].Nome">

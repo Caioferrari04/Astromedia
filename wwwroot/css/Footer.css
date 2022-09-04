@@ -2,6 +2,8 @@
     background-color: #471c5cb3;
     height: 8vh;
     padding: 10px;
+    position: relative;
+    bottom: 0;
 }
 
 .footer a {

@@ -26,6 +26,11 @@ article {
     justify-content: center;
 }
 
+main.container {
+    width: 100%;
+    padding: 0;
+}
+
 .heroElements{
     width: 100%;
     display: flex;
