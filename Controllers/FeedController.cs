@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Astromedia.Services;
 using Astromedia.Models;
+using Microsoft.AspNetCore.Identity;
 
 public class FeedController : Controller {
     private readonly AstroService _astroService;
-
-    public FeedController(AstroService astroService)
+    private readonly UserManager<Usuario> _userManager;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager)
     {
        _astroService = astroService;
+       _userManager = userManager;
     }
 
     public IActionResult Index() => View();
@@ -18,4 +20,8 @@ public class FeedController : Controller {
 
         return View(astro);
     }
+
+    public IActionResult Foruns() => PartialView("_Foruns");
+
+    public IActionResult BruhMongus() => View("/Views/Feed/PerfilAstro.cshtml");
 }

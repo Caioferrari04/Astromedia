@@ -3,7 +3,6 @@
     background-color: var(--color-primary);
     border-radius: 10px;
     padding: 0;
-    width: 100%;
     grid-column: 2;
     margin-bottom: 10px;
 }
@@ -105,9 +104,6 @@
 /* Responsividade */
 
 @media screen and (max-width: 1200px) {
-    .container-perfil {
-        width: 90% !important;
-    }
     .tabs button{
         font-size: 15px;
     }
@@ -125,6 +121,9 @@
     }
 
     .sidebar {display: none !important;}
+    .container-perfil {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -164,10 +163,6 @@
         font-size: 20px;
         padding: 10px 40px;
         margin-bottom: 30px;
-    }
-
-    .container-perfil {
-        width: 90%;
     }
 
     .tab-content{

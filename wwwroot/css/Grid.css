@@ -1,35 +1,20 @@
 /* Estilos  */
 .grid{
     display: grid;
-    grid-template-columns: 0.75fr 6fr 3fr;
+    grid-template-columns: 1fr 8fr 3fr;
+    align-items: flex-start;
 }
 
 /* Side bar */
 .sidebar{
-    position: fixed;
-    left: 0;
-    width: 200px;
-    height: 100%;
-    padding: 10px;
+    grid-column: 1;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
-    grid-column: 1;
-    z-index: 3;
+    align-items: center;
 }
 
 .sidebar::-webkit-scrollbar{
     display: none;
-}
-
-.sidebar .item{
-    margin-bottom: 35px;
-    display: flex; 
-    align-items: center;
-}
-
-.sidebar .item:last-of-type{
-    margin-bottom: 135px;
 }
 
 .item img{
@@ -40,26 +25,6 @@
 }
 .astro-active {
     border: 1px solid var(--color-lightGrey);
-}
-
-.item .tooltip {
-    position: absolute;
-    left: 100px;
-    display: none;
-    font-size: 17px;
-    color: #fff;
-    border-radius: 6px;
-    line-height: 30px;
-    text-align: center;
-    height: 35px;
-    width: 100px;
-    background: var(--color-highlight);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-
-.item > img:hover .tooltip{
-    display: inline;
 }
 
 .item img:active{
