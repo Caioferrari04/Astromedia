@@ -8,15 +8,15 @@
 }
 
 <div class="cad container is-vertical-align is-horizontal-align">
-    <form class="cad-content text-light" asp-action="Index" method="post">
+    <form class="cad-content text-light" asp-action="Index">
         <div class="container logo-box-cad row is-vertical-align is-horizontal-align">
             <!-- substituir por img nova -->
             <img class="img-logo-cad col" src="~/img/logo-main.png" alt="Logo Astromedia" class="maxlogo"> 
-            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">Cadastre-se</h2>
+            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">Cadastro</h2>
         </div>
 
         <div class="container container-cad">
-            <div asp-validation-summary="ModelOnly" class="text-error"></div>
+            <div asp-validation-summary="ModelOnly" class="text-error lista-erro"></div>
             
             <div class="row">
                 <label class="col" asp-for="Nome">
@@ -77,11 +77,13 @@
             <div class="row">
                 <div class="col">
                     <label asp-for="ConditionTerms" class="text-is-vertical-align checkbox-cad">
-                        <input asp-for="ConditionTerms" type="checkbox" required>Aceito os termos de condição 
+                        <input asp-for="ConditionTerms" type="checkbox" required>
+                        <a asp-action="TermosUso" class="text-white" asp-controller="Juridico">Aceito os termos de condição</a>
                     </label>
                     <br>
                     <label asp-for="PrivacyTerms" class="text-is-vertical-align checkbox-cad">
-                        <input asp-for="PrivacyTerms" type="checkbox" required>Aceito os termos de privacidade
+                        <input asp-for="PrivacyTerms" type="checkbox" required>
+                        <a asp-action="TermosUso" class="text-white" asp-controller="Juridico">Aceito os termos de privacidade</a>
                     </label>
                     <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Juntar-se!</button>
                 </div>

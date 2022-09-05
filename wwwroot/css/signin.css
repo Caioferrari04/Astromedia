@@ -102,6 +102,12 @@ body {
     opacity: 0.9;
 }
 
+/* Erros */
+
+.erros {
+    background-color: var(--color-darkGrey);
+}
+
 /* Media Queries - Cadastro */
 
 @media screen and (min-width: 601px) and (max-width: 1154px) {
