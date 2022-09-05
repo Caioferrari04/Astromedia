@@ -1,5 +1,8 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Astromedia.Models;
 using Astromedia.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,8 +33,13 @@ else
 builder.Services.AddDbContext<AstroContext>(options =>
     options.UseNpgsql(connectionString));
 
-builder.Services.AddDefaultIdentity<Usuario>()
-        .AddEntityFrameworkStores<AstroContext>();
+Action<IdentityOptions> identityOptions = m => {
+    m.User.RequireUniqueEmail = true;
+};
+
+builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
+        .AddEntityFrameworkStores<AstroContext>()
+        .AddErrorDescriber<LocalizedIdentityErrorDescriber>();
 
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
@@ -64,3 +72,14 @@ app.UseEndpoints(endpoints =>
     });
 
 app.Run();
+
+MinimizeFootprint();
+
+
+[DllImport("psapi.dll")]
+static extern int EmptyWorkingSet(IntPtr hwProc);
+
+static void MinimizeFootprint()
+{
+    EmptyWorkingSet(Process.GetCurrentProcess().Handle);
+}

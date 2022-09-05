@@ -1,11 +1,9 @@
-.header{
+.header {
     background-image: linear-gradient(var(--bg-secondary-color) 1% , transparent 90%);
-    min-height: 2rem!important;
-    height: 75px;
-    top: 0;
     z-index: 20;
-    width: 100vw;
-    position: fixed;
+    position: sticky;
+    top: 0;
+    height: 8vh;
 }
 
 .header > a {
@@ -44,7 +42,7 @@
 }
 
 @media (max-width: 768px) {
-    .header {
+    .header .nav {
         display: flex;
         flex-direction: row;
     }
