@@ -1,3 +1,5 @@
+/* Área Inserção de Texto */
+
 textarea {
     background-color: var(--color-secondary);
     color: var(--color-lightGrey);
@@ -6,12 +8,19 @@ textarea {
     resize: none;
     outline: none;
     overflow: hidden;
-    font-size: x-large;
+    padding: 7px 10px;
+    font-size: 1.2rem;
 }
+
+textarea:focus {
+    box-shadow: none;
+}
+
+/* Área de Postagens - Geral */
 
 #post-holder::before {
     content: "Crie sua postagem";
-    font-size: 1rem;
+    font-size: .8rem;
     margin-left: 15px;
     color: var(--color-lightGrey);
 }
@@ -19,10 +28,21 @@ textarea {
 #post-holder {
     display: flex;
     flex-flow: column;
-    width: 600px; 
-    margin-top: 14vh;
+    width: 35vw; 
+    margin-top: 10vh;
     overflow: hidden;  
 }
+
+.post-footer-icon {
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    min-width: 20px;
+    margin-bottom: -4px;
+    transition: all .3s;
+}
+
+/* * Área de Postagens - Conteúdo */
 
 #post-input-box {
     background-color: var(--color-secondary);
@@ -32,6 +52,8 @@ textarea {
     height: auto;
     padding: 5px;
 }
+
+/* ** Imagens | post-input-box */
 
 #post-img-preview {
     display: none;  
@@ -43,19 +65,16 @@ textarea {
     display: flex;      
     align-items: center;
     margin: auto;
+    width: 100%;
     border-radius: 10px; 
 }
+
+/* ** Footer | post-input-box */
 
 .post-input-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
-}
-
-#post-imgcon {
-    cursor: pointer;
-    transition: all .3s;
 }
 
 #post-imgcon:active, #post-imgcon:focus {
@@ -69,14 +88,121 @@ textarea {
 .post-input-imgcon {
     position: relative;
     max-width: 1.8vw;
-    left: 12px;
+    left: 9px;
 }
 
 .submit-post-btn {
     position: relative;
     border-radius: 7px;
-    font-size: 18px;
-    height: .9vh;
-    padding: 1vw;
-    margin: 10px;
+    font-size: 1rem;
+    height: 0;
+    padding: 11px;
+    margin: 10px 5px 3px 10px;
+}
+
+/* * Área de Postagens Enviadas - Conteúdo */
+
+.post-box {
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: auto;
+    height: auto;
+    padding: 5px;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usr-post-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.usr-post-date {
+    font-size: .8rem;
+    color: var(--color-lightGrey);
+    margin-left: 10px;
+}
+
+.report-btn {
+    position: relative;
+    top: -4px;
+    cursor: pointer;
+    width: 20px;
+    min-width: 20px;
+    transition: all .3s;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-footer-comment {
+    image-rendering: auto;
+}
+
+.post-footer-comment:active, .post-footer-comment:focus {
+    transform: scale(.9);
+}
+
+.post-footer-comment:hover {
+    opacity: 0.6;
+}
+
+.post-footer-likes {
+    image-rendering: auto;
+}
+
+.post-footer-likes:active, .post-footer-likes:focus {
+    transform: scale(.9);
+}
+
+.post-footer-likes:hover {
+    opacity: 0.6;
+}
+
+.likes-count {
+    position: relative;
+    top: 5px;
+    left: -3px;
+    font-size: .8rem;
+    color: var(--color-lightGrey);
+    margin-left: 10px;
+}
+
+/* Media Queries - Postagens */
+
+@media screen and (min-width: 601px) and (max-width: 1154px) {
+    .grid {
+        flex-flow: row;
+        align-items: flex-start;
+    }
+    #post-holder {
+        width: 45vw;
+        margin-top: 7vh;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sidebar {
+        display: none;
+    }
+    #post-holder {
+        width: 100vw;
+        margin-top: 12vh;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #post-holder {
+        width: 100vw;
+    }
 }

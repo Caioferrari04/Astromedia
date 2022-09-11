@@ -2,6 +2,10 @@
     Layout = "_LayoutFeed";
 }
 
+@{
+    var Postagem = new Postagem();
+}
+
 <link rel="stylesheet" href="~/css/postagem.css">
 
 <div id="post-holder" class="container is-full-screen">
@@ -12,7 +16,7 @@
             <div class="post-input-footer">
                 <div class="post-input-imgcon is-vertical-align is-left">
                     <label for="img-up">
-                        <img id="post-imgcon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
+                        <img class="post-footer-icon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
                     </label>
                     <input id="img-up" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg">
                 </div>
@@ -21,11 +25,32 @@
         </div>
     </div>
 
-    @* <div class="post-box" class="is-vertical-align is-horizontal-align">
+    <div class="post-box" class="is-vertical-align is-horizontal-align">
         <div class="post-content">
-            <h1>Jumping fox</h1>
+            <div class="post-header">
+                <div class="post-header-info is-left">
+                    <img class="usr-post-pic" src="@Postagem.Usuario.FotoPerfil" />
+                    <p class="usr-post-date">@Postagem.DataPostagem.ToString("dd/MM/yyyy")</p>
+                </div>
+                <div class="report-btn is-vertical-align is-right">
+                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                </div>
+            </div>
+            <p class="post-text">
+                @Postagem.Texto
+            </p>
+            <div id="post-img"></div>
+            <div class="post-footer">
+                <div class="post-footer-comment is-vertical-align is-left">
+                    <img class="post-footer-icon" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                </div>
+                <div class="post-footer-likes is-vertical-align is-right">
+                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                    <p class="likes-count">0</p>
+                </div>
+            </div>
         </div>
-    </div> *@
+    </div>
 </div>
 
 <script src="~/js/textarea-post.js"></script>
