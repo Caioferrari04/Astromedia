@@ -18,6 +18,12 @@ textarea:focus {
 
 /* Área de Postagens - Geral */
 
+.between-config {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #post-holder::before {
     content: "Crie sua postagem";
     font-size: .8rem;
@@ -34,12 +40,19 @@ textarea:focus {
 }
 
 .post-footer-icon {
-    position: relative;
     cursor: pointer;
-    width: 20px;
-    min-width: 20px;
-    margin-bottom: -4px;
+    width: 19px;
+    min-width: 18px;
     transition: all .3s;
+    image-rendering: auto;
+}
+
+.post-footer-icon:active, .post-footer-icon:focus {
+    transform: scale(.9);
+}
+
+.post-footer-icon:hover {
+    opacity: 0.6;
 }
 
 /* * Área de Postagens - Conteúdo */
@@ -71,24 +84,11 @@ textarea:focus {
 
 /* ** Footer | post-input-box */
 
-.post-input-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#post-imgcon:active, #post-imgcon:focus {
-    transform: scale(.9);
-}
-
-#post-imgcon:hover {
-    opacity: 0.6;
-}
-
 .post-input-imgcon {
     position: relative;
     max-width: 1.8vw;
-    left: 9px;
+    left: 4px;
+    margin-bottom: -11px;
 }
 
 .submit-post-btn {
@@ -97,7 +97,7 @@ textarea:focus {
     font-size: 1rem;
     height: 0;
     padding: 11px;
-    margin: 10px 5px 3px 10px;
+    margin: 10px 2px 3px 10px;
 }
 
 /* * Área de Postagens Enviadas - Conteúdo */
@@ -111,17 +111,11 @@ textarea:focus {
     padding: 5px;
 }
 
-.post-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .usr-post-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    border-radius: 30%;
+    margin: 3px 0 0 3px;
 }
 
 .usr-post-date {
@@ -132,41 +126,32 @@ textarea:focus {
 
 .report-btn {
     position: relative;
-    top: -4px;
+    top: -5px;
     cursor: pointer;
-    width: 20px;
-    min-width: 20px;
+    width: 21px;
+    min-width: 21px;
     transition: all .3s;
 }
 
-.post-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.report-btn:active, .report-btn:focus {
+    transform: scale(.9);
+}
+
+.report-btn:hover {
+    opacity: 0.6;
 }
 
 .post-footer-comment {
-    image-rendering: auto;
-}
-
-.post-footer-comment:active, .post-footer-comment:focus {
-    transform: scale(.9);
-}
-
-.post-footer-comment:hover {
-    opacity: 0.6;
+    position: relative;
+    margin-bottom: 4px;
+    width: 18px;
+    left: 5px;
 }
 
 .post-footer-likes {
-    image-rendering: auto;
-}
-
-.post-footer-likes:active, .post-footer-likes:focus {
-    transform: scale(.9);
-}
-
-.post-footer-likes:hover {
-    opacity: 0.6;
+    position: relative;
+    margin-bottom: -1px;
+    right: 2px;
 }
 
 .likes-count {
@@ -182,12 +167,14 @@ textarea:focus {
 
 @media screen and (min-width: 601px) and (max-width: 1154px) {
     .grid {
+        display: grid;
         flex-flow: row;
         align-items: flex-start;
+        grid-template-columns: 0.90fr 5fr 2fr !important;
     }
     #post-holder {
         width: 45vw;
-        margin-top: 7vh;
+        margin-top: 8vh;
     }
 }
 
@@ -197,12 +184,16 @@ textarea:focus {
     }
     #post-holder {
         width: 100vw;
-        margin-top: 12vh;
+    }
+    .post-footer-icon {
+        width: 20px;
+        min-width: 19px;
     }
 }
 
 @media screen and (max-width: 320px) {
     #post-holder {
         width: 100vw;
+        margin-top: 12vh;
     }
 }
