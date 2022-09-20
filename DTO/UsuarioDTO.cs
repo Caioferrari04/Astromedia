@@ -26,6 +26,7 @@ public class UsuarioDTO
 
     public bool PrivacyTerms { get; set; }
 
-    public List<PostagemDTO> Postagens { get; set; }
+    public string FotoPerfil { get; set; }
 
+    public List<PostagemDTO> Postagens { get; set; }
 }

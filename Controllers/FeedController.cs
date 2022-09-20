@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Astromedia.Services;
 using Astromedia.Models;
 using Microsoft.AspNetCore.Authorization;
+using Astromedia.DTO;
 
 [AllowAnonymous]
 public class FeedController : Controller {
@@ -22,5 +23,12 @@ public class FeedController : Controller {
     }
     
     public IActionResult Postagens() => View();
+
+    [HttpPost]
+    public void SavePostagem(PostagemDTO postagem)
+    {
+        // var postagemService = new PostagemService();
+        // postagemService.Create(postagem);
+    }
 }
 

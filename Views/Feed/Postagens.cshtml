@@ -1,9 +1,6 @@
+@model PostagemDTO
 @{
     Layout = "_LayoutFeed";
-}
-
-@{
-    var Postagem = new Postagem();
 }
 
 <link rel="stylesheet" href="~/css/postagem.css">
@@ -11,33 +8,72 @@
 <div id="post-holder" class="container is-full-screen">
     <div id="post-input-box" class="is-vertical-align is-horizontal-align">
         <div class="post-input-content">
-            <textarea class="is-full-width" name="" id="" cols="100%" rows="auto" placeholder="Escreva Aqui" maxlength="280"></textarea>
-            <div id="post-img-preview"></div>
-            <div class="between-config">
-                <div class="post-input-imgcon is-vertical-align is-left">
-                    <label for="img-up">
-                        <img class="post-footer-icon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
-                    </label>
-                    <input id="img-up" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg">
+            @using (Html.BeginForm("SavePostagem", "Feed", FormMethod.Post, new {@id = "postform"}))
+            {   
+                @Html.TextAreaFor(m => m.Texto, new { @class = "is-full-width", @name = "posttext", @form = "postform", @cols = "100%", @rows = "auto", @placeholder = "Escreva Aqui", @maxlength = "280" })
+                <div id="post-img-preview"></div>
+                <div class="between-config">
+                    <div class="post-input-imgcon is-vertical-align is-left">
+                        <label for="img-up">
+                            <img class="post-footer-icon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
+                        </label>
+                        <input id="img-up" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg">
+                    </div>
+                    <button type="submit" class="submit-post-btn button outline is-vertical-align is-right">Enviar</button>
                 </div>
-                <button type="submit" class="submit-post-btn button outline is-vertical-align is-right">Enviar</button>
-            </div>
+            }
         </div>
     </div>
 
+    @* Template Postagem Usuário *@
     <div class="post-box" class="is-vertical-align is-horizontal-align">
         <div class="post-content">
             <div class="between-config">
                 <div class="post-header-info is-left">
-                    <img class="usr-post-pic" src="@Postagem.Usuario.FotoPerfil" />
-                    <p class="usr-post-date">@Postagem.DataPostagem.ToString("dd/MM/yyyy")</p>
+                    @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
+                    @* <p class="usr-post-name">@Model.UsuarioDTO.Nome</p> *@
+                    @* <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p> *@
+                    <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
+                    <div class="info-col">
+                        <p class="usr-post-name">Gustavo</p>
+                        <p class="usr-post-date">dd/MM/yyyy</p>
+                    </div>
                 </div>
                 <div class="report-btn is-vertical-align is-right">
                     <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
                 </div>
             </div>
             <p class="post-text">
-                @Postagem.Texto
+                @* @Model.Texto *@
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
+            </p>
+            <div class="post-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" /></div>
+            <div class="between-config">
+                <div class="post-footer-comment is-vertical-align is-left">
+                    <img class="post-footer-icon" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                </div>
+                <div class="post-footer-likes is-vertical-align is-right">
+                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Template Postagem Empresa *@
+    <div class="post-box" class="is-vertical-align is-horizontal-align">
+        <div class="post-content">
+            <div class="between-config">
+                <div class="post-header-info is-left">
+                    @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
+                    @* <p class="usr-post-name">@Model.UsuarioDTO.Nome</p> *@
+                    @* <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p> *@
+                </div>
+                <div class="report-btn is-vertical-align is-right">
+                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                </div>
+            </div>
+            <p class="post-text">
+                @* @Model.Texto *@
             </p>
             <div id="post-img"></div>
             <div class="between-config">
