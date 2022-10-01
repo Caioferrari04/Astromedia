@@ -26,18 +26,22 @@
     </div>
 
     @* Template Postagem Usuário *@
-    <div class="post-box" class="is-vertical-align is-horizontal-align">
+    <div id="usr-all-post" class="post-box" class="is-vertical-align is-horizontal-align">
         <div class="post-content">
             <div class="between-config">
                 <div class="post-header-info is-left">
+
                     @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
-                    @* <p class="usr-post-name">@Model.UsuarioDTO.Nome</p> *@
-                    @* <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p> *@
+                    @* <div class="info-col">
+                        <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
+                        <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
+                    </div> *@
                     <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
                     <div class="info-col">
                         <p class="usr-post-name">Gustavo</p>
                         <p class="usr-post-date">dd/MM/yyyy</p>
                     </div>
+
                 </div>
                 <div class="report-btn is-vertical-align is-right">
                     <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
@@ -47,12 +51,12 @@
                 @* @Model.Texto *@
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
             </p>
-            <div class="post-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" /></div>
+            <div class="post-img"><img src="" /></div>
             <div class="between-config">
-                <div class="post-footer-comment is-vertical-align is-left">
+                <div class="usr-footer-comment is-vertical-align is-left">
                     <img class="post-footer-icon" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
                 </div>
-                <div class="post-footer-likes is-vertical-align is-right">
+                <div class="usr-footer-likes is-vertical-align is-right">
                     <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
                 </div>
             </div>
@@ -60,13 +64,23 @@
     </div>
 
     @* Template Postagem Empresa *@
-    <div class="post-box" class="is-vertical-align is-horizontal-align">
+       <div id="promo-all-post" class="post-box" class="is-vertical-align is-horizontal-align">
         <div class="post-content">
             <div class="between-config">
                 <div class="post-header-info is-left">
+
+                    @* N sei de onde os dados da empresa vão ser puxados *@
                     @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
-                    @* <p class="usr-post-name">@Model.UsuarioDTO.Nome</p> *@
-                    @* <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p> *@
+                    @* <div class="info-col">
+                        <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
+                        <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
+                    </div> *@
+                    <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
+                    <div class="info-col">
+                        <p class="usr-post-name">Gustavo</p>
+                        <p class="usr-post-date">dd/MM/yyyy</p>
+                    </div>
+
                 </div>
                 <div class="report-btn is-vertical-align is-right">
                     <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
@@ -74,19 +88,31 @@
             </div>
             <p class="post-text">
                 @* @Model.Texto *@
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
             </p>
-            <div id="post-img"></div>
+            <div class="post-img"><img src="" /></div>
             <div class="between-config">
-                <div class="post-footer-comment is-vertical-align is-left">
-                    <img class="post-footer-icon" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                <div class="beside-config">
+                    <div class="promo-footer-comment is-vertical-align is-left">
+                        <img class="post-footer-icon" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                    </div>
+                    <div class="promo-footer-likes is-vertical-align is-left">
+                        <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                    </div>
                 </div>
-                <div class="post-footer-likes is-vertical-align is-right">
-                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                <div class="promo-footer-id is-vertical-align is-right">
+                    <img src="https://icongr.am/clarity/pop-out.svg?size=128&color=ffffff" />
+                    <p class="promo-id-text">Promovido</p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
-<script src="~/js/textarea-post.js"></script>
-<script src="~/js/post-img-insert.js"></script>
+
+@section scripts 
+{
+    <script src="~/js/textarea-post.js"></script>
+    <script src="~/js/post-img-insert.js"></script>
+}

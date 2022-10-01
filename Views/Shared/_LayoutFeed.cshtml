@@ -14,4 +14,5 @@
     @RenderBody()
 </div>
 
+@await RenderSectionAsync("scripts", required: false)
 <script src="~/js/openTooltip.js" asp-append-version="true"></script>

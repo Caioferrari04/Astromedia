@@ -24,6 +24,12 @@ textarea:focus {
     align-items: center;
 }
 
+.beside-config {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 #post-holder::before {
     content: "Crie sua postagem";
     font-size: .8rem;
@@ -41,8 +47,8 @@ textarea:focus {
 
 .post-footer-icon {
     cursor: pointer;
-    width: 19px;
-    min-width: 18px;
+    width: 17px;
+    min-width: 16px;
     transition: all .3s;
     image-rendering: auto;
 }
@@ -171,26 +177,47 @@ textarea:focus {
     opacity: 0.6;
 }
 
-.post-footer-comment {
+.usr-footer-comment {
     position: relative;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     width: 18px;
-    left: 5px;
+    left: 4px;
+    bottom: -1px;
 }
 
-.post-footer-likes {
+.promo-footer-comment {
+    position: relative;
+    margin-bottom: 3px;
+    width: 18px;
+    left: 4px;
+    bottom: -1px;
+}
+
+.usr-footer-likes {
     position: relative;
     margin-bottom: -1px;
-    right: 2px;
+    right: 1px;
 }
 
-.likes-count {
+.promo-footer-likes {
     position: relative;
-    top: 5px;
-    left: -3px;
-    font-size: .8rem;
+    margin-bottom: -1px;
+    left: 8px;
+}
+
+.promo-footer-id {
+    position: relative;
+    margin-bottom: -3px;
+    width: 16px;
+    min-width: 16px;
+    right: 3px;
+}
+
+.promo-id-text {
+    font-size: .7rem;
     color: var(--color-lightGrey);
-    margin-left: 10px;
+    margin-left: 2px;
+    margin-bottom: 0;
 }
 
 /* Media Queries - Postagens */
