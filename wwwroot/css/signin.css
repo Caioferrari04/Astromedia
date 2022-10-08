@@ -9,7 +9,7 @@ body {
 /* Conteúdo Cadastro - Geral */
 
 .cad {
-    margin-top: -11vh;
+    margin-top: -8vh;
 }
 
 .cad-content {
@@ -125,7 +125,7 @@ body {
 
 @media screen and (max-width: 600px) {
     .cad {
-        margin-top: -4vh;
+        margin-top: 2vh;
     }
     .cad-content {
         transform: scale(0.9);
@@ -163,7 +163,7 @@ body {
 
 @media screen and (max-width: 320px) {
     .cad {
-        margin-top: -13vh;
+        margin-top: -5vh;
     }
     .cad-content {
         transform: scale(0.80);

@@ -17,6 +17,8 @@
     </div>
 </div>
 
+
 @section scripts {
     <script src="~/js/openTooltip.js" asp-append-version="true"></script>
 }
+@await RenderSectionAsync("scripts", required: false)

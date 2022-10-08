@@ -1,12 +1,15 @@
 /* Estilos  */
 .grid{
     display: grid;
-    grid-template-columns: 1fr 8fr 3fr;
-    align-items: flex-start;
+    grid-template-columns: 0.75fr 6fr 4fr;
 }
 
 /* Side bar */
 .sidebar{
+    position: sticky; /* Tá como sticky por razões de teste */
+    left: 0;
+    height: 100%;
+    padding: 10px;
     grid-column: 1;
     display: flex;
     flex-direction: column;
