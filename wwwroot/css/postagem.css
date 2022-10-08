@@ -72,6 +72,15 @@ textarea:focus {
     padding: 5px;
 }
 
+.comment-input-box {
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: auto;
+    height: auto;
+    padding: 5px;
+}
+
 /* ** Imagens | post-input-box */
 
 #post-img-preview {
@@ -111,6 +120,16 @@ textarea:focus {
 .post-box {
     background-color: var(--color-secondary);
     border-radius: 8px;
+    margin-bottom: 10px;
+    width: auto;
+    height: auto;
+    padding: 5px;
+}
+
+.comment-box {
+    z-index: -1;
+    background-color: var(--color-secondary);
+    border-radius: 10px;
     margin-bottom: 10px;
     width: auto;
     height: auto;

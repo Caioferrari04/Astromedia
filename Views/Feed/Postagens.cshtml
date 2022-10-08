@@ -26,7 +26,7 @@
     </div>
 
     @* Template Postagem Usuário *@
-    <div id="usr-all-post" class="post-box" class="is-vertical-align is-horizontal-align">
+    <div class="post-box" class="is-vertical-align is-horizontal-align">
         <div class="post-content">
             <div class="between-config">
                 <div class="post-header-info is-left">
@@ -63,8 +63,22 @@
         </div>
     </div>
 
+    <div class="comment-input-box" class="is-vertical-align is-horizontal-align">
+        <div class="post-input-content">
+            @using (Html.BeginForm("Action", "Controller", FormMethod.Post, new {@id = "commentform"}))
+            {   
+                @Html.TextAreaFor(m => m.Texto, new { @class = "is-full-width", @name = "commenttext", @form = "commentform", @cols = "100%", @rows = "auto", @placeholder = "Comente Aqui", @maxlength = "280" })
+                <div id="post-img-preview"></div>
+                <div class="between-config">
+                    @* botões de modificação *@
+                    <button type="submit" class="submit-post-btn button outline is-vertical-align is-right">Comentar</button>
+                </div>
+            }
+        </div>
+    </div>
+
     @* Template Postagem Empresa *@
-       <div id="promo-all-post" class="post-box" class="is-vertical-align is-horizontal-align">
+       <div class="post-box" class="is-vertical-align is-horizontal-align">
         <div class="post-content">
             <div class="between-config">
                 <div class="post-header-info is-left">
