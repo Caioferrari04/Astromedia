@@ -16,23 +16,33 @@
     <body>
         <div id="rendermodal" data-url='@Url.Action("Login", "SignIn")'></div>
 
-        <header class="header nav">
-            <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-small.png" class="logo" alt=""></a>
-            <div class="nav-right header--btn-group">
-                <partial name="_LoginPartial" />
+        <header class="header">
+            <div class="container">
+                <nav class="nav">
+                    <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-small.png" class="logo" alt=""></a>
+                    <div class="nav-right header--btn-group">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </nav>
             </div>
         </header>
 
-        @RenderBody()
+        <main class="container" role="main">
+            @RenderBody()
+        </main>
 
-        <footer class="footer is-full-width is-vertical-align">
-            <a href=""><img class="footer--logo" src="~/img/logo-small.png" alt=""></a>
-            <a class="footer--texto text-light" href="#copyright">©2022 Astromedia</a>
-            <a class="footer--texto text-light" href="#termos">Termos</a>
-            <a class="footer--texto text-light" href="#privacidade">Privacidade</a>
+        <footer class="footer is-full-width">
+            <div class="container is-vertical-align">
+                <a href=""><img class="footer--logo" src="~/img/logo-small.png" alt=""></a>
+                <a class="footer--texto text-light" href="#copyright">©2022 Astromedia</a>
+                <a class="footer--texto text-light" href="#termos">Termos</a>
+                <a class="footer--texto text-light" href="#privacidade">Privacidade</a>
+            </div>
         </footer>
 
         </div>
+        <script src="~/lib/tippy/popper.min.js" asp-append-version="true"></script>
+        <script src="~/lib/tippy/tippy-bundle.umd.min.js" asp-append-version="true"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
         <script src="~/js/modal.js" asp-append-version="true"></script>
         <script src="~/js/showpassword.js" asp-append-version="true"></script>

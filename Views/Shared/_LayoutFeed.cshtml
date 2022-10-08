@@ -1,18 +1,24 @@
+
 @{
     Layout = "_Layout";
 }
-
-<link rel="stylesheet" href="~/css/Grid.css" asp-append-version="true">
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/Grid.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/recomendacoes.css" asp-append-version="true" />
+}
 
 <div class="grid">
     <div class="sidebar">
-        <div class="item">
-            <img src="" alt="">
-            <span class="tooltip"></span>
-        </div>
+        <partial name="_Foruns"/>
     </div>
     @RenderBody()
+    <div class="recomendacoes hide-xs hide-sm hide-md">
+        <partial name="_Recomendacoes"/>
+    </div>
 </div>
 
+
+@section scripts {
+    <script src="~/js/openTooltip.js" asp-append-version="true"></script>
+}
 @await RenderSectionAsync("scripts", required: false)
-<script src="~/js/openTooltip.js" asp-append-version="true"></script>

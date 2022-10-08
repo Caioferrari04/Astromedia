@@ -3,14 +3,16 @@ using Astromedia.Services;
 using Astromedia.Models;
 using Microsoft.AspNetCore.Authorization;
 using Astromedia.DTO;
+using Microsoft.AspNetCore.Identity;
 
 [AllowAnonymous]
 public class FeedController : Controller {
     private readonly AstroService _astroService;
-
-    public FeedController(AstroService astroService)
+    private readonly UserManager<Usuario> _userManager;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager)
     {
        _astroService = astroService;
+       _userManager = userManager;
     }
 
     public IActionResult Index() => View();
@@ -30,5 +32,6 @@ public class FeedController : Controller {
         // var postagemService = new PostagemService();
         // postagemService.Create(postagem);
     }
-}
 
+    public IActionResult Foruns() => PartialView("_Foruns");
+}
