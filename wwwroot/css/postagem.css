@@ -73,12 +73,18 @@ textarea:focus {
 }
 
 .comment-input-box {
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary);
+    z-index: 0;
     border-radius: 8px;
     margin-bottom: 10px;
     width: auto;
     height: auto;
-    padding: 5px;
+    padding: 20px 5px 5px 5px;
+}
+
+.comment-input {
+    background-color: var(--color-primary) !important;
+    font-size: 1rem;
 }
 
 /* ** Imagens | post-input-box */
@@ -119,17 +125,8 @@ textarea:focus {
 
 .post-box {
     background-color: var(--color-secondary);
+    z-index: 1;
     border-radius: 8px;
-    margin-bottom: 10px;
-    width: auto;
-    height: auto;
-    padding: 5px;
-}
-
-.comment-box {
-    z-index: -1;
-    background-color: var(--color-secondary);
-    border-radius: 10px;
     margin-bottom: 10px;
     width: auto;
     height: auto;
@@ -259,7 +256,7 @@ textarea:focus {
         display: none;
     }
     #post-holder {
-        width: 100vw;
+        width: 100%
     }
     .post-footer-icon {
         width: 20px;
@@ -283,7 +280,7 @@ textarea:focus {
 
 @media screen and (max-width: 320px) {
     #post-holder {
-        width: 100vw;
+        width: 100%;
         margin-top: 12vh;
     }
 }
