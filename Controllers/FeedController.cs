@@ -27,10 +27,22 @@ public class FeedController : Controller {
     public IActionResult Postagens() => View();
 
     [HttpPost]
-    public void SavePostagem(PostagemDTO postagem)
+    public IActionResult SavePostagem([FromBody]PostagemDTO postagem)
     {
+        if(postagem == null) {
+        Console.WriteLine("Nula");
+
+        }
+
+        else {
+            Console.WriteLine("Não nula");
+            Console.WriteLine(postagem.Texto);
+            Console.WriteLine(postagem.DataPostagem);
+            Console.WriteLine(postagem.Imagem);
+        }
         // var postagemService = new PostagemService();
         // postagemService.Create(postagem);
+        return RedirectToAction("Postagens");
     }
 
     public IActionResult Foruns() => PartialView("_Foruns");
