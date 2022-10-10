@@ -8,6 +8,13 @@
     var astros = usuario?.Astros ?? _service.GetAll();
 }
 
+@foreach (var item in astros)
+{
+     <div class="item">
+        <img src="@item.Foto" alt="@item.Nome" data-tippy-content="@item.Nome">
+    </div>    
+}
+
 @* @for (int i = 0; i < 6; i++) // implementar no servidor
 {
     <div class="item">
