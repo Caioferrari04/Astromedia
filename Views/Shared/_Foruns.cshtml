@@ -10,8 +10,10 @@
 
 @foreach (var item in astros)
 {
-     <div class="item">
-        <img src="@item.Foto" alt="@item.Nome" data-tippy-content="@item.Nome">
+    <div class="item">
+        <a asp-action="Postagens" asp-route-id="@item.Id">
+            <img src="@item.Foto" alt="@item.Nome" data-tippy-content="@item.Nome">
+        </a>
     </div>    
 }
 

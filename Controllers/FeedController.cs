@@ -8,14 +8,20 @@ using Microsoft.AspNetCore.Identity;
 [AllowAnonymous]
 public class FeedController : Controller {
     private readonly AstroService _astroService;
+    private readonly PostagemService _postagemService;
     private readonly UserManager<Usuario> _userManager;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager)
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService)
     {
        _astroService = astroService;
+       _postagemService = postagemService;
        _userManager = userManager;
     }
 
-    public IActionResult Index() => View();
+    public IActionResult Index() 
+    {
+        var postagens = _postagemService.GetAll();
+        return View("Postagens", postagens);
+    }
 
     public IActionResult PerfilAstro(int id)
     {
@@ -24,7 +30,10 @@ public class FeedController : Controller {
         return View(astro);
     }
     
-    public IActionResult Postagens() => View();
+    public IActionResult Postagens(int id) {
+        var postagens = _postagemService.GetAllByAstroId(id);
+        return View(postagens);
+    }
 
     [HttpPost]
     public IActionResult SavePostagem([FromBody]PostagemDTO postagem)

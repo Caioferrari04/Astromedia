@@ -14,9 +14,8 @@ async function handleFormSubmit(event) {
 	data.DataPostagem = new Date(Date.now());
 	data.UsuarioDTO = null;
 
-
 	const file = document.getElementById('img-up').files[0];
-	file == null ? data.Imagem = null : data.Imagem = await saveImg(file);
+	(file == null) ? data.Imagem = null : data.Imagem = await saveImg(file); //ver como pegar link do json
 
 	console.log(data)
 	
