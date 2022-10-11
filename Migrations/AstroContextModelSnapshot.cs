@@ -40,7 +40,7 @@ namespace Astromedia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Astros", (string)null);
+                    b.ToTable("Astros");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
@@ -57,6 +57,9 @@ namespace Astromedia.Migrations
                     b.Property<DateTime>("DataPostagem")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Imagem")
+                        .HasColumnType("text");
+
                     b.Property<string>("Texto")
                         .HasColumnType("text");
 
@@ -69,7 +72,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Postagens", (string)null);
+                    b.ToTable("Postagens");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
@@ -154,7 +157,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuariosId");
 
-                    b.ToTable("AstroUsuario", (string)null);
+                    b.ToTable("AstroUsuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
