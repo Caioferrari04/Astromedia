@@ -1,3 +1,5 @@
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<Usuario> UserManager;
 @model List<Postagem>
 @{
     Layout = "_LayoutFeed";
@@ -8,6 +10,7 @@
 }
 
 <link rel="stylesheet" href="~/css/postagem.css">
+<link rel="stylesheet" href="~/lib/notiflix/dist/notiflix-3.2.5.min.css"/>
 
 
 <div id="post-holder" class="container is-full-screen">
@@ -15,8 +18,8 @@
     {
         <div id="post-input-box" class="is-vertical-align is-horizontal-align">
         <div class="post-input-content">
-            @using (Html.BeginForm(null, null, FormMethod.Post, new {@id = "postform"}))
-            {   
+            <form id="postform" method="post">
+                <div asp-validation-summary="All" class="text-error"></div>
                 <textarea class="is-full-width" name="posttext" form="postform" cols="100%" rows="auto" placeholder="Escreva aqui" maxlength="280"></textarea>
                 <div id="post-img-preview"></div>
                 <div class="between-config">
@@ -28,9 +31,11 @@
                     </div>
                     <button type="submit" class="submit-post-btn button outline is-vertical-align is-right">Enviar</button>
                 </div>
-            }
+                <input type="hidden" value="@id" name="AstroId">
+            </form>
         </div>
     </div>
+
     }
 
     @foreach (var postagem in Model)
@@ -125,6 +130,7 @@
 
 @section scripts 
 {
+    <script src="~/lib/notiflix/dist/notiflix-3.2.5.min.js"></script>
     <script src="~/js/textarea-post.js"></script>
     <script src="~/js/post-img-insert.js"></script>
     <script src="~/js/submit-post.js"></script>
