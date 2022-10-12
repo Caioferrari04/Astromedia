@@ -80,6 +80,7 @@ textarea:focus {
     width: auto;
     height: auto;
     padding: 20px 5px 5px 5px;
+    transition: .7s cubic-bezier(0.72, 0, 0.11, 0.99);
 }
 
 .comment-input {
@@ -119,6 +120,12 @@ textarea:focus {
     height: 0;
     padding: 11px;
     margin: 10px 2px 3px 10px;
+}
+
+.submit-comment-btn {
+    border-radius: 8px;
+    padding: 9px;
+    font-size: .8rem;
 }
 
 /* * Área de Postagens Enviadas - Conteúdo */
