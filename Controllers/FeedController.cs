@@ -36,22 +36,18 @@ public class FeedController : Controller {
     }
 
     [HttpPost]
-    public IActionResult SavePostagem([FromBody]PostagemDTO postagem)
+    public async Task<JsonResult> SavePostagem([FromBody]PostagemDTO postagem)
     {
-        if(postagem == null) {
-        Console.WriteLine("Nula");
+        var usuario = await _userManager.GetUserAsync(User);
+        var validator = new PostagemValidator();
+        var validationResult = validator.Validate(postagem);
 
+        if(validationResult.IsValid)
+        {
+            postagem.UsuarioId = usuario.Id;
+            return Json(new {success = true, errors = validationResult.Errors});
         }
-
-        else {
-            Console.WriteLine("Não nula");
-            Console.WriteLine(postagem.Texto);
-            Console.WriteLine(postagem.DataPostagem);
-            Console.WriteLine(postagem.Imagem);
-        }
-        // var postagemService = new PostagemService();
-        // postagemService.Create(postagem);
-        return RedirectToAction("Postagens");
+        return Json(new {success = false, errors = validationResult.Errors});
     }
 
     public IActionResult Foruns() => PartialView("_Foruns");
