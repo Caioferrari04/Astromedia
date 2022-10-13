@@ -45,7 +45,14 @@ public class FeedController : Controller {
         if(validationResult.IsValid)
         {
             postagem.UsuarioId = usuario.Id;
-            return Json(new {success = true, errors = validationResult.Errors});
+            postagem.DataPostagem = DateTime.Now;
+            //service
+            var data = new {
+                    dataPostagem = postagem.DataPostagem.ToString("dd/MM/yyyy HH:mm"),
+                    imagem = postagem.Imagem,
+                    texto = postagem.Texto
+                };
+            return Json(new {success = true, data = data});
         }
         return Json(new {success = false, errors = validationResult.Errors});
     }
