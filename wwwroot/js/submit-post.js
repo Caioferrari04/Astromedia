@@ -20,7 +20,6 @@ function handleFormSubmit(event) {
 	const file = document.getElementById('img-up').files[0];
 	(file == null) ? data.Imagem = null : data.Imagem = saveImg(file);
 
-
 	if(data.Texto.split(" ").join("") != "" || data.Imagem != null) {
 		(data.Texto.split(" ").join("") == "") ? data.Texto = null : data.Texto = data.Texto;
 		fetch(
@@ -77,6 +76,7 @@ function handleError(errorsMessage) {
 }
 
 function createPost(data) {
+	console.log(data)
 	let div1 = document.createElement("div");
 	let div2 = document.createElement("div");
 	let div3 = document.createElement("div");
@@ -104,6 +104,14 @@ function createPost(data) {
 	div5.appendChild(p2);
 	div6.appendChild(image2);
 	div2.appendChild(p3);
+	if(data.imagem != null) {
+		let div7 = document.createElement("div");
+		let image3 = document.createElement("img");
+		div2.appendChild(div7);
+		div7.appendChild(image3);
+		div7.setAttribute("class", "post-img");
+		image3.setAttribute("src", data.imagem);
+	}
 	div2.appendChild(div8);
 	div8.appendChild(div9);
 	div9.appendChild(image4);
@@ -134,14 +142,7 @@ function createPost(data) {
 	image5.setAttribute("class", "post-footer-icon");
 	image5.setAttribute("src", "https://icongr.am/clarity/heart.svg?size=128&color=ffffff");
 
-	if(data.imagem != null) {
-		let div7 = document.createElement("div");
-		let image3 = document.createElement("img");
-		div2.appendChild(div7);
-		div7.appendChild(image3);
-		div7.setAttribute("class", "post-img");
-		image3.setAttribute("src", data.imagem);
-	}
+	
 
 	const posts = document.querySelectorAll(".post-box");
 	const postsContainer = document.querySelector("#posts");
