@@ -36,7 +36,7 @@ public class PostagemService
             .Include(a => a.Astro)
             .Include(u => u.Usuario)
             .Where(p => p.Astro.Id == id)
-            .OrderBy(p => p.DataPostagem)
+            .OrderByDescending(p => p.DataPostagem)
             .ToList();
 
         postagens.ForEach(p => p.DataPostagem = p.DataPostagem.ToLocalTime());
@@ -48,6 +48,7 @@ public class PostagemService
         var postagens = _astroContext.Postagens
             .Include(a => a.Astro)
             .Include(u => u.Usuario)
+            .OrderByDescending(p => p.DataPostagem)
             .ToList();
 
         postagens.ForEach(p => p.DataPostagem = p.DataPostagem.ToLocalTime());

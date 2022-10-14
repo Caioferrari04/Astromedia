@@ -147,7 +147,7 @@ function createPost(data) {
 	const posts = document.querySelectorAll(".post-box");
 	const postsContainer = document.querySelector("#posts");
 
-	posts.length == 0 ? postsContainer.appendChild(div1) : posts[posts.length-1].parentNode.insertBefore(div1, posts[posts.length-1].nextSibling);
+	posts.length == 0 ? postsContainer.appendChild(div1) : posts[0].parentNode.insertBefore(div1, posts[0]);
 
 	form.elements[0].value = "";
 }
