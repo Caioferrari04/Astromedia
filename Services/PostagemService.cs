@@ -31,18 +31,28 @@ public class PostagemService
     }
 
     public List<Postagem> GetAllByAstroId(int id) {
-        return _astroContext.Postagens
+        
+        var postagens = _astroContext.Postagens
             .Include(a => a.Astro)
             .Include(u => u.Usuario)
             .Where(p => p.Astro.Id == id)
+            .OrderBy(p => p.DataPostagem)
             .ToList();
+
+        postagens.ForEach(p => p.DataPostagem = p.DataPostagem.ToLocalTime());
+
+        return postagens;
     }
 
     public List<Postagem> GetAll() {
-        return _astroContext.Postagens
+        var postagens = _astroContext.Postagens
             .Include(a => a.Astro)
             .Include(u => u.Usuario)
             .ToList();
+
+        postagens.ForEach(p => p.DataPostagem = p.DataPostagem.ToLocalTime());
+
+        return postagens;
     }
     
 }

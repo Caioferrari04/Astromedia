@@ -31,14 +31,15 @@ function handleFormSubmit(event) {
 				headers: {"Content-type": "application/json; charset=UTF-8"}
 			}
 		).then(response => {
+			
 			return response.json();
 		}).then(json => {
 			if(!json.success) {
 				let messages = []
 				for (let i = 0; i<json.errors.length; i++) {
-					messages.push(json.errors[i].errorMessage)
+					messages.push(json.errors[i])
 				}
-				console.log(messages)
+				
 				handleError(messages)
 			}
 			else {
@@ -76,8 +77,6 @@ function handleError(errorsMessage) {
 }
 
 function createPost(data) {
-	console.log(data)
-	
 	let div1 = document.createElement("div");
 	let div2 = document.createElement("div");
 	let div3 = document.createElement("div");

@@ -41,20 +41,30 @@ public class FeedController : Controller {
         var usuario = await _userManager.GetUserAsync(User);
         var validator = new PostagemValidator();
         var validationResult = validator.Validate(postagem);
+        var errorMessages = new List<string>();
 
         if(validationResult.IsValid)
         {
             postagem.UsuarioId = usuario.Id;
-            postagem.DataPostagem = DateTime.Now;
-            //service
-            var data = new {
-                    dataPostagem = postagem.DataPostagem.ToString("dd/MM/yyyy HH:mm"),
+            postagem.DataPostagem = DateTime.UtcNow;
+            try 
+            {
+                _postagemService.Create(postagem);
+                var data = new {
+                    dataPostagem = postagem.DataPostagem.ToLocalTime().ToString("dd/MM/yyyy HH:mm"),
                     imagem = postagem.Imagem,
                     texto = postagem.Texto
                 };
-            return Json(new {success = true, data = data});
+                return Json(new {success = true, data = data});
+            }
+            catch(Exception ex)
+            {
+                errorMessages.Add(ex.Message);
+                return Json(new {success = false, errors = errorMessages});
+            }
         }
-        return Json(new {success = false, errors = validationResult.Errors});
+        validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
+        return Json(new {success = false, errors = errorMessages});
     }
 
     public IActionResult Foruns() => PartialView("_Foruns");
