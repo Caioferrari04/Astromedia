@@ -9,7 +9,7 @@ Array.from(cmbtns).forEach(cmbtn => {
         const allholder = e.target.closest(".post-box");
         
         let clone = cm.cloneNode(true);
-        // clone.removeAttribute("id"); dar um jeito de esconder a div
+        // clone.removeAttribute("id"); Correção do Hide
 
         if(!(allholder.nextSibling.className == "comment-input-box")) {
             allholder.after(clone);

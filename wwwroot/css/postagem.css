@@ -7,6 +7,7 @@ textarea {
     border: none;
     resize: none;
     outline: none;
+    white-space: pre-wrap;
     overflow: hidden;
     padding: 7px 10px;
     font-size: 1.2rem;
@@ -90,7 +91,13 @@ textarea:focus {
 
 .comment-input {
     background-color: var(--color-primary) !important;
-    font-size: 1rem;
+    /* height: auto !important; Corrreção do Hide*/
+    font-size: .9rem;
+}
+
+.comment-modal {
+    text-align: center;
+    font-size: .75rem;
 }
 
 /* ** Imagens | post-input-box */
@@ -192,8 +199,8 @@ textarea:focus {
     position: relative;
     top: -5px;
     cursor: pointer;
-    width: 21px;
-    min-width: 21px;
+    width: 19px;
+    min-width: 19px;
     transition: all .3s;
 }
 

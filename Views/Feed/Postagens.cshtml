@@ -5,6 +5,8 @@
 
 <link rel="stylesheet" href="~/css/postagem.css">
 
+<div id="rendercomment" data-url='@Url.Action("Comentarios", "Feed")'></div>
+
 <div id="post-holder" class="container is-full-screen">
     <div id="post-input-box" class="is-vertical-align is-horizontal-align">
         <div class="post-input-content">
@@ -69,6 +71,7 @@
                 <div class="usr-footer-comment is-vertical-align is-left">
                     <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
                 </div>
+                <a class="text-light comment-modal" href="#">Ver Comentários</a>
                 <div class="usr-footer-likes is-vertical-align is-right">
                     <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
                 </div>
@@ -163,7 +166,9 @@
 
 @section scripts 
 {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
     <script src="~/js/textarea-post.js"></script>
+    <script src="~/js/commentmodal.js"></script>
     <script src="~/js/post-img-insert.js"></script>
     <script src="~/js/comment-behav.js"></script>
 }
