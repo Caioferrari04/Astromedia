@@ -1,5 +1,6 @@
 const cmbtn = document.querySelector(".comment-btn");
 const cmbtns = document.querySelectorAll(".comment-btn");
+
 let tgg = true;
 let aux;
 
@@ -9,7 +10,7 @@ Array.from(cmbtns).forEach(cmbtn => {
         const allholder = e.target.closest(".post-box");
         
         let clone = cm.cloneNode(true);
-        // clone.removeAttribute("id"); Correção do Hide
+        clone.removeAttribute("id");
 
         if(!(allholder.nextSibling.className == "comment-input-box")) {
             allholder.after(clone);
@@ -21,16 +22,27 @@ Array.from(cmbtns).forEach(cmbtn => {
             verifyMargin();
         }
 
+        // Arrumar comportamento do resize dinâmico
+        for (let i = 0; i < tx.length; i++) {
+            tx[i].setAttribute("style", "height: 54px;");
+            tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+        }
+
         function verifyMargin() {
-            if (aux.style.marginTop === "-124px") {
-                console.log("124");
+            if (aux.style.marginTop === "-122px") {
+                console.log("122");
                 aux.style.marginTop = "-26px";
             } else if (aux.style.marginTop === "-26px" && tgg) {
                 console.log("tgg");
                 aux.style.marginTop = "-26px";
             } else if (aux.style.marginTop === "-26px" && !tgg) {
                 console.log("!!tgg");
-                aux.style.marginTop = "-124px";
+                aux.style.marginTop = "-122px";
             }
         }
     });

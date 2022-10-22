@@ -82,7 +82,7 @@ textarea:focus {
     z-index: 0;
     border-radius: 8px;
     margin-bottom: 10px;
-    margin-top: -124px;
+    margin-top: -122px;
     width: auto;
     height: auto;
     padding: 20px 5px 5px 5px;
@@ -91,7 +91,6 @@ textarea:focus {
 
 .comment-input {
     background-color: var(--color-primary) !important;
-    /* height: auto !important; Corrreção do Hide*/
     font-size: .9rem;
 }
 
