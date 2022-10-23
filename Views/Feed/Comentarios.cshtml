@@ -1,47 +1,110 @@
 @model UsuarioDTO
 
-<div id="modalblock" class="modal container is-vertical-align is-horizontal-align">
-    <form class="modal-content animatein text-light col-5" asp-action="Login" asp-controller="SignIn">
-        <div class="container logo-box row is-vertical-align is-horizontal-align">
-            <img class="img-logo col" src="../img/logo-small.png" alt="minorlogo" class="minlogo">
-            <h2 class="col logo-text">Entrar</h2>
-            <img onclick="closeModal()" class="close-btn col" src="../img/close-icon.svg" alt="Close Icon">
-        </div>
+<div id="modalblock" class="commentmodal container is-vertical-align is-horizontal-align">
+    <div class="commentmodal-content commentgrid animatein text-light col-7">
+        <div class="post-content commentmodal-post">
+            <div class="between-config">
+                <div class="post-header-info is-left">
 
-        <div class="container">
-            <div asp-validation-summary="ModelOnly" class="text-error"></div>
-            
-            <div class="row">
-                <label class="col" asp-for="Nome">
-                    @Html.DisplayNameFor(m => m.Nome)
-                    <input class="inputbox inputbox-name" asp-for="Nome" required>
-                </label>
-            </div>
-
-            <small><span asp-validation-for="Senha" class="text-error"></span></small>
-            <div class="row">
-                <label class="col" asp-for="Senha">
-                    <div class="password-box">
-                        @Html.DisplayNameFor(m => m.Senha)
-                        <a asp-action="" asp-controller="">Esqueci minha senha</a>
+                    @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
+                    @* <div class="info-col">
+                        <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
+                        <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
+                    </div> *@
+                    <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
+                    <div class="info-col">
+                        <p class="usr-post-name">Pedrinho</p>
+                        <p class="usr-post-date">dd/MM/yyyy</p>
                     </div>
-                    <div class="row inputbox-password">
-                        <input id="inputbox-pass1" class="col-10 inputbox" asp-for="Senha" required>
-                        <div onclick="showPassword()" class="col btn-show-password is-vertical-align is-horizontal-align">
-                            <img id="show-password1" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
-                        </div>
-                    </div>
-                </label>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <label asp-for="LembrarMe" class="is-vertical-align">
-                        <input asp-for="LembrarMe" class="dnfpassword">Lembrar minha senha
-                    </label>
-                    <button type="submit" class="col submit-btn button outline is-vertical-align is-horizontal-align">Entrar</button>
+                </div>
+                <div class="report-btn is-vertical-align is-right">
+                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                </div>
+            </div>
+            <p class="commentmodal-text">
+                @* @Model.Texto *@
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
+            </p>
+            <div class="post-img"><img src="" /></div>
+            <div class="between-config commentmodal-bottom">
+                <div class="usr-footer-comment is-vertical-align is-left">
+                    <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                </div>
+                <div class="usr-footer-likes is-vertical-align is-right">
+                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
                 </div>
             </div>
         </div>
-    </form>
+        <div class="commentmodal-holder">
+            <div class="post-content commentmodal-comment">
+                <div class="between-config">
+                    <div class="post-header-info is-left">
+
+                        @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
+                        @* <div class="info-col">
+                            <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
+                            <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
+                        </div> *@
+                        <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
+                        <div class="info-col">
+                            <p class="usr-post-name">Pedrinho</p>
+                            <p class="usr-post-date">dd/MM/yyyy</p>
+                        </div>
+
+                    </div>
+                    <div class="report-btn is-vertical-align is-right">
+                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                    </div>
+                </div>
+                <p class="commentmodal-text">
+                    @* @Model.Texto *@
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
+                </p>
+                <div class="post-img"><img src="" /></div>
+                <div class="between-config commentmodal-bottom">
+                    <div class="usr-footer-comment is-vertical-align is-left">
+                        <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                    </div>
+                    <div class="usr-footer-likes is-vertical-align is-right">
+                        <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                    </div>
+                </div>
+            </div>
+            <div class="post-content commentmodal-comment">
+                <div class="between-config">
+                    <div class="post-header-info is-left">
+
+                        @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
+                        @* <div class="info-col">
+                            <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
+                            <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
+                        </div> *@
+                        <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
+                        <div class="info-col">
+                            <p class="usr-post-name">Pedrinho</p>
+                            <p class="usr-post-date">dd/MM/yyyy</p>
+                        </div>
+
+                    </div>
+                    <div class="report-btn is-vertical-align is-right">
+                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                    </div>
+                </div>
+                <p class="commentmodal-text">
+                    @* @Model.Texto *@
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
+                </p>
+                <div class="post-img"><img src="" /></div>
+                <div class="between-config commentmodal-bottom">
+                    <div class="usr-footer-comment is-vertical-align is-left">
+                        <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                    </div>
+                    <div class="usr-footer-likes is-vertical-align is-right">
+                        <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

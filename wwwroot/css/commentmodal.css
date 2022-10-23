@@ -1,0 +1,90 @@
+/* Conteúdo Modal - Corpo do Login */
+
+.commentmodal {
+    position: fixed; 
+    z-index: 2; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;  
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.commentmodal-content {
+    background-color: var(--bg-secondary-color);
+    border-radius: 14px;
+    font-weight: lighter;
+    margin: auto;
+    height: 50%;
+    transform: scale(1.4);
+}
+
+.commentgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.commentmodal-post {
+    border-right: 1px solid var(--color-primary);
+    padding: 10px;
+}
+
+.commentmodal-comment {
+    padding: 10px;
+}
+
+.commentmodal-text {
+    font-size: .6rem;
+    margin: 5px 10px;
+    color: var(--color-lightGrey);
+}
+
+.commentmodal-bottom {
+    margin-bottom: 1px;
+}
+
+.commentmodal-holder {
+    overflow-y: auto;
+}
+
+/* Animação de entrada - Modal do Login */
+
+.animatein {
+    animation: zoomin ease-in-out 0.7s
+}
+
+@keyframes zoomin {
+    from {transform: scale(0); opacity: 0;}
+    to {transform: scale(inherit); opacity: 1;}
+}
+
+/* Media Queries - Modal */
+
+@media screen and (min-width: 601px) and (max-width: 1154px) {
+    .commentmodal-content {
+        font-size: 1.2rem;
+        max-width: 100%;
+    }
+    .close-btn {
+        max-width: 40px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .commentmodal-content {
+        font-size: 1.4rem;
+    }
+    .close-btn {
+        max-width: 47px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .modal-content {
+        font-size: 1.1rem;
+    }
+    .close-btn {
+        max-width: 12vw;
+    }
+}

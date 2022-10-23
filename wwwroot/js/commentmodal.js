@@ -1,14 +1,14 @@
 const renderComment = document.querySelector('#rendercomment');
 const commentmodalBtn = document.querySelector('.comment-modal');
 
-$(commentmodalBtn).click(function () {
+$(commentmodalBtn).click(() => {
     var url = $(renderComment).data('url');
 
-    $.get(url, function (data) {
+    $.get(url, data => {
         $(renderComment).html(data);
         $(renderComment).show();
 
-        $(window).click(function (event) {
+        $(window).click(event => {
             if (event.target == modalblock) {
                 $(renderComment).hide();
             }
