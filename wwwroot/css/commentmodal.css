@@ -16,18 +16,68 @@
     border-radius: 14px;
     font-weight: lighter;
     margin: auto;
-    height: 50%;
+    height: 55%;
     transform: scale(1.4);
+    border: 2px solid var(--bg-secondary-color);
 }
 
 .commentgrid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
 }
 
 .commentmodal-post {
-    border-right: 1px solid var(--color-primary);
+    border-right: 1px solid #58296e;
     padding: 10px;
+    overflow-y: auto;
+}
+
+.commentmodal-post::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.commentmodal-post::-webkit-scrollbar-track {
+    border-radius: 2px;
+    background: rgba(0,0,0,0.1);
+    background-clip: content-box; 
+}
+.commentmodal-post::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: rgba(0,0,0,0.2);
+  }
+.commentmodal-post::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0,0.4);
+}
+.commentmodal-post::-webkit-scrollbar-thumb:active {
+    background: rgba(0,0,0,.9);
+}
+
+.commentmodal-holder::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.commentmodal-holder::-webkit-scrollbar-track {
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    background: rgba(0,0,0,0.1);
+    background-clip: content-box; 
+}
+.commentmodal-holder::-webkit-scrollbar-thumb {
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    background: rgba(0,0,0,0.2);
+  }
+.commentmodal-holder::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0,0.4);
+}
+.commentmodal-holder::-webkit-scrollbar-thumb:active {
+    background: rgba(0,0,0,.9);
+}
+
+.commentmodal-img {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 25px;
 }
 
 .commentmodal-comment {
@@ -40,12 +90,51 @@
     color: var(--color-lightGrey);
 }
 
+.commentmodal-selftext {
+    font-size: .7rem;
+    margin: 5px 10px;
+    color: var(--color-lightGrey);
+}
+
 .commentmodal-bottom {
     margin-bottom: 1px;
 }
 
+.commentmodal-selfbottom {
+    margin-bottom: 1px;
+    position: fixed;
+    bottom: -2px;
+    left: 4px;
+    right: 41.5%;
+    background-color: var(--bg-secondary-color);
+    width: 57%;
+    padding-bottom: 6px;
+    padding-top: 4px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.commentmodal-usrpic {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.commentmodal-reportbtn {
+    width: 16px;
+}
+
+.commentmodal-usrname {
+    font-size: .8rem;
+}
+
+.commentmodal-usrdate {
+    font-size: .47rem;
+}
+
 .commentmodal-holder {
     overflow-y: auto;
+    font-size: small;
 }
 
 /* Animação de entrada - Modal do Login */
