@@ -100,6 +100,10 @@
     margin-bottom: 1px;
 }
 
+.commentmodal-usrlikes {
+    right: 10px;
+}
+
 .commentmodal-selfbottom {
     margin-bottom: 1px;
     position: fixed;
@@ -107,7 +111,7 @@
     left: 4px;
     right: 41.5%;
     background-color: var(--bg-secondary-color);
-    width: 57%;
+    width: 57.9%;
     padding-bottom: 6px;
     padding-top: 4px;
     border-bottom-left-radius: 5px;
@@ -130,6 +134,10 @@
 
 .commentmodal-usrdate {
     font-size: .47rem;
+}
+
+.block-scroll {
+    overflow: hidden;
 }
 
 .commentmodal-holder {

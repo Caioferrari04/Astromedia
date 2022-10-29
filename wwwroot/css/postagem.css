@@ -17,6 +17,10 @@ textarea:focus {
     box-shadow: none;
 }
 
+#rendercomment {
+    position: absolute;
+}
+
 /* Área de Postagens - Geral */
 
 .between-config {

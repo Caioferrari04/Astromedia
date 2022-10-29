@@ -1,8 +1,11 @@
 const renderComment = document.querySelector('#rendercomment');
 const commentmodalBtn = document.querySelector('.comment-modal');
+const bodyScroll = document.getElementsByTagName('body')[0];
 
 $(commentmodalBtn).click(() => {
     var url = $(renderComment).data('url');
+
+    bodyScroll.classList.add('block-scroll');
 
     $.get(url, data => {
         $(renderComment).html(data);
@@ -10,6 +13,7 @@ $(commentmodalBtn).click(() => {
 
         $(window).click(event => {
             if (event.target == modalblock) {
+                bodyScroll.classList.remove('block-scroll');
                 $(renderComment).hide();
             }
         });
@@ -17,5 +21,6 @@ $(commentmodalBtn).click(() => {
 });
 
 function closeModal() {
+    bodyScroll.classList.remove('block-scroll');
     $(renderComment).hide(); 
 };
