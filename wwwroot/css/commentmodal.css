@@ -143,17 +143,23 @@
 .commentmodal-holder {
     overflow-y: auto;
     font-size: small;
+    background: var(--bg-color);
 }
 
 /* Animação de entrada - Modal do Login */
 
 .animatein {
-    animation: zoomin ease-in-out 0.7s
+    animation: zoomin cubic-bezier(0.72, 0, 0.11, 0.99) 0.7s
 }
 
 @keyframes zoomin {
     from {transform: scale(0); opacity: 0;}
     to {transform: scale(inherit); opacity: 1;}
+}
+
+@keyframes slideUp {
+    from {transform: translateY(100%) scale(1.08); opacity: 0;}
+    to {transform: translateY(0) scale(1.08); opacity: 1;}
 }
 
 /* Media Queries - Modal */
@@ -169,11 +175,48 @@
 }
 
 @media screen and (max-width: 600px) {
+    .commentmodal-selfbottom {
+        margin-bottom: 1px;
+        position: relative;
+        bottom: 8px;
+        width: 100%;
+        padding-bottom: 0;
+        padding-top: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .commentmodal-reportbtn {
+        width: 19px;
+    }
+    .commentgrid {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: none;
+    }
     .commentmodal-content {
         font-size: 1.4rem;
+        transform: scale(1.08);
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        margin-top: 5cm;
+    }
+    .commentmodal-post {
+        overflow: unset;
+        border: none;
+    }
+    .commentmodal-holder {
+        overflow: unset;
+        border-radius: 8px;
+    }
+    .commentmodal-text {
+        font-size: .7rem;
     }
     .close-btn {
         max-width: 47px;
+    }
+    .animatein {
+        animation: slideUp cubic-bezier(0.7,-0.08, 0.24, 0.92) 0.7s;
     }
 }
 

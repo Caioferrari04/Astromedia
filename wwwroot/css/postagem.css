@@ -200,7 +200,7 @@ textarea:focus {
 
 .report-btn {
     position: relative;
-    top: -5px;
+    top: -3px;
     cursor: pointer;
     width: 19px;
     transition: all .3s;
