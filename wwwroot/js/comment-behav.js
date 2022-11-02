@@ -35,13 +35,10 @@ Array.from(cmbtns).forEach(cmbtn => {
 
         function verifyMargin() {
             if (aux.style.marginTop === "-122px") {
-                console.log("122");
                 aux.style.marginTop = "-26px";
             } else if (aux.style.marginTop === "-26px" && tgg) {
-                console.log("tgg");
                 aux.style.marginTop = "-26px";
             } else if (aux.style.marginTop === "-26px" && !tgg) {
-                console.log("!!tgg");
                 aux.style.marginTop = "-122px";
             }
         }

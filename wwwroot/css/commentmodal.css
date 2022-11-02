@@ -144,6 +144,7 @@
     overflow-y: auto;
     font-size: small;
     background: var(--bg-color);
+    border-radius: 2px 14px 14px 2px;
 }
 
 /* Animação de entrada - Modal do Login */
@@ -165,16 +166,59 @@
 /* Media Queries - Modal */
 
 @media screen and (min-width: 601px) and (max-width: 1154px) {
+    .commentmodal {
+        overflow-x: hidden;
+    }
+    .commentmodal-selfbottom {
+        margin-bottom: 1px;
+        position: relative;
+        bottom: 8px;
+        width: 100%;
+        padding-bottom: 0;
+        padding-top: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .commentmodal-reportbtn {
+        width: 19px;
+    }
+    .commentgrid {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: none;
+    }
     .commentmodal-content {
-        font-size: 1.2rem;
-        max-width: 100%;
+        font-size: 1.4rem;
+        transform: scale(1.8);
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        margin-top: 15cm;
+    }
+    .commentmodal-post {
+        overflow: unset;
+        border: none;
+    }
+    .commentmodal-holder {
+        overflow: unset;
+        border-radius: 8px;
+    }
+    .commentmodal-text {
+        font-size: .7rem;
     }
     .close-btn {
-        max-width: 40px;
+        max-width: 47px;
+    }
+    .animatein {
+        animation: slideUp cubic-bezier(0.7,-0.08, 0.24, 0.92) 0.7s;
     }
 }
 
-@media screen and (max-width: 600px) {
+/* Selfnote - Verificar height do Pixel 5 */
+@media screen and (max-width: 600px) { 
+    .commentmodal {
+        overflow-x: hidden;
+    }
     .commentmodal-selfbottom {
         margin-bottom: 1px;
         position: relative;
@@ -221,10 +265,50 @@
 }
 
 @media screen and (max-width: 320px) {
-    .modal-content {
-        font-size: 1.1rem;
+    .commentmodal {
+        overflow-x: hidden;
+    }
+    .commentmodal-selfbottom {
+        margin-bottom: 1px;
+        position: relative;
+        bottom: 8px;
+        width: 100%;
+        padding-bottom: 0;
+        padding-top: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .commentmodal-reportbtn {
+        width: 19px;
+    }
+    .commentgrid {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: none;
+    }
+    .commentmodal-content {
+        font-size: 1.4rem;
+        transform: scale(1.08);
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        margin-top: 5cm;
+    }
+    .commentmodal-post {
+        overflow: unset;
+        border: none;
+    }
+    .commentmodal-holder {
+        overflow: unset;
+        border-radius: 8px;
+    }
+    .commentmodal-text {
+        font-size: .7rem;
     }
     .close-btn {
-        max-width: 12vw;
+        max-width: 47px;
+    }
+    .animatein {
+        animation: slideUp cubic-bezier(0.7,-0.08, 0.24, 0.92) 0.7s;
     }
 }
