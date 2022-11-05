@@ -35,6 +35,12 @@
                     </a>
                 </li>
                 <li>
+                    <a class="text-light" asp-action="Postagens" asp-controller="Feed">
+                        <img src="https://icongr.am/material/chat.svg?size=30&color=ffffff"/>
+                        Fórum
+                    </a>
+                </li>
+                <li>
                     <a class="text-light" asp-action="Logout" asp-controller="SignIn">
                         <img src="https://icongr.am/entypo/log-out.svg?size=30&color=ffffff"/>
                         Sair
@@ -48,16 +54,16 @@ else
 {
     @if (rota is "Index" && rotaController is "SignIn")
     {
-        <a class="text-light" id="modalbtn" href="#contact">Login</a>
-        <a class="text-light" asp-action="Index" asp-controller="SignIn">Sign-in</a>
+        <a class="text-light" id="modalbtn" href="#contact">Entrar</a>
+        @* <a class="text-light" asp-action="Index" asp-controller="SignIn">Criar conta</a> *@
     }
-    else if (rota is "LogIn")
+    else if (rota is "LogInView")
     {
-        <a class="text-light" asp-action="Index" asp-controller="SignIn">Sign-in</a>
+        <a class="text-light" asp-action="Index" asp-controller="SignIn">Criar conta</a>
     } 
     else
     {
-        <a class="text-light" id="modalbtn" href="#contact">Login</a>
-        <a class="text-light" asp-action="Index" asp-controller="SignIn">Sign-in</a>
+        <a class="text-light" id="modalbtn" href="#contact">Entrar</a>
+        <a class="text-light" asp-action="Index" asp-controller="SignIn">Criar conta</a>
     }
 }

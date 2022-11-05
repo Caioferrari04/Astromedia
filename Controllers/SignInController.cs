@@ -64,6 +64,12 @@ public class SignInController : Controller
         return View(); /*Atualizar pagina*/
     }
 
+    public async Task<IActionResult> LogInView() 
+    {
+        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+        return View();
+    }
+
     public async Task<IActionResult> LogIn()
     {
         await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme); /*Desloga o usuário caso esteja logado
@@ -91,7 +97,7 @@ public class SignInController : Controller
             {
                 ModelState.AddModelError(string.Empty, @"Tentativa de login inválida, 
                 verifique se digitou seus dados corretamente");
-                return View("LogInView");
+                return RedirectToAction(nameof(LogInView));
             }
 
             return RedirectToAction("Postagens", "Feed"); /*Redirecionar para o feed :)*/
@@ -99,7 +105,7 @@ public class SignInController : Controller
         catch
         {
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
-            return View("LogInView");
+            return RedirectToAction(nameof(LogInView));
         }
     }
 

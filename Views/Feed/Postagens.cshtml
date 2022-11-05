@@ -64,9 +64,9 @@
 
                             <img class="usr-post-pic" src="@postagem.Usuario.FotoPerfil" /> 
                             <div class="info-col">
-                                <p class="usr-post-name">@postagem.Usuario.UserName</p>
+                                <p class="usr-post-name">@postagem.Usuario.UserName @(id is null ? $"em {postagem.Astro.Nome}" : "")</p>
                                 <p class="usr-post-date">@postagem.DataPostagem.ToString("dd/MM/yyyy")</p>
-                            </div> 
+                            </div>
                         </div>
                         <div class="report-btn is-vertical-align is-right">
                             <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />

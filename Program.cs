@@ -1,9 +1,10 @@
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using Astromedia.Models;
 using Astromedia.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ if (builder.Environment.IsProduction())
 
     connectionString = $"User ID={PGUSER};Password={PGPASSWORD};Host={PGHOST};Port={PGPORT};Database={PGDATABASE};";
 }
-else 
+else
 {
     connectionString = builder.Configuration.GetConnectionString("LOCALHOST");
 }
@@ -33,7 +34,8 @@ else
 builder.Services.AddDbContext<AstroContext>(options =>
     options.UseNpgsql(connectionString));
 
-Action<IdentityOptions> identityOptions = m => {
+Action<IdentityOptions> identityOptions = m =>
+{
     m.User.RequireUniqueEmail = true;
 };
 
@@ -43,6 +45,16 @@ builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
 
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+    options.LoginPath = "/SignIn/LogInView";
+    options.AccessDeniedPath = "/SignIn/LogInView";
+    options.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 
@@ -68,7 +80,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
-        endpoints.MapRazorPages();
+        // endpoints.MapRazorPages();
     });
 
 app.Run();
