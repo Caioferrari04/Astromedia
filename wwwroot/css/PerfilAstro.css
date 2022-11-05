@@ -93,7 +93,6 @@
     font-size: 19px;
     margin-top: -5px;
     z-index: 2;
-    text-align: justify;
 }
 
 .tab-content-active {
@@ -120,7 +119,6 @@
         font-size: 17px !important;
     }
 
-    .sidebar {display: none !important;}
     .container-perfil {
         width: 100%;
     }
@@ -133,7 +131,7 @@
     }
 
     .tabs button{
-        font-size: 12px;
+        font-size: 1rem;
         height: 30px;
     }
 
@@ -148,25 +146,27 @@
     }
 
     .astro-title {
-        font-size: 30px;
+        font-size: 2rem;
+        white-space: nowrap;
     }
 
     .picture-container {
         height: 110px;
-        width: 140px;
-        margin-top: -110px;
+        width: 100%;
+        margin-top: -90px;
         margin-left: -110px;
         margin-right: 9px;
     }
 
     .join-btn {
-        font-size: 20px;
+        font-size: 1rem;
         padding: 10px 40px;
         margin-bottom: 30px;
+        margin-left: 0;
     }
 
     .tab-content{
-        font-size: 15px !important;
+        font-size: 1.3rem !important;
     }
 
 }
@@ -176,12 +176,8 @@
         margin: -70px 0 0 0;
     }
 
-    .astro-title {
-        font-size: 18px;
-    }
-
     .join-btn {
-        font-size: 13px;
+        font-size: 1.5rem;
         padding: 10px 30px;
     }
 
@@ -194,8 +190,10 @@
     }
 
     .tabs button{
-        font-size: 10px;
-        min-width: 75px !important;
+        font-size: 1rem;
+        min-width: 80px !important;
+        /* padding: .8rem; */
+        /* padding: 20px 0; */
     }
 
     #tab2{
@@ -212,7 +210,6 @@
     }
 
     .tab-content{
-        font-size: 10px !important;
         padding: 20px 15px;
     }
 }

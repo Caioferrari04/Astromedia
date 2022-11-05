@@ -190,7 +190,7 @@ textarea:focus {
 }
 
 .usr-post-date {
-    font-size: .6rem;
+    font-size: .9rem;
     color: var(--color-lightGrey);
     margin-bottom: 0;
 }
@@ -297,15 +297,15 @@ textarea:focus {
         min-width: 19px;
     }
     .post-text {
-        font-size: .8rem;
+        font-size: 1rem;
     }
     .usr-post-date {
-        font-size: .6rem;
+        font-size: .8rem;
         color: var(--color-lightGrey);
         margin-bottom: 0;
     }
     .usr-post-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 500;
         color: var(--color-lightGrey);
         margin-bottom: -5px;

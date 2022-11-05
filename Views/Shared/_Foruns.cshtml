@@ -4,9 +4,10 @@
 @inject AstroService _service;
 @{
     var usuario = await UserManager.GetUserAsync(User);
-
-    var astros = usuario?.Astros ?? _service.GetAll();
-    astros = astros.GetRange(0, 10);
+    usuario.Astros = await _service.GetAllByUser(usuario.Id);
+    var astros = usuario.Astros ?? await _service.GetAll();
+    var contagem = astros.Count > 10 ? 10 : astros.Count;
+    astros = astros.GetRange(0, contagem);
 }
 
 @foreach (var item in astros)
