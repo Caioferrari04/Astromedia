@@ -2,7 +2,7 @@
     background-color: #471c5cb3;
     height: 8vh;
     padding: 10px;
-    position: relative;
+    position: fixed;
     bottom: 0;
 }
 

@@ -7,7 +7,11 @@ public class UsuarioValidator : AbstractValidator<UsuarioDTO>
     public UsuarioValidator()
     {
         RuleFor(m => m.Nome)
-            .Length(5, 20)
+            .MinimumLength(4)
+            .WithMessage("Nome de usuario muito pequeno");
+
+        RuleFor(m => m.Nome)
+            .MaximumLength(15)
             .WithMessage("Nome de usuario muito grande");
 
         RuleFor(m => m.Nome)
