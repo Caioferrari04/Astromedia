@@ -42,7 +42,8 @@ function handleFormSubmit(event) {
 				handleError(messages)
 			}
 			else {
-				createPost(json.data)
+				// createPost(json.data)
+				window.location.reload();
 			}
 		});
 	}
@@ -76,78 +77,43 @@ function handleError(errorsMessage) {
 }
 
 function createPost(data) {
-	console.log(data)
-	let div1 = document.createElement("div");
-	let div2 = document.createElement("div");
-	let div3 = document.createElement("div");
-	let div4 = document.createElement("div");
-	let image1 = document.createElement("img");
-	let div5 = document.createElement("div");
-	let p1 = document.createElement("p");
-	let p2 = document.createElement("p");
-	let div6 = document.createElement("div");
-	let image2 = document.createElement("img");
-	let p3 = document.createElement("p");
-	let div8 = document.createElement("div");
-	let div9 = document.createElement("div");
-	let image4 = document.createElement("img");
-	let div10 = document.createElement("div");
-	let image5 = document.createElement("img");
+	const postagemNova = document.createElement('div');
+	postagemNova.classList.add('post-box', 'is-vertical-align', 'is-horizontal-align')
+	postagemNova.innerHTML = /* html */`
+	<div class="post-content">
+		<div class="between-config">
+			<div class="post-header-info is-left">
 
-	div1.appendChild(div2);
-	div2.appendChild(div3);
-	div3.appendChild(div4);
-	div3.appendChild(div6);
-	div4.appendChild(image1);
-	div4.appendChild(div5);
-	div5.appendChild(p1);
-	div5.appendChild(p2);
-	div6.appendChild(image2);
-	div2.appendChild(p3);
-	if(data.imagem != null) {
-		let div7 = document.createElement("div");
-		let image3 = document.createElement("img");
-		div2.appendChild(div7);
-		div7.appendChild(image3);
-		div7.setAttribute("class", "post-img");
-		image3.setAttribute("src", data.imagem);
-	}
-	div2.appendChild(div8);
-	div8.appendChild(div9);
-	div9.appendChild(image4);
-	div8.appendChild(div10);
-	div10.appendChild(image5);
+				<img class="usr-post-pic" src="${profilePicture}" /> 
+				<div class="info-col">
+					<p class="usr-post-name">${userName}</p>
+					<p class="usr-post-date">${data.dataPostagem}</p>
+				</div> 
+			</div>
+			<div class="report-btn is-vertical-align is-right">
+				<img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+			</div>
+		</div>
+		<p class="post-text">
+			${data.texto}
+		</p>
+		${data.imagem != null ? `<div class="post-img"><img src="${data.imagem}"/></div>` : ''}
+		<div class="between-config">
+			<div class="usr-footer-comment is-vertical-align is-left">
+				<img class="post-footer-icon comment-modal" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+				<a class="text-light comment-modal" href="javascript:void(0)">Ver Comentários</a>
+			</div>
+			<div class="usr-footer-likes is-vertical-align is-right">
+				<img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+				<small class="text-light likes">0</small>
+			</div>
+		</div>
+	</div>
+	`
 
-	div1.setAttribute("id", "usr-all-post");
-	div1.setAttribute("class", "post-box");
-	div2.setAttribute("class", "post-content");
-	div3.setAttribute("class", "between-config");
-	div4.setAttribute("class", "post-header-info is-left");
-	image1.setAttribute("src", profilePicture);
-	image1.setAttribute("class", "usr-post-pic");
-	div5.setAttribute("class", "info-col");
-	p1.setAttribute("class", "usr-post-name");
-	p2.setAttribute("class", "usr-post-date");
-	p1.innerText = userName;
-	p2.innerText = data.dataPostagem;
-	div6.setAttribute("class", "report-btn is-vertical-align is-right");
-	image2.setAttribute("src", "https://icongr.am/clarity/flag.svg?size=128&color=ffffff");
-	p3.setAttribute("class", "post-text");
-	p3.innerText = data.texto;
-	div8.setAttribute("class", "between-config");
-	div9.setAttribute("class", "usr-footer-comment is-vertical-align is-left");
-	image4.setAttribute("class", "post-footer-icon");
-	image4.setAttribute("src", "https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff");
-	div10.setAttribute("class", "usr-footer-likes is-vertical-align is-right");
-	image5.setAttribute("class", "post-footer-icon");
-	image5.setAttribute("src", "https://icongr.am/clarity/heart.svg?size=128&color=ffffff");
+	const postsContainer = document.getElementById("posts");
 
-	
-
-	const posts = document.querySelectorAll(".post-box");
-	const postsContainer = document.querySelector("#posts");
-
-	posts.length == 0 ? postsContainer.appendChild(div1) : posts[0].parentNode.insertBefore(div1, posts[0]);
+	document.querySelectorAll(".post-box").length == 0 ? postsContainer.appendChild(postagemNova) : postsContainer.prepend(postagemNova);
 
 	form.elements[0].value = "";
 }

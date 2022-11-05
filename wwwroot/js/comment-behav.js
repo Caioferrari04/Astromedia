@@ -40,6 +40,7 @@ Array.from(cmbtns).forEach(cmbtn => {
                 aux.style.marginTop = "-26px";
             } else if (aux.style.marginTop === "-26px" && !tgg) {
                 aux.style.marginTop = "-119px";
+                aux.style.display = 'none';
             }
         }
     });

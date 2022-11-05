@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="~/css/Grid.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/recomendacoes.css" asp-append-version="true" />
 }
+@await RenderSectionAsync("stylesheet", required: false)
 
 <div class="grid">
     <div class="sidebar">
         <partial name="_Foruns"/>
     </div>
     @RenderBody()
-    <div class="recomendacoes hide-xs hide-sm hide-md">
+    <div class="recomendacoes hide-xs hide-sm">
         <partial name="_Recomendacoes"/>
     </div>
 </div>

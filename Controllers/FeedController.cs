@@ -1,70 +1,67 @@
-using Microsoft.AspNetCore.Mvc;
-using Astromedia.Services;
-using Astromedia.Models;
-using Microsoft.AspNetCore.Authorization;
 using Astromedia.DTO;
+using Astromedia.Models;
+using Astromedia.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
-[AllowAnonymous]
-public class FeedController : Controller {
+[Authorize]
+public class FeedController : Controller
+{
     private readonly AstroService _astroService;
     private readonly PostagemService _postagemService;
     private readonly UserManager<Usuario> _userManager;
     public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService)
     {
-       _astroService = astroService;
-       _postagemService = postagemService;
-       _userManager = userManager;
+        _astroService = astroService;
+        _postagemService = postagemService;
+        _userManager = userManager;
     }
-
-    public IActionResult Index() 
-    {
-        var postagens = _postagemService.GetAll();
-        return View("Postagens", postagens);
-    }
-
+    
     public IActionResult PerfilAstro(int id)
     {
         Astro astro = _astroService.GetById(id);
 
         return View(astro);
     }
-    
-    public IActionResult Postagens(int id) {
-        var postagens = _postagemService.GetAllByAstroId(id);
+
+    public IActionResult Postagens(int id)
+    {
+        var postagens = id == 0 ? _postagemService.GetAll() : _postagemService.GetAllByAstroId(id);
         return View(postagens);
     }
 
     [HttpPost]
-    public async Task<JsonResult> SavePostagem([FromBody]PostagemDTO postagem)
+    public async Task<JsonResult> SavePostagem([FromBody] PostagemDTO postagem)
     {
         var usuario = await _userManager.GetUserAsync(User);
         var validator = new PostagemValidator();
         var validationResult = validator.Validate(postagem);
         var errorMessages = new List<string>();
 
-        if(validationResult.IsValid)
+        if (validationResult.IsValid)
         {
             postagem.UsuarioId = usuario.Id;
             postagem.DataPostagem = DateTime.UtcNow;
-            try 
+            try
             {
                 _postagemService.Create(postagem);
-                var data = new {
+                var data = new
+                {
                     dataPostagem = postagem.DataPostagem.ToLocalTime().ToString("dd/MM/yyyy HH:mm"),
                     imagem = postagem.Imagem,
                     texto = postagem.Texto
                 };
-                return Json(new {success = true, data = data});
+                return Json(new { success = true, data = data });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorMessages.Add(ex.Message);
-                return Json(new {success = false, errors = errorMessages});
+                return Json(new { success = false, errors = errorMessages });
             }
         }
         validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
-        return Json(new {success = false, errors = errorMessages});
+        return Json(new { success = false, errors = errorMessages });
     }
 
     public IActionResult Foruns() => PartialView("_Foruns");

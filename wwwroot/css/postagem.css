@@ -44,8 +44,7 @@ textarea:focus {
 #post-holder {
     display: flex;
     flex-flow: column;
-    width: 35vw; 
-    margin-top: 10vh;
+    /* width: 35vw;  */
     overflow: hidden;  
 }
 
@@ -102,6 +101,10 @@ textarea:focus {
     font-size: .75rem;
 }
 
+.post-content {
+    width: 100%;
+}
+
 /* ** Imagens | post-input-box */
 
 #post-img-preview {
@@ -142,6 +145,16 @@ textarea:focus {
     font-size: .8rem;
 }
 
+.comment-modal {
+    margin-left: .5rem;
+    white-space: nowrap;
+}
+
+.likes {
+    margin-left: .5rem;
+    font-size: .9rem;
+}
+
 /* * Área de Postagens Enviadas - Conteúdo */
 
 .post-box {
@@ -155,7 +168,7 @@ textarea:focus {
 }
 
 .post-text {
-    font-size: .7rem;
+    font-size: 1rem;
     margin: 5px 10px;
     color: var(--color-lightGrey);
 }
@@ -177,13 +190,13 @@ textarea:focus {
 }
 
 .usr-post-date {
-    font-size: .5rem;
+    font-size: .6rem;
     color: var(--color-lightGrey);
     margin-bottom: 0;
 }
 
 .usr-post-name {
-    font-size: .9rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--color-lightGrey);
     margin-bottom: -5px;
@@ -259,15 +272,16 @@ textarea:focus {
 /* Media Queries - Postagens */
 
 @media screen and (min-width: 601px) and (max-width: 1154px) {
-    .grid {
+    /* .grid {
         display: grid;
         flex-flow: row;
         align-items: flex-start;
-        grid-template-columns: 0.90fr 5fr 2fr !important;
-    }
+        grid-template-columns: 1fr 5fr 2fr !important;
+    } */
+
     #post-holder {
-        width: 45vw;
-        margin-top: 8vh;
+        /* width: 45vw; */
+        /* margin-top: 8vh; */
     }
 }
 
@@ -301,6 +315,6 @@ textarea:focus {
 @media screen and (max-width: 320px) {
     #post-holder {
         width: 100%;
-        margin-top: 12vh;
+        /* margin-top: 12vh; */
     }
 }
