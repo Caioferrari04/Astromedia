@@ -1,7 +1,10 @@
 @model Astro
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<Usuario> UserManager
 @{
     Layout = "_LayoutFeed";
     ViewData["Title"] = $"Perfil {@Model.Nome}";
+    var usuario = await UserManager.GetUserAsync(User);
 }
 
 <link rel="stylesheet" href="~/css/PerfilAstro.css" asp-append-version="true">
@@ -18,21 +21,28 @@
             </div>
             <h2 class="text-light astro-title">@Model.Nome</h2>
         </div>
-        <button class="join-btn text-light bd-light">Juntar ao fórum</button>
+        @if (usuario.Astros?.Find(astro => astro.Id == Model.Id) is not null) 
+        {
+            <a class="join-btn text-light bd-light" asp-action="EntrarForum" asp-route-id="@Model.Id">Sair do fórum</a>
+        }
+        else
+        {
+            <a class="join-btn text-light bd-light" asp-action="EntrarForum" asp-route-id="@Model.Id">Juntar ao fórum</a>
+        }
     </div>
 
     <nav class="tabs">
-        <button class="button-nav text-light active" id="tab1">Aba 1</button>
+        <button class="button-nav text-light active" id="tab1">Curiosidades</button>
         <button class="button-nav tab1 text-light" id="tab2">Aba 2</button>
         <button class="button-nav tab2 text-light" id="tab3">Aba 3</button>
         <button class="button-nav tab3 text-light" id="tab4">Aba 4</button>
     </nav>
 
-    <div class="tab-content tab-content-active text-justify text-light">
+    <div class="tab-content tab-content-active text-left text-light">
         @Html.Raw(Model.Curiosidades)
     </div>
 
-    <div class="tab-content  text-justify text-light">
+    <div class="tab-content text-left text-light">
         <h4>Aba 2</h4>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
@@ -41,7 +51,7 @@
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
     </div>
 
-    <div class="tab-content  text-justify text-light">
+    <div class="tab-content text-left text-light">
         <h4>Aba 3</h4>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
@@ -50,7 +60,7 @@
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
     </div>
 
-    <div class="tab-content  text-justify text-light">
+    <div class="tab-content text-left text-light">
         <h4>Aba 4</h4>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>

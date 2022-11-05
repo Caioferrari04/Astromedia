@@ -25,15 +25,15 @@ public class PostagemService
             usuario,
             astro
         );
-        
+
         _astroContext.Postagens.Add(postagem);
         _astroContext.SaveChanges();
     }
 
-    public List<Postagem> GetAllByAstroId(int id) {
-        
+    public List<Postagem> GetAllByAstroId(int id)
+    {
         var postagens = _astroContext.Postagens
-            .Include(a => a.Astro)
+            //.Include(a => a.Astro)
             .Include(u => u.Usuario)
             .Where(p => p.Astro.Id == id)
             .OrderByDescending(p => p.DataPostagem)
@@ -44,7 +44,8 @@ public class PostagemService
         return postagens;
     }
 
-    public List<Postagem> GetAll() {
+    public List<Postagem> GetAll()
+    {
         var postagens = _astroContext.Postagens
             .Include(a => a.Astro)
             .Include(u => u.Usuario)
@@ -55,5 +56,5 @@ public class PostagemService
 
         return postagens;
     }
-    
+
 }

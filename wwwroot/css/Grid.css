@@ -1,6 +1,5 @@
 main.container {
     margin-top: 2vh;
-    margin-bottom: 10vh;
     max-width: 1400px;
 }
 
@@ -70,6 +69,8 @@ main.container {
     .sidebar {
         display: none;
     }
+
+    .recomendacoes { display: none!important; }
 }
 
 @media screen and (max-width: 767px) {

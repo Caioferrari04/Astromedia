@@ -26,8 +26,8 @@ html {
 }
 
 main {
-  /* min-height: 80vh; */
-  /* margin-bottom: 4rem; */
+  min-height: 82vh;
+  /* margin-bottom: 1vh!important; */
 }
 
 body::-webkit-scrollbar {

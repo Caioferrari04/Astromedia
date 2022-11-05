@@ -17,17 +17,27 @@ public class FeedController : Controller
         _postagemService = postagemService;
         _userManager = userManager;
     }
-    
-    public IActionResult PerfilAstro(int id)
+
+    public async Task<IActionResult> PerfilAstro(int id)
     {
-        Astro astro = _astroService.GetById(id);
+        Astro astro = await _astroService.GetById(id);
 
         return View(astro);
     }
 
-    public IActionResult Postagens(int id)
+    public async Task<IActionResult> Postagens(int id)
     {
-        var postagens = id == 0 ? _postagemService.GetAll() : _postagemService.GetAllByAstroId(id);
+        List<Postagem> postagens;
+        if (id is not 0)
+        {
+            postagens = _postagemService.GetAllByAstroId(id);
+            ViewBag.astro = await _astroService.GetById(id);
+        }
+        else
+        {
+            postagens = _postagemService.GetAll();
+        }
+
         return View(postagens);
     }
 
@@ -67,4 +77,14 @@ public class FeedController : Controller
     public IActionResult Foruns() => PartialView("_Foruns");
 
     public IActionResult Comentarios() => PartialView("Comentarios");
+
+    [HttpPost]
+    public async Task<IActionResult> EntrarForum(int id)
+    {
+        var usuario = await _userManager.GetUserAsync(User);
+
+        await _astroService.JoinForum(id, usuario);
+
+        return RedirectToAction(nameof(PerfilAstro), new { id = id });
+    }
 }
