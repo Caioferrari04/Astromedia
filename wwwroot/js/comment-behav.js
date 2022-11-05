@@ -34,12 +34,12 @@ Array.from(cmbtns).forEach(cmbtn => {
         }
 
         function verifyMargin() {
-            if (aux.style.marginTop === "-122px") {
+            if (aux.style.marginTop === "-119px") {
                 aux.style.marginTop = "-26px";
             } else if (aux.style.marginTop === "-26px" && tgg) {
                 aux.style.marginTop = "-26px";
             } else if (aux.style.marginTop === "-26px" && !tgg) {
-                aux.style.marginTop = "-122px";
+                aux.style.marginTop = "-119px";
             }
         }
     });

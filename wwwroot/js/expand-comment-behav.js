@@ -1,4 +1,4 @@
-const expcmbtn = document.querySelector(".expand-comment-btn");
+let expcmbtn = document.querySelector(".expand-comment-btn");
 
 expcmbtn.addEventListener("click", e => {
     console.log("click");

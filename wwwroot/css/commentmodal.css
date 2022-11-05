@@ -101,7 +101,9 @@
 }
 
 .commentmodal-usrlikes {
-    right: 10px;
+    right: 50%;
+    left: 50%;
+
 }
 
 .commentmodal-selfbottom {
@@ -215,7 +217,7 @@
 }
 
 /* Selfnote - Verificar height do Pixel 5 */
-@media screen and (max-width: 600px) { 
+@media screen and (min-width: 321px) and (max-width: 600px) { 
     .commentmodal {
         overflow-x: hidden;
     }

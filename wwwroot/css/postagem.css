@@ -86,7 +86,7 @@ textarea:focus {
     z-index: 0;
     border-radius: 8px;
     margin-bottom: 10px;
-    margin-top: -122px;
+    margin-top: -119px;
     width: auto;
     height: auto;
     padding: 20px 5px 5px 5px;
@@ -124,7 +124,7 @@ textarea:focus {
 .post-input-imgcon {
     position: relative;
     max-width: 1.8vw;
-    left: 4px;
+    left: 1px;
     margin-bottom: -11px;
 }
 
