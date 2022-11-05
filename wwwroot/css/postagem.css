@@ -35,10 +35,9 @@ textarea:focus {
     align-items: center;
 }
 
-#post-holder::before {
-    content: "Crie sua postagem";
+#post-holder-text {
     font-size: .8rem;
-    margin-left: 15px;
+    margin: 0 0 0 15px;
     color: var(--color-lightGrey);
 }
 

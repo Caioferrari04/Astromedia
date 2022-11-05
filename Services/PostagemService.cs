@@ -1,5 +1,6 @@
 using Astromedia.DTO;
 using Astromedia.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Astromedia.Services;
 
@@ -14,29 +15,45 @@ public class PostagemService
 
     public void Create(PostagemDTO postagemDTO)
     {
-        _astroContext.Postagens.Add(ToPostagem(postagemDTO));
+        var astro = _astroContext.Astros.Find(postagemDTO.AstroId);
+        var usuario = _astroContext.Users.Find(postagemDTO.UsuarioId);
+
+        Postagem postagem = new Postagem(
+            postagemDTO.Texto,
+            postagemDTO.DataPostagem,
+            postagemDTO.Imagem,
+            usuario,
+            astro
+        );
+        
+        _astroContext.Postagens.Add(postagem);
         _astroContext.SaveChanges();
     }
 
-    private Postagem ToPostagem(PostagemDTO postagemDTO) => new Postagem(postagemDTO.Texto, postagemDTO.DataPostagem, ToUsuario(postagemDTO.UsuarioDTO));
+    public List<Postagem> GetAllByAstroId(int id) {
+        
+        var postagens = _astroContext.Postagens
+            .Include(a => a.Astro)
+            .Include(u => u.Usuario)
+            .Where(p => p.Astro.Id == id)
+            .OrderByDescending(p => p.DataPostagem)
+            .ToList();
 
-    private List<Postagem> ToPostagens(List<PostagemDTO> postagensDTO) 
-    {
-        List<Postagem> postagens = new List<Postagem>();
-        foreach (var postagemDTO in postagensDTO)
-        {
-            postagens.Add(ToPostagem(postagemDTO));
-        }
+        postagens.ForEach(p => p.DataPostagem = p.DataPostagem.ToLocalTime());
+
         return postagens;
-    } 
+    }
 
+    public List<Postagem> GetAll() {
+        var postagens = _astroContext.Postagens
+            .Include(a => a.Astro)
+            .Include(u => u.Usuario)
+            .OrderByDescending(p => p.DataPostagem)
+            .ToList();
+
+        postagens.ForEach(p => p.DataPostagem = p.DataPostagem.ToLocalTime());
+
+        return postagens;
+    }
     
-    private Usuario ToUsuario(UsuarioDTO usuarioDTO)
-    {
-        Usuario usuario = new Usuario();
-        usuario.UserName = usuarioDTO.Nome;
-        usuario.Postagens = ToPostagens(usuarioDTO.Postagens);
-
-        return usuario;
-    } 
 }

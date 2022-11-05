@@ -8,12 +8,21 @@
     var astros = usuario?.Astros ?? _service.GetAll();
 }
 
-@for (int i = 0; i < 6; i++) // implementar no servidor
+@foreach (var item in astros)
+{
+    <div class="item">
+        <a asp-action="Postagens" asp-route-id="@item.Id">
+            <img src="@item.Foto" alt="@item.Nome" data-tippy-content="@item.Nome">
+        </a>
+    </div>    
+}
+
+@* @for (int i = 0; i < 6; i++) // implementar no servidor
 {
     <div class="item">
         <img src="@astros[i].Foto" alt="@astros[i].Nome" data-tippy-content="@astros[i].Nome">
     </div>    
-}
+} *@
 <div class="item">
     <img src="https://icongr.am/clarity/add.svg?size=120&color=ffffff" alt="Ver mais" style="background-color: #7300A8;" data-tippy-content="Ver mais">
 </div>    *@
