@@ -6,6 +6,10 @@
     bottom: 0;
 }
 
+.footer .container {
+    max-width: 1400px;
+}
+
 .footer a {
     margin-right: 0.8rem;
     display: flex;
@@ -22,6 +26,12 @@
 
 .footer--texto:nth-of-type(2) {
     font-size: 12px;
+}
+
+@media screen and (max-width: 1200px) {
+    .footer .container {
+        max-width: 100%;
+    }
 }
 
 @media (min-width: 768px) {

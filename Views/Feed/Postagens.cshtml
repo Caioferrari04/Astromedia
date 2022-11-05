@@ -3,22 +3,20 @@
 @model List<Postagem>
 @{
     Layout = "_LayoutFeed";
-}
-
-@{
     var id = ViewContext.RouteData.Values["id"];
     var user = await UserManager.GetUserAsync(User);
 }
 
-<link rel="stylesheet" href="~/css/postagem.css">
-<link rel="stylesheet" href="~/lib/notiflix/dist/notiflix-3.2.5.min.css"/>
-
-<link rel="stylesheet" href="~/css/commentmodal.css">
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/postagem.css">
+    <link rel="stylesheet" href="~/lib/notiflix/dist/notiflix-3.2.5.min.css"/>
+    <link rel="stylesheet" href="~/css/commentmodal.css">
+}
 
 <div id="rendercomment" data-url='@Url.Action("Comentarios", "Feed")'></div>
 
 <div id="post-holder" class="container is-full-screen">
-    @if(id != null)
+    @if(id is not null)
     {
         <p id="post-holder-text">Crie sua postagem</p>
         <div id="post-input-box" class="is-vertical-align is-horizontal-align">
@@ -42,71 +40,70 @@
                 </form>
             </div>
         </div>
-
+    }
     @* Área de inserção de comentário (Template) *@
-    <div id="hidden" class="comment-input-box" style="margin-top: -119px !important;">
+    <!--div id="hidden" class="comment-input-box" style="margin-top: -119px !important;">
         <div class="comment-input-content">
-            @using (Html.BeginForm("Action", "Controller", FormMethod.Post, new {@id = "commentform"}))
+            @*@using (Html.BeginForm("Action", "Controller", FormMethod.Post, new {@id = "commentform"}))
             {   
                 @Html.TextAreaFor(m => m, new { @class = "is-full-width comment-input", @name = "commenttext", @form = "commentform", @cols = "100%", @rows = "auto", @placeholder = "Comente Aqui", @maxlength = "280"})
                 <div class="is-right">
-                    @* botões de modificação *@
+                    botões de modificação
                     <button type="submit" class="submit-comment-btn submit-post-btn button outline is-vertical-align">Comentar</button>
                 </div>
             }
-        </div>
-    </div>
+        </div>*@
+    </div-->
+    <div id="posts">
+        @foreach (var postagem in Model)
+        {
+            <div class="post-box is-vertical-align is-horizontal-align">
+                <div class="post-content">
+                    <div class="between-config">
+                        <div class="post-header-info is-left">
 
-    @* Template Postagem Usuário *@
-    <div class="post-box" class="is-vertical-align is-horizontal-align">
-        <div class="post-content">
-            <div class="between-config">
-                <div class="post-header-info is-left">
-
-                    @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
-                    @* <div class="info-col">
-                        <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
-                        <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
-                    </div> *@
-                    <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
-                    <div class="info-col">
-                        <p class="usr-post-name">Gustavo</p>
-                        <p class="usr-post-date">dd/MM/yyyy</p>
-                    </div>
-
-                </div>
-                <div class="report-btn is-vertical-align is-right">
-                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
-                </div>
-            </div>
-            <p class="post-text">
-                @* @Model.Texto *@
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
-            </p>
-            <div class="post-img"><img src="" /></div>
-            <div class="between-config">
-                <div class="usr-footer-comment is-vertical-align is-left">
-                    <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
-                </div>
-                <a class="text-light comment-modal" href="#">Ver Comentários</a>
-                <div class="usr-footer-likes is-vertical-align is-right">
-                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-box" class="is-vertical-align is-horizontal-align">
-        <div class="post-content">
-            <div class="between-config">
-                <div class="post-header-info is-left">
-
-                            <img class="usr-post-pic" src="@postagem.Usuario.FotoPerfil" />
+                            <img class="usr-post-pic" src="@postagem.Usuario.FotoPerfil" /> 
                             <div class="info-col">
                                 <p class="usr-post-name">@postagem.Usuario.UserName</p>
-                                <p class="usr-post-date">@postagem.DataPostagem.ToString("dd/MM/yyyy HH:mm")</p>
-                            </div>
+                                <p class="usr-post-date">@postagem.DataPostagem.ToString("dd/MM/yyyy")</p>
+                            </div> 
+                        </div>
+                        <div class="report-btn is-vertical-align is-right">
+                            <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                        </div>
+                    </div>
+                    <p class="post-text">
+                        @postagem.Texto 
+                    </p>
+                    @if(postagem.Imagem is not null)
+                    {
+                        <div class="post-img"><img src="@postagem.Imagem" /></div>
+                    }
+                    <div class="between-config">
+                        <div class="usr-footer-comment is-vertical-align is-left">
+                            <img class="post-footer-icon comment-modal" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                            <a class="text-light comment-modal" href="javascript:void(0)">Ver Comentários</a>
+                        </div>
+                        <div class="usr-footer-likes is-vertical-align is-right">
+                            <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                            <small class="text-light likes">0</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @* Template Postagem Usuário *@
 
+    <!--div class="post-box" class="is-vertical-align is-horizontal-align">
+        <div class="post-content">
+            <div class="between-config">
+                <div class="post-header-info is-left">
+                    <img class="usr-post-pic" src="@*@postagem.Usuario.FotoPerfil*@" />
+                    <div class="info-col">
+                        <p class="usr-post-name">@*@postagem.Usuario.UserName*@</p>
+                        <p class="usr-post-date">@*@postagem.DataPostagem.ToString("dd/MM/yyyy HH:mm")*@</p>
+                    </div>
                 </div>
                 <div class="report-btn is-vertical-align is-right">
                     <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
@@ -127,10 +124,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
 
     @* Template Postagem Empresa *@
-    <div class="post-box" class="is-vertical-align is-horizontal-align">
+    <!--div class="post-box" class="is-vertical-align is-horizontal-align">
         <div class="post-content">
             <div class="between-config">
                 <div class="post-header-info is-left">
@@ -170,7 +167,7 @@
             </div>
 
         </div>
-    </div>
+    </div-->
 </div>
 
 
@@ -181,5 +178,6 @@
     <script src="~/js/textarea-post.js"></script>
     <script src="~/js/commentmodal.js"></script>
     <script src="~/js/post-img-insert.js"></script>
-    <script src="~/js/comment-behav.js"></script>
+    @*<script src="~/js/comment-behav.js"></script>*@
+    <script src="~/js/submit-post.js"></script>
 }
