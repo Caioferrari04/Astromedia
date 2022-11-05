@@ -68,4 +68,6 @@ public class FeedController : Controller {
     }
 
     public IActionResult Foruns() => PartialView("_Foruns");
+
+    public IActionResult Comentarios() => PartialView("Comentarios");
 }
