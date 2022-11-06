@@ -11,3 +11,4 @@ function showPassword(event) {
         toggleImage.src = "https://icongr.am/clarity/eye-hide.svg?size=128&color=d2d6dd";
     }
 };
+

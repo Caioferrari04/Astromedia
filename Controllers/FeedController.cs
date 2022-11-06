@@ -1,71 +1,100 @@
-using Microsoft.AspNetCore.Mvc;
-using Astromedia.Services;
-using Astromedia.Models;
-using Microsoft.AspNetCore.Authorization;
 using Astromedia.DTO;
+using Astromedia.Models;
+using Astromedia.Services;
+using Astromedia.Validations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
-[AllowAnonymous]
-public class FeedController : Controller {
+[Authorize]
+public class FeedController : Controller
+{
     private readonly AstroService _astroService;
     private readonly PostagemService _postagemService;
     private readonly UserManager<Usuario> _userManager;
     public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService)
     {
-       _astroService = astroService;
-       _postagemService = postagemService;
-       _userManager = userManager;
+        _astroService = astroService;
+        _postagemService = postagemService;
+        _userManager = userManager;
     }
 
-    public IActionResult Index() 
+    public async Task<IActionResult> PerfilAstro(int id)
     {
-        var postagens = _postagemService.GetAll();
-        return View("Postagens", postagens);
-    }
-
-    public IActionResult PerfilAstro(int id)
-    {
-        Astro astro = _astroService.GetById(id);
+        Astro astro = await _astroService.GetById(id);
 
         return View(astro);
     }
-    
-    public IActionResult Postagens(int id) {
-        var postagens = _postagemService.GetAllByAstroId(id);
+
+    public async Task<IActionResult> Postagens(int id)
+    {
+        List<Postagem> postagens;
+        if (id is not 0)
+        {
+            postagens = _postagemService.GetAllByAstroId(id);
+            ViewBag.astro = await _astroService.GetById(id);
+        }
+        else
+        {
+            postagens = _postagemService.GetAll();
+        }
+
         return View(postagens);
     }
 
     [HttpPost]
-    public async Task<JsonResult> SavePostagem([FromBody]PostagemDTO postagem)
+    public async Task<JsonResult> SavePostagem([FromBody] PostagemDTO postagem)
     {
         var usuario = await _userManager.GetUserAsync(User);
         var validator = new PostagemValidator();
         var validationResult = validator.Validate(postagem);
         var errorMessages = new List<string>();
 
-        if(validationResult.IsValid)
+        if (validationResult.IsValid)
         {
             postagem.UsuarioId = usuario.Id;
             postagem.DataPostagem = DateTime.UtcNow;
-            try 
+            try
             {
                 _postagemService.Create(postagem);
-                var data = new {
+                var data = new
+                {
                     dataPostagem = postagem.DataPostagem.ToLocalTime().ToString("dd/MM/yyyy HH:mm"),
                     imagem = postagem.Imagem,
                     texto = postagem.Texto
                 };
-                return Json(new {success = true, data = data});
+                return Json(new { success = true, data = data });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorMessages.Add(ex.Message);
-                return Json(new {success = false, errors = errorMessages});
+                return Json(new { success = false, errors = errorMessages });
             }
         }
         validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
-        return Json(new {success = false, errors = errorMessages});
+        return Json(new { success = false, errors = errorMessages });
     }
 
     public IActionResult Foruns() => PartialView("_Foruns");
+
+    public IActionResult Comentarios() => PartialView("Comentarios");
+
+    [HttpGet]
+    public async Task<IActionResult> EntrarForum(int id)
+    {
+        var usuario = await _userManager.GetUserAsync(User);
+
+        await _astroService.JoinForum(id, usuario);
+
+        return RedirectToAction(nameof(PerfilAstro), new { id = id });
+    }
+
+    public async Task<IActionResult> SairForum(int id) 
+    {
+        var usuario = await _userManager.GetUserAsync(User);
+
+        await _astroService.QuitForum(id, usuario);
+
+        return RedirectToAction(nameof(PerfilAstro), new { id = id });
+    }
 }

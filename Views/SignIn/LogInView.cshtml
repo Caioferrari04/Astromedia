@@ -1,21 +1,21 @@
 @model UsuarioDTO
 
 @section stylesheet {
-<style>
-    body {
-        background-image: url(../img/home-background.png);
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-</style>
+    <style>
+        body {
+            background-image: url(../img/home-background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/loginmodal.css" asp-append-version="true">
 }
 
 <div id="modalblock" class="container is-vertical-align is-horizontal-align">
-    <form class="modal-content animatein text-light col-5" asp-action="Login" asp-controller="SignIn">
+    <form class="modal-content text-light col-5" asp-action="LogIn" asp-controller="SignIn">
         <div class="container logo-box row is-vertical-align is-horizontal-align">
             <img class="img-logo col" src="../img/logo-small.png" alt="minorlogo" class="minlogo">
             <h2 class="col logo-text">Entrar</h2>
-            <img onclick="closeModal()" class="close-btn col" src="../img/close-icon.svg" alt="Close Icon">
         </div>
 
         <div class="container">

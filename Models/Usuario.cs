@@ -23,4 +23,6 @@ public class Usuario : IdentityUser
     public List<Postagem> Postagens { get; set; }
 
     public List<Astro> Astros { get; set; }
+
+    public bool isAdmin { get; set; }
 }

@@ -7,6 +7,7 @@ textarea {
     border: none;
     resize: none;
     outline: none;
+    white-space: pre-wrap;
     overflow: hidden;
     padding: 7px 10px;
     font-size: 1.2rem;
@@ -14,6 +15,10 @@ textarea {
 
 textarea:focus {
     box-shadow: none;
+}
+
+#rendercomment {
+    position: absolute;
 }
 
 /* Área de Postagens - Geral */
@@ -39,8 +44,7 @@ textarea:focus {
 #post-holder {
     display: flex;
     flex-flow: column;
-    width: 35vw; 
-    margin-top: 10vh;
+    /* width: 35vw;  */
     overflow: hidden;  
 }
 
@@ -62,6 +66,10 @@ textarea:focus {
 
 /* * Área de Postagens - Conteúdo */
 
+#hidden {
+    display: none;
+}
+
 #post-input-box {
     background-color: var(--color-secondary);
     border-radius: 8px;
@@ -69,6 +77,32 @@ textarea:focus {
     width: auto;
     height: auto;
     padding: 5px;
+}
+
+.comment-input-box {
+    background-color: var(--color-primary);
+    z-index: 0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-top: -119px;
+    width: auto;
+    height: auto;
+    padding: 20px 5px 5px 5px;
+    transition: .7s cubic-bezier(0.72, 0, 0.11, 0.99);
+}
+
+.comment-input {
+    background-color: var(--color-primary) !important;
+    font-size: .9rem;
+}
+
+.comment-modal {
+    text-align: center;
+    font-size: .75rem;
+}
+
+.post-content {
+    width: 100%;
 }
 
 /* ** Imagens | post-input-box */
@@ -92,23 +126,40 @@ textarea:focus {
 .post-input-imgcon {
     position: relative;
     max-width: 1.8vw;
-    left: 4px;
+    left: 1px;
     margin-bottom: -11px;
 }
 
 .submit-post-btn {
     position: relative;
     border-radius: 7px;
-    font-size: 1rem;
+    font-size: .8rem;
     height: 0;
-    padding: 11px;
-    margin: 10px 2px 3px 10px;
+    padding: 9px;
+    margin: 10px -1px 0px 10px;
+}
+
+.submit-comment-btn {
+    border-radius: 8px;
+    padding: 9px;
+    font-size: .8rem;
+}
+
+.comment-modal {
+    margin-left: .5rem;
+    white-space: nowrap;
+}
+
+.likes {
+    margin-left: .5rem;
+    font-size: .9rem;
 }
 
 /* * Área de Postagens Enviadas - Conteúdo */
 
 .post-box {
     background-color: var(--color-secondary);
+    z-index: 1;
     border-radius: 8px;
     margin-bottom: 10px;
     width: auto;
@@ -117,7 +168,7 @@ textarea:focus {
 }
 
 .post-text {
-    font-size: .7rem;
+    font-size: 1rem;
     margin: 5px 10px;
     color: var(--color-lightGrey);
 }
@@ -139,13 +190,13 @@ textarea:focus {
 }
 
 .usr-post-date {
-    font-size: .5rem;
+    font-size: .9rem;
     color: var(--color-lightGrey);
     margin-bottom: 0;
 }
 
 .usr-post-name {
-    font-size: .9rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--color-lightGrey);
     margin-bottom: -5px;
@@ -161,10 +212,9 @@ textarea:focus {
 
 .report-btn {
     position: relative;
-    top: -5px;
+    top: -3px;
     cursor: pointer;
-    width: 21px;
-    min-width: 21px;
+    width: 19px;
     transition: all .3s;
 }
 
@@ -222,15 +272,16 @@ textarea:focus {
 /* Media Queries - Postagens */
 
 @media screen and (min-width: 601px) and (max-width: 1154px) {
-    .grid {
+    /* .grid {
         display: grid;
         flex-flow: row;
         align-items: flex-start;
-        grid-template-columns: 0.90fr 5fr 2fr !important;
-    }
+        grid-template-columns: 1fr 5fr 2fr !important;
+    } */
+
     #post-holder {
-        width: 45vw;
-        margin-top: 8vh;
+        /* width: 45vw; */
+        /* margin-top: 8vh; */
     }
 }
 
@@ -239,22 +290,22 @@ textarea:focus {
         display: none;
     }
     #post-holder {
-        width: 100vw;
+        width: 100%
     }
     .post-footer-icon {
         width: 20px;
         min-width: 19px;
     }
     .post-text {
-        font-size: .8rem;
+        font-size: 1rem;
     }
     .usr-post-date {
-        font-size: .6rem;
+        font-size: .8rem;
         color: var(--color-lightGrey);
         margin-bottom: 0;
     }
     .usr-post-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 500;
         color: var(--color-lightGrey);
         margin-bottom: -5px;
@@ -263,7 +314,7 @@ textarea:focus {
 
 @media screen and (max-width: 320px) {
     #post-holder {
-        width: 100vw;
-        margin-top: 12vh;
+        width: 100%;
+        /* margin-top: 12vh; */
     }
 }

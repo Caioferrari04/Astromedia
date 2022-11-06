@@ -12,7 +12,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddHttpContextAccessor();
 
-string connectionString = "";
+string connectionString;
 
 if (builder.Environment.IsProduction())
 {
@@ -24,7 +24,7 @@ if (builder.Environment.IsProduction())
 
     connectionString = $"User ID={PGUSER};Password={PGPASSWORD};Host={PGHOST};Port={PGPORT};Database={PGDATABASE};";
 }
-else 
+else
 {
     connectionString = builder.Configuration.GetConnectionString("LOCALHOST");
 }
@@ -33,7 +33,8 @@ else
 builder.Services.AddDbContext<AstroContext>(options =>
     options.UseNpgsql(connectionString));
 
-Action<IdentityOptions> identityOptions = m => {
+Action<IdentityOptions> identityOptions = m =>
+{
     m.User.RequireUniqueEmail = true;
 };
 
@@ -43,6 +44,16 @@ builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
 
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromHours(24);
+
+    options.LoginPath = "/SignIn/LogInView";
+    options.AccessDeniedPath = "/SignIn/LogInView";
+    options.SlidingExpiration = true;
+});
 builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();
@@ -69,7 +80,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
-        endpoints.MapRazorPages();
+        // endpoints.MapRazorPages();
     });
 
 app.Run();

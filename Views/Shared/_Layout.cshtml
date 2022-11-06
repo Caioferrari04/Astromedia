@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/Footer.css" asp-append-version="true">
         <link rel="stylesheet" href="~/css/Header.css" asp-append-version="true">
-        <link rel="stylesheet" href="~/css/loginmodal.css" asp-append-version="true">
         <link rel="stylesheet" href="~/css/dropdown.css" asp-append-version="true"/>
         @await RenderSectionAsync("stylesheet", required: false)
     </head>
@@ -35,7 +34,7 @@
             <div class="container is-vertical-align">
                 <a href=""><img class="footer--logo" src="~/img/logo-small.png" alt=""></a>
                 <a class="footer--texto text-light" href="#copyright">©2022 Astromedia</a>
-                <a class="footer--texto text-light" href="#termos">Termos</a>
+                <a class="footer--texto text-light" asp-action="TermosUso" asp-controller="Juridico">Termos</a>
                 <a class="footer--texto text-light" href="#privacidade">Privacidade</a>
             </div>
         </footer>

@@ -8,7 +8,7 @@
 }
 
 <div class="cad container is-vertical-align is-horizontal-align">
-    <form class="cad-content text-light" asp-action="Index" method="post">
+    <form class="cad-content text-light" asp-action="Index">
         <div class="container logo-box-cad row is-vertical-align is-horizontal-align">
             <!-- substituir por img nova -->
             <img class="img-logo-cad col" src="~/img/logo-main.png" alt="Logo Astromedia" class="maxlogo"> 
@@ -16,7 +16,7 @@
         </div>
 
         <div class="container container-cad">
-            <div asp-validation-summary="ModelOnly" class="text-error"></div>
+            <div asp-validation-summary="ModelOnly" class="erro"></div>
             
             <div class="row">
                 <label class="col" asp-for="Nome">
@@ -24,7 +24,8 @@
                     <input class="inputbox-cad" asp-for="Nome" required>
                     <div class="input-desc">
                         <p>Seu nome de usuário deve conter pelo menos 4 caracteres, 
-                        e no máximo 15 caracteres. Sem caracteres especiais.</p>
+                        e no máximo 15 caracteres, assim como pode conter um dos 
+                        caracteres a seguir "-", "_". Sem caracteres especiais.</p>
                     </div>
                 </label>
             </div>
@@ -55,7 +56,7 @@
                         </div>
                     </div>
                     <div class="input-desc">
-                        <p>Sua senha deve conter pelo menos 6 caracteres, uma letra maiuscula e números. Sem caracteres especiais.</p>
+                        <p>Sua senha deve conter pelo menos 6 caracteres, uma letra maiuscula, um dos seguintes caracteres "-", "_" e números. Sem caracteres especiais.</p>
                     </div>
                 </label>
             </div>
@@ -77,11 +78,13 @@
             <div class="row">
                 <div class="col">
                     <label asp-for="ConditionTerms" class="text-is-vertical-align checkbox-cad">
-                        <input asp-for="ConditionTerms" type="checkbox" required>Aceito os termos de condição 
+                        <input asp-for="ConditionTerms" type="checkbox" required>
+                        <a asp-action="TermosUso" class="text-white" asp-controller="Juridico">Aceito os termos de condição</a>
                     </label>
                     <br>
                     <label asp-for="PrivacyTerms" class="text-is-vertical-align checkbox-cad">
-                        <input asp-for="PrivacyTerms" type="checkbox" required>Aceito os termos de privacidade
+                        <input asp-for="PrivacyTerms" type="checkbox" required>
+                        <a asp-action="TermosUso" class="text-white" asp-controller="Juridico">Aceito os termos de privacidade</a>
                     </label>
                     <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Juntar-se!</button>
                 </div>

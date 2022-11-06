@@ -2,13 +2,20 @@ using Astromedia.DTO;
 using FluentValidation;
 using FluentValidation.Validators;
 
+namespace Astromedia.Validations;
+
 public class UsuarioValidator : AbstractValidator<UsuarioDTO>
 {
     public UsuarioValidator()
     {
         RuleFor(m => m.Nome)
-            .Length(5, 20)
-            .WithMessage("Nome de usuario muito grande")
+            .MinimumLength(4)
+            .WithMessage("Nome de usuario muito pequeno");
+            .Unless(m => m.Atualizar == true && m.Senha != null);
+
+        RuleFor(m => m.Nome)
+            .MaximumLength(15)
+            .WithMessage("Nome de usuario muito grande");
             .Unless(m => m.Atualizar == true && m.Senha != null);
 
         RuleFor(m => m.Nome)

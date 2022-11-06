@@ -1,0 +1,25 @@
+@model IEnumerable<Astro>
+@{
+    ViewData["Title"] = "Listagem de astros";
+}
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/administrativo.css">
+}
+
+<h1 class="text-light">Astros</h1>
+<small class="text-light"><em>Clicar em "Excluir" irá excluir o astro SEM CONFIRMAÇÃO. Tome cuidado.</em></small>
+
+<ul>
+    @foreach (var astro in Model)
+    {
+        <li class="item-lista-admin">
+            <img src="@astro.Foto"/>
+            <div class="dados">
+                <p class="text-light">Nome: @astro.Nome</p>
+                <a class="button success" asp-action="Update" asp-route-id="@astro.Id">Editar</a>
+                <a class="button error" asp-action="Delete" asp-route-id="@astro.Id">Excluir</a>
+            </div>
+            <div class="text-light">@Html.Raw(astro.Curiosidades)</div>
+        </li>
+    }
+</ul>

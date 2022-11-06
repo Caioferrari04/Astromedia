@@ -4,8 +4,10 @@
 @inject AstroService _service;
 @{
     var usuario = await UserManager.GetUserAsync(User);
-
-    var astros = usuario?.Astros ?? _service.GetAll();
+    usuario.Astros = await _service.GetAllByUser(usuario.Id);
+    var astros = usuario.Astros ?? await _service.GetAll();
+    var contagem = astros.Count > 10 ? 10 : astros.Count;
+    astros = astros.GetRange(0, contagem);
 }
 
 @foreach (var item in astros)
@@ -16,13 +18,6 @@
         </a>
     </div>    
 }
-
-@* @for (int i = 0; i < 6; i++) // implementar no servidor
-{
-    <div class="item">
-        <img src="@astros[i].Foto" alt="@astros[i].Nome" data-tippy-content="@astros[i].Nome">
-    </div>    
-} *@
 <div class="item">
     <img src="https://icongr.am/clarity/add.svg?size=120&color=ffffff" alt="Ver mais" style="background-color: #7300A8;" data-tippy-content="Ver mais">
-</div>   
+</div>

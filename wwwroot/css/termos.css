@@ -1,36 +1,26 @@
 body{
-    padding: 0;
-    margin: 0;
     background-image: url(https://images.pexels.com/photos/176851/pexels-photo-176851.jpeg?auto=compress&cs=tinysrgb&w=1600);
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+main.container{
+    max-width: 1400px;
 }
 
 .terms-box{
-    max-width: 1400px;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 60px 30px;
+    /* padding: 60px 30px; */
 
 }
 
 .terms-text{
-    padding: 0 20px;
-    height: 700px;
-    font-size: 14px;
+    /* height: 700px; */
+    font-size: 1.2rem;
     font-weight: 500;
     color: #f1f1f1f1;
-    size: 2rem;
-    font-size: 20px;
+    /* size: 2rem; */
+    /* font-size: 20px; */
     text-align: justify;
 }
 

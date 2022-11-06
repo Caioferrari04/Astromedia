@@ -2,8 +2,12 @@
     background-color: #471c5cb3;
     height: 8vh;
     padding: 10px;
-    position: relative;
+    position: static;
     bottom: 0;
+}
+
+.footer .container {
+    max-width: 1400px;
 }
 
 .footer a {
@@ -22,6 +26,12 @@
 
 .footer--texto:nth-of-type(2) {
     font-size: 12px;
+}
+
+@media screen and (max-width: 1200px) {
+    .footer .container {
+        max-width: 100%;
+    }
 }
 
 @media (min-width: 768px) {

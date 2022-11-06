@@ -1,0 +1,316 @@
+/* Conteúdo Modal - Corpo do Login */
+
+.commentmodal {
+    position: fixed; 
+    z-index: 2; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;  
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.commentmodal-content {
+    background-color: var(--bg-secondary-color);
+    border-radius: 14px;
+    font-weight: lighter;
+    margin: auto;
+    height: 55%;
+    transform: scale(1.4);
+    border: 2px solid var(--bg-secondary-color);
+}
+
+.commentgrid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+}
+
+.commentmodal-post {
+    border-right: 1px solid #58296e;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.commentmodal-post::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.commentmodal-post::-webkit-scrollbar-track {
+    border-radius: 2px;
+    background: rgba(0,0,0,0.1);
+    background-clip: content-box; 
+}
+.commentmodal-post::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: rgba(0,0,0,0.2);
+  }
+.commentmodal-post::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0,0.4);
+}
+.commentmodal-post::-webkit-scrollbar-thumb:active {
+    background: rgba(0,0,0,.9);
+}
+
+.commentmodal-holder::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.commentmodal-holder::-webkit-scrollbar-track {
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    background: rgba(0,0,0,0.1);
+    background-clip: content-box; 
+}
+.commentmodal-holder::-webkit-scrollbar-thumb {
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    background: rgba(0,0,0,0.2);
+  }
+.commentmodal-holder::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0,0.4);
+}
+.commentmodal-holder::-webkit-scrollbar-thumb:active {
+    background: rgba(0,0,0,.9);
+}
+
+.commentmodal-img {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
+
+.commentmodal-comment {
+    padding: 10px;
+}
+
+.commentmodal-text {
+    font-size: .6rem;
+    margin: 5px 10px;
+    color: var(--color-lightGrey);
+}
+
+.commentmodal-selftext {
+    font-size: .7rem;
+    margin: 5px 10px;
+    color: var(--color-lightGrey);
+}
+
+.commentmodal-bottom {
+    margin-bottom: 1px;
+}
+
+.commentmodal-usrlikes {
+    right: 50%;
+    left: 50%;
+
+}
+
+.commentmodal-selfbottom {
+    margin-bottom: 1px;
+    position: fixed;
+    bottom: -2px;
+    left: 4px;
+    right: 41.5%;
+    background-color: var(--bg-secondary-color);
+    width: 57.9%;
+    padding-bottom: 6px;
+    padding-top: 4px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.commentmodal-usrpic {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.commentmodal-reportbtn {
+    width: 16px;
+}
+
+.commentmodal-usrname {
+    font-size: .8rem;
+}
+
+.commentmodal-usrdate {
+    font-size: .47rem;
+}
+
+.block-scroll {
+    overflow: hidden;
+}
+
+.commentmodal-holder {
+    overflow-y: auto;
+    font-size: small;
+    background: var(--bg-color);
+    border-radius: 2px 14px 14px 2px;
+}
+
+/* Animação de entrada - Modal do Login */
+
+.animatein {
+    animation: zoomin cubic-bezier(0.72, 0, 0.11, 0.99) 0.7s
+}
+
+@keyframes zoomin {
+    from {transform: scale(0); opacity: 0;}
+    to {transform: scale(inherit); opacity: 1;}
+}
+
+@keyframes slideUp {
+    from {transform: translateY(100%) scale(1.08); opacity: 0;}
+    to {transform: translateY(0) scale(1.08); opacity: 1;}
+}
+
+/* Media Queries - Modal */
+
+@media screen and (min-width: 601px) and (max-width: 1154px) {
+    .commentmodal {
+        overflow-x: hidden;
+    }
+    .commentmodal-selfbottom {
+        margin-bottom: 1px;
+        position: relative;
+        bottom: 8px;
+        width: 100%;
+        padding-bottom: 0;
+        padding-top: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .commentmodal-reportbtn {
+        width: 19px;
+    }
+    .commentgrid {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: none;
+    }
+    .commentmodal-content {
+        font-size: 1.4rem;
+        transform: scale(1.8);
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        margin-top: 15cm;
+    }
+    .commentmodal-post {
+        overflow: unset;
+        border: none;
+    }
+    .commentmodal-holder {
+        overflow: unset;
+        border-radius: 8px;
+    }
+    .commentmodal-text {
+        font-size: .7rem;
+    }
+    .close-btn {
+        max-width: 47px;
+    }
+    .animatein {
+        animation: slideUp cubic-bezier(0.7,-0.08, 0.24, 0.92) 0.7s;
+    }
+}
+
+/* Selfnote - Verificar height do Pixel 5 */
+@media screen and (min-width: 321px) and (max-width: 600px) { 
+    .commentmodal {
+        overflow-x: hidden;
+    }
+    .commentmodal-selfbottom {
+        margin-bottom: 1px;
+        position: relative;
+        bottom: 8px;
+        width: 100%;
+        padding-bottom: 0;
+        padding-top: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .commentmodal-reportbtn {
+        width: 19px;
+    }
+    .commentgrid {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: none;
+    }
+    .commentmodal-content {
+        font-size: 1.4rem;
+        transform: scale(1.08);
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        margin-top: 5cm;
+    }
+    .commentmodal-post {
+        overflow: unset;
+        border: none;
+    }
+    .commentmodal-holder {
+        overflow: unset;
+        border-radius: 8px;
+    }
+    .commentmodal-text {
+        font-size: .7rem;
+    }
+    .close-btn {
+        max-width: 47px;
+    }
+    .animatein {
+        animation: slideUp cubic-bezier(0.7,-0.08, 0.24, 0.92) 0.7s;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .commentmodal {
+        overflow-x: hidden;
+    }
+    .commentmodal-selfbottom {
+        margin-bottom: 1px;
+        position: relative;
+        bottom: 8px;
+        width: 100%;
+        padding-bottom: 0;
+        padding-top: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .commentmodal-reportbtn {
+        width: 19px;
+    }
+    .commentgrid {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: none;
+    }
+    .commentmodal-content {
+        font-size: 1.4rem;
+        transform: scale(1.08);
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+        margin-top: 5cm;
+    }
+    .commentmodal-post {
+        overflow: unset;
+        border: none;
+    }
+    .commentmodal-holder {
+        overflow: unset;
+        border-radius: 8px;
+    }
+    .commentmodal-text {
+        font-size: .7rem;
+    }
+    .close-btn {
+        max-width: 47px;
+    }
+    .animatein {
+        animation: slideUp cubic-bezier(0.7,-0.08, 0.24, 0.92) 0.7s;
+    }
+}

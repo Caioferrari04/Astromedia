@@ -1,0 +1,35 @@
+﻿@model AstroDTO
+@{
+    ViewData["Title"] = "Cadastro de astros";
+}
+
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/administrativo.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css">
+}
+
+<form asp-action="Create" enctype="multipart/form-data" class="container">
+    <div class="row">
+        <div class="col-6">
+            <label class="text-light" asp-for="Nome"></label>
+            <input asp-for="Nome" />
+
+            <label class="text-light" asp-for="Foto"></label>
+            <input asp-for="Foto" />
+        </div>
+        <div class="col-6">
+            <label class="text-light" asp-for="Curiosidades"></label>
+            <div id="CuriosidadesTextArea">
+
+            </div>
+            <textarea asp-for="Curiosidades" style="display: none;"></textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="button">Enviar</button>
+</form>
+
+@section scripts {
+    <script src="https://unpkg.com/pell"></script>
+    <script src="/js/administrativo.js"></script>
+}
