@@ -1,0 +1,34 @@
+@{
+    Layout = "Index";
+    ViewData["Title"] = "Excluir conta";
+}
+@model UsuarioDTO
+
+<form class="cad-content text-light" method="post" asp-action="DeleteAccount" asp-controller="ConfigurationUser">
+    <div class="container container-cad">
+        <div asp-validation-summary="ModelOnly" class="text-error"></div>
+        
+        <div class="row">
+            <label class="col" asp-for="Senha">
+                <div class="password-box-cad">
+                    @Html.DisplayNameFor(m => m.SenhaAtual)
+                </div>
+                <div class="row inputbox-password">
+                    <input id="inputbox-pass2" class="col-11 inputbox-password-cad" asp-for="SenhaAtual" required>
+                    <div onclick="showPassword(event)" class="col btn-show-password-cad is-vertical-align is-horizontal-align">
+                        <img id="show-password2" src="https://icongr.am/clarity/eye.svg?size=128&color=d2d6dd"></img>
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Excluir</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/js/configuracoes-tab.js" asp-append-version="true"></script>
+<script>mostrarAba(2)</script>
