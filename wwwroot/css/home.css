@@ -122,7 +122,7 @@ main.container {
     z-index: 0;
 }
 
-.row :after {
+article .row :after {
     content: "";
     display: table;
     clear: both;
