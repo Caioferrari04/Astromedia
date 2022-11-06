@@ -43,6 +43,7 @@ builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
 
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
+builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();
 
