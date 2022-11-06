@@ -10,7 +10,7 @@ public class AstroValidator : AbstractValidator<AstroDTO>
         RuleFor(m => m.Nome)
             .NotEmpty()
             .WithMessage("Nome não pode ser vazio.")
-            .Length(5, 20);
+            .Length(1, 20);
             
 
         RuleFor(m => m.Curiosidades)

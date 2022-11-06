@@ -19,7 +19,10 @@
     <link rel="stylesheet" href="~/css/commentmodal.css">
 }
 
-<div id="rendercomment" data-url='@Url.Action("Comentarios", "Feed")'></div>
+@section modal {
+    <div id="rendercomment" data-url='@Url.Action("Comentarios", "Feed")'></div>
+    <div id="modal-log" data-url='@Url.Action("LogsEdicao", "Feed")'></div>
+}
 
 <div id="post-holder" class="container is-full-screen">
     @if(id is not null)
@@ -56,12 +59,12 @@
                     <textarea class="is-full-width" name="Texto" form="postform-template" cols="100%" rows="auto" placeholder="Escreva aqui" maxlength="280"></textarea>
                     <div id="template-img-preview">
                         <img src="" id="template-img">
-                        <input type="hidden" name="LinkImagem">
+                        <input type="hidden" name="LinkImagem" id="LinkImagem-template">
                     </div>
                     <div class="between-config">
                         <div class="post-input-imgcon is-vertical-align is-left">
                             <label for="imagem-template">
-                                <img class="post-footer-icon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
+                                <img class="post-footer-icon" id="imagem-template-preview" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
                             </label>
                             <input id="imagem-template" name="Imagem" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg" form="upload-imagem-template">
                         </div>
@@ -128,7 +131,7 @@
                                             @if (contemPostagem || user.isAdmin) {
                                                 <li class="text-light excluir-postagem" data-id="@postagem.Id">Excluir</li>
                                             }
-                                            <li class="text-light historico-postagem">Histórico de edições</li>
+                                            <li class="text-light historico-postagem" data-id="@postagem.Id">Histórico de edições</li>
                                         </ul>
                                     </div>                                    
                                 }

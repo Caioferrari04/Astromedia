@@ -1,5 +1,9 @@
 /* Conteúdo Modal - Corpo do Login */
 
+.modal-open {
+    overflow: hidden;
+}
+
 .modal {
     position: fixed; 
     z-index: 2; 
@@ -53,6 +57,83 @@
 
 .close-btn:active {
     transform: scale(0.85);
+}
+
+.modal-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color-lightGrey);
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 10rem;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.modal-body * {
+    color: var(--color-lightGrey);
+}
+
+.modal-body ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 100%;
+    padding: 0 3rem;
+    gap: 2rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.modal-body li {
+    background-color: var(--color-primary);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.modal-body li div {
+    display: flex;
+    flex-direction: row;
+    gap: .1rem;
+    font-weight: 500;
+}
+
+.modal-body li div div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-lightGrey);
+    margin-top: -5px;
+    margin-left: 10px;
+}
+
+.modal-body li div div small {
+    margin-bottom: 5px;
+}
+
+.modal-body li div img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30%;
+    margin: 3px 0 0 3px;
+}
+
+.modal-body li div div p {
+    margin-bottom: 0;
+    margin-bottom: -10px;
+}
+
+.modal-body li img {
+    width: 100%;
+    border-radius: 8px;
 }
 
 /* -- Inputs do Modal */

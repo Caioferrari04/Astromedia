@@ -12,11 +12,13 @@ public class FeedController : Controller
     private readonly AstroService _astroService;
     private readonly PostagemService _postagemService;
     private readonly UserManager<Usuario> _userManager;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService)
+    private readonly LogEdicaoService _logEdicaoService;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService)
     {
         _astroService = astroService;
         _postagemService = postagemService;
         _userManager = userManager;
+        _logEdicaoService = logEdicaoService;
     }
 
     public async Task<IActionResult> PerfilAstro(int id)
@@ -114,10 +116,24 @@ public class FeedController : Controller
 
         if (validationResult.IsValid)
         {
-            postagem.DataPostagem = DateTime.UtcNow;
             try
             {
-                await _postagemService.Update(postagem);
+                postagem.DataPostagem = DateTime.UtcNow;
+                var postagemOriginal = await _postagemService.GetById(postagem.Id);
+                await _logEdicaoService.Inserir(new()
+                {
+                    Astro = await _astroService.GetById(postagem.AstroId),
+                    DataEdicao = DateTime.UtcNow,
+                    Postagem = postagemOriginal,
+                    TextoAntigo = postagemOriginal.Texto,
+                    Usuario = await _userManager.GetUserAsync(User),
+                    ImagemAntiga = postagemOriginal.Imagem
+                });
+
+                postagemOriginal.DataPostagem = postagem.DataPostagem;
+                postagemOriginal.Texto = postagem.Texto;
+                postagemOriginal.Imagem = postagem.LinkImagem;
+                await _postagemService.Update(postagemOriginal);
                 return Json(new { success = true });
             }
             catch (Exception ex)
@@ -126,6 +142,7 @@ public class FeedController : Controller
                 return Json(new { success = false, errors = errorMessages });
             }
         }
+
         validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
         return Json(new { success = false, errors = errorMessages });
     }
@@ -148,4 +165,6 @@ public class FeedController : Controller
             return Json(new { success = false, errors = new[] { err.Message } });
         }
     }
+
+    public IActionResult LogsEdicao(int Id) => View(_logEdicaoService.ObterTodosDePostagem(Id));
 }

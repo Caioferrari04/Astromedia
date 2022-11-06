@@ -5,8 +5,9 @@
 @section stylesheet {
     <link rel="stylesheet" href="~/css/Grid.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/recomendacoes.css" asp-append-version="true" />
+    @await RenderSectionAsync("stylesheet", required: false)
+    @await RenderSectionAsync("modal", false)
 }
-@await RenderSectionAsync("stylesheet", required: false)
 
 <div class="grid">
     <div class="sidebar">
@@ -21,5 +22,5 @@
 
 @section scripts {
     <script src="~/js/openTooltip.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("scripts", required: false)
 }
-@await RenderSectionAsync("scripts", required: false)

@@ -7,7 +7,12 @@ const TEMPLATE_EDICAO = document.getElementById('template-edicao').cloneNode(tru
 POSTAGENS.forEach(postagem => {
     postagem.addEventListener('atualizar', () => {
         const templateOriginal = document.getElementById('template-edicao');
-        if (templateOriginal) templateOriginal.remove();
+        if (templateOriginal) {
+            templateOriginal.querySelector('#template-botao-cancelar').dispatchEvent(new Event('click'));
+            if (templateOriginal.id == 'template-edicao') {
+                templateOriginal.remove();
+            }
+        };
 
         const valorOriginal = {
             texto: postagem.querySelector('.post-text')?.innerHTML.trim(),
@@ -21,11 +26,12 @@ POSTAGENS.forEach(postagem => {
         const textareaEdicao = novoTemplate.querySelector('textarea');
         textareaEdicao.style.height = document.querySelector('textarea').style.height;
         textareaEdicao.value = valorOriginal.texto;
-        
+        const linkImagem = novoTemplate.querySelector('#LinkImagem-template')
         if (valorOriginal.img) {
             const imgPreview = novoTemplate.querySelector('#template-img');
             imgPreview.src = valorOriginal.img;
             imgPreview.parentElement.style.display = 'block';
+            linkImagem.value = valorOriginal.img;
         }
 
         novoTemplate.querySelector('input[name="AstroId"]').value = document.getElementsByName('AstroId')[0].value;
@@ -40,8 +46,9 @@ POSTAGENS.forEach(postagem => {
         imagemForm.addEventListener('submit', async event => {
             event.preventDefault();
             const resposta = await saveImg(event.target);
-            novoTemplate.querySelector('#img-preview').setAttribute('src', resposta.linkImagem);
-            novoTemplate.querySelector('input[name="LinkImagem"]').value = resposta.linkImagem;
+            console.log(novoTemplate)
+            novoTemplate.querySelector('#template-img').setAttribute('src', resposta.linkImagem);
+            linkImagem.value = resposta.linkImagem;
             novoTemplate.querySelector('#template-img-preview').style.display = 'block';
         });
         
@@ -120,4 +127,19 @@ for (const item of document.getElementsByClassName('excluir-postagem')) {
             }
         )
     })
+}
+
+for (const item of document.getElementsByClassName('historico-postagem')) {
+    item.addEventListener('click', async event => {
+        const modalWrapper = document.getElementById('modal-log');
+        const response = await fetch(`${modalWrapper.getAttribute('data-url')}/${event.target.getAttribute('data-id')}`)
+        modalWrapper.innerHTML = await response.text()
+        item.parentElement.previousElementSibling.dispatchEvent(new Event('click'));
+        document.body.classList.add('modal-open');
+
+        modalWrapper.querySelector('.close-btn').addEventListener('click', () => {
+            modalWrapper.innerHTML = ""
+            document.body.classList.remove('modal-open');
+        });
+    });
 }
