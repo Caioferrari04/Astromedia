@@ -1,0 +1,27 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Configurações";
+}
+
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/configuracoes.css">
+    <link rel="stylesheet" href="~/css/postagem.css">
+
+}
+
+<div class="container text-light">
+    <div class="configuracoes">
+        <h1 class="is-center">Configurações da conta</h1>
+    
+        <nav class="tabs is-center">
+            <a asp-action="UpdateProfile" class="nav-button" id="info">Editar perfil</a>
+            <a asp-action="UpdatePassword" class="nav-button" id="alterar-senha">Alterar senha</a>
+            <a asp-action="DeleteAccount" class="nav-button" id="deletar">Deletar conta</a>
+        </nav>
+        <section class="conteudo-tabs">
+            <section class="conteudo-inner main">
+                @RenderBody()
+            </section>
+        </section>
+    </div>
+</div>

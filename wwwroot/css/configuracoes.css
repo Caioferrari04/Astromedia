@@ -1,0 +1,243 @@
+body {
+    background-image: url(https://images.pexels.com/photos/169789/pexels-photo-169789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+/* .configuracoes {
+    background-color: black;
+    height: 100%;
+    opacity: 0.5;
+    border-radius: 15px;
+} */
+
+/* Conteúdo Cadastro - Geral */
+
+.cad {
+    margin-top: -8vh;
+}
+
+.cad-content {
+    margin: auto;
+    transform: scale(0.85);
+}
+
+.container-cad {
+    width: 73%;
+    padding: 0;
+}
+
+/* Conteúdo Cadastro - Form */
+/* -- Header do Cadastro */
+
+.logo-box-cad {
+    margin: 18px auto;
+    flex-flow: column;
+}
+
+.img-logo-cad {
+    width: 50vw;
+}
+
+.logo-text-cad {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* -- Input do editar perfil */
+
+.inputbox-cad {
+    border: 1px solid var(--color-highlight) !important;
+    border-radius: 20px !important;
+    height: 50px !important;
+    margin-bottom: 15px;
+}
+
+.input-desc {
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    margin-top: -10px;
+}
+
+.inputbox-password-cad {
+    border: 1px solid var(--color-highlight) !important;
+    border-radius: 20px 0 0 20px !important;
+    height: 50px !important;
+    margin-bottom: 15px;
+    margin-right: 0;
+}
+
+.btn-show-password-cad {
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    display: flex;
+    height: 50px;
+    border-radius: 0 20px 20px 0;
+    background-color: var(--color-highlight);
+    margin-left: 0;
+}
+
+.btn-show-password-cad:active {
+    opacity: 0.5;
+}
+
+.btn-show-password-cad img {
+    height: 36px;
+}
+
+.form-label {
+    margin-left: 20px;
+}
+
+input[type=file] {
+    border: none !important;
+    color: #000;
+    background-color: #f0f0f0;
+    padding: 0 !important;
+    border-radius: 20px !important;
+}
+
+input[type=file]:hover::file-selector-button {
+    background-color: var(--color-secondary);
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 15px;
+    border: none;
+    background-color: var(--color-highlight);
+    padding: 10px 20px;
+    border-radius: 0 0 0 20px !important;
+    color: #000;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    height: 100%;
+}
+
+/* -- Submit do editar perfil */
+
+.checkbox-cad {
+    margin-bottom: 10px;
+}
+
+.checkbox-cad input {
+    margin-right: 10px;
+}
+
+.submit-btn-cad {
+    margin: 40px auto;
+    transition: .4s;
+    width: auto !important;
+    background: var(--bg-color);
+    border: 1px solid var(--color-highlight);
+    border-radius: 20px;
+}
+
+.submit-btn-cad:hover {
+    opacity: 0.9;
+}
+
+/* navbar */
+.tabs > a {
+    color: var(--color-lightGrey);
+}
+
+.tabs > a:hover {
+    color: var(--color-highlight) !important;
+    border-bottom: 2px solid var(--color-highlight) !important;
+}
+
+.active {
+    color: var(--color-highlight) !important;
+    border-bottom: 2px solid var(--color-highlight) !important;
+}
+
+/* Media Queries - Cadastro */
+
+@media screen and (min-width: 601px) and (max-width: 1154px) {
+    .cad {
+        margin-top: 0;
+    }
+    .img-logo-cad {
+        width: 80%;
+    }
+    .logo-box-cad {
+        flex-flow: column;
+    }
+    .inputbox-password-cad {
+        height: 50px !important;
+        margin-bottom: 18px;
+    }
+    .btn-show-password-cad {
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cad {
+        margin-top: 2vh;
+    }
+    .cad-content {
+        transform: scale(0.9);
+    }
+    .container-cad {
+        width: 100% !important;
+    }
+    .checkbox-cad {
+        font-size: 1.2rem;
+    }
+    .img-logo-cad {
+        width: 100%;
+    }
+    .inputbox-cad {
+        height: 43px !important;
+        border-radius: 15px !important;
+    }
+    .inputbox-password-cad {
+        height: 43px !important;
+    }
+    .btn-show-password-cad {
+        height: 43px;
+        border-radius: 0 15px 15px 0;
+    }
+    .logo-box-cad {
+        flex-flow: column;
+    }
+    .btn-show-password-cad img {
+        height: 33px;
+    }
+    .input-desc {
+        font-size: .9rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .cad {
+        margin-top: -5vh;
+    }
+    .cad-content {
+        transform: scale(0.80);
+        padding-top: 2px;
+    }
+    .container-cad {
+        width: 100% !important;
+    }
+    .img-logo-cad {
+        max-width: 100vw !important;
+        width: 88vw !important;
+    }
+    .inputbox-cad {
+        height: 38px !important;
+    }
+    .inputbox-password-cad {
+        height: 38px !important;
+    }
+    .logo-box-cad {
+        flex-flow: wrap;
+    }
+    .btn-show-password-cad {
+        height: 38px;
+    }
+    .input-desc {
+        font-size: .75rem;
+    }
+}

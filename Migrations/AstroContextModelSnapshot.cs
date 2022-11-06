@@ -40,7 +40,44 @@ namespace Astromedia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Astros", (string)null);
+                    b.ToTable("Astros");
+                });
+
+            modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AstroId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DataEdicao")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ImagemAntiga")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PostagemId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TextoAntigo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AstroId");
+
+                    b.HasIndex("PostagemId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("LogsEdicoes");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
@@ -72,7 +109,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Postagens", (string)null);
+                    b.ToTable("Postagens");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
@@ -160,7 +197,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuariosId");
 
-                    b.ToTable("AstroUsuario", (string)null);
+                    b.ToTable("AstroUsuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -297,6 +334,31 @@ namespace Astromedia.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
+                {
+                    b.HasOne("Astromedia.Models.Astro", "Astro")
+                        .WithMany()
+                        .HasForeignKey("AstroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Astromedia.Models.Postagem", "Postagem")
+                        .WithMany()
+                        .HasForeignKey("PostagemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Astromedia.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Astro");
+
+                    b.Navigation("Postagem");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>

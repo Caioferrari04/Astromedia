@@ -21,6 +21,14 @@ textarea:focus {
     position: absolute;
 }
 
+#template-edicao {
+    display: none;
+}
+
+.template-visivel {
+    display: block!important;
+}
+
 /* Área de Postagens - Geral */
 
 .between-config {
@@ -70,7 +78,7 @@ textarea:focus {
     display: none;
 }
 
-#post-input-box {
+#post-input-box, #template-edicao {
     background-color: var(--color-secondary);
     border-radius: 8px;
     margin-bottom: 10px;
@@ -107,12 +115,12 @@ textarea:focus {
 
 /* ** Imagens | post-input-box */
 
-#post-img-preview {
+#post-img-preview, #template-img-preview {
     display: none;  
     margin-bottom: 20px;
 }
 
-#post-img-preview img {
+#post-img-preview img, #template-img-preview img {
     height: auto; 
     display: flex;      
     align-items: center;
@@ -215,15 +223,93 @@ textarea:focus {
     top: -3px;
     cursor: pointer;
     width: 19px;
-    transition: all .3s;
+    transition: .3s;
+    transition-property: transform, opacity;
 }
 
-.report-btn:active, .report-btn:focus {
+.acoes-btn {
+    cursor: pointer;
+    transition: .3s;
+    transition-property: transform, opacity;
+}
+
+.report-btn:active, .report-btn:focus, .acoes-btn:active, .acoes-btn:focus {
     transform: scale(.9);
 }
 
-.report-btn:hover {
+.report-btn:hover, .acoes-btn:hover {
     opacity: 0.6;
+}
+
+.dropdown-acoes-container {
+    position: relative;
+}
+
+.dropdown-edicao {
+    --border-radius-dropdown: 15px;
+    position: absolute;
+    display: none;
+    list-style: none;
+    background-color: var(--color-primary);
+    /* border: 1px solid var(--bg-color); */
+    opacity: 1;
+    z-index: 900;
+    padding: 0;
+    border-radius: var(--border-radius-dropdown) 0 var(--border-radius-dropdown) var(--border-radius-dropdown);
+    margin-top: 0;
+    right: .8px;
+    /* top: 0; */
+    font-size: .8rem;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    line-height: 2!important;
+}
+
+.dropdown-edicao li {
+    cursor: pointer;
+    padding: .3rem .6rem;
+    border-bottom: 1px solid var(--bg-secondary-color);
+    transition: background-color .2s;
+}
+
+.dropdown-edicao li:hover {
+    background-color: var(--color-secondary);
+}
+
+.dropdown-edicao li:focus, .dropdown-edicao li:active {
+    background-color: var(--color-highlight);
+    color: #a6a7aa;
+}
+
+.dropdown-edicao li:first-of-type {
+    border-radius: var(--border-radius-dropdown) 0 0 0;
+}
+
+.dropdown-edicao li:last-of-type {
+    border-bottom: 0;
+    border-radius: 0 0 var(--border-radius-dropdown) var(--border-radius-dropdown);
+}
+
+.dropdown-edicao:after{
+    --tamanho-seta: 7.5px;
+    content:''; /* Required to display content */
+    position: absolute; /* Sets the position absolute to the top div */
+    top: 0;
+    right: 0; /* position the little arrow */
+    margin-left: calc(var(--tamanho-seta) * -1);
+    margin-top: calc(var(--tamanho-seta) * -1); /* Set margin equal to border px */
+    width: 0;
+    z-index:1;
+    height: 0;
+    border-bottom: solid var(--tamanho-seta) var(--color-primary); /* Creates the arrow pointing up, to change to a notch instead user border-top */
+    border-left: solid var(--tamanho-seta) transparent; /* Creates triangle effect */
+    border-right: solid var(--tamanho-seta) transparent; /* Creates triangle effect */
+}
+
+
+.dropdown-edicao-ativo {
+    display: block;
 }
 
 .usr-footer-comment {
@@ -271,20 +357,6 @@ textarea:focus {
 
 /* Media Queries - Postagens */
 
-@media screen and (min-width: 601px) and (max-width: 1154px) {
-    /* .grid {
-        display: grid;
-        flex-flow: row;
-        align-items: flex-start;
-        grid-template-columns: 1fr 5fr 2fr !important;
-    } */
-
-    #post-holder {
-        /* width: 45vw; */
-        /* margin-top: 8vh; */
-    }
-}
-
 @media screen and (max-width: 600px) {
     .sidebar {
         display: none;
@@ -315,6 +387,5 @@ textarea:focus {
 @media screen and (max-width: 320px) {
     #post-holder {
         width: 100%;
-        /* margin-top: 12vh; */
     }
 }

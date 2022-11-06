@@ -2,72 +2,63 @@ const form = document.querySelector("#postform");
 let profilePicture = "";
 let userName = "";
 
-form.addEventListener("submit",  (event) => {
-	event.preventDefault();
-    handleFormSubmit(event);
-});
-
-function handleFormSubmit(event) {	
-	let form2 = event.currentTarget;
-
-	let data = {};
-	data.Texto = form2.elements[0].value;
-	data.UsuarioId = null;
-	data.AstroId = form2.elements[3].value;
-	userName = form2.elements[4].value;
-	profilePicture = form2.elements[5].value;
-
-	const file = document.getElementById('img-up').files[0];
-	(file == null) ? data.Imagem = null : data.Imagem = saveImg(file);
-
-	if(data.Texto.split(" ").join("") != "" || data.Imagem != null) {
-		(data.Texto.split(" ").join("") == "") ? data.Texto = null : data.Texto = data.Texto;
-		fetch(
-			'/Feed/SavePostagem', 
-			{
-				method: "POST",
-				body: JSON.stringify(data),
-				headers: {"Content-type": "application/json; charset=UTF-8"}
-			}
-		).then(response => {
-			
-			return response.json();
-		}).then(json => {
-			if(!json.success) {
-				let messages = []
-				for (let i = 0; i<json.errors.length; i++) {
-					messages.push(json.errors[i])
-				}
-				
-				handleError(messages)
-			}
-			else {
-				// createPost(json.data)
-				window.location.reload();
-			}
-		});
-	}
+const imagemInput = document.getElementById('Imagem')
+const imagemForm = document.getElementById('uploadImagem')
+if (form) {
+	imagemInput.addEventListener('input', () => imagemForm.dispatchEvent(new Event('submit')))
+	imagemForm.addEventListener('submit', async event => {
+		event.preventDefault();
+		const resposta = await saveImg(event.target);
+		document.getElementById('img-preview').setAttribute('src', resposta.linkImagem);
+		document.getElementById('LinkImagem').value = resposta.linkImagem;
+		document.getElementById('post-img-preview').style = 'display: block';
+	});
+	
+	form.addEventListener("submit",  event => {
+		event.preventDefault();
+		handleFormSubmit(event.target, event.target.action);
+	});
 }
 
-function saveImg(file) {
-	let formData = new FormData();
-	formData.append('image', file);
 
-	let imgUrl = fetch('https://api.imgur.com/3/image', {
+async function handleFormSubmit(form, url) {	
+	const body = new FormData(form);
+	const fetchConfig = { method: 'POST', body };
+
+	const response = await fetch(url, fetchConfig);
+	if (!response.ok) {
+		handleError(['Houve um erro com sua requisição, tente novamente mais tarde!']);
+		return;
+	}
+
+	const json = await response.json();
+
+	if (!json.success) {
+		const mensagens = [];
+		json.errors.forEach(erro => mensagens.push(erro));
+		handleError(mensagens);
+		return;
+	}
+
+	window.location.reload();
+}
+
+async function saveImg(form) {
+	console.log(form);
+	const formData = new FormData(form);
+
+	const imgUrl = await fetch('/Feed/UploadImagem', {
 		method: "POST",
-		headers: {
-			Authorization: "Client-ID aca6d2502f5bfd8",
-		},
 		body: formData
 	});
 
 	if(!imgUrl.ok) {
-		let errorsMessage = ["Não foi possível salvar a postagem"];
+		const errorsMessage = ["Não foi possível salvar a imagem!"];
 		handleError(errorsMessage)
 		return null;
 	}
 
-	return imgUrl.json().link;
+	return await imgUrl.json();
 }
 
 function handleError(errorsMessage) {

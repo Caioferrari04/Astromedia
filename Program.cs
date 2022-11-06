@@ -44,6 +44,7 @@ builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
 
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
+builder.Services.AddScoped<LogEdicaoService>();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
@@ -54,6 +55,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/SignIn/LogInView";
     options.SlidingExpiration = true;
 });
+builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();
 
