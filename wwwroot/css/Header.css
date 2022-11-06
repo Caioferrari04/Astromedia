@@ -6,6 +6,10 @@
     height: 8vh;
 }
 
+.header .container {
+    max-width: 1400px;
+}
+
 .header > a {
     font-size: 24px;
 }
@@ -39,6 +43,12 @@
 .logo-user:hover {
     border: 3px solid var(--color-highlight);
     opacity: 100%!important;
+}
+
+@media screen and (max-width: 1200px) {
+    .header .container {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 768px) {

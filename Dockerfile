@@ -3,6 +3,7 @@ ARG PGHOST
 ARG PGDATABASE
 ARG PGPASSWORD
 ARG PGPORT
+ARG CLIENT_ID
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app

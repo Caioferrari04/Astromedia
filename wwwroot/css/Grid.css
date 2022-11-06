@@ -1,12 +1,20 @@
+main.container {
+    margin-top: 2vh;
+    max-width: 1400px;
+}
+
 /* Estilos  */
 .grid{
     display: grid;
-    grid-template-columns: 1fr 8fr 3fr;
-    align-items: flex-start;
+    grid-template-columns: 1fr 7fr 4fr;
 }
 
 /* Side bar */
 .sidebar{
+    position: sticky; /* Tá como sticky por razões de teste */
+    left: 0;
+    height: 100%;
+    padding: 10px;
     grid-column: 1;
     display: flex;
     flex-direction: column;
@@ -19,8 +27,8 @@
 
 .item img{
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     cursor: pointer;
 }
 .astro-active {
@@ -37,9 +45,42 @@
 
 /* Responsividade */
 @media screen and (max-width: 1200px) {
+    
+    main.container {
+        max-width: 100%;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 5fr 2fr;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    main.container {
+        max-width: 720px;
+    }
+    
     .grid{
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .recomendacoes { display: none!important; }
+}
+
+@media screen and (max-width: 767px) {
+    main.container {
+        max-width: 540px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    main.container {
+        max-width: 100%;
     }
 }

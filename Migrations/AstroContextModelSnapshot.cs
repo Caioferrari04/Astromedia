@@ -57,6 +57,9 @@ namespace Astromedia.Migrations
                     b.Property<DateTime>("DataPostagem")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Imagem")
+                        .HasColumnType("text");
+
                     b.Property<string>("Texto")
                         .HasColumnType("text");
 
@@ -129,6 +132,9 @@ namespace Astromedia.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("isAdmin")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 

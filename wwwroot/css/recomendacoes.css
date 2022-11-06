@@ -13,9 +13,10 @@
 }
 
 .recomendacao-background {
-    width: 100%;
+    height: 5rem;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    background-size: cover;
 }
 
 .recomendacao-titulo {
@@ -26,12 +27,12 @@
     /* padding-left: .8rem; */
     /* padding-right: .8rem; */
     position: relative;
-    top: -2.3rem;
+    top: -1.8rem;
 }
 
 .recomendacao-titulo img {
     position: relative;
-    top: -1.2rem;
+    top: -1rem;
     width: 62px;
     height: 62px;
     border-radius: 50px;
@@ -42,7 +43,6 @@
 .recomendacao-corpo {
     position: relative;
     padding: 1rem;
-    width: 20vw;
     display: flex;  
     flex-direction: column;
     align-items: flex-start;
@@ -65,12 +65,33 @@
 }
 
 @media screen and (max-width: 1700px) {
-    .recomendacao-titulo h5 {
-        font-size: 1.5rem;
+    .recomendacao-titulo h6 {
+        font-size: 1.2rem;
     }
 }
 @media screen and (max-width: 1400px) {
-    .recomendacao-titulo h5 {
-        font-size: 1.3rem;
+    .recomendacao-corpo {
+        align-items: center;
+    }
+
+    .recomendacao-titulo h6 {
+        font-size: 1rem;
+    }
+
+    .recomendacao-titulo img {
+        top: 0;
+    }
+
+    .recomendacao-titulo {
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+        position: relative;
+    }
+
+    .recomendacao .botao-recomendacao {
+        font-size: .8rem;
+        padding: 8px 1rem;
+        width: 100%;
     }
 }

@@ -12,11 +12,11 @@
         <div class="container logo-box-cad row is-vertical-align is-horizontal-align">
             <!-- substituir por img nova -->
             <img class="img-logo-cad col" src="~/img/logo-main.png" alt="Logo Astromedia" class="maxlogo"> 
-            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">Cadastro</h2>
+            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">Cadastre-se</h2>
         </div>
 
         <div class="container container-cad">
-            <div asp-validation-summary="ModelOnly" class="text-error lista-erro"></div>
+            <div asp-validation-summary="ModelOnly" class="erro"></div>
             
             <div class="row">
                 <label class="col" asp-for="Nome">
@@ -24,7 +24,8 @@
                     <input class="inputbox-cad" asp-for="Nome" required>
                     <div class="input-desc">
                         <p>Seu nome de usuário deve conter pelo menos 4 caracteres, 
-                        e no máximo 15 caracteres. Sem caracteres especiais.</p>
+                        e no máximo 15 caracteres, assim como pode conter um dos 
+                        caracteres a seguir "-", "_". Sem caracteres especiais.</p>
                     </div>
                 </label>
             </div>
@@ -55,7 +56,7 @@
                         </div>
                     </div>
                     <div class="input-desc">
-                        <p>Sua senha deve conter pelo menos 6 caracteres, uma letra maiuscula e números. Sem caracteres especiais.</p>
+                        <p>Sua senha deve conter pelo menos 6 caracteres, uma letra maiuscula, um dos seguintes caracteres "-", "_" e números. Sem caracteres especiais.</p>
                     </div>
                 </label>
             </div>

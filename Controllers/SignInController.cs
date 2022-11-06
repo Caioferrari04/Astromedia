@@ -1,5 +1,6 @@
 using Astromedia.DTO;
 using Astromedia.Models;
+using Astromedia.Validations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -31,34 +32,43 @@ public class SignInController : Controller
 
         if (validationResult.IsValid)
         {                                                              /*Adicionar foto padrão*/
-            var novoUsuario = new Usuario { 
-                UserName = usuario.Nome, 
-                FotoPerfil = "/img/default-img.jpg", 
-                Email = usuario.Email, 
-                DataNascimento = usuario.DataNascimento.ToUniversalTime() 
+            var novoUsuario = new Usuario
+            {
+                UserName = usuario.Nome,
+                FotoPerfil = "/img/default-img.jpg",
+                Email = usuario.Email,
+                DataNascimento = usuario.DataNascimento.ToUniversalTime()
             };
-            try {
+            try
+            {
                 var resultado = await _userManager.CreateAsync(novoUsuario, usuario.Senha);
 
-                if (resultado.Succeeded) {
+                if (resultado.Succeeded)
+                {
                     await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
 
                     return RedirectToAction("Index", "Home");
                 }
-            
+
                 foreach (var error in resultado.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
-                } 
-            catch(Exception error)
+            }
+            catch (Exception error)
             {
                 Console.WriteLine(error.Message);
-            } 
+            }
         }
 
         foreach (var error in validationResult.Errors)
             ModelState.AddModelError(string.Empty, error.ErrorMessage);
 
         return View(); /*Atualizar pagina*/
+    }
+
+    public async Task<IActionResult> LogInView() 
+    {
+        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+        return View();
     }
 
     public async Task<IActionResult> LogIn()
@@ -88,15 +98,15 @@ public class SignInController : Controller
             {
                 ModelState.AddModelError(string.Empty, @"Tentativa de login inválida, 
                 verifique se digitou seus dados corretamente");
-                return View("LogInView");
+                return RedirectToAction(nameof(LogInView));
             }
 
-            return RedirectToAction("Index", "Home"); /*Redirecionar para home*/
+            return RedirectToAction("Postagens", "Feed"); /*Redirecionar para o feed :)*/
         }
         catch
         {
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
-            return View("LogInView");
+            return RedirectToAction(nameof(LogInView));
         }
     }
 

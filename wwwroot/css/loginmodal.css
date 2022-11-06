@@ -18,7 +18,7 @@
     font-weight: lighter;
     padding-top: 10px;
     margin: auto;
-    transform: scale(0.75)
+    transform: scale(0.75);
 }
 
 /* Conteúdo Modal - Form */
@@ -133,7 +133,7 @@
 
 @keyframes zoomin {
     from {transform: scale(0); opacity: 0;}
-    to {transform: scale(0.75); opacity: 1;}
+    to {transform: scale(inherit); opacity: 1;}
 }
 
 /* Media Queries - Modal */

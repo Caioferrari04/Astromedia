@@ -8,22 +8,33 @@ body {
 
 /* Conteúdo Cadastro - Geral */
 
-.cad {
-    margin-top: -11vh;
+.cad p {
+    font-size: smaller
 }
 
 .cad-content {
     margin: auto;
-    transform: scale(0.85);
+    max-width: 800px;
+    /* transform: scale(); */
 }
 
 .container-cad {
-    width: 73%;
+    width: 80%;
     padding: 0;
 }
 
 /* Conteúdo Cadastro - Form */
 /* -- Header do Cadastro */
+
+.erro {
+    color: rgb(255, 73, 73);
+    background-color: rgba(255, 255, 255, 0.068);
+    border-radius: 50px;
+}
+
+.erro li {
+    list-style: none;
+}
 
 .logo-box-cad {
     margin: 18px auto;
@@ -31,7 +42,8 @@ body {
 }
 
 .img-logo-cad {
-    width: 50vw;
+    /* margin-top: 6vh; */
+    width: 30vw;
 }
 
 .logo-text-cad {
@@ -46,6 +58,8 @@ body {
     border-radius: 20px !important;
     height: 50px !important;
     margin-bottom: 15px;
+    padding: 1rem!important;
+    font-size: 1.2rem!important;
 }
 
 .input-desc {
@@ -57,7 +71,10 @@ body {
 .inputbox-password-cad {
     border: 1px solid var(--color-highlight) !important;
     height: 50px !important;
+    border-radius: 20px 0 0 20px !important;
     margin-bottom: 15px;
+    padding: 1rem!important;
+    font-size: 1.2rem!important;
     margin-right: 0;
 }
 
@@ -82,11 +99,16 @@ body {
 /* -- Submit do Cadastro */
 
 .checkbox-cad {
-    margin-bottom: 10px;
+    cursor: pointer;
+    /* margin-bottom: 10px; */
+    font-size: 1.3rem;
+    width: 100%;
 }
 
 .checkbox-cad input {
     margin-right: 10px;
+    width: 1rem;
+    height: 1rem;
 }
 
 .submit-btn-cad {
@@ -131,7 +153,7 @@ body {
 
 @media screen and (max-width: 600px) {
     .cad {
-        margin-top: -4vh;
+        margin-top: 2vh;
     }
     .cad-content {
         transform: scale(0.9);
@@ -169,7 +191,7 @@ body {
 
 @media screen and (max-width: 320px) {
     .cad {
-        margin-top: -13vh;
+        margin-top: -5vh;
     }
     .cad-content {
         transform: scale(0.80);

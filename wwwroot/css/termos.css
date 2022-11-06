@@ -4,42 +4,25 @@ body{
     background-size: cover;
 }
 
-.terms-box{
+main.container{
     max-width: 1400px;
+}
+
+.terms-box{
     font-family: Arial, Helvetica, sans-serif;
-    padding: 30px;
+    /* padding: 60px 30px; */
 
 }
 
 .terms-text{
-    padding: 0 20px;
     /* height: 700px; */
-    font-size: 14px;
+    font-size: 1.2rem;
     font-weight: 500;
     color: #f1f1f1f1;
     /* size: 2rem; */
     /* font-size: 20px; */
-    /* text-align: justify; */
-    /* overflow-y: scroll; */
+    text-align: justify;
 }
 
-.terms-text p {
-    font-size: 1.1rem;
-    margin-bottom: 4rem;
-}
 
-@media screen and (max-width: 550px) {
-    main.container {
-        width: 100%;
-        padding: 0;
-    }
-    
-    .terms-box {
-        width: 100%;
-    }
 
-    .terms-text p {
-        font-size: .9rem;
-        line-height: 1.8rem;
-    }
-}
