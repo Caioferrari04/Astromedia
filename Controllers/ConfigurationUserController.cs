@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Astromedia.Services;
-using Microsoft.AspNetCore.Authentication;
+using Astromedia.Validations;
 
 namespace Astromedia.Controllers;
 
@@ -32,7 +32,6 @@ public class ConfigurationUserController : Controller
         usuarioDTO.DataNascimento = usuario.DataNascimento;
         usuarioDTO.Email = usuario.Email;
         usuarioDTO.Senha = usuario.PasswordHash;
-        usuarioDTO.FotoPerfil = usuario.FotoPerfil;
         return View(usuarioDTO);
     }
 
@@ -49,7 +48,11 @@ public class ConfigurationUserController : Controller
             usuario.UserName = usuarioDTO.Nome;
             usuario.DataNascimento = usuarioDTO.DataNascimento.ToUniversalTime();
             usuario.Email = usuarioDTO.Email;
-            usuario.FotoPerfil = usuarioDTO.FotoPerfil;                                                              
+            if(usuarioDTO.FotoPerfil is not null)
+            {
+                var respostaImgur = await new ImgurService().UploadImagem(usuarioDTO.FotoPerfil);
+                usuario.FotoPerfil = respostaImgur.Data.data.link;  
+            }                                                           
             try 
             {
                 var resultado = await _userManager.UpdateAsync(usuario);
@@ -107,31 +110,6 @@ public class ConfigurationUserController : Controller
     }
 
     public IActionResult DeleteAccount() => View();
-
-    // [HttpPost]
-    // public async Task<IActionResult> DeleteAccount(UsuarioDTO usuarioDTO)
-    // {
-    //     var usuario = await _userManager.GetUserAsync(User);
-    //     var checkPassword =  await _userManager.CheckPasswordAsync(usuario, usuarioDTO.SenhaAtual);
-
-    //     if (checkPassword)
-    //     {                                                        
-    //         try 
-    //         {
-    //             var resultado = await _userManager.DeleteAsync(usuario);
-    //             foreach (var error in resultado.Errors)
-    //                 ModelState.AddModelError(string.Empty, error.Description);
-    //         } 
-    //         catch(Exception error)
-    //         {
-    //             Console.WriteLine(error.Message);
-    //         } 
-    //     }
-
-    //     ModelState.AddModelError(string.Empty, "Senha incorreta");
-
-    //     return View();
-    // }
 
     [HttpPost]
     public async Task<IActionResult> DeleteAccount(UsuarioDTO usuarioDTO)

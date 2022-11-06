@@ -10,12 +10,12 @@ public class UsuarioValidator : AbstractValidator<UsuarioDTO>
     {
         RuleFor(m => m.Nome)
             .MinimumLength(4)
-            .WithMessage("Nome de usuario muito pequeno");
+            .WithMessage("Nome de usuario muito pequeno")
             .Unless(m => m.Atualizar == true && m.Senha != null);
 
         RuleFor(m => m.Nome)
             .MaximumLength(15)
-            .WithMessage("Nome de usuario muito grande");
+            .WithMessage("Nome de usuario muito grande")
             .Unless(m => m.Atualizar == true && m.Senha != null);
 
         RuleFor(m => m.Nome)

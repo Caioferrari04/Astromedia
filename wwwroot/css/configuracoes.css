@@ -44,7 +44,7 @@ body {
     font-size: 2rem;
 }
 
-/* -- Input do Cadastro */
+/* -- Input do editar perfil */
 
 .inputbox-cad {
     border: 1px solid var(--color-highlight) !important;
@@ -61,6 +61,7 @@ body {
 
 .inputbox-password-cad {
     border: 1px solid var(--color-highlight) !important;
+    border-radius: 20px 0 0 20px !important;
     height: 50px !important;
     margin-bottom: 15px;
     margin-right: 0;
@@ -84,7 +85,35 @@ body {
     height: 36px;
 }
 
-/* -- Submit do Cadastro */
+.form-label {
+    margin-left: 20px;
+}
+
+input[type=file] {
+    border: none !important;
+    color: #000;
+    background-color: #f0f0f0;
+    padding: 0 !important;
+    border-radius: 20px !important;
+}
+
+input[type=file]:hover::file-selector-button {
+    background-color: var(--color-secondary);
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 15px;
+    border: none;
+    background-color: var(--color-highlight);
+    padding: 10px 20px;
+    border-radius: 0 0 0 20px !important;
+    color: #000;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    height: 100%;
+}
+
+/* -- Submit do editar perfil */
 
 .checkbox-cad {
     margin-bottom: 10px;

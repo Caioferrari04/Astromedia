@@ -4,7 +4,7 @@
 }
 @model UsuarioDTO
 
-<form class="cad-content text-light" method="post" asp-action="UpdateProfile" asp-controller="ConfigurationUser">
+<form class="cad-content text-light" enctype="multipart/form-data" method="post" asp-action="UpdateProfile" asp-controller="ConfigurationUser">
 
     <div class="container container-cad">
         <div asp-validation-summary="ModelOnly" class="text-error"></div>
@@ -35,15 +35,24 @@
         </div>
 
         <div class="row">
-            <label class="col" asp-for="FotoPerfil">
+            @* <label class="col" asp-for="FotoPerfil">
                 @Html.DisplayNameFor(m => m.FotoPerfil)
-                <input class="inputbox-cad" asp-for="FotoPerfil">
+                <input type="file" class="inputbox-cad" >
+            </label> *@
+
+            @* <label for="formFile" class="form-label col" asp-for="FotoPerfil">
+                Foto de perfil
+                <input class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" id="formFile" asp-for="FotoPerfil">
+            </label> *@
+            <label class="text-light col" asp-for="FotoPerfil">
+                Foto de perfil
+                <input asp-for="FotoPerfil" accept="image/png, image/gif, image/jpeg"/>
             </label>
         </div>
 
         <div class="row">
             <div class="col">
-                <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Juntar-se!</button>
+                <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Editar</button>
             </div>
         </div>
     </div>
