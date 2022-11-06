@@ -1,0 +1,62 @@
+@{
+    Layout = "Index";
+    ViewData["Title"] = "Editar perfil";
+}
+@model UsuarioDTO
+
+<form class="cad-content text-light" enctype="multipart/form-data" method="post" asp-action="UpdateProfile" asp-controller="ConfigurationUser">
+
+    <div class="container container-cad">
+        <div asp-validation-summary="ModelOnly" class="text-error"></div>
+        
+        <div class="row">
+            <label class="col" asp-for="Nome">
+                @Html.DisplayNameFor(m => m.Nome)
+                <input class="inputbox-cad" asp-for="Nome">
+                <div class="input-desc">
+                    <p>Seu nome de usuário deve conter pelo menos 4 caracteres, 
+                    e no máximo 15 caracteres. Sem caracteres especiais.</p>
+                </div>
+            </label>
+        </div>
+
+        <div class="row">
+            <label class="col" asp-for="Email">
+                @Html.DisplayNameFor(m => m.Email)
+                <input class="inputbox-cad" asp-for="Email">
+            </label>
+        </div>
+
+        <div class="row">
+            <label class="col" asp-for="DataNascimento">
+                @Html.DisplayNameFor(m => m.DataNascimento)
+                <input class="inputbox-cad" asp-for="DataNascimento">
+            </label>
+        </div>
+
+        <div class="row">
+            @* <label class="col" asp-for="FotoPerfil">
+                @Html.DisplayNameFor(m => m.FotoPerfil)
+                <input type="file" class="inputbox-cad" >
+            </label> *@
+
+            @* <label for="formFile" class="form-label col" asp-for="FotoPerfil">
+                Foto de perfil
+                <input class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" id="formFile" asp-for="FotoPerfil">
+            </label> *@
+            <label class="text-light col" asp-for="FotoPerfil">
+                Foto de perfil
+                <input asp-for="FotoPerfil" accept="image/png, image/gif, image/jpeg"/>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="col submit-btn-cad button is-vertical-align is-horizontal-align">Editar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/js/configuracoes-tab.js" asp-append-version="true"></script>
+<script>mostrarAba(0)</script>
