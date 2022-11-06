@@ -1,9 +1,10 @@
-@* @using Microsoft.AspNetCore.Identity;
-@inject SignInManager<Usuario> SignInManager;
-@inject UserManager<Usuario> UserManager; *@
+@using Microsoft.AspNetCore.Identity;
+@* @inject SignInManager<Usuario> SignInManager; *@
+@inject UserManager<Usuario> UserManager;
 @inject AstroService _service;
 @{
     var astros = await _service.GetAllRecommended();
+    var usuario = await UserManager.GetUserAsync(User);
 }
 
 
@@ -16,7 +17,14 @@
             <img src="@astro.Foto" class="recomendacao-img" />    
             <h6><a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="text-white">@astro.Nome</a></h6>
         </header>
-        <button class="button primary botao-recomendacao">Juntar-se</button>
+        @if (usuario.Astros?.Contains(astro) is true) 
+        {
+            <a class="button primary botao-recomendacao" asp-action="SairForum" asp-route-id="@astro.Id">Sair de forum</a>
+        }
+        else 
+        {
+            <a class="button primary botao-recomendacao" asp-action="EntrarForum" asp-route-id="@astro.Id">Juntar-se</a>
+        }
     </div>
 </div>  
 }

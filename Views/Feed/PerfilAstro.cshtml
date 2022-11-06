@@ -23,7 +23,7 @@
         </div>
         @if (usuario.Astros?.Find(astro => astro.Id == Model.Id) is not null) 
         {
-            <a class="join-btn text-light bd-light" asp-action="EntrarForum" asp-route-id="@Model.Id">Sair do fórum</a>
+            <a class="join-btn text-light bd-light" asp-action="SairForum" asp-route-id="@Model.Id">Sair do fórum</a>
         }
         else
         {
