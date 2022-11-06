@@ -16,7 +16,6 @@ COPY ["Astromedia.csproj", "."]
 RUN dotnet restore "./Astromedia.csproj"
 COPY . .
 WORKDIR "/Astromedia/."
-RUN dotnet ef database update
 RUN dotnet build "Astromedia.csproj" -c Release -o /app/build
 
 FROM build AS publish
