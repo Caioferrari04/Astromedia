@@ -20,6 +20,8 @@ main.container {
     width: initial;
     padding: 0;
     overflow-x: hidden;
+    margin: 0;
+    max-width: 100%;
 }
 
 #hero{
