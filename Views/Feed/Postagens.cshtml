@@ -27,22 +27,26 @@
         <p id="post-holder-text">Crie sua postagem</p>
         <div id="post-input-box" class="is-vertical-align is-horizontal-align">
             <div class="post-input-content">
+                <form asp-action="UploadImagem" id="uploadImagem"></form>
                 <form id="postform" method="post">
                     <div asp-validation-summary="All" class="text-error"></div>
-                    <textarea class="is-full-width" name="posttext" form="postform" cols="100%" rows="auto" placeholder="Escreva aqui" maxlength="280"></textarea>
-                    <div id="post-img-preview"></div>
+                    <textarea class="is-full-width" name="Texto" form="postform" cols="100%" rows="auto" placeholder="Escreva aqui" maxlength="280"></textarea>
+                    <div id="post-img-preview">
+                        <img src="" id="img-preview">
+                        <input type="hidden" name="LinkImagem" id="LinkImagem">
+                    </div>
                     <div class="between-config">
                         <div class="post-input-imgcon is-vertical-align is-left">
-                            <label for="img-up">
+                            <label for="Imagem">
                                 <img class="post-footer-icon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
                             </label>
-                            <input id="img-up" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg">
+                            <input id="Imagem" name="Imagem" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg" form="uploadImagem">
                         </div>
                         <button type="submit" class="submit-post-btn button outline is-vertical-align is-right">Enviar</button>
                     </div>
                     <input type="hidden" value="@id" name="AstroId">
-                    <input type="hidden" value="@user.UserName">
-                    <input type="hidden" value="@user.FotoPerfil">
+                    @*<input type="hidden" value="@user.UserName" name="Usuario">*@
+                    @*<input type="hidden" value="@user.FotoPerfil">*@
                 </form>
             </div>
         </div>
@@ -197,7 +201,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
     <script src="~/js/textarea-post.js"></script>
     <script src="~/js/commentmodal.js"></script>
-    <script src="~/js/post-img-insert.js"></script>
+    @*<script src="~/js/post-img-insert.js"></script>*@
     @*<script src="~/js/comment-behav.js"></script>*@
     <script src="~/js/submit-post.js"></script>
 }

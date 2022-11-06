@@ -1,6 +1,5 @@
 using Astromedia.DTO;
 using FluentValidation;
-using FluentValidation.Validators;
 
 namespace Astromedia.Validations;
 
@@ -10,7 +9,7 @@ public class PostagemValidator : AbstractValidator<PostagemDTO>
     {
         RuleFor(p => p.Texto)
             .NotEmpty()
-            .When(p => p.Imagem == null)
+            .When(p => p.LinkImagem == null)
             .WithMessage("Postagem inválida");
         RuleFor(p => p.Texto)
             .Matches(@"^([1-9a-zA-ZáàâãéêíóôõöúçñÀÁÂÃÉÊÍÓÔÕÚÜÇ ?=.*@%'}{<>()[\]\"",.^?;#:~=+_*-.|/\\])\w*")
