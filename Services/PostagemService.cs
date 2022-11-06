@@ -13,21 +13,21 @@ public class PostagemService
         _astroContext = astroContext;
     }
 
-    public void Create(PostagemDTO postagemDTO)
+    public async Task Create(PostagemDTO postagemDTO)
     {
-        var astro = _astroContext.Astros.Find(postagemDTO.AstroId);
-        var usuario = _astroContext.Users.Find(postagemDTO.UsuarioId);
+        var astroTask = _astroContext.Astros.FindAsync(postagemDTO.AstroId);
+        var usuarioTask = _astroContext.Users.FindAsync(postagemDTO.UsuarioId);
 
         Postagem postagem = new Postagem(
             postagemDTO.Texto,
             postagemDTO.DataPostagem,
-            postagemDTO.Imagem,
-            usuario,
-            astro
+            postagemDTO.LinkImagem,
+            await usuarioTask,
+            await astroTask
         );
 
-        _astroContext.Postagens.Add(postagem);
-        _astroContext.SaveChanges();
+        await _astroContext.Postagens.AddAsync(postagem);
+        await _astroContext.SaveChangesAsync();
     }
 
     public List<Postagem> GetAllByAstroId(int id)

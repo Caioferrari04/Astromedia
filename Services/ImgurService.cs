@@ -5,7 +5,7 @@ namespace Astromedia.Services;
 
 public class ImgurService
 {
-    private readonly RestClient client = new RestClient("https://api.imgur.com");
+    private readonly RestClient client = new("https://api.imgur.com");
 
     public async Task<RestResponse<Root>> UploadImagem(IFormFile foto)
     {
@@ -14,7 +14,6 @@ public class ImgurService
         request.AlwaysMultipartFormData = true;
 
         byte[] arquivo;
-
         using (var ms = new MemoryStream())
         {
             foto.CopyTo(ms);

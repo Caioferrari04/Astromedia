@@ -43,7 +43,7 @@ public class FeedController : Controller
     }
 
     [HttpPost]
-    public async Task<JsonResult> SavePostagem([FromBody] PostagemDTO postagem)
+    public async Task<JsonResult> SavePostagem([FromForm] PostagemDTO postagem)
     {
         var usuario = await _userManager.GetUserAsync(User);
         var validator = new PostagemValidator();
@@ -56,14 +56,8 @@ public class FeedController : Controller
             postagem.DataPostagem = DateTime.UtcNow;
             try
             {
-                _postagemService.Create(postagem);
-                var data = new
-                {
-                    dataPostagem = postagem.DataPostagem.ToLocalTime().ToString("dd/MM/yyyy HH:mm"),
-                    imagem = postagem.Imagem,
-                    texto = postagem.Texto
-                };
-                return Json(new { success = true, data = data });
+                await _postagemService.Create(postagem);
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {
@@ -89,12 +83,26 @@ public class FeedController : Controller
         return RedirectToAction(nameof(PerfilAstro), new { id = id });
     }
 
-    public async Task<IActionResult> SairForum(int id) 
+    public async Task<IActionResult> SairForum(int id)
     {
         var usuario = await _userManager.GetUserAsync(User);
 
         await _astroService.QuitForum(id, usuario);
 
         return RedirectToAction(nameof(PerfilAstro), new { id = id });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadImagem([FromForm] IFormFile Imagem)
+    {
+        try
+        {
+            var respostaImgur = await new ImgurService().UploadImagem(Imagem);
+            return Json(new { sucesso = true, linkImagem = respostaImgur.Data.data.link });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { sucesso = false, erro = ex.Message });
+        }
     }
 }
