@@ -105,4 +105,47 @@ public class FeedController : Controller
             return Json(new { sucesso = false, erro = ex.Message });
         }
     }
+
+    public async Task<IActionResult> UpdatePostagem([FromForm] PostagemDTO postagem)
+    {
+        var validator = new PostagemValidator();
+        var validationResult = validator.Validate(postagem);
+        var errorMessages = new List<string>();
+
+        if (validationResult.IsValid)
+        {
+            postagem.DataPostagem = DateTime.UtcNow;
+            try
+            {
+                await _postagemService.Update(postagem);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                errorMessages.Add(ex.Message);
+                return Json(new { success = false, errors = errorMessages });
+            }
+        }
+        validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
+        return Json(new { success = false, errors = errorMessages });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeletePostagem(int id)
+    {
+        try
+        {
+            var postagem = await _postagemService.GetById(id);
+            var usuario = await _userManager.GetUserAsync(User);
+
+            if (!usuario.Postagens.Contains(postagem) && !usuario.isAdmin) throw new Exception("Não pode excluir a postagem dos outros! Vá embora!");
+
+            await _postagemService.Delete(postagem);
+            return Json(new { success = true });
+        }
+        catch (Exception err)
+        {
+            return Json(new { success = false, errors = new[] { err.Message } });
+        }
+    }
 }
