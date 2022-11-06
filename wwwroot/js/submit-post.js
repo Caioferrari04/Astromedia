@@ -4,25 +4,28 @@ let userName = "";
 
 const imagemInput = document.getElementById('Imagem')
 const imagemForm = document.getElementById('uploadImagem')
-imagemInput.addEventListener('input', () => imagemForm.dispatchEvent(new Event('submit')))
-imagemForm.addEventListener('submit', async event => {
-	event.preventDefault();
-	const resposta = await saveImg(event.target);
-    document.getElementById('img-preview').setAttribute('src', resposta.linkImagem);
-	document.getElementById('LinkImagem').value = resposta.linkImagem;
-	document.getElementById('post-img-preview').style = 'display: block';
-});
+if (form) {
+	imagemInput.addEventListener('input', () => imagemForm.dispatchEvent(new Event('submit')))
+	imagemForm.addEventListener('submit', async event => {
+		event.preventDefault();
+		const resposta = await saveImg(event.target);
+		document.getElementById('img-preview').setAttribute('src', resposta.linkImagem);
+		document.getElementById('LinkImagem').value = resposta.linkImagem;
+		document.getElementById('post-img-preview').style = 'display: block';
+	});
+	
+	form.addEventListener("submit",  event => {
+		event.preventDefault();
+		handleFormSubmit(event.target, event.target.action);
+	});
+}
 
-form.addEventListener("submit",  event => {
-	event.preventDefault();
-    handleFormSubmit(event.target);
-});
 
-async function handleFormSubmit(form) {	
+async function handleFormSubmit(form, url) {	
 	const body = new FormData(form);
 	const fetchConfig = { method: 'POST', body };
 
-	const response = await fetch('/Feed/SavePostagem', fetchConfig);
+	const response = await fetch(url, fetchConfig);
 	if (!response.ok) {
 		handleError(['Houve um erro com sua requisição, tente novamente mais tarde!']);
 		return;
