@@ -60,19 +60,13 @@ public class PostagemService
     public async Task<Postagem> GetById(int id) =>
         await _astroContext.Postagens.Include(el => el.Astro).Include(el => el.Usuario).FirstAsync(el => el.Id == id);
 
-    public async Task Update(PostagemDTO postagem)
+    public async Task Update(Postagem postagem)
     {
-        var postagemOriginal = await GetById(postagem.Id);
-
-        postagemOriginal.DataPostagem = postagem.DataPostagem;
-        postagemOriginal.Texto = postagem.Texto;
-        postagemOriginal.Imagem = postagem.LinkImagem;
-
-        _astroContext.Postagens.Update(postagemOriginal);
+        _astroContext.Postagens.Update(postagem);
         await _astroContext.SaveChangesAsync();
     }
 
-    public async Task Delete(Postagem postagem) 
+    public async Task Delete(Postagem postagem)
     {
         _astroContext.Postagens.Remove(postagem);
         await _astroContext.SaveChangesAsync();

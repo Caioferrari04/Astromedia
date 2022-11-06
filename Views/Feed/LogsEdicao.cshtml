@@ -1,0 +1,35 @@
+@model IEnumerable<LogEdicao>
+@{
+    Layout = "";
+}
+
+<div class="modal container is-vertical-align is-horizontal-align">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Histórico de edição de postagem</h3>
+            <img class="close-btn col" src="/img/close-icon.svg" alt="Close Icon">
+        </div>
+        <div class="modal-body">
+            <ul>
+                @foreach (var log in Model)
+                {
+                    <li>
+                        <div>
+                            <img src="@log.Usuario.FotoPerfil">
+                            <div>
+                                <p>@log.Usuario.UserName</p>
+                                <small>@log.DataEdicao</small>
+                            </div>
+                        </div>
+                        <p>@log.TextoAntigo</p>
+                        @if (log.ImagemAntiga is not null) 
+                        {
+                            <img src="@log.ImagemAntiga">
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="modal-footer"></div>
+    </div>
+</div>

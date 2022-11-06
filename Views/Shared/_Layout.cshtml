@@ -15,6 +15,7 @@
     </head>
     <body>
         <div id="rendermodal" data-url='@Url.Action("Login", "SignIn")'></div>
+        @await RenderSectionAsync("modal", false)
 
         <header class="header">
             <div class="container">
