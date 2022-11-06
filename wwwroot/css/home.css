@@ -61,7 +61,7 @@ main.container {
 }
 
 .heroTwocontainer img{
-    transform: translateX(1000px);
+    transform: translateY(620px) translateX(400px);
     width: 1000px;
     margin-top: -380px;
     z-index: -999;
