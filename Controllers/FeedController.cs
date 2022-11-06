@@ -1,6 +1,7 @@
 using Astromedia.DTO;
 using Astromedia.Models;
 using Astromedia.Services;
+using Astromedia.Validations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -78,12 +79,21 @@ public class FeedController : Controller
 
     public IActionResult Comentarios() => PartialView("Comentarios");
 
-    [HttpPost]
+    [HttpGet]
     public async Task<IActionResult> EntrarForum(int id)
     {
         var usuario = await _userManager.GetUserAsync(User);
 
         await _astroService.JoinForum(id, usuario);
+
+        return RedirectToAction(nameof(PerfilAstro), new { id = id });
+    }
+
+    public async Task<IActionResult> SairForum(int id) 
+    {
+        var usuario = await _userManager.GetUserAsync(User);
+
+        await _astroService.QuitForum(id, usuario);
 
         return RedirectToAction(nameof(PerfilAstro), new { id = id });
     }

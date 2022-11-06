@@ -2,6 +2,8 @@ using Astromedia.DTO;
 using FluentValidation;
 using FluentValidation.Validators;
 
+namespace Astromedia.Validations;
+
 public class UsuarioValidator : AbstractValidator<UsuarioDTO>
 {
     public UsuarioValidator()

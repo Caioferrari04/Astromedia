@@ -13,7 +13,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddHttpContextAccessor();
 
-string connectionString = "";
+string connectionString;
 
 if (builder.Environment.IsProduction())
 {

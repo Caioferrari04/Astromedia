@@ -1,0 +1,54 @@
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    color: white;
+    border: 0!important;
+}
+
+input, textarea {
+    border: 1px solid var(--color-highlight) !important;
+    border-radius: 20px!important;
+}
+
+.pell-button {
+    height: 40px!important;
+    font-size: 20px;
+    padding: 0 1.5rem;
+    margin-top: -2px;
+}
+
+.pell-content {
+    background-color: white;
+}
+
+li.item-lista-admin {
+    display: flex;
+    flex-grow: 0;
+    gap: 2rem;
+    list-style: none;
+    margin-top: 2rem;
+    align-items: flex-start;
+    background-color: var(--color-secondary);
+    padding: 1rem;
+    border-radius: 30px;
+}
+
+li.item-lista-admin img {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+li.item-lista-admin > div.text-light {
+    max-width: 1200px;
+}
+
+li.item-lista-admin > div.text-light * {
+    color: white!important;
+}
+
+li.item-lista-admin > div.dados {
+    flex-shrink: 0;
+}
+

@@ -40,6 +40,15 @@
                         Fórum
                     </a>
                 </li>
+                @if(usuario.isAdmin) 
+                {
+                    <li>
+                        <a class="text-light" asp-action="Index" asp-controller="Administrativo">
+                            <img src="https://icongr.am/material/account-cog.svg?size=30&color=ffffff"/>
+                            Administrativo
+                        </a>
+                    </li>
+                }
                 <li>
                     <a class="text-light" asp-action="Logout" asp-controller="SignIn">
                         <img src="https://icongr.am/entypo/log-out.svg?size=30&color=ffffff"/>
