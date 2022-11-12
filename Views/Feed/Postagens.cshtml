@@ -79,19 +79,6 @@
             </div>
         </div>
     }
-    @* Área de inserção de comentário (Template) *@
-    <!--div id="hidden" class="comment-input-box" style="margin-top: -119px !important;">
-    <div class="comment-input-content">
-    @*@using (Html.BeginForm("Action", "Controller", FormMethod.Post, new {@id = "commentform"}))
-            {   
-                @Html.TextAreaFor(m => m, new { @class = "is-full-width comment-input", @name = "commenttext", @form = "commentform", @cols = "100%", @rows = "auto", @placeholder = "Comente Aqui", @maxlength = "280"})
-                <div class="is-right">
-                    botões de modificação
-                    <button type="submit" class="submit-comment-btn submit-post-btn button outline is-vertical-align">Comentar</button>
-                </div>
-            }
-        </div>*@
-    </div-->
     <div id="posts">
         @if (Model.Count > 0)
         {
@@ -218,4 +205,5 @@
     <script src="~/js/commentmodal.js" asp-append-version="true"></script>
     <script src="~/js/submit-post.js" asp-append-version="true"></script>
     <script src="~/js/dropdown-postagem.js" asp-append-version="true"></script>
+    
 }

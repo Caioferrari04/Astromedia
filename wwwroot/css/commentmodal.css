@@ -11,6 +11,24 @@
     background-color: rgba(0,0,0,0.5); 
 }
 
+.comment-input-box {
+    position: fixed;
+    background-color: var(--color-primary);
+    z-index: 0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-top: -119px;
+    width: auto;
+    height: auto;
+    padding: 20px 5px 5px 5px;
+    transition: .7s cubic-bezier(0.72, 0, 0.11, 0.99);
+}
+
+.comment-input {
+    background-color: var(--color-primary) !important;
+    font-size: .9rem;
+}
+
 .commentmodal-content {
     background-color: var(--bg-secondary-color);
     border-radius: 14px;
@@ -27,7 +45,6 @@
 }
 
 .commentmodal-post {
-    border-right: 1px solid #58296e;
     padding: 10px;
     overflow-y: auto;
 }
@@ -101,9 +118,7 @@
 }
 
 .commentmodal-usrlikes {
-    right: 50%;
-    left: 50%;
-
+    right: 1%;
 }
 
 .commentmodal-selfbottom {
@@ -146,7 +161,7 @@
     overflow-y: auto;
     font-size: small;
     background: var(--bg-color);
-    border-radius: 2px 14px 14px 2px;
+    border-radius: 4px 14px 14px 4px;
 }
 
 /* Animação de entrada - Modal do Login */
@@ -170,6 +185,9 @@
 @media screen and (min-width: 601px) and (max-width: 1154px) {
     .commentmodal {
         overflow-x: hidden;
+    }
+    .commentmodal-usrlikes {
+        right: 2%;
     }
     .commentmodal-selfbottom {
         margin-bottom: 1px;
@@ -221,6 +239,9 @@
     .commentmodal {
         overflow-x: hidden;
     }
+    .commentmodal-usrlikes {
+        right: 2%;
+    }
     .commentmodal-selfbottom {
         margin-bottom: 1px;
         position: relative;
@@ -269,6 +290,9 @@
 @media screen and (max-width: 320px) {
     .commentmodal {
         overflow-x: hidden;
+    }
+    .commentmodal-usrlikes {
+        right: 2%;
     }
     .commentmodal-selfbottom {
         margin-bottom: 1px;
