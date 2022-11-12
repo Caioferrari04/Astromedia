@@ -15,3 +15,7 @@ if (toggles != null) {
         iterator.addEventListener('click', () => toggleDropdown(dropdown));
     }
 }
+
+if (document.body.scrollHeight <= document.body.clientHeight) {
+    document.querySelector('.footer').classList.add('footer-fixo')
+}

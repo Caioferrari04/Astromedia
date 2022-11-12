@@ -9,58 +9,64 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="profile is-center">
-        <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="Imagem de usuário" />
-        <div id="backdrop" class="dropdown-toggle"></div>
-        <div class="text-center dropdown drifto" id="logged-in">
-            <img src="https://icongr.am/material/close.svg?size=30&color=ffffff" class="icon-button is-left dropdown-toggle" />
-            <ul>
-                <li>
-                    <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="">
-                </li>
-                <li>
-                    <h5 class="text-light">@usuario.UserName</h5>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-light" href="#">
-                        <img src="https://icongr.am/material/account.svg?size=30&color=ffffff"/>
-                        Perfil
-                    </a>
-                </li>
-                <li>
-                    <a class="text-light" asp-action="UpdateProfile" asp-controller="ConfigurationUser">
-                        <img src="https://icongr.am/material/account-cog.svg?size=30&color=ffffff"/>
-                        Configurações
-                    </a>
-                </li>
-                <li>
-                    <a class="text-light" asp-action="Postagens" asp-controller="Feed" asp-route-id="">
-                        <img src="https://icongr.am/material/chat.svg?size=30&color=ffffff"/>
-                        Fórum
-                    </a>
-                </li>
-                @if(usuario.isAdmin) 
-                {
+    <a asp-action="Postagens" asp-controller="Feed" asp-route-id=""><img src="~/img/logo-small.png" class="logo" alt=""></a>
+    <div class="nav-right header--btn-group">
+        <a asp-action="Postagens" asp-controller="Feed" asp-route-id="" class="text-white">Comunidades</a>
+        <div class="profile is-center">
+            <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="Imagem de usuário" />
+            <div id="backdrop" class="dropdown-toggle"></div>
+            <div class="text-center dropdown drifto" id="logged-in">
+                <img src="https://icongr.am/material/close.svg?size=30&color=ffffff" class="icon-button is-left dropdown-toggle" />
+                <ul>
                     <li>
-                        <a class="text-light" asp-action="Index" asp-controller="Administrativo">
-                            <img src="https://icongr.am/material/account-cog.svg?size=30&color=ffffff"/>
-                            Administrativo
+                        <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="">
+                    </li>
+                    <li>
+                        <h5 class="text-light">@usuario.UserName</h5>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-light" href="#">
+                            <img src="https://icongr.am/material/account.svg?size=30&color=ffffff"/>
+                            Perfil
                         </a>
                     </li>
-                }
-                <li>
-                    <a class="text-light" asp-action="Logout" asp-controller="SignIn">
-                        <img src="https://icongr.am/entypo/log-out.svg?size=30&color=ffffff"/>
-                        Sair
-                    </a>
-                </li>
-            </ul>
+                    <li>
+                        <a class="text-light" asp-action="UpdateProfile" asp-controller="ConfigurationUser">
+                            <img src="https://icongr.am/material/account-cog.svg?size=30&color=ffffff"/>
+                            Configurações
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-light" asp-action="Postagens" asp-controller="Feed" asp-route-id="">
+                            <img src="https://icongr.am/material/chat.svg?size=30&color=ffffff"/>
+                            Fórum
+                        </a>
+                    </li>
+                    @if(usuario.isAdmin) 
+                    {
+                        <li>
+                            <a class="text-light" asp-action="Index" asp-controller="Administrativo">
+                                <img src="https://icongr.am/material/account-cog.svg?size=30&color=ffffff"/>
+                                Administrativo
+                            </a>
+                        </li>
+                    }
+                    <li>
+                        <a class="text-light" asp-action="Logout" asp-controller="SignIn">
+                            <img src="https://icongr.am/entypo/log-out.svg?size=30&color=ffffff"/>
+                            Sair
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 }
 else
 {
+    <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-small.png" class="logo" alt=""></a>
+    <div class="nav-right header--btn-group">
     @if (rota is "Index" && rotaController is "SignIn")
     {
         <a class="text-light" id="modalbtn" href="#contact">Entrar</a>
@@ -75,4 +81,5 @@ else
         <a class="text-light" id="modalbtn" href="#contact">Entrar</a>
         <a class="text-light" asp-action="Index" asp-controller="SignIn">Criar conta</a>
     }
+    </div>
 }

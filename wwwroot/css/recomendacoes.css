@@ -1,8 +1,11 @@
 .recomendacoes {
     display: flex;
-    margin: 0 2rem;
+    /* margin-left: 2rem; */
     gap: 1.2rem;
     flex-direction: column;
+    height: fit-content;
+    position: sticky;
+    top: 9vh;
 }
 
 .recomendacao {

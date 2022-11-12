@@ -29,7 +29,7 @@ public class AstroService
         var astros = await _astroContext.Astros.ToListAsync();
         List<Astro> retorno = new();
 
-        for (var i = 0; i < 3; i++)
+        for (var i = 0; i < 4; i++)
         {
             retorno.Add(astros.ElementAt(rnd.Next(astros.Count)));
         }
@@ -58,6 +58,12 @@ public class AstroService
             astro.Foto = respostaImgur.Data.data.link;
         }
 
+        if(astroDTO.FotoBackground is not null) 
+        {
+            var respostaImgur = await new ImgurService().UploadImagem(astroDTO.FotoBackground);
+            astro.FotoBackground = respostaImgur.Data.data.link;
+        }
+
         _astroContext.Astros.Update(astro);
         await _astroContext.SaveChangesAsync();
     }
@@ -72,6 +78,7 @@ public class AstroService
     {
         Id = astro.Id,
         LinkFoto = astro.Foto,
+        LinkFotoBackground = astro.FotoBackground,
         Nome = astro.Nome,
         Curiosidades = astro.Curiosidades
     };

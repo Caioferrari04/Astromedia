@@ -6,6 +6,12 @@
     bottom: 0;
 }
 
+.footer-fixo {
+    position: fixed;
+    bottom: 0;
+    height: fit-content;
+}
+
 .footer .container {
     max-width: 1400px;
 }
