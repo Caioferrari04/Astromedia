@@ -1,11 +1,24 @@
-using System;
+using Astromedia.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+namespace Astromedia.Controllers;
+
 [AllowAnonymous]
-public class HomeController : Controller {
+public class HomeController : Controller
+{
+    private readonly SignInManager<Usuario> _signInManager;
 
-    public IActionResult Index() => View();
+    public HomeController(SignInManager<Usuario> signInManager)
+    {
+        _signInManager = signInManager;
+    }
 
-    public IActionResult PginaNov() => View();
+    public IActionResult Index()
+    {
+        if (_signInManager.IsSignedIn(User)) return RedirectToAction("Postagens", "Feed", new { id = 0 });
+
+        return View();
+    }
 }

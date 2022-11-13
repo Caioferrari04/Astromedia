@@ -1,8 +1,11 @@
 .recomendacoes {
     display: flex;
-    margin: 0 2rem;
+    /* margin-left: 2rem; */
     gap: 1.2rem;
     flex-direction: column;
+    height: fit-content;
+    position: sticky;
+    top: 9vh;
 }
 
 .recomendacao {
@@ -10,6 +13,10 @@
     background: #A367BF;
     padding: 0;
     border-radius: 16px;
+}
+
+.recomendacoes--mobile {
+    display: none;
 }
 
 .recomendacao-background {
@@ -93,5 +100,66 @@
         font-size: .8rem;
         padding: 8px 1rem;
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .recomendacoes {
+        display: flex!important;
+        width: 100%;
+        position: static;
+    }
+
+    .recomendacoes--mobile {
+        display: block;
+        order: -1;
+        margin: 10px -1rem;
+        padding: 0rem 1rem .2rem;
+    }
+
+    .recomendacao--mobile {
+        background-color: var(--color-highlight);
+        text-align: center;
+        padding: .4rem 0;
+        border-radius: 10px;
+    }
+
+    .recomendacao--mobile:active, .recomendacao--mobile:focus {
+        opacity: 0.9;
+    } 
+
+    .recomendacao--mobile img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    .recomendacao--mobile * {
+        display: block;
+    }
+
+    .recomendacao--mobile small {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .recomendacao-mobile--link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .recomendacoes--mobile {
+        margin-left: -2.5rem;
+        /* background-color: var(--color-primary); */
+    }
+    .recomendacoes--mobile small {
+        margin-left: 1.5rem;
     }
 }

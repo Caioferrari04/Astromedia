@@ -48,7 +48,8 @@ public class AdministrativoController : Controller
         if (validationResult.IsValid)
         {
             var respostaImgur = await new ImgurService().UploadImagem(astroDTO.Foto);
-            var astro = new Astro(astroDTO.Nome, astroDTO.Curiosidades, respostaImgur.Data.data.link);
+            var respostaImgur2 = await new ImgurService().UploadImagem(astroDTO.FotoBackground);
+            var astro = new Astro(astroDTO.Nome, astroDTO.Curiosidades, respostaImgur.Data.data.link, respostaImgur2.Data.data.link);
             await _context.Astros.AddAsync(astro);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");

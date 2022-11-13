@@ -1,15 +1,17 @@
 body {
-    background-image: url(https://images.pexels.com/photos/169789/pexels-photo-169789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    /* background-image: url(https://images.pexels.com/photos/169789/pexels-photo-169789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1); */
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
 }
-/* .configuracoes {
-    background-color: black;
-    height: 100%;
-    opacity: 0.5;
+.configuracoes {
+    background-color: var(--bg-secondary-color);
+    height: fit-content;
+    /* opacity: 0.5; */
     border-radius: 15px;
-} */
+    margin: .5rem 2rem;
+    padding: 1rem;
+}
 
 /* Conteúdo Cadastro - Geral */
 
@@ -19,7 +21,13 @@ body {
 
 .cad-content {
     margin: auto;
-    transform: scale(0.85);
+    /* transform: scale(0.85); */
+    font-size: 1rem;
+    padding: 1rem 5rem;
+}
+
+.cad-content label {
+    font-size: 1.2rem;
 }
 
 .container-cad {
@@ -124,7 +132,7 @@ input[type=file]::file-selector-button {
 }
 
 .submit-btn-cad {
-    margin: 40px auto;
+    margin: 10px auto 0;
     transition: .4s;
     width: auto !important;
     background: var(--bg-color);

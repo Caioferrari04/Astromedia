@@ -58,8 +58,6 @@ textarea:focus {
 
 .post-footer-icon {
     cursor: pointer;
-    width: 17px;
-    min-width: 16px;
     transition: all .3s;
     image-rendering: auto;
 }
@@ -73,6 +71,8 @@ textarea:focus {
 }
 
 /* * Área de Postagens - Conteúdo */
+
+
 
 #hidden {
     display: none;
@@ -139,12 +139,12 @@ textarea:focus {
 }
 
 .submit-post-btn {
-    position: relative;
+    /* position: relative; */
     border-radius: 7px;
-    font-size: .8rem;
+    font-size: 1rem;
     height: 0;
-    padding: 9px;
-    margin: 10px -1px 0px 10px;
+    padding: 13px;
+    /* margin: 10px -1px 0px 10px; */
 }
 
 .submit-comment-btn {
@@ -357,13 +357,17 @@ textarea:focus {
 
 /* Media Queries - Postagens */
 
-@media screen and (max-width: 600px) {
-    .sidebar {
-        display: none;
+@media screen and (max-width: 992px) {
+    #post-holder.container {
+        padding: 0;
     }
+}
+
+@media screen and (max-width: 600px) {
     #post-holder {
         width: 100%
     }
+
     .post-footer-icon {
         width: 20px;
         min-width: 19px;

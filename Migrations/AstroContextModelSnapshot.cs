@@ -35,6 +35,9 @@ namespace Astromedia.Migrations
                     b.Property<string>("Foto")
                         .HasColumnType("text");
 
+                    b.Property<string>("FotoBackground")
+                        .HasColumnType("text");
+
                     b.Property<string>("Nome")
                         .HasColumnType("text");
 
