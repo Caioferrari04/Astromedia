@@ -29,7 +29,7 @@ public class AstroService
         var astros = await _astroContext.Astros.ToListAsync();
         List<Astro> retorno = new();
 
-        for (var i = 0; i < 4; i++)
+        for (var i = 0; i < 6; i++)
         {
             retorno.Add(astros.ElementAt(rnd.Next(astros.Count)));
         }

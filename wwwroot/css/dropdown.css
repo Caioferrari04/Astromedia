@@ -1,6 +1,7 @@
 .dropdown {
     visibility: hidden;
-    transition: visibility .1s;
+    transition: .1s;
+    transition-property: transform, visibility;
     background-color: var(--bg-secondary-color); 
     animation: inverso-drifto 0.6s;
     transform: translateX(700px);
@@ -10,6 +11,10 @@
     position: fixed;
     height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.dropdown-load {
+    display: none;
 }
 
 .dropdown-active {
@@ -69,4 +74,18 @@
 @keyframes inverso-drifto {
     from {transform: translateX(0)}
     to {transform: translateX(700px)}
+}
+
+
+@media screen and (max-width: 992px) {
+    .dropdown {
+        max-width: 100vw;
+        left: 0;
+        transform: translateX(0px);
+        /* text-align: left; */
+    }
+
+    .img-perfil, .nome-perfil {
+        text-align: center;
+    }
 }

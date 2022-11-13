@@ -7,15 +7,18 @@ function toggleDropdown(dropdown) {
     backdrop.classList.toggle('is-full-screen');
 }
 
-const toggles = document.getElementsByClassName('dropdown-toggle');
-if (toggles != null) {
-    const dropdown = document.getElementById('logged-in');
-    console.log(toggles);
-    for (const iterator of toggles) {
-        iterator.addEventListener('click', () => toggleDropdown(dropdown));
-    }
-}
 
-if (document.body.scrollHeight <= document.body.clientHeight) {
-    document.querySelector('.footer').classList.add('footer-fixo')
-}
+window.addEventListener('DOMContentLoaded', () => {
+    const toggles = document.getElementsByClassName('dropdown-toggle');
+    if (toggles != null) {
+        const dropdown = document.getElementById('logged-in');
+        dropdown.classList.remove('dropdown-load')
+        for (const iterator of toggles) {
+            iterator.addEventListener('click', () => toggleDropdown(dropdown));
+        }
+    }
+    
+    if (document.body.scrollHeight <= window.innerHeight) {
+        document.querySelector('.footer').classList.add('footer-fixo')
+    }
+})

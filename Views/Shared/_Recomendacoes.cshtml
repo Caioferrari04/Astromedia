@@ -13,7 +13,7 @@
 {
     @foreach (var astro in astros)
     {
-    <div class="recomendacao">
+    <div class="recomendacao hide-xs hide-sm">
         <div class="recomendacao-background" style="background-image: url(@(astro.FotoBackground is null ? astro.Foto : astro.FotoBackground));"></div>
         <div class="recomendacao-corpo">
             <header class="recomendacao-titulo">
@@ -35,6 +35,21 @@
                 </a>
             }
         </div>
-    </div>  
+    </div>   
     }
+    <div class="splide recomendacoes--mobile" role="group" aria-label="Recomendações">
+        <small class="text-light">Astros interessantes</small>
+        <div class="splide__track">
+            <ul class="splide__list">
+                @foreach (var astro in astros)
+                {
+                    <li class="splide__slide recomendacao--mobile">
+                        <img src="@astro.Foto" class="recomendacao-mobile--foto">
+                        @* <small class="text-light">@astro.Nome</small> *@
+                        <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="recomendacao-mobile--link"></a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 }

@@ -10,18 +10,17 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <a asp-action="Postagens" asp-controller="Feed" asp-route-id=""><img src="~/img/logo-small.png" class="logo" alt=""></a>
-    <div class="nav-right header--btn-group">
-        <a asp-action="Postagens" asp-controller="Feed" asp-route-id="" class="text-white">Comunidades</a>
+    <div class="nav-right header--btn-group is-vertical-align">
         <div class="profile is-center">
             <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="Imagem de usuário" />
             <div id="backdrop" class="dropdown-toggle"></div>
-            <div class="text-center dropdown drifto" id="logged-in">
+            <div class="text-center dropdown dropdown-load drifto" id="logged-in">
                 <img src="https://icongr.am/material/close.svg?size=30&color=ffffff" class="icon-button is-left dropdown-toggle" />
                 <ul>
-                    <li>
+                    <li class="img-perfil">
                         <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="">
                     </li>
-                    <li>
+                    <li class="nome-perfil">
                         <h5 class="text-light">@usuario.UserName</h5>
                     </li>
                     <li class="divider"></li>
@@ -61,6 +60,7 @@
                 </ul>
             </div>
         </div>
+        <img class="dropdown-toggle header--down" src="~/icons/menu-down.svg"/>
     </div>
 }
 else

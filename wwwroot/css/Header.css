@@ -37,12 +37,16 @@
     transition: 0.3s;
     border: 3px solid transparent;
     cursor: pointer;
-    margin-right: 20px; 
+    /* margin-right: 20px;  */
 }
 
 .logo-user:hover {
     border: 3px solid var(--color-highlight);
     opacity: 100%!important;
+}
+
+.header--down {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {

@@ -106,6 +106,9 @@ main.container {
 }
 
 @media screen and (max-width: 992px) {
+    .info-astro {
+        margin-bottom: 0;
+    }
     main.container {
         max-width: 720px;
     }
@@ -120,7 +123,9 @@ main.container {
         display: none;
     }
 
-    .recomendacoes { display: none!important; }
+    .recomendacoes { 
+        order: -1;
+    }
 }
 
 @media screen and (max-width: 767px) {
