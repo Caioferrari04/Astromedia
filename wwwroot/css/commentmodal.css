@@ -12,7 +12,7 @@
 }
 
 .comment-input-box {
-    position: fixed;
+    position: relative;
     background-color: var(--color-primary);
     z-index: 0;
     border-radius: 8px;
