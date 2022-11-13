@@ -7,6 +7,10 @@ function toggleDropdown(dropdown) {
     backdrop.classList.toggle('is-full-screen');
 }
 
+function positionFooter() {
+    document.querySelector('.footer').classList.toggle('footer-fixo', document.body.scrollHeight <= window.innerHeight)
+}
+
 
 window.addEventListener('DOMContentLoaded', () => {
     const toggles = document.getElementsByClassName('dropdown-toggle');
@@ -17,8 +21,9 @@ window.addEventListener('DOMContentLoaded', () => {
             iterator.addEventListener('click', () => toggleDropdown(dropdown));
         }
     }
-    
-    if (document.body.scrollHeight <= window.innerHeight) {
-        document.querySelector('.footer').classList.add('footer-fixo')
-    }
+
+    const resizeObserver = new ResizeObserver(positionFooter)
+
+    resizeObserver.observe(document.body);
+    positionFooter();
 })

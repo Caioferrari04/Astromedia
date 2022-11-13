@@ -1,0 +1,164 @@
+@model Usuario
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<Usuario> UserManager
+@{
+    Layout = "_LayoutFeed";
+    ViewData["Title"] = $"Perfil {@Model.UserName}";
+    var usuario = await UserManager.GetUserAsync(User);
+    var isUsuario = usuario.Id == Model.Id;
+}
+
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/postagem.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/commentmodal.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/PerfilAstro.css" asp-append-version="true">
+}
+
+<div class="container-perfil">
+    <div class="is-full-width banner-container">
+        <img class="img" src="@(Model.FotoBackground is null ? Model.FotoPerfil : Model.FotoBackground)" alt="">
+    </div>
+
+    <div class="is-vertical-align elements-container">
+        <div class="responsive is-vertical-align">
+            <div class="picture-container bd-light">
+                <img class="img" src="@Model.FotoPerfil" alt="">
+            </div>
+            <h2 class="text-light astro-title">@Model.UserName</h2>
+        </div>
+        @* <div class="is-vertical-align is-horizontal-align btns">
+            @if (usuario.Astros?.Find(astro => astro.Id == Model.Id) is not null) 
+            {
+                <a class="join-btn text-light leave-btn" asp-action="SairForum" asp-route-id="@Model.Id">
+                    <img src="https://icongr.am/material/star-off.svg?size=22&color=d2d6dd" alt="Sair de forum">
+                    Remover interesse
+                </a>
+                <a class="join-btn text-light" asp-action="Postagens" asp-route-id="@Model.Id">
+                    <img src="https://icongr.am/material/chat.svg?size=18&color=d2d6dd" alt="Sair de forum">
+                    Ver postagens
+                </a>
+            }
+            else
+            {
+                <a class="join-btn text-light enter-btn" asp-action="EntrarForum" asp-route-id="@Model.Id">
+                    <img src="https://icongr.am/material/star-outline.svg?size=22&color=d2d6dd" alt="Sair de forum">
+                    Adicionar interesse
+                </a>
+            }
+        </div> *@
+    </div>
+
+    <nav class="tabs is-center">
+        <a href="javascript:void(0)" class="nav-button tab active text-light" id="tab1">Bio</a>
+        <a href="javascript:void(0)" class="nav-button tab text-light" id="tab2">Postagens</a>
+    </nav>
+
+    <div class="tab-content tab-content-active text-left text-light" data-id="tab1">
+        <h4>Bio</h4>
+        @Html.Raw(Model.Bio)
+    </div>
+
+    <div class="tab-content text-left text-light" data-id="tab2">
+        <h4>@(isUsuario ? "Suas p" : "P")ostagens</h4>
+        <div id="template-edicao" class="is-vertical-align is-horizontal-align">
+            <div class="post-input-content">
+                <form asp-action="UploadImagem" id="upload-imagem-template"></form>
+                <form asp-action="UpdatePostagem" id="postform-template">
+                    <div asp-validation-summary="All" class="text-error"></div>
+                    <textarea class="is-full-width" name="Texto" form="postform-template" cols="100%" rows="auto" placeholder="Escreva aqui" maxlength="280"></textarea>
+                    <div id="template-img-preview">
+                        <img src="" id="template-img">
+                        <input type="hidden" name="LinkImagem" id="LinkImagem-template">
+                    </div>
+                    <div class="between-config">
+                        <div class="post-input-imgcon is-vertical-align is-left">
+                            <label for="imagem-template">
+                                <img class="post-footer-icon" id="imagem-template-preview" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
+                            </label>
+                            <input id="imagem-template" name="Imagem" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg" form="upload-imagem-template">
+                        </div>
+                        <div class="is-right">
+                            <button type="button" id="template-botao-cancelar" class="submit-post-btn button outline is-vertical-align text-light">Cancelar</button>
+                            <button type="submit" class="submit-post-btn button outline is-vertical-align">Enviar</button>
+                        </div>
+                    </div>
+                    <input type="hidden" value="" name="AstroId">
+                    <input type="hidden" value="" name="Id"/>
+                </form>
+            </div>
+        </div>
+        @if (Model.Postagens.Count > 0)
+        {
+            @foreach (var postagem in Model.Postagens)
+            {
+                <div class="post-box is-vertical-align is-horizontal-align" id="postagem-@postagem.Id" data-astro-id="@postagem.Astro.Id">
+                    <div class="post-content">
+                        <div class="between-config">
+                            <div class="post-header-info is-left">
+
+                                <img class="usr-post-pic" src="@postagem.Usuario.FotoPerfil" /> 
+                                <div class="info-col">
+                                    <p class="usr-post-name">
+                                        @postagem.Usuario.UserName 
+                                        <a class="text-white" asp-action="PerfilAstro" asp-route-id="@postagem.Astro.Id">em @postagem.Astro.Nome</a>
+                                    </p> 
+                                    <p class="usr-post-date">@postagem.DataPostagem.ToString("dd/MM/yyyy hh:mm:ss")</p>
+                                </div>
+                            </div>
+                            <div class="is-vertical-align is-right">
+                                <div class="report-btn">
+                                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                                </div>
+                                <div class="dropdown-acoes-container">
+                                    <img src="~/icons/menu-down.svg" class="dropdown-acoes acoes-btn"/>
+                                    <ul class="dropdown-edicao">
+                                        @if (isUsuario) {
+                                            <li class="text-light atualizar-postagem">Editar</li>
+                                        }
+                                        @if (isUsuario || usuario.isAdmin) {
+                                            <li class="text-light excluir-postagem" data-id="@postagem.Id">Excluir</li>
+                                        }
+                                        <li class="text-light historico-postagem" data-id="@postagem.Id">Histórico de edições</li>
+                                    </ul>
+                                </div>                                    
+                            </div>
+                        </div>
+                        <p class="post-text">
+                            @postagem.Texto 
+                        </p>
+                        @if(postagem.Imagem is not null)
+                        {
+                            <div class="post-img"><img src="@postagem.Imagem" /></div>
+                        }
+                        <div class="between-config">
+                            <div class="usr-footer-comment is-vertical-align is-left">
+                                <img class="post-footer-icon comment-modal" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                                <a class="text-light comment-modal" href="javascript:void(0)">Ver Comentários</a>
+                            </div>
+                            <div class="usr-footer-likes is-vertical-align is-right">
+                                <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=20&color=ffffff" />
+                                <small class="text-light likes">0</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        } 
+        else
+        {
+            <div class="text-center">
+                <p class="text-light">Esse usuário não possui postagens.</p>
+            </div>
+        }    
+    </div>
+
+</div>
+
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/textarea-post.js" asp-append-version="true"></script>
+    <script src="~/js/commentmodal.js" asp-append-version="true"></script>
+    <script src="~/js/submit-post.js" asp-append-version="true"></script>
+    <script src="~/js/dropdown-postagem.js" asp-append-version="true"></script>
+    <script src="~/js/openTabs.js" asp-append-version="true"></script>
+}

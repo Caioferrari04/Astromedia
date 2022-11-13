@@ -37,9 +37,9 @@
 }
 
 @section stylesheet {
-    <link rel="stylesheet" href="~/css/postagem.css">
-    <link rel="stylesheet" href="~/lib/notiflix/dist/notiflix-3.2.5.min.css"/>
-    <link rel="stylesheet" href="~/css/commentmodal.css">
+    <link rel="stylesheet" href="~/css/postagem.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/notiflix/dist/notiflix-3.2.5.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/commentmodal.css" asp-append-version="true">
 }
 
 @section modal {
@@ -127,7 +127,7 @@
                                 <img class="usr-post-pic" src="@postagem.Usuario.FotoPerfil" /> 
                                 <div class="info-col">
                                     <p class="usr-post-name">
-                                        @postagem.Usuario.UserName 
+                                        <a class="text-light" asp-action="PerfilUsuario" asp-route-id="@postagem.Usuario.Id">@postagem.Usuario.UserName</a>
                                         @if (id is null || id is 0) {
                                             <a class="text-white" asp-action="PerfilAstro" asp-route-id="@postagem.Astro.Id">em @postagem.Astro.Nome</a>
                                         } 

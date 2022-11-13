@@ -21,7 +21,7 @@ if (form) {
 }
 
 
-async function handleFormSubmit(form, url) {	
+async function handleFormSubmit(form, url, isReload = true) {	
 	const body = new FormData(form);
 	const fetchConfig = { method: 'POST', body };
 
@@ -40,7 +40,9 @@ async function handleFormSubmit(form, url) {
 		return;
 	}
 
-	window.location.reload();
+	if(isReload) {
+		window.location.reload();
+	}
 }
 
 async function saveImg(form) {

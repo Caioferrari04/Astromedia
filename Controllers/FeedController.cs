@@ -13,12 +13,14 @@ public class FeedController : Controller
     private readonly PostagemService _postagemService;
     private readonly UserManager<Usuario> _userManager;
     private readonly LogEdicaoService _logEdicaoService;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService)
+    private readonly UsuarioService _usuarioService;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, UsuarioService usuarioService)
     {
         _astroService = astroService;
         _postagemService = postagemService;
         _userManager = userManager;
         _logEdicaoService = logEdicaoService;
+        _usuarioService = usuarioService;
     }
 
     public async Task<IActionResult> PerfilAstro(int id)
@@ -130,7 +132,7 @@ public class FeedController : Controller
                     ImagemAntiga = postagemOriginal.Imagem
                 });
 
-                postagemOriginal.DataPostagem = postagem.DataPostagem;
+                // postagemOriginal.DataPostagem = postagem.DataPostagem;
                 postagemOriginal.Texto = postagem.Texto;
                 postagemOriginal.Imagem = postagem.LinkImagem;
                 await _postagemService.Update(postagemOriginal);
@@ -155,7 +157,7 @@ public class FeedController : Controller
             var postagem = await _postagemService.GetById(id);
             var usuario = await _userManager.GetUserAsync(User);
 
-            if (!usuario.Postagens.Contains(postagem) && !usuario.isAdmin) throw new Exception("Não pode excluir a postagem dos outros! Vá embora!");
+            if (!usuario.Postagens.Contains(postagem) && !usuario.isAdmin) throw new Exception("Nï¿½o pode excluir a postagem dos outros! Vï¿½ embora!");
 
             await _postagemService.Delete(postagem);
             return Json(new { success = true });
@@ -167,4 +169,6 @@ public class FeedController : Controller
     }
 
     public IActionResult LogsEdicao(int Id) => View(_logEdicaoService.ObterTodosDePostagem(Id));
+
+    public async Task<IActionResult> PerfilUsuario(string id) => View(await _usuarioService.GetById(id));
 }
