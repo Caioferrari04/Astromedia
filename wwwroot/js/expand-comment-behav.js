@@ -1,4 +1,4 @@
-const expcmbtn = document.querySelector(".expand-comment-btn");
+var expcmbtn = document.querySelector(".expand-comment-btn");
 
 expcmbtn.addEventListener("click", e => {
     console.log("click");
@@ -22,8 +22,8 @@ expcmbtn.addEventListener("click", e => {
 
     document.querySelectorAll("textarea").forEach(textarea => {
         textarea.addEventListener('change', (e) => {
-          e.target.setAttribute("style", "height:" + (e.target.scrollHeight) + "px;");
-          e.target.addEventListener("input", OnInput, false);
+            e.target.setAttribute("style", "height:" + (e.target.scrollHeight) + "px;");
+            e.target.addEventListener("input", OnInput, false);
         })
       
         textarea.dispatchEvent(new Event('change'));
@@ -33,6 +33,7 @@ expcmbtn.addEventListener("click", e => {
         if (aux.style.marginTop === "-119px") {
             console.log("122");
             aux.style.marginTop = "-5px";
+            aux.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
         } else if (aux.style.marginTop === "-5px" && tgg) {
             console.log("tgg");
             aux.style.marginTop = "-5px";
