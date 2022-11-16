@@ -19,7 +19,7 @@ Array.from(commentmodalBtnAll).forEach(commentmodalBtn => {
         $(window).click(event => {
             if (event.target == renderComment.children[0]) {
                 bodyScroll.classList.remove('block-scroll');
-                renderComment.innerHTML = ""
+                renderComment.innerHTML = "";
             }
         });
     });

@@ -43,6 +43,35 @@ namespace Astromedia.Migrations
                     b.ToTable("Astros");
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Comentario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataComentario")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("PostagemId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Texto")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostagemId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Comentario");
+                });
+
             modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
                 {
                     b.Property<int>("Id")
@@ -336,6 +365,21 @@ namespace Astromedia.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Comentario", b =>
+                {
+                    b.HasOne("Astromedia.Models.Postagem", "Postagem")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("PostagemId");
+
+                    b.HasOne("Astromedia.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Postagem");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
                 {
                     b.HasOne("Astromedia.Models.Astro", "Astro")
@@ -445,6 +489,11 @@ namespace Astromedia.Migrations
             modelBuilder.Entity("Astromedia.Models.Astro", b =>
                 {
                     b.Navigation("Postagens");
+                });
+
+            modelBuilder.Entity("Astromedia.Models.Postagem", b =>
+                {
+                    b.Navigation("Comentarios");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>

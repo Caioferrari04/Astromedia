@@ -1,6 +1,6 @@
 var expcmbtn = document.querySelector(".expand-comment-btn");
 
-expcmbtn.addEventListener("click", e => {
+$(document).on("click",".expand-comment-btn", () => {
     console.log("click");
     const cm = document.querySelector(".comment-input-box");
     const allholder = document.querySelector(".commentmodal-holder");

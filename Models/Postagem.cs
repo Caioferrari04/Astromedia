@@ -8,6 +8,7 @@ public class Postagem
     public DateTime DataPostagem { get; set; }
     public Usuario Usuario { get; set; }
     public Astro Astro { get; set; }
+    public List<Comentario> Comentarios { get; set; }
 
     public Postagem() { }
     public Postagem(string texto, DateTime dataPostagem, string imagem, Usuario usuario, Astro astro)
