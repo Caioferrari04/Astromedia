@@ -37,12 +37,11 @@ main.container {
     height: 90vh;
     display: flex;
     background-color: #1e1e1e;
-    /* margin-left: -100px; */
 }
 
 .heroTwocontainer{
     font-size: 20px;
-    padding: 20px;
+    padding: 60px;
     text-align: left;
     color: #fff;
 }
@@ -65,14 +64,9 @@ main.container {
 }
 
 .heroTwocontainer img{
-    /* transform: translateY(620px) translateX(400px); */
     width: 1000px;
-    /* margin-top: -380px; */
-    /* z-index: -999; */
     position: absolute;
-    /* top: 5rem; */
-    /* left: 10rem; */
-    bottom: 0;
+    align-items: flex-end;
 }
 
 .heroTwo-elements{
@@ -82,7 +76,7 @@ main.container {
     width: 100vw;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1650px) {
 
     .heroTwo-text{
         margin-left: 0px;
@@ -93,12 +87,11 @@ main.container {
     }
 
     .heroTwocontainer{
-        width: 100%;
-        height: 60vh;
-        text-align: center;
-        padding: 10px;
+        width: 40%;
+        height: 50vh;
+        text-align: left;
+        padding: 30px;
         color: #fff;
-        
     }
     
     .heroTwo{
@@ -106,9 +99,73 @@ main.container {
     }
 
     .heroTwocontainer img{
-        width: 2000px;
-        margin-left: 10px;
-        margin-top: 30px;
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+
+    .heroTwo-text{
+        margin-left: 0px;
+        margin-top: 20%;
+        text-align: center;
+    }
+
+    .heroTwo-text2{
+        margin-left: 0px;
+        text-align: center;
+    }
+
+    .heroTwo{
+        height: 900px;
+    }
+
+    .heroTwocontainer img{
+        width: 700px;
+        margin-left: 15%;
+    }
+
+    .heroTwocontainer{
+        width: 600px;
+    }
+
+    .heroTwo-elements{
+        width: 100vw;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .heroTwo-text{
+        margin-left: 0px;
+        margin-top: 20%;
+        text-align: center;
+    }
+
+    .heroTwo-text2{
+        margin-left: 0px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .heroTwo{
+        height: 700px;
+    }
+
+    .heroTwocontainer img{
+        width: 100px;
+    }
+
+    .heroTwocontainer{
+        width: 400px;
+    }
+
+    .heroTwo-elements{
+        width: 100vw;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -187,7 +244,6 @@ article .row :after {
 .videoContainer iframe{
     width: 100%;
     height: 100%;
-    border: 8px solid #5c2578;
     border-radius: 6px;
 }
 

@@ -13,10 +13,33 @@
     var user = await UserManager.GetUserAsync(User);
 }
 
+@if (ViewBag.astro is not null) 
+{
+    @section informacoesAstro {
+        <div class="info-astro row is-vertical-align">
+            <img class="info-astro_imagem col-4" src="@ViewBag.astro.Foto">
+            <div class="info-astro_texto text-light col-8">
+                <h2>
+                    <a asp-action="PerfilAstro" asp-route-id="@ViewBag.astro.Id" class="text-white nome-astro">@ViewBag.astro.Nome</a>
+                    <a class="text-light info-astro_sair-forum" asp-action="SairForum" asp-route-id="@ViewBag.astro.Id">
+                        <img src="https://icongr.am/material/star-off.svg?size=15&color=d2d6dd" alt="Sair de forum">
+                        Remover interesse
+                    </a>
+                </h2>
+                <div class="row is-vertical-align">
+                    <small class="col-lg-2"><img src="https://icongr.am/material/chat.svg?size=18&color=d2d6dd"> @Model.Count postagens</small>
+                    <small class="col-lg-2"><img src="https://icongr.am/material/account.svg?size=24&color=d2d6dd"> @ViewBag.astro.Usuarios.Count pessoas interessadas</small>
+                </div>
+                @* @Html.Raw(ViewBag.astro.Curiosidades) *@
+            </div>
+        </div>
+    }
+}
+
 @section stylesheet {
-    <link rel="stylesheet" href="~/css/postagem.css">
-    <link rel="stylesheet" href="~/lib/notiflix/dist/notiflix-3.2.5.min.css"/>
-    <link rel="stylesheet" href="~/css/commentmodal.css">
+    <link rel="stylesheet" href="~/css/postagem.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/notiflix/dist/notiflix-3.2.5.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/commentmodal.css" asp-append-version="true">
 }
 
 @section modal {
@@ -27,21 +50,20 @@
 <div id="post-holder" class="container is-full-screen">
     @if(id is not null)
     {
-        <p id="post-holder-text">Crie sua postagem</p>
+        @* <p id="post-holder-text">Crie sua postagem</p> *@
         <div id="post-input-box" class="is-vertical-align is-horizontal-align">
             <div class="post-input-content">
                 <form asp-action="UploadImagem" id="uploadImagem"></form>
                 <form asp-action="SavePostagem" id="postform">
                     <div asp-validation-summary="All" class="text-error"></div>
-                    <textarea class="is-full-width" name="Texto" form="postform" cols="100%" rows="auto" placeholder="Escreva aqui" maxlength="280"></textarea>
+                    <textarea class="is-full-width" name="Texto" form="postform" cols="100%" rows="auto" placeholder="Escreva sua postagem..." maxlength="280"></textarea>
                     <div id="post-img-preview">
-                        <img src="" id="img-preview">
                         <input type="hidden" name="LinkImagem" id="LinkImagem">
                     </div>
                     <div class="between-config">
                         <div class="post-input-imgcon is-vertical-align is-left">
-                            <label for="Imagem">
-                                <img class="post-footer-icon" src="https://icongr.am/clarity/image.svg?size=128&color=ffffff" />
+                            <label for="Imagem" data-tippy-content="Enviar imagem">
+                                <img class="post-footer-icon" src="https://icongr.am/clarity/image.svg?size=30&color=ffffff" />
                             </label>
                             <input id="Imagem" name="Imagem" class="is-hidden" type="file" accept="image/png, image/gif, image/jpeg" form="uploadImagem">
                         </div>
@@ -105,12 +127,12 @@
                                 <img class="usr-post-pic" src="@postagem.Usuario.FotoPerfil" /> 
                                 <div class="info-col">
                                     <p class="usr-post-name">
-                                        @postagem.Usuario.UserName 
+                                        <a class="text-light" asp-action="PerfilUsuario" asp-route-id="@postagem.Usuario.Id">@postagem.Usuario.UserName</a>
                                         @if (id is null || id is 0) {
-                                            <a class="text-light" asp-action="PerfilAstro" asp-route-id="@postagem.Astro.Id">em @postagem.Astro.Nome</a>
+                                            <a class="text-white" asp-action="PerfilAstro" asp-route-id="@postagem.Astro.Id">em @postagem.Astro.Nome</a>
                                         } 
                                     </p> 
-                                    <p class="usr-post-date">@postagem.DataPostagem.ToString("dd/MM/yyyy")</p>
+                                    <p class="usr-post-date">@postagem.DataPostagem.ToString("dd/MM/yyyy hh:mm:ss")</p>
                                 </div>
                             </div>
                             <div class="is-vertical-align is-right">
@@ -150,7 +172,7 @@
                                 <a class="text-light comment-modal" href="javascript:void(0)">Ver Comentários</a>
                             </div>
                             <div class="usr-footer-likes is-vertical-align is-right">
-                                <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                                <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=20&color=ffffff" />
                                 <small class="text-light likes">0</small>
                             </div>
                         </div>

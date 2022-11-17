@@ -8,16 +8,22 @@
     var astros = usuario.Astros ?? await _service.GetAll();
     var contagem = astros.Count > 10 ? 10 : astros.Count;
     astros = astros.GetRange(0, contagem);
+    int id = 0;
+    try
+    {
+        id = Convert.ToInt32(ViewContext.RouteData.Values["id"]);
+    }
+    catch (FormatException) {}
 }
 
 @foreach (var item in astros)
 {
     <div class="item">
         <a asp-action="Postagens" asp-route-id="@item.Id">
-            <img src="@item.Foto" alt="@item.Nome" data-tippy-content="@item.Nome">
+            <img class="@(item.Id.Equals(id) ? "astro-active" : "" )" src="@item.Foto" alt="@item.Nome" data-tippy-content="@item.Nome">
         </a>
     </div>    
 }
-<div class="item">
+<a class="item" asp-action="MeusAstros">
     <img src="https://icongr.am/clarity/add.svg?size=120&color=ffffff" alt="Ver mais" style="background-color: #7300A8;" data-tippy-content="Ver mais">
-</div>
+</a>
