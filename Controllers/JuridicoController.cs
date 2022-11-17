@@ -7,4 +7,6 @@ namespace Astromedia.Controllers;
 public class JuridicoController : Controller 
 {
     public IActionResult TermosUso() => View();
+
+    public IActionResult TermosPrivacidade() => View();
 }
