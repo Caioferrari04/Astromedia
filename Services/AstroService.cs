@@ -26,16 +26,20 @@ public class AstroService
     public async Task<IEnumerable<Astro>> GetAllRecommended()
     {
         Random rnd = new();
-        var astros = await _astroContext.Astros.ToListAsync();
+        var astros = await _astroContext.Astros.Include(p => p.Postagens).Include(u => u.Usuarios).ToListAsync();
         List<Astro> retorno = new();
 
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < 10; i++)
         {
-            retorno.Add(astros.ElementAt(rnd.Next(astros.Count)));
+            if (astros.Count == 0) break;
+            
+            var elemento = astros.ElementAt(rnd.Next(0, astros.Count));
+            retorno.Add(elemento);
+            astros.Remove(elemento);
         }
+        IEnumerable<Astro> retornoVerdadeiro = retorno;
 
-
-        return retorno.DistinctBy(el => el.Id);
+        return retornoVerdadeiro;
     }
 
     public async Task Delete(int id)

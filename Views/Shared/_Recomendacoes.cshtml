@@ -6,6 +6,8 @@
     var usuario = await UserManager.GetUserAsync(User);
     var astrosUsuario = astros.Where(el => !usuario.Astros.Contains(el));
     astros = astrosUsuario.Count() > 0 ? astrosUsuario : astros;
+    var contagem = astrosUsuario.Count() < 3 ? astros.Count() : 3;
+    astros = astros.Take(contagem);
 }
 
 

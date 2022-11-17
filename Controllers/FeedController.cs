@@ -171,4 +171,9 @@ public class FeedController : Controller
     public IActionResult LogsEdicao(int Id) => View(_logEdicaoService.ObterTodosDePostagem(Id));
 
     public async Task<IActionResult> PerfilUsuario(string id) => View(await _usuarioService.GetById(id));
+
+    public async Task<IActionResult> MeusAstros()
+    {
+        return View(await _userManager.GetUserAsync(User));
+    }
 }
