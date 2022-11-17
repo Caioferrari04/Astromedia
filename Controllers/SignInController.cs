@@ -31,11 +31,12 @@ public class SignInController : Controller
         var validationResult = await validator.ValidateAsync(usuario);
 
         if (validationResult.IsValid)
-        {                                                              /*Adicionar foto padrão*/
+        {
             var novoUsuario = new Usuario
             {
                 UserName = usuario.Nome,
                 FotoPerfil = "/img/default-img.jpg",
+                FotoBackground = "/img/capa-padrao.jpeg",
                 Email = usuario.Email,
                 DataNascimento = usuario.DataNascimento.ToUniversalTime()
             };

@@ -1,0 +1,72 @@
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<Usuario> UserManager;
+@model Usuario;
+@inject AstroService _service;
+@{
+    @* Layout = "_LayoutFeed"; *@
+    ViewData["Title"] = $"Meus interesses";
+    var astros = await _service.GetAllRecommended();
+    astros = astros.Where(el => Model.Astros.Find(f => f.Id == el.Id) is null);
+}
+
+@section stylesheet {
+    <link rel="stylesheet" href="~/lib/splide-4.1.3/dist/css/splide.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/meus-astros.css" asp-append-version="true">
+}
+
+<h1 class="text-light">Meus astros</h1>
+<div class="splide astros-usuario" role="group" aria-label="Meus astros">
+    <div class="splide__track">
+        <ul class="splide__list">
+            @foreach (var astro in Model.Astros)
+            {
+                <li class="splide__slide astro">
+                    <img src="@astro.Foto" class="recomendacao-mobile--foto">
+                    <div class="conteudo">
+                        <small class="text-light">@astro.Nome</small>
+                        <small class="estatistica text-light">
+                            <img src="https://icongr.am/material/chat.svg?size=20&color=d2d6dd"> 
+                            @astro.Postagens.Count
+                        </small>
+                        <small class="estatistica text-light">
+                            <img src="https://icongr.am/material/account.svg?size=20&color=d2d6dd"> 
+                            @astro.Usuarios.Count
+                        </small>
+                    </div>
+                    <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="astro--link"></a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<h2 class="text-light">Astros interessantes</h2>
+<div class="splide astros-recomendacoes" role="group" aria-label="Recomendações">
+    <div class="splide__track">
+        <ul class="splide__list">
+            @foreach (var astro in astros)
+            {
+                <li class="splide__slide astro">
+                    <img src="@astro.Foto" class="recomendacao-mobile--foto">
+                    <div class="conteudo">
+                        <small class="text-light">@astro.Nome</small>
+                        <small class="estatistica text-light">
+                            <img src="https://icongr.am/material/chat.svg?size=20&color=d2d6dd"> 
+                            @astro.Postagens.Count
+                        </small>
+                        <small class="estatistica text-light">
+                            <img src="https://icongr.am/material/account.svg?size=20&color=d2d6dd"> 
+                            @astro.Usuarios.Count
+                        </small>
+                    </div>
+                    <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="astro--link"></a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/lib/splide-4.1.3/dist/js/splide.min.js" asp-append-version="true"></script>
+    <script src="~/js/meus-astros.js" asp-append-version="true"></script>
+}

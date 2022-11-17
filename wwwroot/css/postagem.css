@@ -53,7 +53,7 @@ textarea:focus {
     display: flex;
     flex-flow: column;
     /* width: 35vw;  */
-    overflow: hidden;  
+    /* overflow: hidden;   */
 }
 
 .post-footer-icon {
@@ -253,7 +253,7 @@ textarea:focus {
     background-color: var(--color-primary);
     /* border: 1px solid var(--bg-color); */
     opacity: 1;
-    z-index: 900;
+    z-index: 1100;
     padding: 0;
     border-radius: var(--border-radius-dropdown) 0 var(--border-radius-dropdown) var(--border-radius-dropdown);
     margin-top: 0;

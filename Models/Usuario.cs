@@ -17,6 +17,7 @@ public class Usuario : IdentityUser
     }
 
     public string FotoPerfil { get; set; }
+    public string FotoBackground { get; set; }
 
     public DateTime DataNascimento { get; set; }
 
@@ -25,4 +26,6 @@ public class Usuario : IdentityUser
     public List<Astro> Astros { get; set; }
 
     public bool isAdmin { get; set; }
+
+    public string Bio { get; set; }
 }
