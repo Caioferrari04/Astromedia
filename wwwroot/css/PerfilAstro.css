@@ -131,6 +131,17 @@
     display: block;
 }
 
+/* galeria de imagens */
+.gallery-container > .gallery-item > img {
+    max-width: 100px;
+    min-height: 50px;
+    height: 60px;
+}
+
+.lg-on {
+    overflow-y: hidden;
+}
+
 
 /* Responsividade */
 
