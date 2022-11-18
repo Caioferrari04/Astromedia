@@ -115,4 +115,9 @@ public class SignInController : Controller
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
+
+    public IActionResult EmailRecPassword() => View();
+
+    public IActionResult RecPassword() => View();
+
 }
