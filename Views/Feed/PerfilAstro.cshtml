@@ -73,9 +73,12 @@
             <div class="row justify-content-center">
                 <div class="col col-md-10">
                     <div class="gallery-container" id="gallery-container">
-                        <a class="gallery-item" data-src="https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1600&q=80">
-                            <img alt="layers of blue." class="img-responsive" src="https://images.unsplash.com/photo-1609342122563-a43ac8917a3a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=240&q=80" />
-                        </a>
+                        @foreach (var foto in Model.Fotos)
+                        {
+                            <a class="gallery-item" data-src="@foto">
+                                <img alt="" class="img-responsive" src="@foto" />
+                            </a>
+                        }
                     </div>
                 </div>
             </div>

@@ -64,6 +64,14 @@ public class AstroService
             astro.FotoBackground = respostaImgur.Data.data.link;
         }
 
+        if(astroDTO.Fotos is not null) 
+        {
+            foreach(var foto in astroDTO.Fotos) {
+                var resposta = await new ImgurService().UploadImagem(foto);
+                astro.Fotos.Add(resposta.Data.data.link);
+            }
+        }
+
         _astroContext.Astros.Update(astro);
         await _astroContext.SaveChangesAsync();
     }

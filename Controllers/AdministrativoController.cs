@@ -50,6 +50,10 @@ public class AdministrativoController : Controller
             var respostaImgur = await new ImgurService().UploadImagem(astroDTO.Foto);
             var respostaImgur2 = await new ImgurService().UploadImagem(astroDTO.FotoBackground);
             var astro = new Astro(astroDTO.Nome, astroDTO.Curiosidades, respostaImgur.Data.data.link, respostaImgur2.Data.data.link);
+            foreach(var foto in astroDTO.Fotos) {
+                var resposta = await new ImgurService().UploadImagem(foto);
+                astro.Fotos.Add(resposta.Data.data.link);
+            }
             await _context.Astros.AddAsync(astro);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -75,6 +79,6 @@ public class AdministrativoController : Controller
     public async Task<IActionResult> Update(AstroDTO astro)
     {
         await _astroService.Update(astro);
-        return View();
+        return RedirectToAction(nameof(List));
     }
 }
