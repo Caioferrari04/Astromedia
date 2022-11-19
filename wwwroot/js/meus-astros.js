@@ -26,6 +26,6 @@ Splide.defaults = {
     }
 }
 
-new Splide('.astros-usuario').mount();
+if (document.querySelector('.astros-usuario')) new Splide('.astros-usuario').mount();
 new Splide('.astros-recomendacoes').mount();
 

@@ -48,7 +48,7 @@ public class SignInController : Controller
                 {
                     await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("MeusAstros", "Feed");
                 }
 
                 foreach (var error in resultado.Errors)
@@ -102,7 +102,7 @@ public class SignInController : Controller
                 return RedirectToAction(nameof(LogInView));
             }
 
-            return RedirectToAction("Postagens", "Feed"); /*Redirecionar para o feed :)*/
+            return RedirectToAction("MeusAstros", "Feed"); /*Redirecionar para o feed :)*/
         }
         catch
         {
