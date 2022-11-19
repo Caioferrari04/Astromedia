@@ -1,4 +1,5 @@
 var expcmbtn = document.querySelector(".expand-comment-btn");
+let tt = 0;
 
 $(document).on("click",".expand-comment-btn", () => {
     console.log("click");
@@ -30,17 +31,52 @@ $(document).on("click",".expand-comment-btn", () => {
     })
 
     function verifyMargin() {
-        if (aux.style.marginTop === "-119px") {
-            console.log("122");
+        if (window.screen.width > 600 && aux.style.marginTop === "-115px") {
             aux.style.marginTop = "-5px";
             aux.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-        } else if (aux.style.marginTop === "-5px" && tgg) {
-            console.log("tgg");
+        } else if (window.screen.width > 600 && aux.style.marginTop === "-5px" && tgg) {
             aux.style.marginTop = "-5px";
-        } else if (aux.style.marginTop === "-5px" && !tgg) {
-            console.log("!!tgg");
-            aux.style.marginTop = "-119px";
+        } else if (window.screen.width > 600 && aux.style.marginTop === "-5px" && !tgg) {
+            aux.style.marginTop = "-115px";
+        } 
+        
+        else if (window.screen.width <= 600 && aux.style.marginTop === "-115px") {
+            aux.style.marginTop = "-5px";
+            aux.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        } else if (window.screen.width <= 600 && aux.style.marginTop === "-5px" && !tgg) {
+            aux.style.marginTop = "-5px";
         }
     }
+
+    const cmmform = document.querySelector("#commentform");
+    if(tt == 0) {
+        cmmform.addEventListener("submit", e => {
+            e.preventDefault();
+            handleFormSubmit(e.target, e.target.action);
+        });
+    }
+
+    async function handleFormSubmit(form, url) {	
+        const body = new FormData(form);
+        const fetchConfig = { method: 'POST', body };
     
+        const response = await fetch(url, fetchConfig);
+        if (!response.ok) {
+            handleError(['Houve um erro com sua requisição, tente novamente mais tarde!']);
+            return;
+        }
+    
+        const json = await response.json();
+    
+        if (!json.success) {
+            const mensagens = [];
+            json.errors.forEach(erro => mensagens.push(erro));
+            handleError(mensagens);
+            return;
+        }
+    
+        window.location.reload();
+    }
+    
+    tt = 1;
 });

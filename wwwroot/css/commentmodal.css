@@ -11,13 +11,17 @@
     background-color: rgba(0,0,0,0.5); 
 }
 
+.hidden {
+    display: none;
+}
+
 .comment-input-box {
     position: relative;
     background-color: var(--color-primary);
     z-index: 0;
     border-radius: 8px;
     margin-bottom: 10px;
-    margin-top: -119px;
+    margin-top: -115px;
     width: auto;
     height: auto;
     padding: 20px 5px 5px 5px;
@@ -36,6 +40,15 @@
     margin: auto;
     height: 55%;
     transform: scale(1.4);
+    border: 2px solid var(--bg-secondary-color);
+}
+
+.out-comments {
+    background-color: var(--bg-secondary-color);
+    border-radius: 8px;
+    font-weight: lighter;
+    margin: 8px;
+    height: 55%;
     border: 2px solid var(--bg-secondary-color);
 }
 
@@ -212,8 +225,8 @@
         width: 100%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        height: auto;
-        margin-top: 15cm;
+        height: -webkit-fill-available;
+        margin-top: 14cm;
     }
     .commentmodal-post {
         overflow: unset;
@@ -234,7 +247,6 @@
     }
 }
 
-/* Selfnote - Verificar height do Pixel 5 */
 @media screen and (min-width: 321px) and (max-width: 600px) { 
     .commentmodal {
         overflow-x: hidden;
@@ -265,8 +277,8 @@
         width: 100%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        height: auto;
-        margin-top: 5cm;
+        height: -webkit-fill-available;
+        margin-top: 4cm;
     }
     .commentmodal-post {
         overflow: unset;
@@ -317,7 +329,7 @@
         width: 100%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        height: auto;
+        height: -webkit-fill-available;
         margin-top: 5cm;
     }
     .commentmodal-post {

@@ -40,7 +40,7 @@ namespace Astromedia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Astros");
+                    b.ToTable("Astros", (string)null);
                 });
 
             modelBuilder.Entity("Astromedia.Models.Comentario", b =>
@@ -69,7 +69,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Comentario");
+                    b.ToTable("Comentarios", (string)null);
                 });
 
             modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
@@ -106,7 +106,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("LogsEdicoes");
+                    b.ToTable("LogsEdicoes", (string)null);
                 });
 
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
@@ -138,7 +138,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Postagens");
+                    b.ToTable("Postagens", (string)null);
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
@@ -226,7 +226,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuariosId");
 
-                    b.ToTable("AstroUsuario");
+                    b.ToTable("AstroUsuario", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

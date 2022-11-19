@@ -47,10 +47,10 @@
                 <div class="between-config">
                     <div class="post-header-info is-left">
 
-                        <img class="usr-post-pic commentmodal-usrpic" src="@comment.Postagem.Usuario.FotoPerfil" />
+                        <img class="usr-post-pic commentmodal-usrpic" src="@comment.Usuario.FotoPerfil" />
                         <div class="info-col">
-                            <p class="commentmodal-usrname usr-post-name">@comment.Postagem.Usuario.UserName</p>
-                            <p class="commentmodal-usrdate usr-post-date">@comment.Postagem.DataPostagem.ToString("dd/MM/yyyy")</p>
+                            <p class="commentmodal-usrname usr-post-name">@comment.Usuario.UserName</p>
+                            <p class="commentmodal-usrdate usr-post-date">@comment.DataComentario.ToString("dd/MM/yyyy")</p>
                         </div>
 
                     </div>
@@ -76,7 +76,7 @@
         else
         {
             <div class="text-center">
-                <p class="text-light">Não há comentários nessa postagem... ainda. Seja o(a) primeiro(a)!</p>
+                <p class="text-light out-comments">Não há comentários nessa postagem... ainda. Seja o(a) primeiro(a)!</p>
             </div>
         }
 
@@ -86,15 +86,15 @@
 </div>
 
 @* Área de inserção de comentário (Template) *@
-<div id="hidden" class="comment-input-box" style="margin-top: -119px !important;">
+<div id="hidden" class="comment-input-box" style="margin-top: -115px !important;">
     <div class="comment-input-content">
-        @using (Html.BeginForm("Action", "Controller", FormMethod.Post, new {@id = "commentform"}))
-        {   
-            @Html.TextAreaFor(m => m, new { @class = "is-full-width comment-input", @name = "commenttext", @form = "commentform", @cols = "100%", @rows = "auto", @placeholder = "Comente Aqui", @maxlength = "280"})
+        <form asp-action="SaveComment" id="commentform">  
+            <textarea class="is-full-width comment-input" name="Texto" form="commentform" cols="100%" rows="auto" placeholder="Comente Aqui" maxlength="280"></textarea>
             <div class="is-right">
                 <button type="submit" class="submit-comment-btn submit-post-btn button outline is-vertical-align">Comentar</button>
             </div>
-        }
+            <input type="hidden" value="@Model.Id" name="PostId">
+        </form>
     </div>
 </div>
 
