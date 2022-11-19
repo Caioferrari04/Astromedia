@@ -130,6 +130,9 @@ namespace Astromedia.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Bio")
+                        .HasColumnType("text");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
@@ -143,6 +146,9 @@ namespace Astromedia.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("FotoBackground")
+                        .HasColumnType("text");
 
                     b.Property<string>("FotoPerfil")
                         .HasColumnType("text");

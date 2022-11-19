@@ -18,14 +18,14 @@
                 <img src="https://icongr.am/material/close.svg?size=30&color=ffffff" class="icon-button is-left dropdown-toggle" />
                 <ul>
                     <li class="img-perfil">
-                        <img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="">
+                        <a class="link-escondido" asp-action="PerfilUsuario" asp-controller="Feed" asp-route-id="@usuario.Id"><img src="@usuario.FotoPerfil" class="logo-user dropdown-toggle" alt="Foto de perfil"></a>
                     </li>
                     <li class="nome-perfil">
-                        <h5 class="text-light">@usuario.UserName</h5>
+                        <h5 class="text-light"><a asp-action="PerfilUsuario" asp-controller="Feed" asp-route-id="@usuario.Id" class="text-light link-escondido">@usuario.UserName</a></h5>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a class="text-light" href="#">
+                        <a class="text-light" asp-action="PerfilUsuario" asp-controller="Feed" asp-route-id="@usuario.Id">
                             <img src="https://icongr.am/material/account.svg?size=30&color=ffffff"/>
                             Perfil
                         </a>

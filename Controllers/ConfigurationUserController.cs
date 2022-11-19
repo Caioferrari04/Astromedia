@@ -52,7 +52,14 @@ public class ConfigurationUserController : Controller
             {
                 var respostaImgur = await new ImgurService().UploadImagem(usuarioDTO.FotoPerfil);
                 usuario.FotoPerfil = respostaImgur.Data.data.link;  
-            }                                                           
+            }     
+            
+            if(usuarioDTO.FotoBackground is not null)
+            {
+                var respostaImgur = await new ImgurService().UploadImagem(usuarioDTO.FotoBackground);
+                usuario.FotoBackground = respostaImgur.Data.data.link;  
+            }   
+
             try 
             {
                 var resultado = await _userManager.UpdateAsync(usuario);

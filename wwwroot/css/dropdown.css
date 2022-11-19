@@ -66,6 +66,15 @@
     margin: 0.5rem 1rem 0 1rem;
 }
 
+.link-escondido {
+    display: block!important;
+    padding: 0!important;
+}
+
+.link-escondido:hover {
+    background-color: transparent!important;
+}
+
 @keyframes drifto {
     from {transform: translateX(700px)}
     to {transform: translateX(0)}
@@ -87,5 +96,13 @@
 
     .img-perfil, .nome-perfil {
         text-align: center;
+    }
+
+    .link-escondido {
+        font-size: 2rem!important;
+    }
+    .link-escondido img {
+        width: 5rem;
+        height: 5rem;
     }
 }

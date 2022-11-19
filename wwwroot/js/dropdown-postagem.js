@@ -34,27 +34,37 @@ POSTAGENS.forEach(postagem => {
             linkImagem.value = valorOriginal.img;
         }
 
-        novoTemplate.querySelector('input[name="AstroId"]').value = document.getElementsByName('AstroId')[0].value;
+        const astroId =  document.getElementsByName('AstroId')[0].value;
+
+        novoTemplate.querySelector('input[name="AstroId"]').value = astroId ? astroId : postagem.getAttribute('data-astro-id');
         novoTemplate.querySelector('#template-botao-cancelar').addEventListener('click', () => novoTemplate.replaceWith(postagem));
 
         const imagemInput = novoTemplate.querySelector('#imagem-template');
         const imagemForm = novoTemplate.querySelector('#upload-imagem-template');
-        const form = novoTemplate.querySelector('#postform-template')
+        const form = novoTemplate.querySelector('#postform-template');
+        const templateImg = novoTemplate.querySelector('#template-img');
         form.querySelector('input[name="Id"]').value = postagem.id.split('-')[1];
 
         imagemInput.addEventListener('input', () => imagemForm.dispatchEvent(new Event('submit')))
         imagemForm.addEventListener('submit', async event => {
             event.preventDefault();
             const resposta = await saveImg(event.target);
-            console.log(novoTemplate)
-            novoTemplate.querySelector('#template-img').setAttribute('src', resposta.linkImagem);
+            templateImg.setAttribute('src', resposta.linkImagem);
             linkImagem.value = resposta.linkImagem;
             novoTemplate.querySelector('#template-img-preview').style.display = 'block';
         });
         
         form.addEventListener("submit",  event => {
             event.preventDefault();
-            handleFormSubmit(event.target, event.target.action);
+            handleFormSubmit(event.target, event.target.action, false);
+            
+            postagem.querySelector('.post-text').innerHTML = textareaEdicao.value;
+            const img = postagem.querySelector('.post-img')?.firstElementChild;
+            if (img && templateImg.getAttribute('src')) {
+                img.src = templateImg.getAttribute('src');
+            }
+
+            novoTemplate.replaceWith(postagem);
         });
     });
 
