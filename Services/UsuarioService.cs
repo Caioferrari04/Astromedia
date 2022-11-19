@@ -17,5 +17,9 @@ public class UsuarioService
         _astroContext = astroContext;
         _signInManager = signInManager;
     }
-    public async Task<Usuario> GetById(string id) => await _astroContext.Users.Include(el => el.Postagens).Include(el => el.Astros).FirstOrDefaultAsync(usuario => usuario.Id == id);
+    public async Task<Usuario> GetById(string id) 
+        => await _astroContext.Users
+            .Include(el => el.Postagens)
+            .Include(el => el.Astros)
+            .FirstOrDefaultAsync(usuario => usuario.Id == id);
 }

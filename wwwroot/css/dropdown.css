@@ -21,6 +21,7 @@
     visibility: visible;
     animation: drifto 0.6s;
     transform: translateX(0);
+    overflow: scroll;
 }
 
 .dropdown-active .logo-user {

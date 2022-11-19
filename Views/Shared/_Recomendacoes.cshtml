@@ -6,7 +6,7 @@
     var usuario = await UserManager.GetUserAsync(User);
     var astrosUsuario = astros.Where(el => !usuario.Astros.Contains(el));
     astros = astrosUsuario.Count() > 0 ? astrosUsuario : astros;
-    var contagem = astrosUsuario.Count() < 3 ? astros.Count() : 3;
+    var contagem = astrosUsuario.Count() < 5 ? astros.Count() : 5;
     astros = astros.Take(contagem);
 }
 
@@ -39,8 +39,11 @@
         </div>
     </div>   
     }
+    <small class="text-light recomendacoes--mobile_titulo hide-md hide-lg">
+        <a asp-action="MeusAstros"><img src="https://icongr.am/material/arrow-left.svg?size=20&color=ffffff" alt="Ver mais"></a>
+        Astros interessantes
+    </small>
     <div class="splide recomendacoes--mobile" role="group" aria-label="Recomendações">
-        <small class="text-light">Astros interessantes</small>
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach (var astro in astros)

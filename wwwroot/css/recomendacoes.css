@@ -4,8 +4,8 @@
     gap: 1.2rem;
     flex-direction: column;
     height: fit-content;
-    position: sticky;
-    top: 9vh;
+    /* position: sticky; */
+    /* top: 9vh; */
 }
 
 .recomendacao {
@@ -108,6 +108,8 @@
         display: flex!important;
         width: 100%;
         position: static;
+        gap: 0;
+        margin-bottom: 0.5em;
     }
 
     .recomendacoes--mobile {
@@ -117,11 +119,25 @@
         padding: 0rem 1rem .2rem;
     }
 
+    .recomendacoes--mobile_titulo {
+        order: -1;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    }
+    
+    .recomendacoes--mobile_titulo a {
+        display: flex;
+    }
+
     .recomendacao--mobile {
         background-color: var(--color-highlight);
         text-align: center;
         padding: .4rem 0;
         border-radius: 10px;
+    }
+    .paginacao-splide {
+        bottom: -.8em!important;
     }
 
     .recomendacao--mobile:active, .recomendacao--mobile:focus {
@@ -155,11 +171,11 @@
 }
 
 @media screen and (max-width: 576px) {
-    .recomendacoes--mobile {
+    /* .recomendacoes--mobile {
         margin-left: -2.5rem;
-        /* background-color: var(--color-primary); */
-    }
-    .recomendacoes--mobile small {
+        background-color: var(--color-primary);
+    } */
+    /* .recomendacoes--mobile small {
         margin-left: 1.5rem;
-    }
+    } */
 }
