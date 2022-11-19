@@ -119,6 +119,31 @@ public class SignInController : Controller
 
     public IActionResult EmailRecPassword() => View();
 
+    [HttpPost]
+    public async Task<IActionResult> EmailRecPassword(ForgotPassword forgotPassword)
+    {
+        var validator = new ForgotPasswordValidator();
+        var validationResult = await validator.ValidateAsync(forgotPassword);
+
+        if (validationResult.IsValid)
+        {                                                        
+            // try 
+            // {
+            //     var resultado = await _userManager.ChangePasswordAsync(usuario, usuarioDTO.SenhaAtual, usuarioDTO.Senha);
+            //     foreach (var error in resultado.Errors)
+            //         ModelState.AddModelError(string.Empty, error.Description);
+            // } 
+            // catch(Exception error)
+            // {
+            //     Console.WriteLine(error.Message);
+            // } 
+        }
+
+        foreach (var error in validationResult.Errors)
+            ModelState.AddModelError(string.Empty, error.ErrorMessage);
+        return View();
+    } 
+
     public IActionResult RecPassword() => View();
 
 }
