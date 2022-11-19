@@ -126,23 +126,50 @@ public class SignInController : Controller
         var validationResult = await validator.ValidateAsync(forgotPassword);
 
         if (validationResult.IsValid)
-        {                                                        
-            // try 
-            // {
-            //     var resultado = await _userManager.ChangePasswordAsync(usuario, usuarioDTO.SenhaAtual, usuarioDTO.Senha);
-            //     foreach (var error in resultado.Errors)
-            //         ModelState.AddModelError(string.Empty, error.Description);
-            // } 
-            // catch(Exception error)
-            // {
-            //     Console.WriteLine(error.Message);
-            // } 
+        {                                              
+            var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
+            if(user != null)
+            {   
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                var passwordResetLink = Url.Action(
+                    "EmailRecPassword",
+                    "SignInController",
+                    new { email = forgotPassword.Email, token =  token }, 
+                    Request.Scheme
+                );
+
+                EmailHelper emailHelper = new EmailHelper();
+                bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, passwordResetLink);
+
+                if (emailResponse)
+                {
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+
+                else {
+                    return View(forgotPassword);
+                }
+               
+                // astromedia123_
+                // testealex962
+
+                //email alexsandro.astromedia@outlook.com
+                //senha astromedia123_
+                //nome alexsandro astromedia
+                
+            }
+
+            ModelState.AddModelError(string.Empty, "Nenhuma conta foi encontrada com o email informado");
+            return View(forgotPassword);
         }
 
         foreach (var error in validationResult.Errors)
             ModelState.AddModelError(string.Empty, error.ErrorMessage);
-        return View();
+        return View(forgotPassword);
     } 
+
+    public IActionResult ForgotPasswordConfirmation() => View();
 
     public IActionResult RecPassword() => View();
 
