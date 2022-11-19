@@ -13,10 +13,12 @@ public class Astro
         Postagens = new();
         FotoBackground = fotoBackground;
         Fotos = new();
+        MarcosHistoricos = new();
     }
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Curiosidades { get; set; }
+    public List<string> MarcosHistoricos { get; set; }
     public string Foto { get; set; }
     public string FotoBackground { get; set; }
     public List<string> Fotos { get; set; }

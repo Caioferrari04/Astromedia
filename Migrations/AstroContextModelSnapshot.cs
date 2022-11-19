@@ -42,6 +42,9 @@ namespace Astromedia.Migrations
                     b.Property<List<string>>("Fotos")
                         .HasColumnType("text[]");
 
+                    b.Property<List<string>>("MarcosHistoricos")
+                        .HasColumnType("text[]");
+
                     b.Property<string>("Nome")
                         .HasColumnType("text");
 

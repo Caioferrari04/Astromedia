@@ -32,6 +32,29 @@
             <div id="CuriosidadesTextArea"></div>
             <textarea asp-for="Curiosidades" style="display: none;"></textarea>
         </div>
+
+        <div class="justificar">
+          
+            <div class="d-flex">
+                <label class="text-light">Marcos Históricos</label>
+                <button type="button" class="button primary is-right" id="button">+</button>
+            </div>
+
+            @if(Model.MarcosHistoricos?.Count > 0)
+            {
+                @for (int i = 0; i<Model.MarcosHistoricos.Count(); i++)
+                { 
+                    <div class="margin-bottom">
+                        <div id="MarcosHistoricosDiv_@i"></div>
+                        <textarea name="MarcosHistoricos" id="MarcosHistoricos_@i" style="display: none;" value="@Model.MarcosHistoricos[i]"></textarea>
+                    </div>
+                }
+            }
+
+
+            
+        </div>
+
     </div>
     <input type="hidden" asp-for="Id">
     <button type="submit" class="button">Enviar</button>
@@ -39,5 +62,6 @@
 
 @section scripts {
     <script src="https://unpkg.com/pell"></script>
-    <script src="/js/administrativo.js"></script>
+    <script src="/js/administrativo-atualizar.js"></script>
+    <script src="/js/create-textarea-administrativo.js"></script>
 }

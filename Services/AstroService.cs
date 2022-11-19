@@ -51,6 +51,7 @@ public class AstroService
         var astro = await GetById(astroDTO.Id);
         astro.Nome = astroDTO.Nome;
         astro.Curiosidades = astroDTO.Curiosidades;
+        astro.MarcosHistoricos = astroDTO.MarcosHistoricos;
 
         if(astroDTO.Foto is not null) 
         {
@@ -88,7 +89,8 @@ public class AstroService
         LinkFoto = astro.Foto,
         LinkFotoBackground = astro.FotoBackground,
         Nome = astro.Nome,
-        Curiosidades = astro.Curiosidades
+        Curiosidades = astro.Curiosidades,
+        MarcosHistoricos = astro.MarcosHistoricos
     };
 
     public async Task JoinForum(int id, Usuario usuario)
