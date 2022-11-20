@@ -140,7 +140,7 @@ public class SignInController : Controller
                 );
 
                 EmailHelper emailHelper = new EmailHelper();
-                bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, passwordResetLink);
+                bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
 
                 if (emailResponse)
                 {
@@ -190,7 +190,7 @@ public class SignInController : Controller
             );
 
             EmailHelper emailHelper = new EmailHelper();
-            bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, passwordResetLink);
+            bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
 
             if (emailResponse)
             {
