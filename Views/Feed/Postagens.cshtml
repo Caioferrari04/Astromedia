@@ -157,13 +157,13 @@
                                 <a class="comment-modal" href="javascript:void(0)" data-id="@postagem.Id">Ver Comentários</a>
                             </div>
                             <div class="usr-footer-likes is-vertical-align is-right">
-                                @if (user.Likes?.Find(el => el.Postagem.Id == postagem.Id) is not null) 
+                                @if (user.Likes?.Find(el => el.Postagem?.Id == postagem.Id) is not null) 
                                 {
-                                    <img class="post-footer-icon btn-dislike"  data-id="@postagem.Id" src="/icons/heart-fill.svg" />
+                                    <img class="post-footer-icon btn-dislike"  data-id="@postagem.Id" data-url="/Feed/RemoverLikePostagem" data-tipo="Postagem" src="/icons/heart-fill.svg" />
                                 }
                                 else
                                 {
-                                    <img class="post-footer-icon btn-like"  data-id="@postagem.Id" src="/icons/heart.svg" />
+                                    <img class="post-footer-icon btn-like"  data-id="@postagem.Id" data-url="/Feed/AdicionarLikePostagem" data-tipo="Postagem" src="/icons/heart.svg" />
                                 }
                                 <small class="text-light likes">@postagem.Likes?.Count</small>
                             </div>

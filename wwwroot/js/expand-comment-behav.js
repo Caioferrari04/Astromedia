@@ -17,7 +17,7 @@ function expandComment() {
             expandirComentario.addEventListener('click', clickInicial, { once: true })
         })
 
-        document.querySelector('textarea').addEventListener('change', e => {
+        document.querySelector('textarea').addEventListener('input', e => {
             e.target.setAttribute('style', 'height:' + (e.target.scrollHeight) + 'px')
             e.target.addEventListener('input', OnInput, false)
         })

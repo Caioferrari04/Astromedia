@@ -83,6 +83,7 @@ public class FeedController : Controller
     public async Task<IActionResult> Comentarios(int id) 
     {
         Postagem postagem = await _postagemService.GetById(id);
+        ViewBag.Usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
         return View(postagem);
     }
 
@@ -211,11 +212,11 @@ public class FeedController : Controller
     public async Task<IActionResult> MeusAstros() => View(await _usuarioService.GetById(_userManager.GetUserId(User)));
 
     [HttpPost]
-    public async Task<IActionResult> AdicionarLikePostagem(int postagemId)
+    public async Task<IActionResult> AdicionarLikePostagem(int id)
     {
         try 
         {
-            await _likeService.AdicionarLikePostagem(await _userManager.GetUserAsync(User), postagemId);
+            await _likeService.AdicionarLikePostagem(await _userManager.GetUserAsync(User), id);
             return Json(new { sucesso = true });
         } 
         catch(Exception)
@@ -225,25 +226,11 @@ public class FeedController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AdicionarLikeComentario(int comentarioId)
+    public async Task<IActionResult> AdicionarLikeComentario(int id)
     {
         try 
         {
-            await _likeService.AdicionarLikeComentario(await _userManager.GetUserAsync(User), comentarioId);
-            return Json(new { sucesso = true });
-        } 
-        catch(Exception)
-        {
-            return Json(new { sucesso = false, mensagem = "Houve um erro adicionando o like! Tente novamente mais tarde." });
-        }
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> RemoverLikePostagem(int postagemId)
-    {
-        try 
-        {
-            await _likeService.RemoverLikePostagem(await _userManager.GetUserAsync(User), postagemId);
+            await _likeService.AdicionarLikeComentario(await _userManager.GetUserAsync(User), id);
             return Json(new { sucesso = true });
         } 
         catch(Exception)
@@ -253,16 +240,30 @@ public class FeedController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> RemoverLikeComentario(int comentarioId)
+    public async Task<IActionResult> RemoverLikePostagem(int id)
     {
         try 
         {
-            await _likeService.RemoverLikeComentario(await _userManager.GetUserAsync(User), comentarioId);
+            await _likeService.RemoverLikePostagem(await _userManager.GetUserAsync(User), id);
             return Json(new { sucesso = true });
         } 
         catch(Exception)
         {
-            return Json(new { sucesso = false, mensagem = "Houve um erro removendo o like! Tente novamente mais tarde." });
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoverLikeComentario(int id)
+    {
+        try 
+        {
+            await _likeService.RemoverLikeComentario(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
         }
     }
 }

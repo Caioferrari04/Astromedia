@@ -11,6 +11,37 @@
     background-color: rgba(0,0,0,0.5); 
 }
 
+.modo-flexbox {
+    display: flex!important;
+    flex-direction: column;
+}
+
+.modo-flexbox .commentmodal-holder {
+    border-radius: 0 0 14px 14px;
+    max-height: 30vh;
+}
+
+.commentmodal-header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentgrid .commentmodal-header {
+    grid-column: 1/3;
+}
+
+.close-comment-btn {
+    width: 1rem;
+    cursor: pointer;
+}
+
+.commentmodal-header p {
+    font-size: 1rem;
+    font-weight: bolder;
+    margin: 0;
+}
+
 .hidden {
     display: none;
 }
@@ -19,7 +50,7 @@
     position: relative;
     background-color: var(--color-primary);
     z-index: 0;
-    border-radius: 8px;
+    /* border-radius: 0 0 0 0; */
     margin-bottom: 10px;
     /* margin-top: -115px; */
     width: auto;
@@ -42,8 +73,7 @@
     border-radius: 14px;
     font-weight: lighter;
     margin: auto;
-    height: 55%;
-    transform: scale(1.4);
+    /* height: 55%; */
     border: 2px solid var(--bg-secondary-color);
 }
 
@@ -51,6 +81,7 @@
     background-color: var(--bg-secondary-color);
     border-radius: 8px;
     font-weight: lighter;
+    font-size: 1rem;
     margin: 8px;
     height: 55%;
     border: 2px solid var(--bg-secondary-color);
@@ -62,7 +93,7 @@
 }
 
 .commentmodal-post {
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     overflow-y: auto;
 }
 
@@ -119,14 +150,15 @@
 }
 
 .commentmodal-text {
-    font-size: .6rem;
+    font-size: 1rem;
     margin: 5px 10px;
     color: var(--color-lightGrey);
 }
 
 .commentmodal-selftext {
-    font-size: .7rem;
+    font-size: 1rem;
     margin: 5px 10px;
+    /* min-height: 68%; */
     color: var(--color-lightGrey);
 }
 
@@ -139,17 +171,14 @@
 }
 
 .commentmodal-selfbottom {
-    margin-bottom: 1px;
-    position: fixed;
-    bottom: -2px;
-    left: 4px;
-    right: 41.5%;
+    position: sticky;
+    bottom: 0;
     background-color: var(--bg-secondary-color);
-    width: 57.9%;
+    width: 100%;
     padding-bottom: 6px;
     padding-top: 4px;
     border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 0px;
 }
 
 .commentmodal-usrpic {
@@ -163,11 +192,11 @@
 }
 
 .commentmodal-usrname {
-    font-size: .8rem;
+    font-size: 1rem;
 }
 
 .commentmodal-usrdate {
-    font-size: .47rem;
+    font-size: .7rem;
 }
 
 .block-scroll {
@@ -241,7 +270,7 @@
         border-radius: 8px;
     }
     .commentmodal-text {
-        font-size: .7rem;
+        font-size: 1rem;
     }
     .close-btn {
         max-width: 47px;

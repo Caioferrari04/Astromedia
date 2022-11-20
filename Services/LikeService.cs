@@ -29,6 +29,7 @@ public class LikeService
     public async Task AdicionarLikeComentario(Usuario usuario, int comentarioId) 
     {
         Comentario comentario = await _comentarioService.GetById(comentarioId);
+        // comentario.Id = comentarioId;
 
         await _context.Likes.AddAsync(new Like() {
             Comentario = comentario,
@@ -52,7 +53,7 @@ public class LikeService
     {
         Comentario comentario = await _comentarioService.GetById(comentarioId);
 
-        var like = _context.Likes.FirstOrDefault(el => el.Usuario.Id == usuario.Id && el.Postagem.Id == comentarioId);
+        var like = _context.Likes.FirstOrDefault(el => el.Usuario.Id == usuario.Id && el.Comentario.Id == comentarioId);
         _context.Likes.Remove(like);
         
         await _context.SaveChangesAsync();

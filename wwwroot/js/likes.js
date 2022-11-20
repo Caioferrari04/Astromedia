@@ -1,6 +1,6 @@
 const enviar = async (url, postagemId) => {
     const form = new FormData()
-    form.append('postagemId', postagemId)
+    form.append('id', postagemId)
 
     const response = await fetch(url, {
         method: 'POST',
@@ -20,23 +20,25 @@ const enviar = async (url, postagemId) => {
         handleError(mensagens)
         return false;
     }
-    
+
     return true;
 }
 
 const submitDislike = async (e) => {
-    if (await enviar('/Feed/RemoverLikePostagem', e.target.getAttribute('data-id'))) {
+    if (await enviar(e.target.getAttribute('data-url'), e.target.getAttribute('data-id'))) {
         e.target.src = "/icons/heart.svg"
         e.target.nextElementSibling.textContent = parseInt(e.target.nextElementSibling.textContent) - 1
         e.target.addEventListener('click', submitLike, { once: true })
+        e.target.setAttribute('data-url', '/Feed/AdicionarLike' + e.target.getAttribute('data-tipo'))
     }
 }
 
 const submitLike = async (e) => {
-    if (await enviar('/Feed/AdicionarLikePostagem', e.target.getAttribute('data-id'))) {
+    if (await enviar(e.target.getAttribute('data-url'), e.target.getAttribute('data-id'))) {
         e.target.src = "/icons/heart-fill.svg"
         e.target.nextElementSibling.textContent = parseInt(e.target.nextElementSibling.textContent) + 1
         e.target.addEventListener('click', submitDislike, { once: true })
+        e.target.setAttribute('data-url', '/Feed/RemoverLike' + e.target.getAttribute('data-tipo'))
     }
 
 }

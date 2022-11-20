@@ -60,7 +60,14 @@ public class PostagemService
     }
 
     public async Task<Postagem> GetById(int id) =>
-        await _astroContext.Postagens.Include(el => el.Astro).Include(el => el.Usuario).Include(el => el.Comentarios).ThenInclude(el => el.Usuario).FirstAsync(el => el.Id == id);
+        await _astroContext.Postagens
+            .Include(el => el.Astro)
+            .Include(el => el.Usuario)
+            .Include(el => el.Likes)
+            .Include(el => el.Comentarios)
+            .ThenInclude(el => el.Usuario)
+            .ThenInclude(el => el.Likes)
+            .FirstAsync(el => el.Id == id);
 
     public async Task Update(Postagem postagem)
     {
