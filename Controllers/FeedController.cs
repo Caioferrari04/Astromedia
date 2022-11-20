@@ -11,15 +11,17 @@ public class FeedController : Controller
 {
     private readonly AstroService _astroService;
     private readonly PostagemService _postagemService;
+    private readonly CommentService _commentService;
     private readonly UserManager<Usuario> _userManager;
     private readonly LogEdicaoService _logEdicaoService;
     private readonly UsuarioService _usuarioService;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, UsuarioService usuarioService)
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService, UsuarioService usuarioService)
     {
         _astroService = astroService;
-        _postagemService = postagemService;
         _userManager = userManager;
+        _postagemService = postagemService;
         _logEdicaoService = logEdicaoService;
+        _commentService = commentService;
         _usuarioService = usuarioService;
     }
 
@@ -75,7 +77,38 @@ public class FeedController : Controller
 
     public IActionResult Foruns() => PartialView("_Foruns");
 
-    public IActionResult Comentarios() => PartialView("Comentarios");
+    public async Task<IActionResult> Comentarios(int id) 
+    {
+        Postagem postagem = await _postagemService.GetById(id);
+        return View(postagem);
+    }
+
+    [HttpPost]
+    public async Task<JsonResult> SaveComment([FromForm] CommentDTO comment)
+    {
+        var usuario = await _userManager.GetUserAsync(User);
+        var validator = new CommentValidator();
+        var validationResult = validator.Validate(comment);
+        var errorMessages = new List<string>();
+
+        if (validationResult.IsValid)
+        {
+            comment.UsuarioId = usuario.Id;
+            comment.DataComentario = DateTime.UtcNow;
+            try
+            {
+                await _commentService.Create(comment);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                errorMessages.Add(ex.Message);
+                return Json(new { success = false, errors = errorMessages });
+            }
+        }
+        validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
+        return Json(new { success = false, errors = errorMessages });
+    }
 
     [HttpGet]
     public async Task<IActionResult> EntrarForum(int id)

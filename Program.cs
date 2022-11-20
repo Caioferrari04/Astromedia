@@ -44,6 +44,7 @@ builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
 
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
+builder.Services.AddScoped<CommentService>();
 builder.Services.AddScoped<LogEdicaoService>();
 builder.Services.ConfigureApplicationCookie(options =>
 {

@@ -11,6 +11,28 @@
     background-color: rgba(0,0,0,0.5); 
 }
 
+.hidden {
+    display: none;
+}
+
+.comment-input-box {
+    position: relative;
+    background-color: var(--color-primary);
+    z-index: 0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-top: -115px;
+    width: auto;
+    height: auto;
+    padding: 20px 5px 5px 5px;
+    transition: .7s cubic-bezier(0.72, 0, 0.11, 0.99);
+}
+
+.comment-input {
+    background-color: var(--color-primary) !important;
+    font-size: .9rem;
+}
+
 .commentmodal-content {
     background-color: var(--bg-secondary-color);
     border-radius: 14px;
@@ -21,13 +43,21 @@
     border: 2px solid var(--bg-secondary-color);
 }
 
+.out-comments {
+    background-color: var(--bg-secondary-color);
+    border-radius: 8px;
+    font-weight: lighter;
+    margin: 8px;
+    height: 55%;
+    border: 2px solid var(--bg-secondary-color);
+}
+
 .commentgrid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
 }
 
 .commentmodal-post {
-    border-right: 1px solid #58296e;
     padding: 10px;
     overflow-y: auto;
 }
@@ -101,9 +131,7 @@
 }
 
 .commentmodal-usrlikes {
-    right: 50%;
-    left: 50%;
-
+    right: 1%;
 }
 
 .commentmodal-selfbottom {
@@ -146,7 +174,7 @@
     overflow-y: auto;
     font-size: small;
     background: var(--bg-color);
-    border-radius: 2px 14px 14px 2px;
+    border-radius: 4px 14px 14px 4px;
 }
 
 /* Animação de entrada - Modal do Login */
@@ -171,6 +199,9 @@
     .commentmodal {
         overflow-x: hidden;
     }
+    .commentmodal-usrlikes {
+        right: 2%;
+    }
     .commentmodal-selfbottom {
         margin-bottom: 1px;
         position: relative;
@@ -194,8 +225,8 @@
         width: 100%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        height: auto;
-        margin-top: 15cm;
+        height: -webkit-fill-available;
+        margin-top: 14cm;
     }
     .commentmodal-post {
         overflow: unset;
@@ -216,10 +247,12 @@
     }
 }
 
-/* Selfnote - Verificar height do Pixel 5 */
 @media screen and (min-width: 321px) and (max-width: 600px) { 
     .commentmodal {
         overflow-x: hidden;
+    }
+    .commentmodal-usrlikes {
+        right: 2%;
     }
     .commentmodal-selfbottom {
         margin-bottom: 1px;
@@ -244,8 +277,8 @@
         width: 100%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        height: auto;
-        margin-top: 5cm;
+        height: -webkit-fill-available;
+        margin-top: 4cm;
     }
     .commentmodal-post {
         overflow: unset;
@@ -270,6 +303,9 @@
     .commentmodal {
         overflow-x: hidden;
     }
+    .commentmodal-usrlikes {
+        right: 2%;
+    }
     .commentmodal-selfbottom {
         margin-bottom: 1px;
         position: relative;
@@ -293,7 +329,7 @@
         width: 100%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        height: auto;
+        height: -webkit-fill-available;
         margin-top: 5cm;
     }
     .commentmodal-post {

@@ -1,4 +1,8 @@
-@model UsuarioDTO
+@model Postagem
+
+@{
+    Layout = "";
+}
 
 <div id="modalblock" class="commentmodal container is-vertical-align is-horizontal-align">
     <div class="commentmodal-content commentgrid animatein text-light col-7">
@@ -6,15 +10,10 @@
             <div class="between-config">
                 <div class="post-header-info is-left">
 
-                    @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
-                    @* <div class="info-col">
-                        <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
-                        <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
-                    </div> *@
-                    <img class="usr-post-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
+                    <img class="usr-post-pic" src="@Model.Usuario.FotoPerfil" />
                     <div class="info-col">
-                        <p class="usr-post-name">Pedrinho</p>
-                        <p class="usr-post-date">dd/MM/yyyy</p>
+                        <p class="usr-post-name">@Model.Usuario.UserName</p>
+                        <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
                     </div>
 
                 </div>
@@ -23,14 +22,16 @@
                 </div>
             </div>
             <p class="commentmodal-selftext">
-                @* @Model.Texto *@
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
+                @Model.Texto 
             </p>
-            <div class="post-img commentmodal-img"><img src="https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" /></div>
+            @if(Model.Imagem is not null)
+            {
+                <div class="post-img commentmodal-img"><img src="@Model.Imagem" /></div>
+            }
             <div class="between-config commentmodal-selfbottom">
-                @* <div class="usr-footer-comment is-vertical-align is-left">
+                <div class="usr-footer-comment is-vertical-align is-left">
                     <img class="post-footer-icon expand-comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
-                </div> *@
+                </div>
                 <div class="usr-footer-likes commentmodal-usrlikes is-vertical-align is-right">
                     <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
                 </div>
@@ -38,19 +39,18 @@
         </div>
 
         <div class="commentmodal-holder">
+        @if (Model.Comentarios?.Count > 0)
+        {
+            @foreach (var comment in Model.Comentarios)
+            {
             <div class="post-content commentmodal-comment">
                 <div class="between-config">
                     <div class="post-header-info is-left">
 
-                        @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
-                        @* <div class="info-col">
-                            <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
-                            <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
-                        </div> *@
-                        <img class="usr-post-pic commentmodal-usrpic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
+                        <img class="usr-post-pic commentmodal-usrpic" src="@comment.Usuario.FotoPerfil" />
                         <div class="info-col">
-                            <p class="commentmodal-usrname usr-post-name">Pedrinho</p>
-                            <p class="commentmodal-usrdate usr-post-date">dd/MM/yyyy</p>
+                            <p class="commentmodal-usrname usr-post-name">@comment.Usuario.UserName</p>
+                            <p class="commentmodal-usrdate usr-post-date">@comment.DataComentario.ToString("dd/MM/yyyy")</p>
                         </div>
 
                     </div>
@@ -59,8 +59,7 @@
                     </div>
                 </div>
                 <p class="commentmodal-text">
-                    @* @Model.Texto *@
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
+                    @comment.Texto
                 </p>
                 @* class = between-config *@
                 <div class="commentmodal-bottom">
@@ -72,41 +71,30 @@
                     </div>
                 </div>
             </div>
-
-            <div class="post-content commentmodal-comment">
-                <div class="between-config">
-                    <div class="post-header-info is-left">
-
-                        @* <img class="usr-post-pic" src="@Model.UsuarioDTO.FotoPerfil" /> *@
-                        @* <div class="info-col">
-                            <p class="usr-post-name">@Model.UsuarioDTO.Nome</p>
-                            <p class="usr-post-date">@Model.DataPostagem.ToString("dd/MM/yyyy")</p>
-                        </div> *@
-                        <img class="usr-post-pic commentmodal-usrpic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA&usqp=CAU" />
-                        <div class="info-col">
-                            <p class="commentmodal-usrname usr-post-name">Pedrinho</p>
-                            <p class="commentmodal-usrdate usr-post-date">dd/MM/yyyy</p>
-                        </div>
-
-                    </div>
-                    <div class="commentmodal-reportbtn report-btn is-vertical-align is-right">
-                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
-                    </div>
-                </div>
-                <p class="commentmodal-text">
-                    @* @Model.Texto *@
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa voluptatum culpa, laboriosam minima, maiores cumque necessitatibus illo neque aliquid tempora, dicta ipsum rem quae veniam assumenda voluptates. Ipsa, ea corrupti!
-                </p>
-                @* class = between-config *@
-                <div class="commentmodal-bottom">
-                    @* <div class="usr-footer-comment is-vertical-align is-left">
-                        <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
-                    </div> *@
-                    <div class="usr-footer-likes is-vertical-align is-right">
-                        <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
-                    </div>
-                </div>
+            }
+        } 
+        else
+        {
+            <div class="text-center">
+                <p class="text-light out-comments">Não há comentários nessa postagem... ainda. Seja o(a) primeiro(a)!</p>
             </div>
+        }
+
+
         </div>
     </div>
 </div>
+
+@* Área de inserção de comentário (Template) *@
+<div id="hidden" class="comment-input-box" style="margin-top: -115px !important;">
+    <div class="comment-input-content">
+        <form asp-action="SaveComment" id="commentform">  
+            <textarea class="is-full-width comment-input" name="Texto" form="commentform" cols="100%" rows="auto" placeholder="Comente Aqui" maxlength="280"></textarea>
+            <div class="is-right">
+                <button type="submit" class="submit-comment-btn submit-post-btn button outline is-vertical-align">Comentar</button>
+            </div>
+            <input type="hidden" value="@Model.Id" name="PostId">
+        </form>
+    </div>
+</div>
+
