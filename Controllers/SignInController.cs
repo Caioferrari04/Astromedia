@@ -1,5 +1,6 @@
 using Astromedia.DTO;
 using Astromedia.Models;
+using Astromedia.Services;
 using Astromedia.Validations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,13 @@ public class SignInController : Controller
 {
     private readonly SignInManager<Usuario> _signInManager;
     private readonly UserManager<Usuario> _userManager;
+    private readonly EmailService _emailService;
 
-    public SignInController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+    public SignInController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, EmailService emailService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _emailService = emailService;
     }
 
     /*Cadastro e log in*/
@@ -128,6 +131,11 @@ public class SignInController : Controller
         if (validationResult.IsValid)
         {                                              
             var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
+            if(!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError(string.Empty, "Confirme sua conta para ser possível redefinir sua senha.");
+                return View(forgotPassword);
+            }
             if(user != null)
             {   
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -139,18 +147,17 @@ public class SignInController : Controller
                     Request.Scheme
                 );
 
-                EmailHelper emailHelper = new EmailHelper();
-                bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
+                
+                bool emailResponse = _emailService.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
 
-                if (emailResponse)
+                if (!emailResponse)
                 {
-                    return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
-                }
-
-                else {
+                    ModelState.AddModelError(string.Empty, "Não foi possível enviar o e-mail, verifique se ele está correto ou tente novamente mais tarde.");
                     return View(forgotPassword);
                 }
-               
+
+                return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
+
                 // astromedia123_
                 // testealex962
 
@@ -189,16 +196,11 @@ public class SignInController : Controller
                 Request.Scheme
             );
 
-            EmailHelper emailHelper = new EmailHelper();
-            bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
+            bool emailResponse = _emailService.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
 
-            if (emailResponse)
+            if (!emailResponse)
             {
-                return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
-            }
-
-            else {
-                return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
+               ViewBag.Erro = "Não foi possível reenviar o e-mail.";
             }
         }
         return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);

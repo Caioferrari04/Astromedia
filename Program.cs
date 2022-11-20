@@ -36,6 +36,7 @@ builder.Services.AddDbContext<AstroContext>(options =>
 Action<IdentityOptions> identityOptions = m =>
 {
     m.User.RequireUniqueEmail = true;
+    m.SignIn.RequireConfirmedEmail = true;
 };
 
 builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
@@ -45,6 +46,7 @@ builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
 builder.Services.AddScoped<LogEdicaoService>();
+builder.Services.AddScoped<EmailService>();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
