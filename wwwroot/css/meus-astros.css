@@ -1,0 +1,87 @@
+.astro {
+    --border-radius: 25px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-highlight);
+    display: flex;
+    background-color: var(--color-primary);
+    /* filter: blur(8px); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* gap: .5rem; */
+    /* justify-content: center; */
+}
+
+.astros-usuario {
+    margin-bottom: 6rem;
+}
+
+.recomendacao-mobile--foto {
+    display: inline-block;
+    min-height: 10rem;
+    max-width: 10rem;
+    border-radius: var(--border-radius) 0px 0px var(--border-radius);
+}
+
+.astro small:first-of-type {
+    position: relative;
+    display: block;
+}
+
+.astro .estatistica {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    /* color: ; */
+    opacity: 1;
+}
+
+.conteudo {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    /* left: -20%; */
+    /* background-color: var(--color-primary); */
+    padding: 1rem;
+    width: 100%;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.509);
+    text-decoration: none;
+}
+
+/* .astro--link {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.305);
+    z-index: 999;
+} */
+
+.flecha-splide:active, .flecha-splide:focus {
+    transform: translateY(-50%);
+    background-color: #ddd;
+}
+
+@media screen and (max-width: 768px) {
+    .recomendacao-mobile--foto {
+        max-width: 8rem;
+        min-height: 8rem;
+    }
+
+    .conteudo {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        /* padding: 0 0 0 .5rem; */
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .recomendacao-mobile--foto {
+        max-width: 5rem;
+        min-height: 5rem;
+    }
+}

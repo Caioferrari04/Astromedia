@@ -52,3 +52,25 @@ li.item-lista-admin > div.dados {
     flex-shrink: 0;
 }
 
+
+.justificar {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.d-flex > .button {
+    padding: .2rem 1rem !important;
+}
+
+.margin-bottom{
+    margin-bottom: 10px;
+}
+

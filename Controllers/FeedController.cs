@@ -14,13 +14,15 @@ public class FeedController : Controller
     private readonly CommentService _commentService;
     private readonly UserManager<Usuario> _userManager;
     private readonly LogEdicaoService _logEdicaoService;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService)
+    private readonly UsuarioService _usuarioService;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService, UsuarioService usuarioService)
     {
         _astroService = astroService;
         _userManager = userManager;
         _postagemService = postagemService;
         _logEdicaoService = logEdicaoService;
         _commentService = commentService;
+        _usuarioService = usuarioService;
     }
 
     public async Task<IActionResult> PerfilAstro(int id)
@@ -163,7 +165,7 @@ public class FeedController : Controller
                     ImagemAntiga = postagemOriginal.Imagem
                 });
 
-                postagemOriginal.DataPostagem = postagem.DataPostagem;
+                // postagemOriginal.DataPostagem = postagem.DataPostagem;
                 postagemOriginal.Texto = postagem.Texto;
                 postagemOriginal.Imagem = postagem.LinkImagem;
                 await _postagemService.Update(postagemOriginal);
@@ -200,4 +202,8 @@ public class FeedController : Controller
     }
 
     public IActionResult LogsEdicao(int Id) => View(_logEdicaoService.ObterTodosDePostagem(Id));
+
+    public async Task<IActionResult> PerfilUsuario(string id) => View(await _usuarioService.GetById(id));
+
+    public async Task<IActionResult> MeusAstros() => View(await _usuarioService.GetById(_userManager.GetUserId(User)));
 }

@@ -7,11 +7,25 @@ function toggleDropdown(dropdown) {
     backdrop.classList.toggle('is-full-screen');
 }
 
-const toggles = document.getElementsByClassName('dropdown-toggle');
-if (toggles != null) {
-    const dropdown = document.getElementById('logged-in');
-    console.log(toggles);
-    for (const iterator of toggles) {
-        iterator.addEventListener('click', () => toggleDropdown(dropdown));
-    }
+function positionFooter() {
+    document.querySelector('.footer').classList.toggle('footer-fixo', document.body.scrollHeight <= window.innerHeight)
 }
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    const toggles = document.getElementsByClassName('dropdown-toggle');
+    if (toggles != null) {
+        const dropdown = document.getElementById('logged-in');
+        if (dropdown) {
+            dropdown.classList.remove('dropdown-load')
+            for (const iterator of toggles) {
+                iterator.addEventListener('click', () => toggleDropdown(dropdown));
+            }
+        }
+    }
+
+    const resizeObserver = new ResizeObserver(positionFooter)
+
+    resizeObserver.observe(document.body);
+    positionFooter();
+})

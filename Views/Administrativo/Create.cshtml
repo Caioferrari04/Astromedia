@@ -8,7 +8,8 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css">
 }
 
-<form asp-action="Create" enctype="multipart/form-data" class="container">
+<form asp-action="Create" enctype="multipart/form-data" class="container" id="form">
+    <div asp-validation-summary="ModelOnly" class="text-error"></div>
     <div class="row">
         <div class="col-6">
             <label class="text-light" asp-for="Nome"></label>
@@ -16,6 +17,12 @@
 
             <label class="text-light" asp-for="Foto"></label>
             <input asp-for="Foto" />
+
+            <label class="text-light" asp-for="FotoBackground"></label>
+            <input asp-for="FotoBackground" />
+
+            <label class="text-light" asp-for="Fotos"></label>
+            <input asp-for="Fotos" multiple="multiple"/>
         </div>
         <div class="col-6">
             <label class="text-light" asp-for="Curiosidades"></label>
@@ -26,10 +33,27 @@
         </div>
     </div>
 
-    <button type="submit" class="button">Enviar</button>
+    <div class="justificar">
+          
+            <div class="d-flex">
+                <label class="text-light" for="MarcosHistoricos0">Marcos Históricos</label>
+                <button type="button" class="button primary is-right" id="button">+</button>
+            </div>
+
+            <div class="margin-bottom">
+                <div id="MarcosHistoricosDiv_0"></div>
+                <textarea name="MarcosHistoricos" id="MarcosHistoricos_0" style="display: none;"></textarea>
+            </div>
+    </div>
+
+    <div>
+        <button type="submit" class="button">Enviar</button>
+    <div>
+    
 </form>
 
 @section scripts {
     <script src="https://unpkg.com/pell"></script>
-    <script src="/js/administrativo.js"></script>
+    <script src="/js/administrativo-criar.js"></script>
+    <script src="/js/create-textarea-administrativo.js"></script>
 }

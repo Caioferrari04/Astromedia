@@ -1,51 +1,60 @@
 @using Microsoft.AspNetCore.Identity;
-@* @inject SignInManager<Usuario> SignInManager; *@
 @inject UserManager<Usuario> UserManager;
 @inject AstroService _service;
 @{
     var astros = await _service.GetAllRecommended();
     var usuario = await UserManager.GetUserAsync(User);
+    var astrosUsuario = astros.Where(el => !usuario.Astros.Contains(el));
+    astros = astrosUsuario.Count() > 0 ? astrosUsuario : astros;
+    var contagem = astrosUsuario.Count() < 5 ? astros.Count() : 5;
+    astros = astros.Take(contagem);
 }
 
 
-@foreach (var astro in astros)
+@if (astros.Count() > 0)
 {
-  <div class="recomendacao">
-    <div class="recomendacao-background" style="background-image: url(@astro.Foto);"></div>
-    <div class="recomendacao-corpo">
-        <header class="recomendacao-titulo">
-            <img src="@astro.Foto" class="recomendacao-img" />    
-            <h6><a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="text-white">@astro.Nome</a></h6>
-        </header>
-        @if (usuario.Astros?.Contains(astro) is true) 
-        {
-            <a class="button primary botao-recomendacao" asp-action="SairForum" asp-route-id="@astro.Id">Sair de forum</a>
-        }
-        else 
-        {
-            <a class="button primary botao-recomendacao" asp-action="EntrarForum" asp-route-id="@astro.Id">Juntar-se</a>
-        }
+    @foreach (var astro in astros)
+    {
+    <div class="recomendacao hide-xs hide-sm">
+        <div class="recomendacao-background" style="background-image: url(@(astro.FotoBackground is null ? astro.Foto : astro.FotoBackground));"></div>
+        <div class="recomendacao-corpo">
+            <header class="recomendacao-titulo">
+                <img src="@astro.Foto" class="recomendacao-img" />    
+                <h6><a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="text-white">@astro.Nome</a></h6>
+            </header>
+            @if (usuario.Astros?.Contains(astro) is true) 
+            {
+                <a class="button error botao-recomendacao is-horizontal-align" asp-action="SairForum" asp-route-id="@astro.Id">
+                    <img src="https://icongr.am/material/star-off.svg?size=18&color=d2d6dd" alt="Sair de forum">
+                    Remover interesse
+                </a>
+            }
+            else 
+            {
+                <a class="button primary botao-recomendacao is-horizontal-align" asp-action="EntrarForum" asp-route-id="@astro.Id">
+                    <img src="https://icongr.am/material/star-outline.svg?size=18&color=d2d6dd" alt="Sair de forum">
+                    Adicionar interesse
+                </a>
+            }
+        </div>
+    </div>   
+    }
+    <small class="text-light recomendacoes--mobile_titulo hide-md hide-lg">
+        <a asp-action="MeusAstros"><img src="https://icongr.am/material/arrow-left.svg?size=20&color=ffffff" alt="Ver mais"></a>
+        Astros interessantes
+    </small>
+    <div class="splide recomendacoes--mobile" role="group" aria-label="Recomendações">
+        <div class="splide__track">
+            <ul class="splide__list">
+                @foreach (var astro in astros)
+                {
+                    <li class="splide__slide recomendacao--mobile">
+                        <img src="@astro.Foto" class="recomendacao-mobile--foto">
+                        @* <small class="text-light">@astro.Nome</small> *@
+                        <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="recomendacao-mobile--link"></a>
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
-</div>  
 }
-
-@* <div class="recomendacao">
-    <img src="~/img/signin-bg.jpg" class="recomendacao-background" />
-    <div class="recomendacao-corpo">
-        <header class="recomendacao-titulo">
-            <img src="~/img/signin-bg.jpg" class="recomendacao-img" />    
-            <h5><a href="~/Feed/PerfilAstro/1" class="text-white">Recomendacao</a></h5>
-        </header>
-        <button class="button primary botao-recomendacao">Juntar-se</button>
-    </div>
-</div>
-<div class="recomendacao">
-    <img src="~/img/signin-bg.jpg" class="recomendacao-background" />
-    <div class="recomendacao-corpo">
-        <header class="recomendacao-titulo">
-            <img src="~/img/signin-bg.jpg" class="recomendacao-img" />    
-            <h5><a href="~/Feed/PerfilAstro/1" class="text-white">Recomendacao</a></h5>
-        </header>
-        <button class="button primary botao-recomendacao">Juntar-se</button>
-    </div>
-</div> *@

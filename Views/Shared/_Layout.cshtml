@@ -20,10 +20,7 @@
         <header class="header">
             <div class="container">
                 <nav class="nav">
-                    <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-small.png" class="logo" alt=""></a>
-                    <div class="nav-right header--btn-group">
-                        <partial name="_LoginPartial" />
-                    </div>
+                    <partial name="_LoginPartial" />
                 </nav>
             </div>
         </header>
@@ -37,7 +34,7 @@
                 <a href=""><img class="footer--logo" src="~/img/logo-small.png" alt=""></a>
                 <a class="footer--texto text-light" href="#copyright">©2022 Astromedia</a>
                 <a class="footer--texto text-light" asp-action="TermosUso" asp-controller="Juridico">Termos</a>
-                <a class="footer--texto text-light" href="#privacidade">Privacidade</a>
+                <a class="footer--texto text-light" asp-action="TermosPrivacidade" asp-controller="Juridico">Privacidade</a>
             </div>
         </footer>
 

@@ -20,5 +20,13 @@ public class AstroValidator : AbstractValidator<AstroDTO>
         RuleFor(m => m.Foto)
             .NotEmpty()
             .WithMessage("Insira uma foto");
+        RuleFor(m => m.FotoBackground)
+            .NotEmpty()
+            .WithMessage("Insira uma foto de background");
+        RuleForEach(m => m.MarcosHistoricos)
+            .NotEmpty();
+        RuleForEach(m => m.MarcosHistoricos)
+            .Length(5, 200)
+            .WithMessage("Marcos históricos deve ter entre 200 e 5 caracteres");
     }
 }

@@ -26,17 +26,23 @@ public class AstroService
     public async Task<IEnumerable<Astro>> GetAllRecommended()
     {
         Random rnd = new();
-        var astros = await _astroContext.Astros.ToListAsync();
+        var astros = await _astroContext.Astros.Include(p => p.Postagens).Include(u => u.Usuarios).ToListAsync();
         List<Astro> retorno = new();
 
-        for (var i = 0; i < 3; i++)
+        for (var i = 0; i < 10; i++)
         {
-            retorno.Add(astros.ElementAt(rnd.Next(astros.Count)));
+            if (astros.Count == 0) break;
+            
+            var elemento = astros.ElementAt(rnd.Next(0, astros.Count));
+            retorno.Add(elemento);
+            astros.Remove(elemento);
         }
+        IEnumerable<Astro> retornoVerdadeiro = retorno;
 
-
-        return retorno.DistinctBy(el => el.Id);
+        return retornoVerdadeiro;
     }
+
+    public IEnumerable<Astro> GetTopAstros() => _astroContext.Astros.Include(el => el.Usuarios).OrderByDescending(el => el.Usuarios.Count);
 
     public async Task Delete(int id)
     {
@@ -51,11 +57,26 @@ public class AstroService
         var astro = await GetById(astroDTO.Id);
         astro.Nome = astroDTO.Nome;
         astro.Curiosidades = astroDTO.Curiosidades;
+        astro.MarcosHistoricos = astroDTO.MarcosHistoricos;
 
         if(astroDTO.Foto is not null) 
         {
             var respostaImgur = await new ImgurService().UploadImagem(astroDTO.Foto);
             astro.Foto = respostaImgur.Data.data.link;
+        }
+
+        if(astroDTO.FotoBackground is not null) 
+        {
+            var respostaImgur = await new ImgurService().UploadImagem(astroDTO.FotoBackground);
+            astro.FotoBackground = respostaImgur.Data.data.link;
+        }
+
+        if(astroDTO.Fotos is not null) 
+        {
+            foreach(var foto in astroDTO.Fotos) {
+                var resposta = await new ImgurService().UploadImagem(foto);
+                astro.Fotos.Add(resposta.Data.data.link);
+            }
         }
 
         _astroContext.Astros.Update(astro);
@@ -72,8 +93,10 @@ public class AstroService
     {
         Id = astro.Id,
         LinkFoto = astro.Foto,
+        LinkFotoBackground = astro.FotoBackground,
         Nome = astro.Nome,
-        Curiosidades = astro.Curiosidades
+        Curiosidades = astro.Curiosidades,
+        MarcosHistoricos = astro.MarcosHistoricos
     };
 
     public async Task JoinForum(int id, Usuario usuario)

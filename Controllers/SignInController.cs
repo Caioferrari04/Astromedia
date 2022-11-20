@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
 
 namespace Astromedia.Controllers;
 
@@ -28,14 +29,15 @@ public class SignInController : Controller
     public async Task<IActionResult> Index(UsuarioDTO usuario)
     {
         var validator = new UsuarioValidator();
-        var validationResult = await validator.ValidateAsync(usuario);
+        var validationResult = await validator.ValidateAsync(usuario, options => options.IncludeAllRuleSets());
 
         if (validationResult.IsValid)
-        {                                                              /*Adicionar foto padrão*/
+        {
             var novoUsuario = new Usuario
             {
                 UserName = usuario.Nome,
                 FotoPerfil = "/img/default-img.jpg",
+                FotoBackground = "/img/capa-padrao.jpeg",
                 Email = usuario.Email,
                 DataNascimento = usuario.DataNascimento.ToUniversalTime()
             };
@@ -47,7 +49,7 @@ public class SignInController : Controller
                 {
                     await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("MeusAstros", "Feed");
                 }
 
                 foreach (var error in resultado.Errors)
@@ -101,7 +103,7 @@ public class SignInController : Controller
                 return RedirectToAction(nameof(LogInView));
             }
 
-            return RedirectToAction("Postagens", "Feed"); /*Redirecionar para o feed :)*/
+            return RedirectToAction("MeusAstros", "Feed"); /*Redirecionar para o feed :)*/
         }
         catch
         {
@@ -115,4 +117,9 @@ public class SignInController : Controller
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
+
+    public IActionResult EmailRecPassword() => View();
+
+    public IActionResult RecPassword() => View();
+
 }

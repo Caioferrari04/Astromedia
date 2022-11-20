@@ -4,9 +4,11 @@ namespace Astromedia.DTO;
 
 public class UsuarioDTO
 {
+    [Display(Name = "Nome de usuário")]
     public string Nome { get; set; }
     
     public string Email { get; set; }
+
     [Display(Name = "Senha atual")]
     [DataType(DataType.Password)]
     public string SenhaAtual { get; set; }
@@ -28,8 +30,13 @@ public class UsuarioDTO
 
     public bool PrivacyTerms { get; set; }
 
+    [Display(Name = "Foto de perfil")]
     public IFormFile FotoPerfil { get; set; }
+    
+    [Display(Name = "Capa de perfil")]
+    public IFormFile FotoBackground { get; set; }
 
     public List<PostagemDTO> Postagens { get; set; }
     public bool Atualizar { get; set; }
+    public string Bio { get; set; }
 }

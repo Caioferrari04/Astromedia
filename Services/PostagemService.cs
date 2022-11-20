@@ -15,15 +15,15 @@ public class PostagemService
 
     public async Task Create(PostagemDTO postagemDTO)
     {
-        var astroTask = _astroContext.Astros.FindAsync(postagemDTO.AstroId);
-        var usuarioTask = _astroContext.Users.FindAsync(postagemDTO.UsuarioId);
+        var astro = await _astroContext.Astros.FindAsync(postagemDTO.AstroId);
+        var usuario = await _astroContext.Users.FindAsync(postagemDTO.UsuarioId);
 
         Postagem postagem = new Postagem(
             postagemDTO.Texto,
             postagemDTO.DataPostagem,
             postagemDTO.LinkImagem,
-            await usuarioTask,
-            await astroTask
+            usuario,
+            astro
         );
 
         await _astroContext.Postagens.AddAsync(postagem);

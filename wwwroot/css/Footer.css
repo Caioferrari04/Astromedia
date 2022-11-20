@@ -1,9 +1,17 @@
 .footer{
     background-color: #471c5cb3;
-    height: 8vh;
+    /* height: 8vh; */
     padding: 10px;
     position: static;
     bottom: 0;
+    /* display: flex; */
+    /* align-items: baseline; */
+}
+
+.footer-fixo {
+    position: fixed;
+    bottom: 0;
+    height: fit-content;
 }
 
 .footer .container {
@@ -14,6 +22,7 @@
     margin-right: 0.8rem;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .footer--logo {

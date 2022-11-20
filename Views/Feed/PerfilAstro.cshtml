@@ -7,11 +7,17 @@
     var usuario = await UserManager.GetUserAsync(User);
 }
 
-<link rel="stylesheet" href="~/css/PerfilAstro.css" asp-append-version="true">
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/PerfilAstro.css" asp-append-version="true">
+    <link type="text/css" rel="stylesheet" href="~/lib/lightgallery/css/lightgallery.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/lightgallery/css/lg-zoom.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/lightgallery/css/lg-thumbnail.css" />
+}
+
 
 <div class="container-perfil">
     <div class="is-full-width banner-container">
-        <img class="img" src="@Model.Foto" alt="">
+        <img class="img" src="@(Model.FotoBackground is null ? Model.Foto : Model.FotoBackground)" alt="">
     </div>
 
     <div class="is-vertical-align elements-container">
@@ -21,53 +27,112 @@
             </div>
             <h2 class="text-light astro-title">@Model.Nome</h2>
         </div>
-        @if (usuario.Astros?.Find(astro => astro.Id == Model.Id) is not null) 
-        {
-            <a class="join-btn text-light bd-light" asp-action="SairForum" asp-route-id="@Model.Id">Sair do fórum</a>
-        }
-        else
-        {
-            <a class="join-btn text-light bd-light" asp-action="EntrarForum" asp-route-id="@Model.Id">Juntar ao fórum</a>
-        }
+        <div class="is-vertical-align is-horizontal-align btns">
+            @if (usuario.Astros?.Find(astro => astro.Id == Model.Id) is not null) 
+            {
+                <a class="join-btn text-light leave-btn" asp-action="SairForum" asp-route-id="@Model.Id">
+                    <img src="https://icongr.am/material/star-off.svg?size=22&color=d2d6dd" alt="Sair de forum">
+                    Remover interesse
+                </a>
+                <a class="join-btn text-light" asp-action="Postagens" asp-route-id="@Model.Id">
+                    <img src="https://icongr.am/material/chat.svg?size=18&color=d2d6dd" alt="Sair de forum">
+                    Ver postagens
+                </a>
+            }
+            else
+            {
+                <a class="join-btn text-light enter-btn" asp-action="EntrarForum" asp-route-id="@Model.Id">
+                    <img src="https://icongr.am/material/star-outline.svg?size=22&color=d2d6dd" alt="Sair de forum">
+                    Adicionar interesse
+                </a>
+            }
+        </div>
     </div>
 
-    <nav class="tabs">
+    @* <nav class="tabs">
         <button class="button-nav text-light active" id="tab1">Curiosidades</button>
         <button class="button-nav tab1 text-light" id="tab2">Aba 2</button>
         <button class="button-nav tab2 text-light" id="tab3">Aba 3</button>
         <button class="button-nav tab3 text-light" id="tab4">Aba 4</button>
+    </nav> *@
+    <nav class="tabs is-center">
+        <a href="javascript:void(0)" class="nav-button tab active text-light" id="tab1">Curiosidades</a>
+        <a href="javascript:void(0)" class="nav-button tab text-light" id="tab2">Fotos</a>
+        <a href="javascript:void(0)" class="nav-button tab text-light" id="tab3">Historia</a>
     </nav>
 
-    <div class="tab-content tab-content-active text-left text-light">
+    <div class="tab-content tab-content-active text-left text-light" data-id="tab1">
+        <h4>Curiosidades</h4>
         @Html.Raw(Model.Curiosidades)
     </div>
 
-    <div class="tab-content text-left text-light">
-        <h4>Aba 2</h4>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
+    <div class="tab-content text-left text-light" data-id="tab2">
+        <h4>Fotos</h4>
+        
+        <div class="container-sm">
+            <div class="row justify-content-center">
+                <div class="col col-md-10">
+                    <div class="gallery-container" id="gallery-container">
+                        @if (Model.Fotos is not null)
+                        {
+                            @foreach (var foto in Model.Fotos)
+                            {
+                                <a class="gallery-item" data-src="@foto">
+                                    <img alt="" class="img-responsive" src="@foto" />
+                                </a>
+                            }
+                        }
+
+                        else {
+                            <p>Astro sem fotos cadastradas.</p>
+                        }
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="tab-content text-left text-light">
-        <h4>Aba 3</h4>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-    </div>
+     <div class="tab-content text-left text-light" data-id="tab3">
+        <h4>História</h4>
+        
+        @if(Model.MarcosHistoricos?.Count > 0)
+        {
+            <div class="timeline">
+                @for(int i = 0; i<Model.MarcosHistoricos.Count(); i++)
+                {
+                    @if(i % 2 == 0)
+                    {
+                        <div class="containerr leftt">
+                            <div class="contentt">
+                                @Html.Raw(Model.MarcosHistoricos[i])
+                            </div>
+                        </div>
+                    }
 
-    <div class="tab-content text-left text-light">
-        <h4>Aba 4</h4>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
+                    else {
+                        <div class="containerr rightt">
+                            <div class="contentt">
+                                @Html.Raw(Model.MarcosHistoricos[i])
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+
+        else {
+            <p>Astro sem história cadastrada.</p>
+        }
+       
+
     </div>
 </div>
 
-<script src="~/js/openTabs.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/js/openTabs.js" asp-append-version="true"></script>
+    <script src="~/lib/lightgallery/lightgallery.umd.js"></script>
+    <script src="~/lib/lightgallery/plugins/thumbnail/lg-thumbnail.umd.js"></script>
+    <script src="~/lib/lightgallery/plugins/zoom/lg-zoom.umd.js"></script>
+    <script src="~/js/astro-gallery.js"></script>
+}
