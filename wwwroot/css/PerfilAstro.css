@@ -36,6 +36,14 @@
     border-radius: 50%;
 }
 
+.astro-title {
+    flex-shrink: 10;
+}
+.elements-container {
+    padding: 0 10px;
+    flex-wrap: wrap;
+}
+
 .join-btn {
     font-size: 18px;
     background-color: var(--bg-color);
@@ -94,7 +102,8 @@
     /* border-bottom: 3px solid !important; */
     border-color: var(--color-highlight) !important;
     z-index: 1 !important;
-    color: #AF43E0 !important;
+    /* color: var(--color-highlight) !important; */
+    font-weight: bolder;
 }
 
 /* #tab2{
