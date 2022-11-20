@@ -66,8 +66,8 @@ public class SignInController : Controller
                         await _userManager.DeleteAsync(novoUsuario);
                         return View(usuario);
                     }
-
-                    return RedirectToAction(nameof(SucessRegistration));
+                    ViewBag.UsuarioDTO = usuario;
+                    return View("SucessRegistration", usuario.Email);
                 }
 
                 foreach (var error in resultado.Errors)
@@ -85,7 +85,28 @@ public class SignInController : Controller
         return View(); /*Atualizar pagina*/
     }
 
-    public IActionResult SucessRegistration() => View();
+    public IActionResult SucessRegistration(string email) => View(email);
+
+    public async Task<IActionResult> ResendEmailToConfirmAccount(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        var confirmationLink = Url.Action(
+            nameof(ConfirmEmail),
+            "SignIn", 
+            new { email = email, token = token },
+            Request.Scheme
+            );
+        
+        bool emailResponse = _emailService.SendConfirmationEmail(user.Email, user.UserName, confirmationLink);
+        
+        if (!emailResponse)
+        {
+            ViewBag.Erro = "Não foi possível reenviar o e-mail.";
+        }
+
+        return View(nameof(SucessRegistration), email);
+    }
 
     public async Task<IActionResult> ConfirmEmail(string email, string token)
     {

@@ -1,4 +1,4 @@
-@model UsuarioDTO
+@model string
 @{
     ViewData["Title"] = "Sign In";
 }
@@ -11,12 +11,29 @@
     <div class="cad-content text-light" asp-action="Index">
         <div class="container logo-box-cad row is-vertical-align is-horizontal-align">
             <!-- substituir por img nova -->
-            <img class="img-logo-cad col" src="~/img/logo-main.png" alt="Logo Astromedia" class="maxlogo"> 
-            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">E-mai de confirmação</h2>
+            <img class="img-logo-cad col" src="~/img/logo-main.png" alt="Logo Astromedia" class="maxlogo">
+            @if(ViewBag.Erro is null)
+            {
+                <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">E-mai de confirmação</h2>
+            } 
+
+            else 
+            {
+                <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">Erro ao reenviar e-mail</h2>
+            }
         </div>
 
         <div class="container container-cad">
-            <p>Verifique o seu e-mail e confirme a sua conta para poder acessá-la.</p>
+            @if(ViewBag.Erro is null)
+            {
+                <p>Verifique o seu e-mail e confirme a sua conta para poder acessá-la. Caso não tenha recebido o e-mail, clique <a asp-action="ResendEmailToConfirmAccount" asp-route-email="@Model">aqui </a> para reenviá-lo.</p>
+
+            } 
+
+            else 
+            {
+                <p>@ViewBag.Erro Clique <a asp-action="ResendEmailToConfirmAccount" asp-route-email="@Model">aqui </a> para reenviá-lo.</p>
+            }
         </div>
     </div>
 </div>
