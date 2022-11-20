@@ -117,10 +117,10 @@ public class SignInController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-    public IActionResult EmailRecPassword() => View();
+    public IActionResult ForgotPassword() => View();
 
     [HttpPost]
-    public async Task<IActionResult> EmailRecPassword(ForgotPassword forgotPassword)
+    public async Task<IActionResult> ForgotPassword(ForgotPassword forgotPassword)
     {
         var validator = new ForgotPasswordValidator();
         var validationResult = await validator.ValidateAsync(forgotPassword);
@@ -133,8 +133,8 @@ public class SignInController : Controller
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                 var passwordResetLink = Url.Action(
-                    "EmailRecPassword",
-                    "SignInController",
+                    "ResetPassword",
+                    "SignIn",
                     new { email = forgotPassword.Email, token =  token }, 
                     Request.Scheme
                 );
@@ -171,6 +171,48 @@ public class SignInController : Controller
 
     public IActionResult ForgotPasswordConfirmation() => View();
 
-    public IActionResult RecPassword() => View();
+    public IActionResult ResetPassword(string token, string email)
+    {
+        if (_signInManager.IsSignedIn(User)) return RedirectToAction("MeusAstros", "Feed");
+        if (token == null || email == null)
+        {
+            ModelState.AddModelError("", "Token de redefinição de senha inválido");
+        }
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
+    {
+        var validator = new ResetPasswordValidator();
+        var validationResult = await validator.ValidateAsync(resetPassword);
+
+        if (validationResult.IsValid)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+
+            if (user != null)
+            {
+                var result = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Senha);
+                if (result.Succeeded)
+                {
+                    return View("ResetPasswordConfirmation");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(resetPassword);
+            }
+
+            return View("ResetPasswordConfirmation");
+        }
+
+        foreach (var error in validationResult.Errors)
+            ModelState.AddModelError(string.Empty, error.ErrorMessage);
+        return View(resetPassword);
+    }
+
+     public IActionResult ResetPasswordConfirmation() => View();
 
 }

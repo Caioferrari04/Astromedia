@@ -33,7 +33,7 @@
                 <label class="col" asp-for="Senha">
                     <div class="password-box">
                         @Html.DisplayNameFor(m => m.Senha)
-                        <a asp-action="" asp-controller="">Esqueci minha senha</a>
+                        <a asp-action="ForgotPassword" asp-controller="SignIn">Esqueci minha senha</a>
                     </div>
                     <div class="row inputbox-password">
                         <input id="inputbox-pass1" class="col-10 inputbox" asp-for="Senha" required>
