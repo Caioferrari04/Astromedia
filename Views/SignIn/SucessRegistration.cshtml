@@ -1,0 +1,22 @@
+@model UsuarioDTO
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true">
+}
+
+<div class="cad container is-vertical-align is-horizontal-align">
+    <div class="cad-content text-light" asp-action="Index">
+        <div class="container logo-box-cad row is-vertical-align is-horizontal-align">
+            <!-- substituir por img nova -->
+            <img class="img-logo-cad col" src="~/img/logo-main.png" alt="Logo Astromedia" class="maxlogo"> 
+            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">E-mai de confirmação</h2>
+        </div>
+
+        <div class="container container-cad">
+            <p>Verifique o seu e-mail e confirme a sua conta para poder acessá-la.</p>
+        </div>
+    </div>
+</div>

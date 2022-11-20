@@ -1,5 +1,6 @@
 using Astromedia.DTO;
 using Astromedia.Models;
+using Astromedia.Services;
 using Astromedia.Validations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -14,11 +15,13 @@ public class SignInController : Controller
 {
     private readonly SignInManager<Usuario> _signInManager;
     private readonly UserManager<Usuario> _userManager;
+    private readonly EmailService _emailService;
 
-    public SignInController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+    public SignInController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, EmailService emailService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _emailService = emailService;
     }
 
     /*Cadastro e log in*/
@@ -47,9 +50,24 @@ public class SignInController : Controller
 
                 if (resultado.Succeeded)
                 {
-                    await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(novoUsuario);
+                    var confirmationLink = Url.Action(
+                        nameof(ConfirmEmail),
+                        "SignIn", 
+                        new { email = novoUsuario.Email, token = token },
+                        Request.Scheme
+                        );
+                    
+                    bool emailResponse = _emailService.SendConfirmationEmail(novoUsuario.Email, novoUsuario.UserName, confirmationLink);
+                    
+                    if (!emailResponse)
+                    {
+                        ModelState.AddModelError(string.Empty, "Não foi possível enviar o e-mail, verifique se ele está correto ou tente novamente mais tarde.");
+                        await _userManager.DeleteAsync(novoUsuario);
+                        return View(usuario);
+                    }
 
-                    return RedirectToAction("MeusAstros", "Feed");
+                    return RedirectToAction(nameof(SucessRegistration));
                 }
 
                 foreach (var error in resultado.Errors)
@@ -66,6 +84,13 @@ public class SignInController : Controller
 
         return View(); /*Atualizar pagina*/
     }
+
+    public IActionResult SucessRegistration() => View();
+
+    public IActionResult ConfirmEmail()
+    {
+        return View();
+    } 
 
     public async Task<IActionResult> LogInView() 
     {
@@ -107,6 +132,7 @@ public class SignInController : Controller
         }
         catch
         {
+            Console.WriteLine("Passou aqui 2");
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
             return RedirectToAction(nameof(LogInView));
         }

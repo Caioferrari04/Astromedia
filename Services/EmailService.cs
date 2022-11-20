@@ -1,4 +1,5 @@
 using System.Net.Mail;
+using Astromedia.Resilience;
 
 namespace Astromedia.Services;
 
@@ -42,12 +43,12 @@ public class EmailService
         }
     }
 
-    public bool SendVerificationEmail(string userEmail, string userName, string link)
+    public bool SendConfirmationEmail(string userEmail, string userName, string link)
     {
         MailMessage mailMessage = new MailMessage();
         mailMessage.From = new MailAddress("alexsandro.astromedia@outlook.com");
         mailMessage.To.Add(new MailAddress(userEmail));
-        mailMessage.Subject = "Verificação de Email";
+        mailMessage.Subject = "Confirmação de Email";
         mailMessage.IsBodyHtml = true;
         mailMessage.Body =  "<div style=\"text-align: center;\"><div style=\"padding: 10px; text-align: left\"><h1>Verifique seu e-mail</h1>\n" +
                 "<p>Ol&aacute;, "+ userName + ".</p>\n" +
@@ -71,7 +72,9 @@ public class EmailService
         client.Credentials = credential;
         try
         {
-            client.Send(mailMessage);
+            ExceptionHanderFactory.BuildForHttpClient().ConfigureRetry().Execute(() => {
+                client.Send(mailMessage);
+            });
             return true; 
         }
         catch (Exception ex)
