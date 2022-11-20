@@ -35,6 +35,7 @@ public class PostagemService
         var postagens = _astroContext.Postagens
             //.Include(a => a.Astro)
             .Include(u => u.Usuario)
+            .Include(u => u.Likes)
             .Where(p => p.Astro.Id == id)
             .OrderByDescending(p => p.DataPostagem)
             .ToList();
@@ -49,6 +50,7 @@ public class PostagemService
         var postagens = _astroContext.Postagens
             .Include(a => a.Astro)
             .Include(u => u.Usuario)
+            .Include(l => l.Likes)
             .OrderByDescending(p => p.DataPostagem)
             .ToList();
 

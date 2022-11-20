@@ -21,5 +21,6 @@ public class UsuarioService
         => await _astroContext.Users
             .Include(el => el.Postagens)
             .Include(el => el.Astros)
+            .Include(el => el.Likes)
             .FirstOrDefaultAsync(usuario => usuario.Id == id);
 }

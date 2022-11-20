@@ -15,6 +15,7 @@ public class Astro
         Fotos = new();
         MarcosHistoricos = new();
     }
+    
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Curiosidades { get; set; }
