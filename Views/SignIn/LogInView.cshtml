@@ -10,6 +10,11 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
+        .erros ul {
+            list-style: none;
+            padding: 0;
+        }
     </style>
     <link rel="stylesheet" href="~/css/loginmodal.css" asp-append-version="true">
 }
@@ -22,7 +27,7 @@
         </div>
 
         <div class="container">
-            <div asp-validation-summary="ModelOnly" class="text-error"></div>
+            <div asp-validation-summary="ModelOnly" class="text-error erros"></div>
             
             <div class="row">
                 <label class="col" asp-for="Nome">
@@ -52,6 +57,7 @@
                     <label asp-for="LembrarMe" class="is-vertical-align">
                         <input asp-for="LembrarMe" class="dnfpassword">Lembrar minha senha
                     </label>
+                    <a asp-action="Index" class="is-vertical-align">Não possui conta? Crie aqui</a>
                     <button type="submit" class="col submit-btn button outline is-vertical-align is-horizontal-align">Entrar</button>
                 </div>
             </div>

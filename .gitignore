@@ -35,3 +35,5 @@ msbuild.wrn
 node_modules/
 
 .env
+
+global.json
