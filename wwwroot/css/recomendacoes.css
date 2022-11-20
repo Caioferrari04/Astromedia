@@ -37,6 +37,10 @@
     top: -1.8rem;
 }
 
+.recomendacao-titulo a {
+    text-decoration: none!important;
+}
+
 .recomendacao-titulo img {
     position: relative;
     top: -1rem;

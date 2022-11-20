@@ -17,7 +17,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        if (_signInManager.IsSignedIn(User)) return RedirectToAction("Postagens", "Feed", new { id = 0 });
+        if (_signInManager.IsSignedIn(User)) return RedirectToAction("MeusAstros", "Feed", new { id = 0 });
 
         return View();
     }

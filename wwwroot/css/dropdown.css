@@ -21,7 +21,6 @@
     visibility: visible;
     animation: drifto 0.6s;
     transform: translateX(0);
-    overflow: scroll;
 }
 
 .dropdown-active .logo-user {
@@ -91,6 +90,7 @@
     .dropdown {
         max-width: 100vw;
         left: 0;
+        overflow: scroll;
         transform: translateX(0px);
         /* text-align: left; */
     }

@@ -75,7 +75,7 @@ else
     <div class="nav-right header--btn-group">
     @if (rota is "Index" && rotaController is "SignIn")
     {
-        <a class="text-light" id="modalbtn" href="#contact">Entrar</a>
+        <a class="text-light" id="modalbtn" href="javascript:void(0)">Entrar</a>
         @* <a class="text-light" asp-action="Index" asp-controller="SignIn">Criar conta</a> *@
     }
     else if (rota is "LogInView")
@@ -84,7 +84,7 @@ else
     } 
     else
     {
-        <a class="text-light" id="modalbtn" href="#contact">Entrar</a>
+        <a class="text-light" id="modalbtn" href="javascript:void(0)">Entrar</a>
         <a class="text-light" asp-action="Index" asp-controller="SignIn">Criar conta</a>
     }
     </div>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
 
 namespace Astromedia.Controllers;
 
@@ -28,7 +29,7 @@ public class SignInController : Controller
     public async Task<IActionResult> Index(UsuarioDTO usuario)
     {
         var validator = new UsuarioValidator();
-        var validationResult = await validator.ValidateAsync(usuario);
+        var validationResult = await validator.ValidateAsync(usuario, options => options.IncludeAllRuleSets());
 
         if (validationResult.IsValid)
         {
