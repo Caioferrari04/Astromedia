@@ -93,6 +93,7 @@ textarea:focus {
 .comment-modal {
     text-align: center;
     font-size: .75rem;
+    text-decoration: none;
 }
 
 .post-content {

@@ -22,6 +22,8 @@ Array.from(commentmodalBtnAll).forEach(commentmodalBtn => {
                 renderComment.innerHTML = "";
             }
         });
+
+        expandComment();
     });
 });
 

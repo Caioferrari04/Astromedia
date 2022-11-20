@@ -39,7 +39,8 @@ public class SignInController : Controller
                 FotoPerfil = "/img/default-img.jpg",
                 FotoBackground = "/img/capa-padrao.jpeg",
                 Email = usuario.Email,
-                DataNascimento = usuario.DataNascimento.ToUniversalTime()
+                DataNascimento = usuario.DataNascimento.ToUniversalTime(),
+                Bio = "Olá mundo!"
             };
             try
             {

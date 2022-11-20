@@ -1,5 +1,4 @@
 @model Postagem
-
 @{
     Layout = "";
 }
@@ -33,7 +32,7 @@
                     <img class="post-footer-icon expand-comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
                 </div>
                 <div class="usr-footer-likes commentmodal-usrlikes is-vertical-align is-right">
-                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=20&color=ffffff" />
                 </div>
             </div>
         </div>
@@ -67,7 +66,7 @@
                         <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
                     </div> *@
                     <div class="usr-footer-likes is-vertical-align is-right">
-                        <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                        <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=20&color=ffffff" />
                     </div>
                 </div>
             </div>
@@ -86,7 +85,7 @@
 </div>
 
 @* Área de inserção de comentário (Template) *@
-<div id="hidden" class="comment-input-box" style="margin-top: -115px !important;">
+<div class="comment-input-box comment-input-box-hidden hide ">
     <div class="comment-input-content">
         <form asp-action="SaveComment" id="commentform">  
             <textarea class="is-full-width comment-input" name="Texto" form="commentform" cols="100%" rows="auto" placeholder="Comente Aqui" maxlength="280"></textarea>
@@ -97,4 +96,3 @@
         </form>
     </div>
 </div>
-
