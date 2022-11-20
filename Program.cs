@@ -47,6 +47,7 @@ builder.Services.AddScoped<PostagemService>();
 builder.Services.AddScoped<CommentService>();
 builder.Services.AddScoped<LogEdicaoService>();
 builder.Services.AddScoped<LikeService>();
+builder.Services.AddScoped<DenunciaService>();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings

@@ -38,6 +38,14 @@ Array.from(commentmodalBtnAll).forEach(commentmodalBtn => {
             bodyScroll.classList.remove('block-scroll');
         })
 
+        for (const item of renderComment.querySelectorAll('.report-btn')) {
+            item.firstElementChild.addEventListener('click', denunciar)
+        }
+
+        for (const item of renderComment.querySelectorAll('.commentmodal-comment')) {
+            item.addEventListener('exclusao', () => item.remove());
+        }
+
         expandComment();
     });
 });

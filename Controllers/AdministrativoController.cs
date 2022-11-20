@@ -15,12 +15,17 @@ public class AdministrativoController : Controller
     private readonly UserManager<Usuario> _userManager;
     private readonly AstroContext _context;
     private readonly AstroService _astroService;
-
-    public AdministrativoController(UserManager<Usuario> userManager, AstroContext context, AstroService astroService)
+    private readonly DenunciaService _denunciaService;
+    private readonly PostagemService _postagemService;
+    private readonly CommentService _comentarioService;
+    public AdministrativoController(UserManager<Usuario> userManager, AstroContext context, AstroService astroService, DenunciaService denunciaService, PostagemService postagemService, CommentService comentarioService)
     {
         _userManager = userManager;
         _context = context;
         _astroService = astroService;
+        _denunciaService = denunciaService;
+        _postagemService = postagemService;
+        _comentarioService = comentarioService;
     }
 
     public async Task<IActionResult> Index()
@@ -83,9 +88,31 @@ public class AdministrativoController : Controller
     } 
 
     [HttpPost]
-    public  async Task<IActionResult> Update(AstroDTO astro)
+    public async Task<IActionResult> Update(AstroDTO astro)
     {
         await _astroService.Update(astro);
         return RedirectToAction(nameof(List));
+    }
+
+    public IActionResult Denuncias() => View(_denunciaService.GetAll());
+
+    public async Task<IActionResult> RemoverPostagem(int id, int denunciaId)
+    {
+        await _denunciaService.Delete(denunciaId);
+        await _postagemService.Delete(await _postagemService.GetById(id));
+        return RedirectToAction(nameof(Denuncias));
+    }
+
+    public async Task<IActionResult> RemoverComentario(int id, int denunciaId)
+    {
+        await _denunciaService.Delete(denunciaId);
+        await _comentarioService.Delete(await _comentarioService.GetById(id));
+        return RedirectToAction(nameof(Denuncias));
+    }
+
+    public async Task<IActionResult> Ignorar(int id)
+    {
+        await _denunciaService.MarkAsResolved(id);
+        return RedirectToAction(nameof(Denuncias));
     }
 }

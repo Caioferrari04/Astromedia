@@ -16,7 +16,8 @@ public class FeedController : Controller
     private readonly LogEdicaoService _logEdicaoService;
     private readonly UsuarioService _usuarioService;
     private readonly LikeService _likeService;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService, UsuarioService usuarioService, LikeService likeService)
+    private readonly DenunciaService _denunciaService;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService, UsuarioService usuarioService, LikeService likeService, DenunciaService denunciaService)
     {
         _astroService = astroService;
         _userManager = userManager;
@@ -25,6 +26,7 @@ public class FeedController : Controller
         _commentService = commentService;
         _usuarioService = usuarioService;
         _likeService = likeService;
+        _denunciaService = denunciaService;
     }
 
     public async Task<IActionResult> PerfilAstro(int id)
@@ -37,7 +39,7 @@ public class FeedController : Controller
     public async Task<IActionResult> Postagens(int id)
     {
         List<Postagem> postagens;
-        ViewBag.Usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
+        var usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
         if (id is not 0)
         {
             postagens = _postagemService.GetAllByAstroId(id);
@@ -48,6 +50,9 @@ public class FeedController : Controller
             postagens = _postagemService.GetAll();
         }
 
+        postagens = postagens.Where(el => usuario.Denuncias.FirstOrDefault(x => x.Id == el.Id) is null).ToList();
+
+        ViewBag.Usuario = usuario;
         return View(postagens);
     }
 
@@ -83,7 +88,11 @@ public class FeedController : Controller
     public async Task<IActionResult> Comentarios(int id) 
     {
         Postagem postagem = await _postagemService.GetById(id);
-        ViewBag.Usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
+
+        var usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
+        postagem.Comentarios = postagem.Comentarios.Where(el => usuario.Denuncias.FirstOrDefault(x => x.Comentario.Id == el.Id) is null).ToList();
+        
+        ViewBag.Usuario = usuario;
         return View(postagem);
     }
 
@@ -264,6 +273,35 @@ public class FeedController : Controller
         catch(Exception)
         {
             return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    public IActionResult Denuncia() => View();
+
+    [HttpPost]
+    public async Task<IActionResult> Denuncia(Denuncia denuncia) 
+    {
+        try
+        {
+            if (denuncia.Comentario?.Id is not 0) 
+            {
+                denuncia.Comentario = await _commentService.GetById(denuncia.Comentario.Id);
+                denuncia.Postagem = null;
+            }
+            else 
+            {
+                denuncia.Postagem = await _postagemService.GetById(denuncia.Postagem.Id);
+                denuncia.Comentario = null;
+            }
+
+            denuncia.Usuario = await _userManager.GetUserAsync(User);
+
+            await _denunciaService.Create(denuncia);
+            return Json(new { sucesso = true });
+        }
+        catch (Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro fazendo a denúncia! Tente novamente mais tarde." } });
         }
     }
 }
