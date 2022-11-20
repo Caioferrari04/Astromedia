@@ -113,7 +113,7 @@
                                 <div class="info-col">
                                     <p class="usr-post-name">
                                         <a class="text-light" asp-action="PerfilUsuario" asp-route-id="@postagem.Usuario.Id">@postagem.Usuario.UserName</a>
-                                        @if (id is null || id is 0 && postagem.Astro is not null) {
+                                        @if ((id is null || id is 0) && postagem.Astro is not null) {
                                             <a class="text-white" asp-action="PerfilAstro" asp-route-id="@postagem.Astro.Id">em @postagem.Astro.Nome</a>
                                         } 
                                     </p> 
