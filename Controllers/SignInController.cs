@@ -1,5 +1,6 @@
 using Astromedia.DTO;
 using Astromedia.Models;
+using Astromedia.Services;
 using Astromedia.Validations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -14,11 +15,13 @@ public class SignInController : Controller
 {
     private readonly SignInManager<Usuario> _signInManager;
     private readonly UserManager<Usuario> _userManager;
+    private readonly EmailService _emailService;
 
-    public SignInController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+    public SignInController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, EmailService emailService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _emailService = emailService;
     }
 
     /*Cadastro e log in*/
@@ -119,8 +122,134 @@ public class SignInController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-    public IActionResult EmailRecPassword() => View();
+    public IActionResult ForgotPassword() => View();
 
-    public IActionResult RecPassword() => View();
+    [HttpPost]
+    public async Task<IActionResult> ForgotPassword(ForgotPassword forgotPassword)
+    {
+        var validator = new ForgotPasswordValidator();
+        var validationResult = await validator.ValidateAsync(forgotPassword);
+
+        if (validationResult.IsValid)
+        {                                              
+            var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
+            if(!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError(string.Empty, "Confirme sua conta para ser possível redefinir sua senha.");
+                return View(forgotPassword);
+            }
+            if(user != null)
+            {   
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                var passwordResetLink = Url.Action(
+                    "ResetPassword",
+                    "SignIn",
+                    new { email = forgotPassword.Email, token =  token }, 
+                    Request.Scheme
+                );
+
+                
+                bool emailResponse = _emailService.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
+
+                if (!emailResponse)
+                {
+                    ModelState.AddModelError(string.Empty, "Não foi possível enviar o e-mail, verifique se ele está correto ou tente novamente mais tarde.");
+                    return View(forgotPassword);
+                }
+
+                return View("ForgotPasswordConfirmation", forgotPassword);
+
+                // astromedia123_
+                // testealex962
+
+                //email alexsandro.astromedia@outlook.com
+                //senha astromedia123_
+                //nome alexsandro astromedia
+                
+            }
+
+            ModelState.AddModelError(string.Empty, "Nenhuma conta foi encontrada com o email informado");
+            return View(forgotPassword);
+        }
+
+        foreach (var error in validationResult.Errors)
+            ModelState.AddModelError(string.Empty, error.ErrorMessage);
+        return View(forgotPassword);
+    } 
+
+    public IActionResult ForgotPasswordConfirmation(ForgotPassword forgotPassword) => View(forgotPassword);
+
+    public async Task<IActionResult> ResendEmail(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+
+        ForgotPassword forgotPassword = new ForgotPassword();
+        forgotPassword.Email = user.Email;
+
+        if(user != null)
+        {   
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var passwordResetLink = Url.Action(
+                "ResetPassword",
+                "SignIn",
+                new { email = email, token =  token }, 
+                Request.Scheme
+            );
+
+            bool emailResponse = _emailService.SendEmailPasswordReset(user.Email, user.UserName, passwordResetLink);
+
+            if (!emailResponse)
+            {
+               ViewBag.Erro = "Não foi possível reenviar o e-mail.";
+            }
+        }
+        return View("ForgotPasswordConfirmation", forgotPassword);
+    }
+
+    public IActionResult ResetPassword(string token, string email)
+    {
+        if (_signInManager.IsSignedIn(User)) return RedirectToAction("MeusAstros", "Feed");
+        if (token == null || email == null)
+        {
+            ModelState.AddModelError("", "Token de redefinição de senha inválido");
+        }
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
+    {
+        var validator = new ResetPasswordValidator();
+        var validationResult = await validator.ValidateAsync(resetPassword);
+
+        if (validationResult.IsValid)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+
+            if (user != null)
+            {
+                var result = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Senha);
+                if (result.Succeeded)
+                {
+                    return View("ResetPasswordConfirmation");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(resetPassword);
+            }
+
+            return View("ResetPasswordConfirmation");
+        }
+
+        foreach (var error in validationResult.Errors)
+            ModelState.AddModelError(string.Empty, error.ErrorMessage);
+        return View(resetPassword);
+    }
+
+     public IActionResult ResetPasswordConfirmation() => View();
 
 }

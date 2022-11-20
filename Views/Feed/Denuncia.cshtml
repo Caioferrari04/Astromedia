@@ -1,0 +1,25 @@
+@model Denuncia
+@{
+    Layout = "";
+}
+
+<div class="modal container is-vertical-align is-horizontal-align">
+    <form id="form-denuncia" asp-action="Denuncia" class="modal-content modal-denuncia">
+        <div class="modal-header">
+            <h3>Denunciar</h3>
+            <img class="close-btn col" src="/img/close-icon.svg" alt="Close Icon">
+        </div>
+        <div class="modal-body">
+            <label for="Conteudo">
+                Descreva o conteúdo ofensivo, que está em violação com os termos de uso e/ou privacidade. Procure descrever com detalhes:
+                <textarea class="is-full-width" asp-for="Conteudo" cols="100%" rows="auto" placeholder="Escreva..." maxlength="500"></textarea>
+            </label>
+        </div>
+        <div class="modal-footer pull-right">
+            <input asp-for="Comentario.Id" type="hidden">
+            <input asp-for="Postagem.Id" type="hidden">
+            <button class="button error" type="button" id="botao-cancelar-denuncia">Cancelar</button>
+            <button class="button primary" type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
