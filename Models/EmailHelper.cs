@@ -9,8 +9,7 @@ public class EmailHelper
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("alexsandro.astromedia@outlook.com");
             mailMessage.To.Add(new MailAddress(userEmail));
- 
-            mailMessage.Subject = "Password Reset";
+            mailMessage.Subject = "Redefinição de senha";
             mailMessage.IsBodyHtml = true;
             // mailMessage.Body = link;
             mailMessage.Body =  "<div style=\"text-align: center;\"><div style=\"padding: 10px; text-align: left\"><h1>Pedido de altera&ccedil;&atilde;o de senha</h1>\n" +
