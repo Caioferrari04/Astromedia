@@ -66,7 +66,6 @@ public class SignInController : Controller
                         await _userManager.DeleteAsync(novoUsuario);
                         return View(usuario);
                     }
-                    ViewBag.UsuarioDTO = usuario;
                     return View("SucessRegistration", usuario.Email);
                 }
 
