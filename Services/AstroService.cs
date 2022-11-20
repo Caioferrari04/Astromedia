@@ -42,6 +42,8 @@ public class AstroService
         return retornoVerdadeiro;
     }
 
+    public IEnumerable<Astro> GetTopAstros() => _astroContext.Astros.Include(el => el.Usuarios).OrderByDescending(el => el.Usuarios.Count);
+
     public async Task Delete(int id)
     {
         var astro = await GetById(id);

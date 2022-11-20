@@ -12,11 +12,11 @@
         <div class="row">
             <label class="col" asp-for="Nome">
                 @Html.DisplayNameFor(m => m.Nome)
-                <input class="inputbox-cad" asp-for="Nome">
                 <div class="input-desc">
-                    <p>Seu nome de usuário deve conter pelo menos 4 caracteres, 
-                    e no máximo 15 caracteres. Sem caracteres especiais.</p>
+                    <small>Seu nome de usuário deve conter pelo menos 4 caracteres, 
+                    e no máximo 15 caracteres. Sem caracteres especiais.</small>
                 </div>
+                <input class="inputbox-cad" asp-for="Nome">
             </label>
         </div>
 
@@ -52,6 +52,13 @@
             <label class="text-light col" asp-for="FotoBackground">
                 @Html.DisplayNameFor(m => m.FotoBackground)
                 <input asp-for="FotoBackground" accept="image/png, image/gif, image/jpeg"/>
+            </label>
+        </div>
+
+        <div class="row">
+            <label asp-for="Bio" class="col">
+                @Html.DisplayNameFor(el => el.Bio)
+                <textarea asp-for="Bio" style="resize: vertical; background-color: #fff; color: #000"></textarea>
             </label>
         </div>
 

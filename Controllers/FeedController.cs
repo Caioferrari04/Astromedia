@@ -172,8 +172,5 @@ public class FeedController : Controller
 
     public async Task<IActionResult> PerfilUsuario(string id) => View(await _usuarioService.GetById(id));
 
-    public async Task<IActionResult> MeusAstros()
-    {
-        return View(await _userManager.GetUserAsync(User));
-    }
+    public async Task<IActionResult> MeusAstros() => View(await _usuarioService.GetById(_userManager.GetUserId(User)));
 }

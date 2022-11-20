@@ -58,7 +58,8 @@ textarea:focus {
 
 .post-footer-icon {
     cursor: pointer;
-    transition: all .3s;
+    transition: .3s;
+    transition-property: transform, opacity;
     image-rendering: auto;
 }
 
@@ -206,8 +207,12 @@ textarea:focus {
 .usr-post-name {
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--color-lightGrey);
+    /* color: var(--color-lightGrey); */
     margin-bottom: -5px;
+}
+
+.usr-post-name a {
+    text-decoration: none!important;
 }
 
 .info-col {

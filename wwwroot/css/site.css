@@ -79,6 +79,11 @@ body::-webkit-scrollbar-thumb:active {
   border-right-color: var(--color-highlight);
 }
 
+a {
+  color: #edd1f9;
+  text-decoration: underline;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;

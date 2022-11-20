@@ -1,10 +1,11 @@
 using Astromedia.DTO;
 using Astromedia.Models;
+using Astromedia.Services;
+using Astromedia.Validations;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Astromedia.Services;
-using Astromedia.Validations;
 
 namespace Astromedia.Controllers;
 
@@ -27,11 +28,15 @@ public class ConfigurationUserController : Controller
     public async Task<IActionResult> UpdateProfile()
     {
         var usuario = await _userManager.GetUserAsync(User);
-        var usuarioDTO = new UsuarioDTO();
-        usuarioDTO.Nome = usuario.UserName;
-        usuarioDTO.DataNascimento = usuario.DataNascimento;
-        usuarioDTO.Email = usuario.Email;
-        usuarioDTO.Senha = usuario.PasswordHash;
+        var usuarioDTO = new UsuarioDTO
+        {
+            Nome = usuario.UserName,
+            DataNascimento = usuario.DataNascimento,
+            Email = usuario.Email,
+            Senha = usuario.PasswordHash,
+            Bio = usuario.Bio
+        };
+
         return View(usuarioDTO);
     }
 
@@ -41,39 +46,42 @@ public class ConfigurationUserController : Controller
         var usuario = await _userManager.GetUserAsync(User);
         usuarioDTO.Atualizar = true;
         var validator = new UsuarioValidator();
-        var validationResult = await validator.ValidateAsync(usuarioDTO);
+        var validationResult = await validator.ValidateAsync(usuarioDTO, options => options.IncludeRuleSets("ValidacaoUpdateProfile"));
 
         if (validationResult.IsValid)
         {
             usuario.UserName = usuarioDTO.Nome;
             usuario.DataNascimento = usuarioDTO.DataNascimento.ToUniversalTime();
             usuario.Email = usuarioDTO.Email;
-            if(usuarioDTO.FotoPerfil is not null)
+            usuario.Bio = usuarioDTO.Bio;
+            if (usuarioDTO.FotoPerfil is not null)
             {
                 var respostaImgur = await new ImgurService().UploadImagem(usuarioDTO.FotoPerfil);
-                usuario.FotoPerfil = respostaImgur.Data.data.link;  
-            }     
-            
-            if(usuarioDTO.FotoBackground is not null)
+                usuario.FotoPerfil = respostaImgur.Data.data.link;
+            }
+
+            if (usuarioDTO.FotoBackground is not null)
             {
                 var respostaImgur = await new ImgurService().UploadImagem(usuarioDTO.FotoBackground);
-                usuario.FotoBackground = respostaImgur.Data.data.link;  
-            }   
+                usuario.FotoBackground = respostaImgur.Data.data.link;
+            }
 
-            try 
+            try
             {
                 var resultado = await _userManager.UpdateAsync(usuario);
-                    foreach (var error in resultado.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                        Console.WriteLine(error.Description);
-                    }
-                
-            } 
-            catch(Exception error)
+                foreach (var error in resultado.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                    Console.WriteLine(error.Description);
+                }
+
+                return RedirectToAction("PerfilUsuario", "Feed", new { id = usuario.Id });
+            }
+            catch (Exception)
             {
-                Console.WriteLine(error.Message);
-            } 
+                ModelState.AddModelError(string.Empty, "Houve um erro de conexão! Aguarde e tente novamente mais tarde.");
+
+            }
         }
 
         foreach (var error in validationResult.Errors)
@@ -82,7 +90,7 @@ public class ConfigurationUserController : Controller
         return View();
     }
 
-    
+
     public IActionResult UpdatePassword()
     {
         return View();
@@ -94,20 +102,20 @@ public class ConfigurationUserController : Controller
         var usuario = await _userManager.GetUserAsync(User);
         usuarioDTO.Atualizar = true;
         var validator = new UsuarioValidator();
-        var validationResult = await validator.ValidateAsync(usuarioDTO);
+        var validationResult = await validator.ValidateAsync(usuarioDTO, options => options.IncludeRuleSets("ValidacaoSenha"));
 
         if (validationResult.IsValid)
-        {                                                        
-            try 
+        {
+            try
             {
                 var resultado = await _userManager.ChangePasswordAsync(usuario, usuarioDTO.SenhaAtual, usuarioDTO.Senha);
                 foreach (var error in resultado.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
-            } 
-            catch(Exception error)
+            }
+            catch (Exception error)
             {
                 Console.WriteLine(error.Message);
-            } 
+            }
         }
 
         foreach (var error in validationResult.Errors)
@@ -121,21 +129,21 @@ public class ConfigurationUserController : Controller
     [HttpPost]
     public async Task<IActionResult> DeleteAccount(UsuarioDTO usuarioDTO)
     {
-        
+
         var usuario = await _userManager.GetUserAsync(User);
         var usuarioAtual = await _usuarioService.GetById(usuario.Id);
 
         if (await _userManager.CheckPasswordAsync(usuarioAtual, usuarioDTO.SenhaAtual))
         {
-            if(usuarioAtual.Astros?.Count() > 0)
+            if (usuarioAtual.Astros?.Count > 0)
             {
                 usuarioAtual.Astros.ForEach(a => a.Usuarios.Remove(usuarioAtual));
                 _astroContext.Astros.UpdateRange(usuarioAtual.Astros);
             }
 
-            if(usuarioAtual.Postagens?.Count() > 0)
+            if (usuarioAtual.Postagens?.Count > 0)
             {
-                _astroContext.Postagens.RemoveRange( _astroContext.Postagens.Where(a => a.Usuario.Id == usuarioAtual.Id));
+                _astroContext.Postagens.RemoveRange(_astroContext.Postagens.Where(a => a.Usuario.Id == usuarioAtual.Id));
             }
             await _signInManager.SignOutAsync();
             await _userManager.DeleteAsync(usuarioAtual);

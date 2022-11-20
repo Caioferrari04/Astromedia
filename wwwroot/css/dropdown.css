@@ -90,6 +90,7 @@
     .dropdown {
         max-width: 100vw;
         left: 0;
+        overflow: scroll;
         transform: translateX(0px);
         /* text-align: left; */
     }
