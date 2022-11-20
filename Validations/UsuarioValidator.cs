@@ -68,6 +68,17 @@ public class UsuarioValidator : AbstractValidator<UsuarioDTO>
             RuleFor(v => v.ConditionTerms)
                 .Equal(true).WithMessage("Aceite os termos de condição para continuar.");
         });
+
+        RuleSet("ValidacaoEmail", () => {
+            RuleFor(m => m.NovoEmail)
+            .EmailAddress(EmailValidationMode.AspNetCoreCompatible)
+            .WithMessage("Email inválido.");
+            
+            RuleFor(m => m.SenhaAtual)
+                .Length(6, 20)
+                .Matches("^([a-zA-Z0-9_-])*$")
+                .WithMessage("Senha atual deve conter apenas letras, números, underline e traço.");
+        });
     
 
     }
