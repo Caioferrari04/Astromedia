@@ -16,4 +16,6 @@ public class AstroContext : IdentityDbContext<Usuario>
     public DbSet<LogEdicao> LogsEdicoes { get; set; }
 
     public DbSet<Like> Likes { get; set; }
+
+    public DbSet<Denuncia> Denuncias { get; set; }
 }

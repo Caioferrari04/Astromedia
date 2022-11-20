@@ -29,6 +29,18 @@
     transform: scale(0.75);
 }
 
+.modal-denuncia {
+    padding: 20px;
+}
+
+.modal-denuncia textarea {
+    font-size: 1.5rem;
+}
+
+.modal-denuncia .modal-footer {
+    margin-top: 20px;
+}
+
 /* Conteúdo Modal - Form */
 /* -- Header do Modal */
 

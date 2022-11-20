@@ -1,0 +1,56 @@
+@model IEnumerable<Denuncia>
+
+<h1 class="text-light">Denuncias</h1>
+<ul>
+    @foreach(var denuncia in Model) 
+    {
+        @if (!denuncia.Respondida)
+        {
+            <li class="text-light">
+                <div>
+                    @if(!string.IsNullOrEmpty(denuncia.Postagem?.Usuario.UserName))
+                    {
+                        <p class="is-marginless">Usuario denunciado: @denuncia.Postagem.Usuario.UserName</p>
+                    }
+                    else
+                    {
+                        <p class="is-marginless">Usuario denunciado: @denuncia.Comentario.Usuario.UserName</p>
+                    }
+                </div>
+                <div>
+                    <p class="is-marginless">Motivo:</p>
+                    <p>@denuncia.Conteudo</p>
+                </div>
+                <div>
+                    @if(denuncia.Postagem is not null) 
+                    {
+                        <p>@denuncia.Postagem.Texto</p>
+                    }
+                    else
+                    {
+                        <p>@denuncia.Comentario.Texto</p>
+                    }
+                </div>
+                @if (!string.IsNullOrEmpty(denuncia.Postagem?.Imagem)) 
+                {
+                    <div>
+                        <p class="is-marginless">imagem:</p> 
+                        <img src="@denuncia.Postagem.Imagem" style="max-width: 200px;">
+                    </div>
+                }
+                <div>
+                    @if (denuncia.Postagem is not null) 
+                    {
+                        <a class="button primary" asp-action="RemoverPostagem" asp-route-id="@denuncia.Postagem.Id" asp-route-denunciaId="@denuncia.Id">Remover postagem</a>
+                    }
+                    else 
+                    {
+                        <a class="button primary" asp-action="RemoverComentario" asp-route-id="@denuncia.Comentario.Id" asp-route-denunciaId="@denuncia.Id">Remover comentário</a>
+                    }
+                    <a class="button primary" asp-action="Ignorar" asp-route-id="@denuncia.Id">Ignorar</a>
+                </div>
+                
+            </li>
+        }
+    }
+</ul>

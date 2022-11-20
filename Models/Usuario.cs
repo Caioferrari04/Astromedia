@@ -30,4 +30,5 @@ public class Usuario : IdentityUser
     public string Bio { get; set; }
 
     public List<Like> Likes { get; set; }
+    public List<Denuncia> Denuncias { get; set; }
 }
