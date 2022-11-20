@@ -144,7 +144,7 @@ public class SignInController : Controller
 
                 if (emailResponse)
                 {
-                    return RedirectToAction("ForgotPasswordConfirmation");
+                    return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
                 }
 
                 else {
@@ -169,7 +169,40 @@ public class SignInController : Controller
         return View(forgotPassword);
     } 
 
-    public IActionResult ForgotPasswordConfirmation() => View();
+    public IActionResult ForgotPasswordConfirmation(ForgotPassword forgotPassword) => View(forgotPassword);
+
+    public async Task<IActionResult> ResendEmail(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+
+        ForgotPassword forgotPassword = new ForgotPassword();
+        forgotPassword.Email = user.Email;
+
+        if(user != null)
+        {   
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var passwordResetLink = Url.Action(
+                "ResetPassword",
+                "SignIn",
+                new { email = email, token =  token }, 
+                Request.Scheme
+            );
+
+            EmailHelper emailHelper = new EmailHelper();
+            bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, passwordResetLink);
+
+            if (emailResponse)
+            {
+                return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
+            }
+
+            else {
+                return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
+            }
+        }
+        return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
+    }
 
     public IActionResult ResetPassword(string token, string email)
     {
