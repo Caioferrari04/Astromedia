@@ -45,8 +45,10 @@ builder.Services.AddDefaultIdentity<Usuario>(identityOptions)
 
 builder.Services.AddScoped<AstroService>();
 builder.Services.AddScoped<PostagemService>();
+builder.Services.AddScoped<CommentService>();
 builder.Services.AddScoped<LogEdicaoService>();
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<LikeService>();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
@@ -88,13 +90,13 @@ app.UseEndpoints(endpoints =>
 
 app.Run();
 
-MinimizeFootprint();
+// MinimizeFootprint();
 
 
-[DllImport("psapi.dll")]
-static extern int EmptyWorkingSet(IntPtr hwProc);
+// [DllImport("psapi.dll")]
+// static extern int EmptyWorkingSet(IntPtr hwProc);
 
-static void MinimizeFootprint()
-{
-    EmptyWorkingSet(Process.GetCurrentProcess().Handle);
-}
+// static void MinimizeFootprint()
+// {
+//     EmptyWorkingSet(Process.GetCurrentProcess().Handle);
+// }

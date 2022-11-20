@@ -42,6 +42,8 @@ public class AstroService
         return retornoVerdadeiro;
     }
 
+    public IEnumerable<Astro> GetTopAstros() => _astroContext.Astros.Include(el => el.Usuarios).OrderByDescending(el => el.Usuarios.Count);
+
     public async Task Delete(int id)
     {
         var astro = await GetById(id);
@@ -55,6 +57,7 @@ public class AstroService
         var astro = await GetById(astroDTO.Id);
         astro.Nome = astroDTO.Nome;
         astro.Curiosidades = astroDTO.Curiosidades;
+        astro.MarcosHistoricos = astroDTO.MarcosHistoricos;
 
         if(astroDTO.Foto is not null) 
         {
@@ -66,6 +69,14 @@ public class AstroService
         {
             var respostaImgur = await new ImgurService().UploadImagem(astroDTO.FotoBackground);
             astro.FotoBackground = respostaImgur.Data.data.link;
+        }
+
+        if(astroDTO.Fotos is not null) 
+        {
+            foreach(var foto in astroDTO.Fotos) {
+                var resposta = await new ImgurService().UploadImagem(foto);
+                astro.Fotos.Add(resposta.Data.data.link);
+            }
         }
 
         _astroContext.Astros.Update(astro);
@@ -84,7 +95,8 @@ public class AstroService
         LinkFoto = astro.Foto,
         LinkFotoBackground = astro.FotoBackground,
         Nome = astro.Nome,
-        Curiosidades = astro.Curiosidades
+        Curiosidades = astro.Curiosidades,
+        MarcosHistoricos = astro.MarcosHistoricos
     };
 
     public async Task JoinForum(int id, Usuario usuario)

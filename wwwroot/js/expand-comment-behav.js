@@ -1,46 +1,55 @@
-let expcmbtn = document.querySelector(".expand-comment-btn");
+function expandComment() {
+    const expandirComentario = document.querySelector('.expand-comment-btn')
 
-expcmbtn.addEventListener("click", e => {
-    console.log("click");
-    const cm = document.querySelector(".comment-input-box");
-    const allholder = e.target.closest(".commentmodal-post");
-
-    console.log(allholder);
+    const clickInicial = () => {
+        const commentBox = document.querySelector('.comment-input-box')
+        const allholder =  document.querySelector('.commentmodal-holder')
     
-    let clone = cm.cloneNode(true);
-    clone.removeAttribute("id");
+        const clone = commentBox.cloneNode(true)
+        clone.classList.remove('hide')
+    
+        allholder.prepend(clone)
+        new Promise(r => setTimeout(r, 200)).then(() => clone.classList.remove('comment-input-box-hidden'))
+    
+        expandirComentario.addEventListener('click', () => {
+            clone.classList.add('comment-input-box-hidden')
+            new Promise(r => setTimeout(r, 700)).then(() => clone.remove())
+            expandirComentario.addEventListener('click', clickInicial, { once: true })
+        })
 
-    if(!(allholder.nextSibling.className == "comment-input-box")) {
-        allholder.after(clone);
-        aux = allholder.nextSibling;
-        setTimeout(verifyMargin, 100);
-        tgg = false;
-    } else {
-        aux = allholder.nextSibling;
-        verifyMargin();
-    }
+        document.querySelector('textarea').addEventListener('input', e => {
+            e.target.setAttribute('style', 'height:' + (e.target.scrollHeight) + 'px')
+            e.target.addEventListener('input', OnInput, false)
+        })
 
-    // Arrumar comportamento do resize dinâmico
-    for (let i = 0; i < tx.length; i++) {
-        tx[i].setAttribute("style", "height: 54px;");
-        tx[i].addEventListener("input", OnInput, false);
-    }
+        const cmmform = document.querySelector('#commentform')
+        cmmform.addEventListener('submit', e => {
+            e.preventDefault()
+            handleFormSubmit(e.target, e.target.action)
+        })
 
-    function OnInput() {
-        this.style.height = "auto";
-        this.style.height = (this.scrollHeight) + "px";
-    }
-
-    function verifyMargin() {
-        if (aux.style.marginTop === "-122px") {
-            console.log("122");
-            aux.style.marginTop = "-26px";
-        } else if (aux.style.marginTop === "-26px" && tgg) {
-            console.log("tgg");
-            aux.style.marginTop = "-26px";
-        } else if (aux.style.marginTop === "-26px" && !tgg) {
-            console.log("!!tgg");
-            aux.style.marginTop = "-122px";
+        const handleFormSubmit = async (form, url) => {	
+            const body = new FormData(form)
+            const fetchConfig = { method: 'POST', body }
+        
+            const response = await fetch(url, fetchConfig)
+            if (!response.ok) {
+                handleError(['Houve um erro com sua requisição, tente novamente mais tarde!'])
+                return
+            }
+        
+            const json = await response.json()
+        
+            if (!json.success) {
+                const mensagens = []
+                json.errors.forEach(erro => mensagens.push(erro))
+                handleError(mensagens)
+                return
+            }
+        
+            window.location.reload()
         }
     }
-});
+
+    expandirComentario.addEventListener('click', clickInicial, { once: true })
+}

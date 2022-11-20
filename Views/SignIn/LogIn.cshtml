@@ -1,4 +1,7 @@
 @model UsuarioDTO
+@{
+    var rota = ViewContext.RouteData.Values["action"] as string;
+}
 
 <div id="modalblock" class="modal container is-vertical-align is-horizontal-align">
     <form class="modal-content animatein text-light col-5" asp-action="Login" asp-controller="SignIn">
@@ -39,6 +42,7 @@
                     <label asp-for="LembrarMe" class="is-vertical-align">
                         <input asp-for="LembrarMe" class="dnfpassword">Lembrar minha senha
                     </label>
+                    <a asp-action="Index" class="is-vertical-align">Não possui conta? Crie aqui</a>
                     <button type="submit" class="col submit-btn button outline is-vertical-align is-horizontal-align">Entrar</button>
                 </div>
             </div>

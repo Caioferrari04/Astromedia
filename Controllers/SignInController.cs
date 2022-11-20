@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
 
 namespace Astromedia.Controllers;
 
@@ -31,7 +32,7 @@ public class SignInController : Controller
     public async Task<IActionResult> Index(UsuarioDTO usuario)
     {
         var validator = new UsuarioValidator();
-        var validationResult = await validator.ValidateAsync(usuario);
+        var validationResult = await validator.ValidateAsync(usuario, options => options.IncludeAllRuleSets());
 
         if (validationResult.IsValid)
         {
@@ -41,7 +42,8 @@ public class SignInController : Controller
                 FotoPerfil = "/img/default-img.jpg",
                 FotoBackground = "/img/capa-padrao.jpeg",
                 Email = usuario.Email,
-                DataNascimento = usuario.DataNascimento.ToUniversalTime()
+                DataNascimento = usuario.DataNascimento.ToUniversalTime(),
+                Bio = "Olá mundo!"
             };
             try
             {
@@ -51,7 +53,7 @@ public class SignInController : Controller
                 {
                     await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("MeusAstros", "Feed");
                 }
 
                 foreach (var error in resultado.Errors)
@@ -102,15 +104,15 @@ public class SignInController : Controller
             {
                 ModelState.AddModelError(string.Empty, @"Tentativa de login inválida, 
                 verifique se digitou seus dados corretamente");
-                return RedirectToAction(nameof(LogInView));
+                return View(nameof(LogInView));
             }
 
-            return RedirectToAction("Postagens", "Feed"); /*Redirecionar para o feed :)*/
+            return RedirectToAction("MeusAstros", "Feed"); /*Redirecionar para o feed :)*/
         }
         catch
         {
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
-            return RedirectToAction(nameof(LogInView));
+            return View(nameof(LogInView));
         }
     }
 

@@ -4,6 +4,10 @@
     border: 1px solid var(--color-highlight);
     display: flex;
     background-color: var(--color-primary);
+    /* filter: blur(8px); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     /* gap: .5rem; */
     /* justify-content: center; */
 }
@@ -26,27 +30,36 @@
 
 .astro .estatistica {
     display: inline-flex;
+    position: relative;
     align-items: center;
+    /* color: ; */
+    opacity: 1;
 }
 
 .conteudo {
+    cursor: pointer;
     position: relative;
     display: block;
-    left: -20%;
-    padding: 0 1.5rem;
-    background-color: var(--color-primary);
+    /* left: -20%; */
+    /* background-color: var(--color-primary); */
+    padding: 1rem;
     width: 100%;
-    border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.509);
+    text-decoration: none;
 }
 
-.astro--link {
+/* .astro--link {
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     position: absolute;
     cursor: pointer;
-}
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.305);
+    z-index: 999;
+} */
 
 .flecha-splide:active, .flecha-splide:focus {
     transform: translateY(-50%);
@@ -62,7 +75,7 @@
     .conteudo {
         max-width: 100%;
         text-overflow: ellipsis;
-        padding: 0 0 0 .5rem;
+        /* padding: 0 0 0 .5rem; */
     }
 }
 

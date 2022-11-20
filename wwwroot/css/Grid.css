@@ -22,7 +22,7 @@ main.container {
 
 .info-astro_imagem {
     max-width: 4.5rem;
-    max-height: 4.5rem;
+    height: 4.5rem;
     border-radius: 50%;
 }
 
@@ -49,6 +49,7 @@ main.container {
     padding: 2px 10px;
     border-radius: 15px;
     gap: 3px;
+    text-decoration: none;
 }
 
 /* Estilos  */

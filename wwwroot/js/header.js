@@ -16,9 +16,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const toggles = document.getElementsByClassName('dropdown-toggle');
     if (toggles != null) {
         const dropdown = document.getElementById('logged-in');
-        dropdown.classList.remove('dropdown-load')
-        for (const iterator of toggles) {
-            iterator.addEventListener('click', () => toggleDropdown(dropdown));
+        if (dropdown) {
+            dropdown.classList.remove('dropdown-load')
+            for (const iterator of toggles) {
+                iterator.addEventListener('click', () => toggleDropdown(dropdown));
+            }
         }
     }
 
