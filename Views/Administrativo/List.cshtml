@@ -20,6 +20,16 @@
                 <a class="button error" asp-action="Delete" asp-route-id="@astro.Id">Excluir</a>
             </div>
             <div class="text-light">@Html.Raw(astro.Curiosidades)</div>
+            @if(astro.Fotos?.Count > 0)
+            {
+                <div class="text-light">
+                    <p>Fotos:</p>
+                    @foreach (var foto in astro.Fotos)
+                    {
+                        <img src="@foto" alt="">
+                    }
+                </div>
+            } 
         </li>
     }
 </ul>

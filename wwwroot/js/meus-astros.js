@@ -3,7 +3,9 @@ Splide.defaults = {
     type   : 'slide',
     perPage: 5,
     // arrows : false,
-    gap    : '5rem',
+    padding: '6rem',
+    gap    : '3rem',
+    lazyLoad: 'nearby',
     classes: {
         arrow: 'splide__arrow flecha-splide'
     },
@@ -15,10 +17,11 @@ Splide.defaults = {
             perPage: 3
         },
         1024: {
-            gap: '1rem'
+            gap: '1rem',
+            padding: '0'
         },
         768: {
-            arrows: false
+            arrows: false,
         },
         425: {
             perPage: 2
@@ -26,6 +29,7 @@ Splide.defaults = {
     }
 }
 
-new Splide('.astros-usuario').mount();
+if (document.querySelector('.astros-usuario')) new Splide('.astros-usuario').mount();
 new Splide('.astros-recomendacoes').mount();
+new Splide('.astros-famosos').mount();
 

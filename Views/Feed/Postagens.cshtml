@@ -1,5 +1,3 @@
-@using Microsoft.AspNetCore.Identity;
-@inject UserManager<Usuario> UserManager;
 @model List<Postagem>
 @{
     Layout = "_LayoutFeed";
@@ -10,7 +8,7 @@
         ViewData["Title"] += $" de {ViewBag.astro.Nome}";
     }
 
-    var user = await UserManager.GetUserAsync(User);
+    Usuario user = ViewBag.Usuario;
 }
 
 @if (ViewBag.astro is not null) 
@@ -20,7 +18,7 @@
             <img class="info-astro_imagem col-4" src="@ViewBag.astro.Foto">
             <div class="info-astro_texto text-light col-8">
                 <h2>
-                    <a asp-action="PerfilAstro" asp-route-id="@ViewBag.astro.Id" class="text-white nome-astro">@ViewBag.astro.Nome</a>
+                    <a asp-action="PerfilAstro" asp-route-id="@ViewBag.astro.Id" class="nome-astro">@ViewBag.astro.Nome</a>
                     <a class="text-light info-astro_sair-forum" asp-action="SairForum" asp-route-id="@ViewBag.astro.Id">
                         <img src="https://icongr.am/material/star-off.svg?size=15&color=d2d6dd" alt="Sair de forum">
                         Remover interesse
@@ -101,19 +99,6 @@
             </div>
         </div>
     }
-    @* Área de inserção de comentário (Template) *@
-    <!--div id="hidden" class="comment-input-box" style="margin-top: -119px !important;">
-    <div class="comment-input-content">
-    @*@using (Html.BeginForm("Action", "Controller", FormMethod.Post, new {@id = "commentform"}))
-            {   
-                @Html.TextAreaFor(m => m, new { @class = "is-full-width comment-input", @name = "commenttext", @form = "commentform", @cols = "100%", @rows = "auto", @placeholder = "Comente Aqui", @maxlength = "280"})
-                <div class="is-right">
-                    botões de modificação
-                    <button type="submit" class="submit-comment-btn submit-post-btn button outline is-vertical-align">Comentar</button>
-                </div>
-            }
-        </div>*@
-    </div-->
     <div id="posts">
         @if (Model.Count > 0)
         {
@@ -168,12 +153,19 @@
                         }
                         <div class="between-config">
                             <div class="usr-footer-comment is-vertical-align is-left">
-                                <img class="post-footer-icon comment-modal" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
-                                <a class="text-light comment-modal" href="javascript:void(0)">Ver Comentários</a>
+                                <img class="post-footer-icon comment-modal" href="javascript:void(0)" data-id="@postagem.Id" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
+                                <a class="comment-modal" href="javascript:void(0)" data-id="@postagem.Id">Ver Comentários</a>
                             </div>
                             <div class="usr-footer-likes is-vertical-align is-right">
-                                <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=20&color=ffffff" />
-                                <small class="text-light likes">0</small>
+                                @if (user.Likes?.Find(el => el.Postagem?.Id == postagem.Id) is not null) 
+                                {
+                                    <img class="post-footer-icon btn-dislike"  data-id="@postagem.Id" data-url="/Feed/RemoverLikePostagem" data-tipo="Postagem" src="/icons/heart-fill.svg" />
+                                }
+                                else
+                                {
+                                    <img class="post-footer-icon btn-like"  data-id="@postagem.Id" data-url="/Feed/AdicionarLikePostagem" data-tipo="Postagem" src="/icons/heart.svg" />
+                                }
+                                <small class="text-light likes">@postagem.Likes?.Count</small>
                             </div>
                         </div>
                     </div>
@@ -235,9 +227,9 @@
 @section scripts 
 {
     <script src="~/lib/notiflix/dist/notiflix-3.2.5.min.js" asp-append-version="true"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
     <script src="~/js/textarea-post.js" asp-append-version="true"></script>
     <script src="~/js/commentmodal.js" asp-append-version="true"></script>
     <script src="~/js/submit-post.js" asp-append-version="true"></script>
-    <script src="~/js/dropdown-postagem.js" asp-append-version="true"></script>
+    <script src="~/js/dropdown-postagem.js" asp-append-version="true"></script>  
+    <script src="~/js/likes.js" asp-append-version="true"></script>  
 }

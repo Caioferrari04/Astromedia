@@ -9,7 +9,11 @@
 
 @section stylesheet {
     <link rel="stylesheet" href="~/css/PerfilAstro.css" asp-append-version="true">
+    <link type="text/css" rel="stylesheet" href="~/lib/lightgallery/css/lightgallery.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/lightgallery/css/lg-zoom.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/lightgallery/css/lg-thumbnail.css" />
 }
+
 
 <div class="container-perfil">
     <div class="is-full-width banner-container">
@@ -53,9 +57,8 @@
     </nav> *@
     <nav class="tabs is-center">
         <a href="javascript:void(0)" class="nav-button tab active text-light" id="tab1">Curiosidades</a>
-        <a href="javascript:void(0)" class="nav-button tab text-light" id="tab2">Noticias</a>
-        <a href="javascript:void(0)" class="nav-button tab text-light" id="tab3">Fotos</a>
-        @* <a asp-action="DeleteAccount" class="nav-button text-light" id="tab4">Historia</a> *@
+        <a href="javascript:void(0)" class="nav-button tab text-light" id="tab2">Fotos</a>
+        <a href="javascript:void(0)" class="nav-button tab text-light" id="tab3">Historia</a>
     </nav>
 
     <div class="tab-content tab-content-active text-left text-light" data-id="tab1">
@@ -64,25 +67,72 @@
     </div>
 
     <div class="tab-content text-left text-light" data-id="tab2">
-        <h4>Noticias</h4>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-    </div>
-
-    <div class="tab-content text-left text-light" data-id="tab3">
         <h4>Fotos</h4>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, placeat! Nisi est ipsam incidunt, blanditiis quod, et aut, delectus dolorem nulla ullam dolores aliquid totam iste vitae eligendi fuga officia! lorefxLayout="row wrap"</p>
+        
+        <div class="container-sm">
+            <div class="row justify-content-center">
+                <div class="col col-md-10">
+                    <div class="gallery-container" id="gallery-container">
+                        @if (Model.Fotos is not null)
+                        {
+                            @foreach (var foto in Model.Fotos)
+                            {
+                                <a class="gallery-item" data-src="@foto">
+                                    <img alt="" class="img-responsive" src="@foto" />
+                                </a>
+                            }
+                        }
+
+                        else {
+                            <p>Astro sem fotos cadastradas.</p>
+                        }
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+     <div class="tab-content text-left text-light" data-id="tab3">
+        <h4>História</h4>
+        
+        @if(Model.MarcosHistoricos?.Count > 0)
+        {
+            <div class="timeline">
+                @for(int i = 0; i<Model.MarcosHistoricos.Count(); i++)
+                {
+                    @if(i % 2 == 0)
+                    {
+                        <div class="containerr leftt">
+                            <div class="contentt">
+                                @Html.Raw(Model.MarcosHistoricos[i])
+                            </div>
+                        </div>
+                    }
+
+                    else {
+                        <div class="containerr rightt">
+                            <div class="contentt">
+                                @Html.Raw(Model.MarcosHistoricos[i])
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+
+        else {
+            <p>Astro sem história cadastrada.</p>
+        }
+       
+
+    </div>
 </div>
 
 @section scripts {
     <script src="~/js/openTabs.js" asp-append-version="true"></script>
+    <script src="~/lib/lightgallery/lightgallery.umd.js"></script>
+    <script src="~/lib/lightgallery/plugins/thumbnail/lg-thumbnail.umd.js"></script>
+    <script src="~/lib/lightgallery/plugins/zoom/lg-zoom.umd.js"></script>
+    <script src="~/js/astro-gallery.js"></script>
 }

@@ -5,8 +5,15 @@
 @{
     @* Layout = "_LayoutFeed"; *@
     ViewData["Title"] = $"Meus interesses";
+    var possuiAstros = Model.Astros is not null && Model.Astros.Count > 0;
+
     var astros = await _service.GetAllRecommended();
-    astros = astros.Where(el => Model.Astros.Find(f => f.Id == el.Id) is null);
+    var topAstros = _service.GetTopAstros();
+    if (possuiAstros) {
+        astros = astros.Where(el => Model.Astros.Find(f => f.Id == el.Id) is null);
+        topAstros = topAstros.Where(el => Model.Astros.Find(f => f.Id == el.Id) is null);
+    }
+
 }
 
 @section stylesheet {
@@ -14,31 +21,34 @@
     <link rel="stylesheet" href="~/css/meus-astros.css" asp-append-version="true">
 }
 
-<h1 class="text-light">Meus astros</h1>
-<div class="splide astros-usuario" role="group" aria-label="Meus astros">
-    <div class="splide__track">
-        <ul class="splide__list">
-            @foreach (var astro in Model.Astros)
-            {
-                <li class="splide__slide astro">
-                    <img src="@astro.Foto" class="recomendacao-mobile--foto">
-                    <div class="conteudo">
-                        <small class="text-light">@astro.Nome</small>
-                        <small class="estatistica text-light">
-                            <img src="https://icongr.am/material/chat.svg?size=20&color=d2d6dd"> 
-                            @astro.Postagens.Count
-                        </small>
-                        <small class="estatistica text-light">
-                            <img src="https://icongr.am/material/account.svg?size=20&color=d2d6dd"> 
-                            @astro.Usuarios.Count
-                        </small>
-                    </div>
-                    <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="astro--link"></a>
-                </li>
-            }
-        </ul>
+@if (possuiAstros) 
+{
+    <h1 class="text-light">Meus astros</h1>
+    <div class="splide astros-usuario" role="group" aria-label="Meus astros">
+        <div class="splide__track">
+            <ul class="splide__list">
+                @foreach (var astro in Model.Astros)
+                {
+                    <li class="splide__slide astro" style="background-image: url(@astro.Foto);">
+                        @* <img src="" class="recomendacao-mobile--foto"> *@
+                        <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="conteudo">
+                            <small class="text-light">@astro.Nome</small>
+                            <small class="estatistica text-light">
+                                <img src="https://icongr.am/material/chat.svg?size=20&color=d2d6dd"> 
+                                @astro.Postagens.Count
+                            </small>
+                            <small class="estatistica text-light">
+                                <img src="https://icongr.am/material/account.svg?size=20&color=d2d6dd"> 
+                                @astro.Usuarios.Count
+                            </small>
+                        </a>
+                        @* <a  class="astro--link"></a> *@
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
-</div>
+}
 
 <h2 class="text-light">Astros interessantes</h2>
 <div class="splide astros-recomendacoes" role="group" aria-label="Recomendações">
@@ -46,9 +56,9 @@
         <ul class="splide__list">
             @foreach (var astro in astros)
             {
-                <li class="splide__slide astro">
-                    <img src="@astro.Foto" class="recomendacao-mobile--foto">
-                    <div class="conteudo">
+                <li class="splide__slide astro" style="background-image: url(@astro.Foto);">
+                    @* <img src="" class="recomendacao-mobile--foto"> *@
+                    <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="conteudo">
                         <small class="text-light">@astro.Nome</small>
                         <small class="estatistica text-light">
                             <img src="https://icongr.am/material/chat.svg?size=20&color=d2d6dd"> 
@@ -58,8 +68,34 @@
                             <img src="https://icongr.am/material/account.svg?size=20&color=d2d6dd"> 
                             @astro.Usuarios.Count
                         </small>
-                    </div>
-                    <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="astro--link"></a>
+                    </a>
+                    @* <a  class="astro--link"></a> *@
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<h3 class="text-light">Astros famosos</h3>
+<div class="splide astros-famosos" role="group" aria-label="Astros famosos">
+    <div class="splide__track">
+        <ul class="splide__list">
+            @foreach (var astro in topAstros)
+            {
+                <li class="splide__slide astro" style="background-image: url(@astro.Foto);">
+                    @* <img src="" class="recomendacao-mobile--foto"> *@
+                    <a asp-action="PerfilAstro" asp-controller="Feed" asp-route-id="@astro.Id" class="conteudo">
+                        <small class="text-light">@astro.Nome</small>
+                        <small class="estatistica text-light">
+                            <img src="https://icongr.am/material/chat.svg?size=20&color=d2d6dd"> 
+                            @astro.Postagens.Count
+                        </small>
+                        <small class="estatistica text-light">
+                            <img src="https://icongr.am/material/account.svg?size=20&color=d2d6dd"> 
+                            @astro.Usuarios.Count
+                        </small>
+                    </a>
+                    @* <a  class="astro--link"></a> *@
                 </li>
             }
         </ul>

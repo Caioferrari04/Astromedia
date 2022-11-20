@@ -11,16 +11,20 @@ public class FeedController : Controller
 {
     private readonly AstroService _astroService;
     private readonly PostagemService _postagemService;
+    private readonly CommentService _commentService;
     private readonly UserManager<Usuario> _userManager;
     private readonly LogEdicaoService _logEdicaoService;
     private readonly UsuarioService _usuarioService;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, UsuarioService usuarioService)
+    private readonly LikeService _likeService;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService, UsuarioService usuarioService, LikeService likeService)
     {
         _astroService = astroService;
-        _postagemService = postagemService;
         _userManager = userManager;
+        _postagemService = postagemService;
         _logEdicaoService = logEdicaoService;
+        _commentService = commentService;
         _usuarioService = usuarioService;
+        _likeService = likeService;
     }
 
     public async Task<IActionResult> PerfilAstro(int id)
@@ -33,6 +37,7 @@ public class FeedController : Controller
     public async Task<IActionResult> Postagens(int id)
     {
         List<Postagem> postagens;
+        ViewBag.Usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
         if (id is not 0)
         {
             postagens = _postagemService.GetAllByAstroId(id);
@@ -75,7 +80,39 @@ public class FeedController : Controller
 
     public IActionResult Foruns() => PartialView("_Foruns");
 
-    public IActionResult Comentarios() => PartialView("Comentarios");
+    public async Task<IActionResult> Comentarios(int id) 
+    {
+        Postagem postagem = await _postagemService.GetById(id);
+        ViewBag.Usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
+        return View(postagem);
+    }
+
+    [HttpPost]
+    public async Task<JsonResult> SaveComment([FromForm] CommentDTO comment)
+    {
+        var usuario = await _userManager.GetUserAsync(User);
+        var validator = new CommentValidator();
+        var validationResult = validator.Validate(comment);
+        var errorMessages = new List<string>();
+
+        if (validationResult.IsValid)
+        {
+            comment.UsuarioId = usuario.Id;
+            comment.DataComentario = DateTime.UtcNow;
+            try
+            {
+                await _commentService.Create(comment);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                errorMessages.Add(ex.Message);
+                return Json(new { success = false, errors = errorMessages });
+            }
+        }
+        validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
+        return Json(new { success = false, errors = errorMessages });
+    }
 
     [HttpGet]
     public async Task<IActionResult> EntrarForum(int id)
@@ -172,8 +209,61 @@ public class FeedController : Controller
 
     public async Task<IActionResult> PerfilUsuario(string id) => View(await _usuarioService.GetById(id));
 
-    public async Task<IActionResult> MeusAstros()
+    public async Task<IActionResult> MeusAstros() => View(await _usuarioService.GetById(_userManager.GetUserId(User)));
+
+    [HttpPost]
+    public async Task<IActionResult> AdicionarLikePostagem(int id)
     {
-        return View(await _userManager.GetUserAsync(User));
+        try 
+        {
+            await _likeService.AdicionarLikePostagem(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro adicionando o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AdicionarLikeComentario(int id)
+    {
+        try 
+        {
+            await _likeService.AdicionarLikeComentario(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoverLikePostagem(int id)
+    {
+        try 
+        {
+            await _likeService.RemoverLikePostagem(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoverLikeComentario(int id)
+    {
+        try 
+        {
+            await _likeService.RemoverLikeComentario(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
     }
 }

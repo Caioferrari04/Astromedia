@@ -40,6 +40,15 @@ public class LocalizedIdentityErrorDescriber : IdentityErrorDescriber
             };
         }
 
+        public override IdentityError PasswordMismatch() 
+        {
+            return new IdentityError
+            {
+                Code = nameof(PasswordMismatch),
+                Description = "Senha inválida."
+            };
+        }
+
         public override IdentityError DefaultError()
         {
             return new IdentityError
