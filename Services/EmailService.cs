@@ -5,10 +5,13 @@ namespace Astromedia.Services;
 
 public class EmailService
 {
+    private string Email { get => Environment.GetEnvironmentVariable("EMAILCLIENT"); }
+    private string Senha { get => Environment.GetEnvironmentVariable("EMAILPASSWORD"); }
+
     public bool SendEmailPasswordReset(string userEmail, string userName, string link)
     {
         MailMessage mailMessage = new MailMessage();
-        mailMessage.From = new MailAddress("alexsandro.astromedia@outlook.com");
+        mailMessage.From = new MailAddress(Email);
         mailMessage.To.Add(new MailAddress(userEmail));
         mailMessage.Subject = "Redefinição de senha";
         mailMessage.IsBodyHtml = true;
@@ -28,7 +31,7 @@ public class EmailService
         client.Port = 587;
         client.DeliveryMethod = SmtpDeliveryMethod.Network;
         client.UseDefaultCredentials = false;
-        System.Net.NetworkCredential credential = new System.Net.NetworkCredential("alexsandro.astromedia@outlook.com", "astromedia123_"); 
+        System.Net.NetworkCredential credential = new System.Net.NetworkCredential(Email, Senha); 
         client.EnableSsl = true;
         client.Credentials = credential;
         try
@@ -48,7 +51,7 @@ public class EmailService
     public bool SendConfirmationEmail(string userEmail, string userName, string link)
     {
         MailMessage mailMessage = new MailMessage();
-        mailMessage.From = new MailAddress("alexsandro.astromedia@outlook.com");
+        mailMessage.From = new MailAddress(Email);
         mailMessage.To.Add(new MailAddress(userEmail));
         mailMessage.Subject = "Confirmação de E-mail";
         mailMessage.IsBodyHtml = true;
@@ -69,7 +72,7 @@ public class EmailService
         client.Port = 587;
         client.DeliveryMethod = SmtpDeliveryMethod.Network;
         client.UseDefaultCredentials = false;
-        System.Net.NetworkCredential credential = new System.Net.NetworkCredential("alexsandro.astromedia@outlook.com", "astromedia123_"); 
+        System.Net.NetworkCredential credential = new System.Net.NetworkCredential(Email, Senha); 
         client.EnableSsl = true;
         client.Credentials = credential;
         try
