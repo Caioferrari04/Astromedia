@@ -2,7 +2,7 @@ const DROPDOWN_ATIVO = "https://icongr.am/material/menu-up.svg?size=20&color=fff
 const DROPDOWN_INATIVO = "https://icongr.am/material/menu-down.svg?size=20&color=ffffff";
 const DROPDOWNS = document.querySelectorAll('.dropdown-edicao');
 const POSTAGENS = document.querySelectorAll('.post-box');
-const TEMPLATE_EDICAO = document.getElementById('template-edicao').cloneNode(true);
+const TEMPLATE_EDICAO = document.getElementById('template-edicao')?.cloneNode(true);
 
 POSTAGENS.forEach(postagem => {
     postagem.addEventListener('atualizar', () => {

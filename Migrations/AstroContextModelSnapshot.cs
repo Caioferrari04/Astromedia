@@ -82,6 +82,35 @@ namespace Astromedia.Migrations
                     b.ToTable("Comentarios", (string)null);
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ComentarioId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PostagemId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComentarioId");
+
+                    b.HasIndex("PostagemId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Likes", (string)null);
+                });
+
             modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
                 {
                     b.Property<int>("Id")
@@ -396,6 +425,29 @@ namespace Astromedia.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Like", b =>
+                {
+                    b.HasOne("Astromedia.Models.Comentario", "Comentario")
+                        .WithMany("Likes")
+                        .HasForeignKey("ComentarioId");
+
+                    b.HasOne("Astromedia.Models.Postagem", "Postagem")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostagemId");
+
+                    b.HasOne("Astromedia.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comentario");
+
+                    b.Navigation("Postagem");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
                 {
                     b.HasOne("Astromedia.Models.Astro", "Astro")
@@ -507,9 +559,16 @@ namespace Astromedia.Migrations
                     b.Navigation("Postagens");
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Comentario", b =>
+                {
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
                 {
                     b.Navigation("Comentarios");
+
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>

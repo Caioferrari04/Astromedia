@@ -93,6 +93,7 @@ textarea:focus {
 .comment-modal {
     text-align: center;
     font-size: .75rem;
+    text-decoration: none;
 }
 
 .post-content {
@@ -111,7 +112,7 @@ textarea:focus {
     display: flex;      
     align-items: center;
     margin: auto;
-    width: 100%;
+    /* width: 100%; */
     border-radius: 10px; 
 }
 
@@ -167,12 +168,19 @@ textarea:focus {
     color: var(--color-lightGrey);
 }
 
+.post-img {
+    background-color: var(--bg-color);
+    border-radius: 10px; 
+    margin: 10px 0;
+}
+
 .post-img img {
     height: auto; 
     display: flex;      
     align-items: center;
     margin: 8px 0;
-    width: 100%;
+    margin: auto;
+    /* width: 100%; */
     border-radius: 10px; 
 }
 

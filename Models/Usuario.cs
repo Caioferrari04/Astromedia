@@ -28,4 +28,6 @@ public class Usuario : IdentityUser
     public bool isAdmin { get; set; }
 
     public string Bio { get; set; }
+
+    public List<Like> Likes { get; set; }
 }
