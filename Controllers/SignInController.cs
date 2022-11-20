@@ -101,7 +101,7 @@ public class SignInController : Controller
             {
                 ModelState.AddModelError(string.Empty, @"Tentativa de login inválida, 
                 verifique se digitou seus dados corretamente");
-                return RedirectToAction(nameof(LogInView));
+                return View(nameof(LogInView));
             }
 
             return RedirectToAction("MeusAstros", "Feed"); /*Redirecionar para o feed :)*/
@@ -109,7 +109,7 @@ public class SignInController : Controller
         catch
         {
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
-            return RedirectToAction(nameof(LogInView));
+            return View(nameof(LogInView));
         }
     }
 
