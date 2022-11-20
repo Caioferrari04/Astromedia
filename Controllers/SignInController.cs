@@ -156,7 +156,7 @@ public class SignInController : Controller
                     return View(forgotPassword);
                 }
 
-                return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
+                return View("ForgotPasswordConfirmation", forgotPassword);
 
                 // astromedia123_
                 // testealex962
@@ -203,7 +203,7 @@ public class SignInController : Controller
                ViewBag.Erro = "Não foi possível reenviar o e-mail.";
             }
         }
-        return RedirectToAction("ForgotPasswordConfirmation", forgotPassword);
+        return View("ForgotPasswordConfirmation", forgotPassword);
     }
 
     public IActionResult ResetPassword(string token, string email)
