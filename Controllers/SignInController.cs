@@ -137,6 +137,16 @@ public class SignInController : Controller
     {
         try
         {
+            var user = await _userManager.FindByNameAsync(usuario.Nome);
+            if(user != null)
+            {
+                if (!await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    ModelState.AddModelError(string.Empty, "E-mail não confirmado, primeiro confirme-o.");
+                    return View(nameof(LogInView));
+                }
+            }
+            
             var resultado = await _signInManager.PasswordSignInAsync(
                 userName: usuario.Nome,
                 password: usuario.Senha,
@@ -148,7 +158,7 @@ public class SignInController : Controller
             {
                 ModelState.AddModelError(string.Empty, @"Tentativa de login inválida, 
                 verifique se digitou seus dados corretamente");
-                return RedirectToAction(nameof(LogInView));
+                return View(nameof(LogInView));
             }
 
             return RedirectToAction("MeusAstros", "Feed"); /*Redirecionar para o feed :)*/
@@ -157,7 +167,7 @@ public class SignInController : Controller
         {
             Console.WriteLine("Passou aqui 2");
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
-            return RedirectToAction(nameof(LogInView));
+            return View(nameof(LogInView));
         }
     }
 
