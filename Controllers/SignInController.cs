@@ -87,9 +87,32 @@ public class SignInController : Controller
 
     public IActionResult SucessRegistration() => View();
 
-    public IActionResult ConfirmEmail()
+    public async Task<IActionResult> ConfirmEmail(string email, string token)
     {
-        return View();
+        
+        var errors = new List<string>();
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null || token == null)
+        {
+            errors.Add("Token de confirmação de e-mail inválido.");
+            return View(errors);
+        }
+
+        if (await _userManager.IsEmailConfirmedAsync(user))
+        {
+            if(_signInManager.IsSignedIn(User)) return RedirectToAction("MeusAstros", "Feed");
+            return RedirectToAction("LogInView");
+        } 
+
+        var result = await _userManager.ConfirmEmailAsync(user, token);
+
+        if(result.Succeeded)
+            return View();
+
+        foreach (var error in result.Errors)
+            errors.Add(error.Description);
+
+        return View(errors);
     } 
 
     public async Task<IActionResult> LogInView() 

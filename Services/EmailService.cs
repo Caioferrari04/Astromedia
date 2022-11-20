@@ -33,7 +33,9 @@ public class EmailService
         client.Credentials = credential;
         try
         {
-            client.Send(mailMessage);
+            ExceptionHanderFactory.BuildForHttpClient().ConfigureRetry().Execute(() => {
+                client.Send(mailMessage);
+            });
             return true; 
         }
         catch (Exception ex)
@@ -48,14 +50,14 @@ public class EmailService
         MailMessage mailMessage = new MailMessage();
         mailMessage.From = new MailAddress("alexsandro.astromedia@outlook.com");
         mailMessage.To.Add(new MailAddress(userEmail));
-        mailMessage.Subject = "Confirmação de Email";
+        mailMessage.Subject = "Confirmação de E-mail";
         mailMessage.IsBodyHtml = true;
         mailMessage.Body =  "<div style=\"text-align: center;\"><div style=\"padding: 10px; text-align: left\"><h1>Verifique seu e-mail</h1>\n" +
                 "<p>Ol&aacute;, "+ userName + ".</p>\n" +
                 "<p>Voc&ecirc; realizou o cadastro na Astromedia.</p>\n" +
-                "<p>Utilize o bot&atilde;o abaixo para verificar seu email.</p>\n" +
+                "<p>Utilize o bot&atilde;o abaixo para verificar seu e-mail.</p>\n" +
                 "<a href=\"" + link +"\" target=\"_blank\" style=\"max-width: 280px; text-decoration: none; display: inline-block; background-color: #4caf50; color: #ffffff; height: 36px; border-radius: 5px; font-weight: bold; font-size: 18px; margin: 20px 0; width: 100%; text-align: center; padding-top: 10px; \">" +
-                "  Verificar Email" +
+                "  Verificar E-mail" +
                 "</a>" +
                 "<p>Caso n&atilde;o consiga utilizar o bot&atilde;o, copie e cole o seguinte link no seu navegador:</p>\n" +
                 "<p>"+ link + "</p>\n" +
