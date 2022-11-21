@@ -129,12 +129,13 @@ for (const dropdown of document.getElementsByClassName('dropdown-acoes')) {
     dropdown.addEventListener('click', event => {
         const isAtivo = event.target.src.includes(DROPDOWN_ATIVO);
         event.target.src = isAtivo ? DROPDOWN_INATIVO : DROPDOWN_ATIVO;
-
+        console.log('aqui')
+    
         DROPDOWNS.forEach(el => {
             el.previousElementSibling.src = el.previousElementSibling.src === DROPDOWN_ATIVO && el === event.target.nextElementSibling ? DROPDOWN_ATIVO : DROPDOWN_INATIVO;
             el.classList.toggle('dropdown-edicao-ativo', el === event.target.nextElementSibling)
         });
-
+    
         if (isAtivo) {
             event.target.nextElementSibling.classList.remove('dropdown-edicao-ativo');
         }

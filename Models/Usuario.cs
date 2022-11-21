@@ -31,4 +31,5 @@ public class Usuario : IdentityUser
 
     public List<Like> Likes { get; set; }
     public List<Denuncia> Denuncias { get; set; }
+    public List<Comentario> Comentarios { get; set; }
 }
