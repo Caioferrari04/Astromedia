@@ -21,9 +21,12 @@
                     </div>
 
                 </div>
-                <div class="report-btn is-vertical-align is-right" data-id="@Model.Id" data-tipo="Postagem">
-                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
-                </div>
+                @if (Model.Usuario.Id != user.Id)
+                {
+                    <div class="commentmodal-reportbtn report-btn is-vertical-align is-right" data-id="@Model.Id" data-tipo="Postagem">
+                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                    </div>
+                }
             </div>
             <p class="commentmodal-selftext">
                 @Model.Texto 
@@ -64,11 +67,17 @@
                             <p class="commentmodal-usrname usr-post-name">@comment.Usuario.UserName</p>
                             <p class="commentmodal-usrdate usr-post-date">@comment.DataComentario.ToString("dd/MM/yyyy")</p>
                         </div>
-
                     </div>
-                    <div class="commentmodal-reportbtn report-btn is-vertical-align is-right" data-id="@comment.Id" data-tipo="Comentario">
-                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
-                    </div>
+                    @if (comment.Usuario.Id != user.Id)
+                    {
+                        <div class="commentmodal-reportbtn report-btn is-vertical-align is-right" data-id="@comment.Id" data-tipo="Comentario">
+                            <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                        </div>
+                    }
+                    else if (Model.Usuario.Id == user.Id || user.isAdmin)
+                    {
+                        <img src="~/icons/trash.svg" class="dropdown-acoes excluir-comentario acoes-btn" data-id="@comment.Id"/>
+                    }
                 </div>
                 <p class="commentmodal-text">
                     @comment.Texto

@@ -123,6 +123,26 @@ public class FeedController : Controller
         return Json(new { success = false, errors = errorMessages });
     }
 
+    [HttpPost]
+    public async Task<JsonResult> DeleteComment(int id)
+    {
+        try
+        {
+            var usuario = await _userManager.GetUserAsync(User);
+            var comentario = await _commentService.GetById(id);
+
+            if (!usuario.Comentarios.Contains(comentario) && !usuario.isAdmin) throw new Exception("Não pode excluir a postagem dos outros! Vá embora!");
+
+            await _commentService.Delete(comentario);
+
+            return Json(new { sucesso = true });
+        }
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro excluindo o comentário, tente novamente mais tarde" }});
+        }
+    }
+
     [HttpGet]
     public async Task<IActionResult> EntrarForum(int id)
     {
