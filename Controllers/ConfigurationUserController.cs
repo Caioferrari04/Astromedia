@@ -220,6 +220,7 @@ public class ConfigurationUserController : Controller
 
     public async Task<IActionResult> ConfirmEmail(string email, string newemail, string token)
     {
+        
         var errors = new List<string>();
         var user = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(email));
         if (user == null || token == null)
@@ -228,6 +229,9 @@ public class ConfigurationUserController : Controller
             return View(errors);
         }
 
+        var usuarioAtual = await _userManager.GetUserAsync(User);
+       
+        if(!usuarioAtual.Equals(user)) return RedirectToAction("Logout", "SignIn");
         var result = await _userManager.ChangeEmailAsync(user, newemail, token);
 
         if(result.Succeeded)

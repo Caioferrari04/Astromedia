@@ -89,7 +89,7 @@ public class SignInController : Controller
 
     public async Task<IActionResult> ResendEmailToConfirmAccount(string email)
     {
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(email));
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         var confirmationLink = Url.Action(
             nameof(ConfirmEmail),
@@ -112,7 +112,7 @@ public class SignInController : Controller
     {
         
         var errors = new List<string>();
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(email));
         if (user == null || token == null)
         {
             errors.Add("Token de confirmação de e-mail inválido.");
@@ -208,7 +208,7 @@ public class SignInController : Controller
 
         if (validationResult.IsValid)
         {                                              
-            var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
+            var user = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(forgotPassword.Email));
             if(!await _userManager.IsEmailConfirmedAsync(user))
             {
                 ModelState.AddModelError(string.Empty, "Confirme sua conta para ser possível redefinir sua senha.");
@@ -258,7 +258,7 @@ public class SignInController : Controller
 
     public async Task<IActionResult> ResendEmail(string email)
     {
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(email));
 
         ForgotPassword forgotPassword = new ForgotPassword();
         forgotPassword.Email = user.Email;
@@ -302,7 +302,7 @@ public class SignInController : Controller
 
         if (validationResult.IsValid)
         {
-            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+            var user = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(resetPassword.Email));
 
             if (user != null)
             {
