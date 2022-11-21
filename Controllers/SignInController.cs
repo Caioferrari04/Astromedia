@@ -103,6 +103,8 @@ public class SignInController : Controller
         if (!emailResponse)
         {
             ViewBag.Erro = "Não foi possível reenviar o e-mail.";
+            Console.WriteLine(ViewBag.Erro);
+            Console.WriteLine("Salveeeeeeee");
         }
 
         return View(nameof(SucessRegistration), email);
@@ -163,8 +165,11 @@ public class SignInController : Controller
             {
                 if (!await _userManager.IsEmailConfirmedAsync(user))
                 {
-                    ModelState.AddModelError(string.Empty, "E-mail não confirmado, primeiro confirme-o.");
-                    return View(nameof(LogInView));
+                    ViewBag.EmailConfirmadoMensagem = "E-mail não confirmado.";
+                    // ModelState.AddModelError(string.Empty, "E-mail não confirmado, primeiro confirme-o.");
+                    var usuarioDto = new UsuarioDTO(); 
+                    usuarioDto.Email = user.Email;
+                    return View(nameof(LogInView), usuarioDto);
                 }
             }
             
