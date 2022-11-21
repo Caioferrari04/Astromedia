@@ -15,7 +15,9 @@ public class FeedController : Controller
     private readonly UserManager<Usuario> _userManager;
     private readonly LogEdicaoService _logEdicaoService;
     private readonly UsuarioService _usuarioService;
-    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService, UsuarioService usuarioService)
+    private readonly LikeService _likeService;
+    private readonly DenunciaService _denunciaService;
+    public FeedController(AstroService astroService, UserManager<Usuario> userManager, PostagemService postagemService, LogEdicaoService logEdicaoService, CommentService commentService, UsuarioService usuarioService, LikeService likeService, DenunciaService denunciaService)
     {
         _astroService = astroService;
         _userManager = userManager;
@@ -23,6 +25,8 @@ public class FeedController : Controller
         _logEdicaoService = logEdicaoService;
         _commentService = commentService;
         _usuarioService = usuarioService;
+        _likeService = likeService;
+        _denunciaService = denunciaService;
     }
 
     public async Task<IActionResult> PerfilAstro(int id)
@@ -35,6 +39,7 @@ public class FeedController : Controller
     public async Task<IActionResult> Postagens(int id)
     {
         List<Postagem> postagens;
+        var usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
         if (id is not 0)
         {
             postagens = _postagemService.GetAllByAstroId(id);
@@ -45,6 +50,9 @@ public class FeedController : Controller
             postagens = _postagemService.GetAll();
         }
 
+        postagens = postagens.Where(el => usuario.Denuncias.FirstOrDefault(x => x.Id == el.Id) is null).ToList();
+
+        ViewBag.Usuario = usuario;
         return View(postagens);
     }
 
@@ -80,6 +88,11 @@ public class FeedController : Controller
     public async Task<IActionResult> Comentarios(int id) 
     {
         Postagem postagem = await _postagemService.GetById(id);
+
+        var usuario = await _usuarioService.GetById(_userManager.GetUserId(User));
+        postagem.Comentarios = postagem.Comentarios.Where(el => usuario.Denuncias.FirstOrDefault(x => x.Comentario.Id == el.Id) is null).ToList();
+        
+        ViewBag.Usuario = usuario;
         return View(postagem);
     }
 
@@ -108,6 +121,26 @@ public class FeedController : Controller
         }
         validationResult.Errors.ForEach(error => errorMessages.Add(error.ErrorMessage));
         return Json(new { success = false, errors = errorMessages });
+    }
+
+    [HttpPost]
+    public async Task<JsonResult> DeleteComment(int id)
+    {
+        try
+        {
+            var usuario = await _userManager.GetUserAsync(User);
+            var comentario = await _commentService.GetById(id);
+
+            if (!usuario.Comentarios.Contains(comentario) && !usuario.isAdmin) throw new Exception("Não pode excluir a postagem dos outros! Vá embora!");
+
+            await _commentService.Delete(comentario);
+
+            return Json(new { sucesso = true });
+        }
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro excluindo o comentário, tente novamente mais tarde" }});
+        }
     }
 
     [HttpGet]
@@ -206,4 +239,89 @@ public class FeedController : Controller
     public async Task<IActionResult> PerfilUsuario(string id) => View(await _usuarioService.GetById(id));
 
     public async Task<IActionResult> MeusAstros() => View(await _usuarioService.GetById(_userManager.GetUserId(User)));
+
+    [HttpPost]
+    public async Task<IActionResult> AdicionarLikePostagem(int id)
+    {
+        try 
+        {
+            await _likeService.AdicionarLikePostagem(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro adicionando o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AdicionarLikeComentario(int id)
+    {
+        try 
+        {
+            await _likeService.AdicionarLikeComentario(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoverLikePostagem(int id)
+    {
+        try 
+        {
+            await _likeService.RemoverLikePostagem(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoverLikeComentario(int id)
+    {
+        try 
+        {
+            await _likeService.RemoverLikeComentario(await _userManager.GetUserAsync(User), id);
+            return Json(new { sucesso = true });
+        } 
+        catch(Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro removendo o like! Tente novamente mais tarde." } });
+        }
+    }
+
+    public IActionResult Denuncia() => View();
+
+    [HttpPost]
+    public async Task<IActionResult> Denuncia(Denuncia denuncia) 
+    {
+        try
+        {
+            if (denuncia.Comentario?.Id is not 0) 
+            {
+                denuncia.Comentario = await _commentService.GetById(denuncia.Comentario.Id);
+                denuncia.Postagem = null;
+            }
+            else 
+            {
+                denuncia.Postagem = await _postagemService.GetById(denuncia.Postagem.Id);
+                denuncia.Comentario = null;
+            }
+
+            denuncia.Usuario = await _userManager.GetUserAsync(User);
+
+            await _denunciaService.Create(denuncia);
+            return Json(new { sucesso = true });
+        }
+        catch (Exception)
+        {
+            return Json(new { sucesso = false, mensagem = new[] { "Houve um erro fazendo a denúncia! Tente novamente mais tarde." } });
+        }
+    }
 }

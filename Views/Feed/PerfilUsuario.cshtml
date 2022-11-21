@@ -91,7 +91,7 @@
         {
             @foreach (var postagem in Model.Postagens)
             {
-                <div class="post-box is-vertical-align is-horizontal-align" id="postagem-@postagem.Id" data-astro-id="@postagem.Astro.Id">
+                <div class="post-box is-vertical-align is-horizontal-align" id="postagem-@postagem.Id" data-astro-id="@postagem.Astro?.Id">
                     <div class="post-content">
                         <div class="between-config">
                             <div class="post-header-info is-left">
@@ -100,7 +100,9 @@
                                 <div class="info-col">
                                     <p class="usr-post-name">
                                         @postagem.Usuario.UserName 
-                                        <a class="text-white" asp-action="PerfilAstro" asp-route-id="@postagem.Astro.Id">em @postagem.Astro.Nome</a>
+                                        @if (postagem.Astro is not null) {
+                                            <a class="text-white" asp-action="PerfilAstro" asp-route-id="@postagem.Astro?.Id">em @postagem.Astro.Nome</a>
+                                        }
                                     </p> 
                                     <p class="usr-post-date">@postagem.DataPostagem.ToString("dd/MM/yyyy hh:mm:ss")</p>
                                 </div>

@@ -1,8 +1,62 @@
+const denunciar = async eventOriginal => {
+    const modalWrapper = document.getElementById('modal-denuncia');
+    const dataUrl = modalWrapper.getAttribute('data-url');
+    const dataId = eventOriginal.target.parentElement.getAttribute('data-id');
+    const dataTipo = eventOriginal.target.parentElement.getAttribute('data-tipo');
+
+    const response = await fetch(`${dataUrl}/${dataId}`);
+
+    modalWrapper.innerHTML = await response.text();
+    document.body.classList.add('modal-open');
+
+    modalWrapper.querySelector(`#${dataTipo}_Id`).value = dataId;
+
+    modalWrapper.querySelector('textarea').addEventListener('input', e => {
+        e.target.setAttribute('style', 'height:' + (e.target.scrollHeight) + 'px');
+        e.target.addEventListener('input', OnInput, false);
+    })
+
+    const closeModal = () => {
+        modalWrapper.innerHTML = "";
+        document.body.classList.remove('modal-open');
+    }
+
+    modalWrapper.querySelector('.close-btn').addEventListener('click', closeModal);
+    modalWrapper.querySelector('#botao-cancelar-denuncia').addEventListener('click', closeModal);
+
+    modalWrapper.querySelector('#form-denuncia').addEventListener('submit', async event => {
+        event.preventDefault();
+
+        const body = new FormData(event.target);
+        const fetchConfig = { method: 'POST', body };
+
+        const response = await fetch(event.target.action, fetchConfig);
+
+        if (!response.ok) {
+            handleError(['Houve um erro com sua requisição, tente novamente mais tarde!']);
+            return;
+        }
+    
+        const json = await response.json();
+    
+        if (!json.sucesso) {
+            const mensagens = [];
+            json.mensagem.forEach(erro => mensagens.push(erro));
+            handleError(mensagens);
+            return;
+        }
+    
+        Notiflix.Notify.success('Denuncia realizada com sucesso.');
+        eventOriginal.target.dispatchEvent(new Event('exclusao', { bubbles: true }))
+        closeModal();
+    });
+}
+
 const DROPDOWN_ATIVO = "https://icongr.am/material/menu-up.svg?size=20&color=ffffff";
 const DROPDOWN_INATIVO = "https://icongr.am/material/menu-down.svg?size=20&color=ffffff";
 const DROPDOWNS = document.querySelectorAll('.dropdown-edicao');
 const POSTAGENS = document.querySelectorAll('.post-box');
-const TEMPLATE_EDICAO = document.getElementById('template-edicao').cloneNode(true);
+const TEMPLATE_EDICAO = document.getElementById('template-edicao')?.cloneNode(true);
 
 POSTAGENS.forEach(postagem => {
     postagem.addEventListener('atualizar', () => {
@@ -75,12 +129,13 @@ for (const dropdown of document.getElementsByClassName('dropdown-acoes')) {
     dropdown.addEventListener('click', event => {
         const isAtivo = event.target.src.includes(DROPDOWN_ATIVO);
         event.target.src = isAtivo ? DROPDOWN_INATIVO : DROPDOWN_ATIVO;
-
+        console.log('aqui')
+    
         DROPDOWNS.forEach(el => {
             el.previousElementSibling.src = el.previousElementSibling.src === DROPDOWN_ATIVO && el === event.target.nextElementSibling ? DROPDOWN_ATIVO : DROPDOWN_INATIVO;
             el.classList.toggle('dropdown-edicao-ativo', el === event.target.nextElementSibling)
         });
-
+    
         if (isAtivo) {
             event.target.nextElementSibling.classList.remove('dropdown-edicao-ativo');
         }
@@ -152,4 +207,8 @@ for (const item of document.getElementsByClassName('historico-postagem')) {
             document.body.classList.remove('modal-open');
         });
     });
+}
+
+for (const item of document.getElementsByClassName('report-btn')) {
+    item.firstElementChild.addEventListener('click', denunciar)
 }

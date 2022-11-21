@@ -40,4 +40,6 @@ public class CommentService
         _astroContext.Comentarios.Remove(comentario);
         await _astroContext.SaveChangesAsync();
     }
+
+    public async Task<Comentario> GetById(int id) => await _astroContext.Comentarios.FindAsync(id);
 }

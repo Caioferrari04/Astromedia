@@ -50,7 +50,7 @@ namespace Astromedia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Astros", (string)null);
+                    b.ToTable("Astros");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Comentario", b =>
@@ -79,7 +79,70 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Comentarios", (string)null);
+                    b.ToTable("Comentarios");
+                });
+
+            modelBuilder.Entity("Astromedia.Models.Denuncia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ComentarioId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Conteudo")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("PostagemId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Respondida")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComentarioId");
+
+                    b.HasIndex("PostagemId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Denuncias");
+                });
+
+            modelBuilder.Entity("Astromedia.Models.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ComentarioId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PostagemId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComentarioId");
+
+                    b.HasIndex("PostagemId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
@@ -116,7 +179,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("LogsEdicoes", (string)null);
+                    b.ToTable("LogsEdicoes");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
@@ -148,7 +211,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Postagens", (string)null);
+                    b.ToTable("Postagens");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
@@ -242,7 +305,7 @@ namespace Astromedia.Migrations
 
                     b.HasIndex("UsuariosId");
 
-                    b.ToTable("AstroUsuario", (string)null);
+                    b.ToTable("AstroUsuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -396,6 +459,50 @@ namespace Astromedia.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Denuncia", b =>
+                {
+                    b.HasOne("Astromedia.Models.Comentario", "Comentario")
+                        .WithMany()
+                        .HasForeignKey("ComentarioId");
+
+                    b.HasOne("Astromedia.Models.Postagem", "Postagem")
+                        .WithMany()
+                        .HasForeignKey("PostagemId");
+
+                    b.HasOne("Astromedia.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Comentario");
+
+                    b.Navigation("Postagem");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Astromedia.Models.Like", b =>
+                {
+                    b.HasOne("Astromedia.Models.Comentario", "Comentario")
+                        .WithMany("Likes")
+                        .HasForeignKey("ComentarioId");
+
+                    b.HasOne("Astromedia.Models.Postagem", "Postagem")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostagemId");
+
+                    b.HasOne("Astromedia.Models.Usuario", "Usuario")
+                        .WithMany("Likes")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comentario");
+
+                    b.Navigation("Postagem");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Astromedia.Models.LogEdicao", b =>
                 {
                     b.HasOne("Astromedia.Models.Astro", "Astro")
@@ -507,13 +614,22 @@ namespace Astromedia.Migrations
                     b.Navigation("Postagens");
                 });
 
+            modelBuilder.Entity("Astromedia.Models.Comentario", b =>
+                {
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("Astromedia.Models.Postagem", b =>
                 {
                     b.Navigation("Comentarios");
+
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("Astromedia.Models.Usuario", b =>
                 {
+                    b.Navigation("Likes");
+
                     b.Navigation("Postagens");
                 });
 #pragma warning restore 612, 618

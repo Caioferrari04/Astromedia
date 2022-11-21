@@ -1,11 +1,15 @@
 @model Postagem
-
 @{
     Layout = "";
+    Usuario user = ViewBag.Usuario;
 }
 
-<div id="modalblock" class="commentmodal container is-vertical-align is-horizontal-align">
+<div id="modalblock" class="commentmodal is-vertical-align is-horizontal-align">
     <div class="commentmodal-content commentgrid animatein text-light col-7">
+        <div class="commentmodal-header">
+            <p>Postagem de @Model.Usuario.UserName</p>
+            <img class="close-comment-btn" src="/img/close-icon.svg" alt="Close Icon">
+        </div>
         <div class="post-content commentmodal-post">
             <div class="between-config">
                 <div class="post-header-info is-left">
@@ -17,9 +21,12 @@
                     </div>
 
                 </div>
-                <div class="report-btn is-vertical-align is-right">
-                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
-                </div>
+                @if (Model.Usuario.Id != user.Id)
+                {
+                    <div class="commentmodal-reportbtn report-btn is-vertical-align is-right" data-id="@Model.Id" data-tipo="Postagem">
+                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                    </div>
+                }
             </div>
             <p class="commentmodal-selftext">
                 @Model.Texto 
@@ -33,7 +40,15 @@
                     <img class="post-footer-icon expand-comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
                 </div>
                 <div class="usr-footer-likes commentmodal-usrlikes is-vertical-align is-right">
-                    <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                    @if (user.Likes?.Find(el => el.Postagem?.Id == Model.Id) is not null) 
+                    {
+                        <img class="post-footer-icon btn-dislike" data-id="@Model.Id" data-url="/Feed/RemoverLikePostagem" data-tipo="Postagem" src="/icons/heart-fill.svg" />
+                    }
+                    else
+                    {
+                        <img class="post-footer-icon btn-like" data-id="@Model.Id" data-url="/Feed/AdicionarLikePostagem" data-tipo="Postagem" src="/icons/heart.svg" />
+                    }
+                    <small class="text-light likes">@Model.Likes?.Count</small>
                 </div>
             </div>
         </div>
@@ -52,11 +67,17 @@
                             <p class="commentmodal-usrname usr-post-name">@comment.Usuario.UserName</p>
                             <p class="commentmodal-usrdate usr-post-date">@comment.DataComentario.ToString("dd/MM/yyyy")</p>
                         </div>
-
                     </div>
-                    <div class="commentmodal-reportbtn report-btn is-vertical-align is-right">
-                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
-                    </div>
+                    @if (comment.Usuario.Id != user.Id)
+                    {
+                        <div class="commentmodal-reportbtn report-btn is-vertical-align is-right" data-id="@comment.Id" data-tipo="Comentario">
+                            <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                        </div>
+                    }
+                    else if (Model.Usuario.Id == user.Id || user.isAdmin)
+                    {
+                        <img src="~/icons/trash.svg" class="dropdown-acoes excluir-comentario acoes-btn" data-id="@comment.Id"/>
+                    }
                 </div>
                 <p class="commentmodal-text">
                     @comment.Texto
@@ -67,7 +88,15 @@
                         <img class="post-footer-icon comment-btn" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
                     </div> *@
                     <div class="usr-footer-likes is-vertical-align is-right">
-                        <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=128&color=ffffff" />
+                         @if (user.Likes?.Find(el => el.Comentario?.Id == comment.Id) is not null) 
+                        {
+                            <img class="post-footer-icon btn-dislike"  data-id="@comment.Id" data-url="/Feed/RemoverLikeComentario" data-tipo="Comentario" src="/icons/heart-fill.svg" />
+                        }
+                        else
+                        {
+                            <img class="post-footer-icon btn-like"  data-id="@comment.Id" data-url="/Feed/AdicionarLikeComentario" data-tipo="Comentario" src="/icons/heart.svg" />
+                        }
+                        <small class="text-light likes">@(comment.Likes is null ? 0 : comment.Likes.Count)</small>
                     </div>
                 </div>
             </div>
@@ -86,7 +115,7 @@
 </div>
 
 @* Área de inserção de comentário (Template) *@
-<div id="hidden" class="comment-input-box" style="margin-top: -115px !important;">
+<div class="comment-input-box comment-input-box-hidden hide ">
     <div class="comment-input-content">
         <form asp-action="SaveComment" id="commentform">  
             <textarea class="is-full-width comment-input" name="Texto" form="commentform" cols="100%" rows="auto" placeholder="Comente Aqui" maxlength="280"></textarea>
@@ -97,4 +126,3 @@
         </form>
     </div>
 </div>
-

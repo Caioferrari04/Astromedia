@@ -1,5 +1,3 @@
-@using Microsoft.AspNetCore.Identity;
-@inject UserManager<Usuario> UserManager;
 @model List<Postagem>
 @{
     Layout = "_LayoutFeed";
@@ -10,7 +8,7 @@
         ViewData["Title"] += $" de {ViewBag.astro.Nome}";
     }
 
-    var user = await UserManager.GetUserAsync(User);
+    Usuario user = ViewBag.Usuario;
 }
 
 @if (ViewBag.astro is not null) 
@@ -45,6 +43,7 @@
 @section modal {
     <div id="rendercomment" data-url='@Url.Action("Comentarios", "Feed")'></div>
     <div id="modal-log" data-url='@Url.Action("LogsEdicao", "Feed")'></div>
+    <div id="modal-denuncia" data-url='@Url.Action("Denuncia", "Feed")'></div>
 }
 
 <div id="post-holder" class="container is-full-screen">
@@ -58,6 +57,7 @@
                     <div asp-validation-summary="All" class="text-error"></div>
                     <textarea class="is-full-width" name="Texto" form="postform" cols="100%" rows="auto" placeholder="Escreva sua postagem..." maxlength="280"></textarea>
                     <div id="post-img-preview">
+                        <img src="" id="img-preview">
                         <input type="hidden" name="LinkImagem" id="LinkImagem">
                     </div>
                     <div class="between-config">
@@ -115,7 +115,7 @@
                                 <div class="info-col">
                                     <p class="usr-post-name">
                                         <a class="text-light" asp-action="PerfilUsuario" asp-route-id="@postagem.Usuario.Id">@postagem.Usuario.UserName</a>
-                                        @if (id is null || id is 0) {
+                                        @if ((id is null || id is 0) && postagem.Astro is not null) {
                                             <a class="text-white" asp-action="PerfilAstro" asp-route-id="@postagem.Astro.Id">em @postagem.Astro.Nome</a>
                                         } 
                                     </p> 
@@ -123,17 +123,20 @@
                                 </div>
                             </div>
                             <div class="is-vertical-align is-right">
-                                <div class="report-btn">
-                                    <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
-                                </div>
+                                @{
+                                    bool contemPostagem = user.Postagens.Contains(postagem);
+                                }
+                                @if (!contemPostagem) 
+                                {
+                                    <div class="report-btn" data-id="@postagem.Id" data-tipo="Postagem">
+                                        <img src="https://icongr.am/clarity/flag.svg?size=128&color=ffffff" />
+                                    </div>
+                                }
                                 @if (id is not null || id is 0)
                                 {
                                     <div class="dropdown-acoes-container">
                                         <img src="~/icons/menu-down.svg" class="dropdown-acoes acoes-btn"/>
                                         <ul class="dropdown-edicao">
-                                            @{
-                                                bool contemPostagem = user.Postagens.Contains(postagem);
-                                            }
                                             @if (contemPostagem) {
                                                 <li class="text-light atualizar-postagem">Editar</li>
                                             }
@@ -156,11 +159,18 @@
                         <div class="between-config">
                             <div class="usr-footer-comment is-vertical-align is-left">
                                 <img class="post-footer-icon comment-modal" href="javascript:void(0)" data-id="@postagem.Id" src="https://icongr.am/fontawesome/comment-o.svg?size=128&color=ffffff" />
-                                <a class="text-light comment-modal" href="javascript:void(0)" data-id="@postagem.Id">Ver Comentários</a>
+                                <a class="comment-modal" href="javascript:void(0)" data-id="@postagem.Id">Ver @postagem.Comentarios.Count comentários</a>
                             </div>
                             <div class="usr-footer-likes is-vertical-align is-right">
-                                <img class="post-footer-icon" src="https://icongr.am/clarity/heart.svg?size=20&color=ffffff" />
-                                <small class="text-light likes">0</small>
+                                @if (user.Likes?.Find(el => el.Postagem?.Id == postagem.Id) is not null) 
+                                {
+                                    <img class="post-footer-icon btn-dislike"  data-id="@postagem.Id" data-url="/Feed/RemoverLikePostagem" data-tipo="Postagem" src="/icons/heart-fill.svg" />
+                                }
+                                else
+                                {
+                                    <img class="post-footer-icon btn-like"  data-id="@postagem.Id" data-url="/Feed/AdicionarLikePostagem" data-tipo="Postagem" src="/icons/heart.svg" />
+                                }
+                                <small class="text-light likes">@postagem.Likes?.Count</small>
                             </div>
                         </div>
                     </div>
@@ -225,5 +235,6 @@
     <script src="~/js/textarea-post.js" asp-append-version="true"></script>
     <script src="~/js/commentmodal.js" asp-append-version="true"></script>
     <script src="~/js/submit-post.js" asp-append-version="true"></script>
-    <script src="~/js/dropdown-postagem.js" asp-append-version="true"></script>    
+    <script src="~/js/dropdown-postagem.js" asp-append-version="true"></script>  
+    <script src="~/js/likes.js" asp-append-version="true"></script>  
 }

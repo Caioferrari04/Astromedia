@@ -35,6 +35,8 @@ public class PostagemService
         var postagens = _astroContext.Postagens
             //.Include(a => a.Astro)
             .Include(u => u.Usuario)
+            .Include(u => u.Likes)
+            .Include(u => u.Comentarios)
             .Where(p => p.Astro.Id == id)
             .OrderByDescending(p => p.DataPostagem)
             .ToList();
@@ -49,6 +51,8 @@ public class PostagemService
         var postagens = _astroContext.Postagens
             .Include(a => a.Astro)
             .Include(u => u.Usuario)
+            .Include(u => u.Comentarios)
+            .Include(l => l.Likes)
             .OrderByDescending(p => p.DataPostagem)
             .ToList();
 
@@ -58,7 +62,14 @@ public class PostagemService
     }
 
     public async Task<Postagem> GetById(int id) =>
-        await _astroContext.Postagens.Include(el => el.Astro).Include(el => el.Usuario).Include(el => el.Comentarios).FirstAsync(el => el.Id == id);
+        await _astroContext.Postagens
+            .Include(el => el.Astro)
+            .Include(el => el.Usuario)
+            .Include(el => el.Likes)
+            .Include(el => el.Comentarios)
+            .ThenInclude(el => el.Usuario)
+            .ThenInclude(el => el.Likes)
+            .FirstAsync(el => el.Id == id);
 
     public async Task Update(Postagem postagem)
     {
