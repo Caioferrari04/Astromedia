@@ -47,15 +47,31 @@
     </form>
 }
 
-else 
+@if(ViewBag.Error is null && ViewBag.Sucesso is not null)
 {
     <div class="cad-content text-light">
         <div class="container container-cad">
             <div class="row">
                 <h2 class="col is-vertical-align is-horizontal-align">E-mail enviado com sucesso</h2>
                 <div>
-                    <p class="col is-vertical-align is-horizontal-align">
-                        Verifique o seu novo e-mail para poder definí-lo como e-mail atual. Caso não tenha recebido o e-mail, clique aqui para reenviá-lo.
+                    <p class="text-center">
+                        Verifique o seu novo e-mail para poder definí-lo como e-mail atual. Caso não tenha recebido o e-mail, clique <a asp-action="ResendEmail" asp-route-email="@Model.NovoEmail">aqui</a>  para reenviá-lo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if(ViewBag.Error is not null)
+{
+    <div class="cad-content text-light">
+        <div class="container container-cad">
+            <div class="row">
+                <h2 class="col is-vertical-align is-horizontal-align">Erro ao enviar E-mail</h2>
+                <div>
+                    <p class="text-center">
+                        @ViewBag.Error Clique <a asp-action="ResendEmail" asp-route-email="@Model.NovoEmail">aqui </a> para reenviá-lo.
                     </p>
                 </div>
             </div>

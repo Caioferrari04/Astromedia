@@ -205,7 +205,7 @@ public class ConfigurationUserController : Controller
                     return View(usuarioDTO);
                 }
                 ViewBag.Sucesso = "Sucesso";
-                return View();
+                return View(usuarioDTO);
             }
             
             ModelState.AddModelError(string.Empty, "Senha incorreta");
@@ -237,6 +237,32 @@ public class ConfigurationUserController : Controller
             errors.Add(error.Description);
 
         return View(errors);
+    }
+
+    public async Task<IActionResult> ResendEmail(string email)
+    {
+        var usuario = await _userManager.GetUserAsync(User);
+        var usuarioAtual = await _usuarioService.GetById(usuario.Id);
+
+        var token = await _userManager.GenerateChangeEmailTokenAsync(usuarioAtual, email);
+        var decodedTokenString = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+        var link = Url.Action(
+                nameof(ConfirmEmail),
+                "ConfigurationUser", 
+                new { email = usuario.Email, newemail = email,  token = token },
+                Request.Scheme
+                );
+        var emailResponse = _emailService.SendEmailToUpdate(email, usuario.UserName, link);
+        var usuarioDTO = new UsuarioDTO();
+        usuarioDTO.NovoEmail = email;
+        ViewBag.Sucesso = "Sucesso";
+        if(!emailResponse)
+        {
+            ViewBag.Error = "Não foi possível enviar o e-mail, verifique se ele está correto ou tente novamente mais tarde.";
+            return View("UpdateEmail", usuarioDTO);
+        }
+        
+        return View("UpdateEmail", usuarioDTO);
     }
 
 }
