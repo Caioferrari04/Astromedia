@@ -73,6 +73,8 @@ public class AstroService
 
         if(astroDTO.Fotos is not null) 
         {
+            if(astro.Fotos is null)
+                astro.Fotos = new();
             foreach(var foto in astroDTO.Fotos) {
                 var resposta = await new ImgurService().UploadImagem(foto);
                 astro.Fotos.Add(resposta.Data.data.link);

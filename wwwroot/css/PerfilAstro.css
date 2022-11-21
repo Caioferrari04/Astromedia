@@ -134,6 +134,10 @@
     z-index: 2;
 }
 
+a {
+    text-decoration: none;
+}
+
 .tab-content * {
     color: white!important;
 }

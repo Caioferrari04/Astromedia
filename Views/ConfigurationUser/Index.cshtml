@@ -7,17 +7,18 @@
     <link rel="stylesheet" href="~/css/configuracoes.css">
     <link rel="stylesheet" href="~/css/postagem.css">
 
+
 }
 
 <div class="container text-light">
-    <div class="configuracoes">
-        <h1 class="is-center">Configurações da conta</h1>
+    <div class="configuracoes text-center">
+        <h2 class="is-center">Configurações da conta</h2>
     
-        <nav class="tabs is-center">
+        <nav class="tabs is-center mb">
             <a asp-action="UpdateProfile" class="nav-button" id="info">Editar perfil</a>
             <a asp-action="UpdatePassword" class="nav-button" id="alterar-senha">Alterar senha</a>
             <a asp-action="DeleteAccount" class="nav-button" id="deletar">Deletar conta</a>
-            <a asp-action="UpdateEmail" class="nav-button" id="deletar">Editar e-mail</a>
+            <a asp-action="UpdateEmail" class="nav-button" id="deletar">Alterar email</a>
         </nav>
         <section class="conteudo-tabs">
             <section class="conteudo-inner main">

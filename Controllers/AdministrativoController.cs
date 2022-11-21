@@ -55,10 +55,14 @@ public class AdministrativoController : Controller
             var respostaImgur = await new ImgurService().UploadImagem(astroDTO.Foto);
             var respostaImgur2 = await new ImgurService().UploadImagem(astroDTO.FotoBackground);
             var astro = new Astro(astroDTO.Nome, astroDTO.Curiosidades, respostaImgur.Data.data.link, respostaImgur2.Data.data.link);
-            foreach(var foto in astroDTO.Fotos) {
+            if(astroDTO.Fotos is not null)
+            {
+                foreach(var foto in astroDTO.Fotos) {
                 var resposta = await new ImgurService().UploadImagem(foto);
                 astro.Fotos.Add(resposta.Data.data.link);
             }
+            }
+           
             foreach(var marco in astroDTO.MarcosHistoricos) {
                 astro.MarcosHistoricos.Add(marco);
             }
