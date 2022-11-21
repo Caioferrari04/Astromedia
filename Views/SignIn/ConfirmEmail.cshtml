@@ -1,0 +1,43 @@
+@model List<string>
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+@section stylesheet {
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true">
+}
+
+<div class="cad container is-vertical-align is-horizontal-align">
+    <div class="cad-content text-light" asp-action="Index">
+        <div class="container logo-box-cad row is-vertical-align is-horizontal-align">
+            <!-- substituir por img nova -->
+            <img class="img-logo-cad col" src="~/img/logo-main.png" alt="Logo Astromedia" class="maxlogo"> 
+           
+            @if(Model is null)
+            {
+                <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">E-mail confirmado com sucesso</h2>
+            }
+
+            else 
+            {
+                <h2 class="col logo-text-cad is-vertical-align is-horizontal-align text-error">Erro ao confirmar e-mail</h2>
+            }
+        </div>
+
+        <div class="container container-cad">
+            @if(Model is null)
+            {
+               <p>Seu e-mail foi confirmado. Agora você pode acessar sua conta clicando <a asp-action="LogInView">aqui</a></p>
+            }
+
+            else 
+            {
+                @foreach (var error in Model)
+                {
+                    <p class="text-error text-center mt-5">@error</p>
+                }
+                
+            } 
+        </div>
+    </div>
+</div>

@@ -51,9 +51,23 @@ public class SignInController : Controller
 
                 if (resultado.Succeeded)
                 {
-                    await _signInManager.SignInAsync(novoUsuario, isPersistent: false);
-
-                    return RedirectToAction("MeusAstros", "Feed");
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(novoUsuario);
+                    var confirmationLink = Url.Action(
+                        nameof(ConfirmEmail),
+                        "SignIn", 
+                        new { email = novoUsuario.Email, token = token },
+                        Request.Scheme
+                        );
+                    
+                    bool emailResponse = _emailService.SendConfirmationEmail(novoUsuario.Email, novoUsuario.UserName, confirmationLink);
+                    
+                    if (!emailResponse)
+                    {
+                        ModelState.AddModelError(string.Empty, "Não foi possível enviar o e-mail, verifique se ele está correto ou tente novamente mais tarde.");
+                        await _userManager.DeleteAsync(novoUsuario);
+                        return View(usuario);
+                    }
+                    return View("SucessRegistration", usuario.Email);
                 }
 
                 foreach (var error in resultado.Errors)
@@ -70,6 +84,57 @@ public class SignInController : Controller
 
         return View(); /*Atualizar pagina*/
     }
+
+    public IActionResult SucessRegistration(string email) => View(email);
+
+    public async Task<IActionResult> ResendEmailToConfirmAccount(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        var confirmationLink = Url.Action(
+            nameof(ConfirmEmail),
+            "SignIn", 
+            new { email = email, token = token },
+            Request.Scheme
+            );
+        
+        bool emailResponse = _emailService.SendConfirmationEmail(user.Email, user.UserName, confirmationLink);
+        
+        if (!emailResponse)
+        {
+            ViewBag.Erro = "Não foi possível reenviar o e-mail.";
+        }
+
+        return View(nameof(SucessRegistration), email);
+    }
+
+    public async Task<IActionResult> ConfirmEmail(string email, string token)
+    {
+        
+        var errors = new List<string>();
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null || token == null)
+        {
+            errors.Add("Token de confirmação de e-mail inválido.");
+            return View(errors);
+        }
+
+        if (await _userManager.IsEmailConfirmedAsync(user))
+        {
+            if(_signInManager.IsSignedIn(User)) return RedirectToAction("MeusAstros", "Feed");
+            return RedirectToAction("LogInView");
+        } 
+
+        var result = await _userManager.ConfirmEmailAsync(user, token);
+
+        if(result.Succeeded)
+            return View();
+
+        foreach (var error in result.Errors)
+            errors.Add(error.Description);
+
+        return View(errors);
+    } 
 
     public async Task<IActionResult> LogInView() 
     {
@@ -93,6 +158,16 @@ public class SignInController : Controller
     {
         try
         {
+            var user = await _userManager.FindByNameAsync(usuario.Nome);
+            if(user != null)
+            {
+                if (!await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    ModelState.AddModelError(string.Empty, "E-mail não confirmado, primeiro confirme-o.");
+                    return View(nameof(LogInView));
+                }
+            }
+            
             var resultado = await _signInManager.PasswordSignInAsync(
                 userName: usuario.Nome,
                 password: usuario.Senha,
@@ -111,6 +186,7 @@ public class SignInController : Controller
         }
         catch
         {
+            Console.WriteLine("Passou aqui 2");
             ModelState.AddModelError(string.Empty, "Algo deu errado! Verifique sua conexão de internet");
             return View(nameof(LogInView));
         }

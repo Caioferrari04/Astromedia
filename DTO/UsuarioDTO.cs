@@ -39,4 +39,6 @@ public class UsuarioDTO
     public List<PostagemDTO> Postagens { get; set; }
     public bool Atualizar { get; set; }
     public string Bio { get; set; }
+    [Display(Name = "Novo Email")]
+    public string NovoEmail { get; set; }
 }
