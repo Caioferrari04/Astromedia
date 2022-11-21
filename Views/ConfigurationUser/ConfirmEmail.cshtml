@@ -1,0 +1,27 @@
+@{
+    Layout = "Index";
+    ViewData["Title"] = "Editar e-mail";
+}
+@model List<string>
+
+<div class="cad-content text-light" method="post" asp-action="UpdatePassword" asp-controller="ConfigurationUser">
+    <div class="container container-cad">
+         @if(Model is null)
+        {
+            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align">E-mail confirmado com sucesso</h2>
+            <p class="col text-center">Seu e-mail foi alterado. Verifique seu e-mail clicando  <a asp-action="UpdateEmail">aqui</a></p>
+        }
+
+        else 
+        {
+            <h2 class="col logo-text-cad is-vertical-align is-horizontal-align text-error">Erro ao confirmar e-mail</h2>
+            @foreach (var error in Model)
+            {
+                <p class="text-error text-center mt-5">@error</p>
+            }
+        }
+    </div>
+</div>
+
+<script src="~/js/configuracoes-tab.js" asp-append-version="true"></script>
+<script>mostrarAba(4)</script>
