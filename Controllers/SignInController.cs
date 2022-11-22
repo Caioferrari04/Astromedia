@@ -174,7 +174,7 @@ public class SignInController : Controller
             }
             
             var resultado = await _signInManager.PasswordSignInAsync(
-                userName: usuario.Nome,
+                userName: usuario.Nome.Trim(),
                 password: usuario.Senha,
                 isPersistent: usuario.LembrarMe,
                 lockoutOnFailure: false
