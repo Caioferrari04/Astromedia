@@ -110,8 +110,14 @@ public class FeedController : Controller
             comment.DataComentario = DateTime.UtcNow;
             try
             {
-                await _commentService.Create(comment);
-                return Json(new { success = true });
+                var comentario = await _commentService.Create(comment);
+                return Json(new { success = true, dados = new {
+                    id = comentario.Id,
+                    nomeUsuario = usuario.UserName,
+                    fotoUsuario = usuario.FotoPerfil,
+                    texto = comentario.Texto,
+                    dataPostagem = comentario.DataComentario.ToString("dd/MM/yyyy")
+                }});
             }
             catch (Exception ex)
             {
@@ -303,6 +309,7 @@ public class FeedController : Controller
     {
         try
         {
+            denuncia.Id = 0;
             if (denuncia.Comentario?.Id is not 0) 
             {
                 denuncia.Comentario = await _commentService.GetById(denuncia.Comentario.Id);

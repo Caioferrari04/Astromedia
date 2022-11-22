@@ -23,6 +23,7 @@ public class UsuarioService
             .Include(el => el.Astros)
             .Include(el => el.Likes)
             .Include(el => el.Denuncias)
+            .ThenInclude(el => el.Comentario)
             .ThenInclude(el => el.Postagem)
             .FirstOrDefaultAsync(usuario => usuario.Id == id);
 }

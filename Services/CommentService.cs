@@ -13,7 +13,7 @@ public class CommentService
         _astroContext = astroContext;
     }
 
-    public async Task Create(CommentDTO commentDTO)
+    public async Task<Comentario> Create(CommentDTO commentDTO)
     {
         var postTask = _astroContext.Postagens.FindAsync(commentDTO.PostId);
         var usuarioTask = _astroContext.Users.FindAsync(commentDTO.UsuarioId);
@@ -25,8 +25,9 @@ public class CommentService
             await postTask
         );
 
-        await _astroContext.Comentarios.AddAsync(comentario);
+        var result = await _astroContext.Comentarios.AddAsync(comentario);
         await _astroContext.SaveChangesAsync();
+        return result.Entity;
     }
 
     public async Task Update(Comentario comentario)
