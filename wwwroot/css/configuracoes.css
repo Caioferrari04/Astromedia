@@ -13,6 +13,18 @@ body {
     padding: 1rem;
 }
 
+.configuracoes > h2 {
+    font-size: 2rem;
+}
+
+.mb {
+    margin-bottom: 30px;
+}
+
+.small {
+    margin-top: -17px !important;
+}
+
 /* Conteúdo Cadastro - Geral */
 
 .cad {
@@ -23,7 +35,7 @@ body {
     margin: auto;
     /* transform: scale(0.85); */
     font-size: 1rem;
-    padding: 1rem 5rem;
+    /* padding: 1rem 5rem; */
 }
 
 .cad-content label {
@@ -64,7 +76,10 @@ body {
 .input-desc {
     font-size: 1.1rem;
     word-wrap: break-word;
-    margin-top: -10px;
+    margin-bottom: 3px;
+    /* margin-top: 1px;
+    margin-bottom: 10px;
+    line-height: 10px; */
 }
 
 .inputbox-password-cad {
@@ -147,6 +162,7 @@ input[type=file]::file-selector-button {
 /* navbar */
 .tabs > a {
     color: var(--color-lightGrey);
+    font-size: 1.2rem;
 }
 
 .tabs > a:hover {
@@ -181,6 +197,9 @@ input[type=file]::file-selector-button {
 }
 
 @media screen and (max-width: 600px) {
+    .configuracoes {
+        margin: 0;
+    }
     .cad {
         margin-top: 2vh;
     }
@@ -215,15 +234,33 @@ input[type=file]::file-selector-button {
     }
     .input-desc {
         font-size: .9rem;
+        margin-bottom: 8px;
+    }
+    .tabs > a {
+        padding: .2rem .9rem;
+        font-size: 1rem;
+    }
+
+    .mb {
+        margin-bottom: 0px;
+    }
+
+    input[type=file]::file-selector-button {
+        font-size: .8rem;
+        margin-right: 5px;
+        padding: 13px 10px;
     }
 }
 
 @media screen and (max-width: 320px) {
+    .configuracoes {
+        margin: 0;
+    }
     .cad {
         margin-top: -5vh;
     }
     .cad-content {
-        transform: scale(0.80);
+        transform: scale(.9);
         padding-top: 2px;
     }
     .container-cad {
@@ -243,7 +280,7 @@ input[type=file]::file-selector-button {
         flex-flow: wrap;
     }
     .btn-show-password-cad {
-        height: 38px;
+        height: 35px;
     }
     .input-desc {
         font-size: .75rem;

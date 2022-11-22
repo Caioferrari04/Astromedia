@@ -181,7 +181,7 @@ public class ConfigurationUserController : Controller
         
         if (validationResult.IsValid)
         {
-            var existingUser = await _userManager.FindByEmailAsync(usuarioDTO.NovoEmail);
+            var existingUser = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(usuarioDTO.NovoEmail));
             if(existingUser != null)
             {
                 ModelState.AddModelError(string.Empty, "O e-mail fornecido já foi cadastrado.");
@@ -220,14 +220,18 @@ public class ConfigurationUserController : Controller
 
     public async Task<IActionResult> ConfirmEmail(string email, string newemail, string token)
     {
+        
         var errors = new List<string>();
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByEmailAsync(_userManager.NormalizeEmail(email));
         if (user == null || token == null)
         {
             errors.Add("Token de confirmação de e-mail inválido.");
             return View(errors);
         }
 
+        var usuarioAtual = await _userManager.GetUserAsync(User);
+       
+        if(!usuarioAtual.Equals(user)) return RedirectToAction("Logout", "SignIn");
         var result = await _userManager.ChangeEmailAsync(user, newemail, token);
 
         if(result.Succeeded)

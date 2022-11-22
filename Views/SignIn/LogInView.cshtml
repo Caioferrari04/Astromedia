@@ -28,6 +28,10 @@
 
         <div class="container">
             <div asp-validation-summary="ModelOnly" class="text-error erros"></div>
+            @if(ViewBag.EmailConfirmadoMensagem is not null)
+            {
+                <p class="text-error erros">@ViewBag.EmailConfirmadoMensagem Clique <a class="text-error" asp-action="ResendEmailToConfirmAccount" asp-route-email="@Model.Email">aqui</a> para receber o e-mail de confirmação.</p>
+            }
             
             <div class="row">
                 <label class="col" asp-for="Nome">
